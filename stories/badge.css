@@ -1,0 +1,182 @@
+@import './theme.css';
+
+.snake-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+/* Sizes */
+.snake-badge--small {
+  padding: 2px 8px;
+  font-size: 10px;
+  min-height: 18px;
+}
+
+.snake-badge--medium {
+  padding: 4px 12px;
+  font-size: 11px;
+  min-height: 22px;
+}
+
+.snake-badge--large {
+  padding: 6px 16px;
+  font-size: 12px;
+  min-height: 26px;
+}
+
+/* Clickable */
+.snake-badge--clickable {
+  cursor: pointer;
+}
+
+.snake-badge--clickable:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.snake-badge--clickable:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Icon */
+.snake-badge__icon {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+/* Dot style */
+.snake-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.snake-badge--large .snake-badge__dot {
+  width: 8px;
+  height: 8px;
+}
+
+/* Default variant */
+.snake-badge--default {
+  background-color: #3a3a3a;
+  color: var(--color-text-primary);
+  border-color: #4a4a4a;
+}
+
+.snake-badge--default.snake-badge--outline {
+  background-color: transparent;
+  border-color: #8e8e90;
+  color: #8e8e90;
+}
+
+.snake-badge--default.snake-badge--dot {
+  background-color: transparent;
+  color: #8e8e90;
+}
+
+/* Success variant */
+.snake-badge--success {
+  background-color: rgba(80, 250, 123, 0.2);
+  color: var(--color-success);
+  border-color: rgba(80, 250, 123, 0.4);
+}
+
+.snake-badge--success.snake-badge--outline {
+  background-color: transparent;
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.snake-badge--success.snake-badge--dot {
+  background-color: transparent;
+  color: var(--color-success);
+}
+
+/* Warning variant */
+.snake-badge--warning {
+  background-color: rgba(241, 250, 140, 0.2);
+  color: var(--color-warning);
+  border-color: rgba(241, 250, 140, 0.4);
+}
+
+.snake-badge--warning.snake-badge--outline {
+  background-color: transparent;
+  border-color: var(--color-warning);
+  color: var(--color-warning);
+}
+
+.snake-badge--warning.snake-badge--dot {
+  background-color: transparent;
+  color: var(--color-warning);
+}
+
+/* Danger variant */
+.snake-badge--danger {
+  background-color: rgba(255, 85, 85, 0.2);
+  color: var(--color-danger);
+  border-color: rgba(255, 85, 85, 0.4);
+}
+
+.snake-badge--danger.snake-badge--outline {
+  background-color: transparent;
+  border-color: var(--color-danger);
+  color: var(--color-danger);
+}
+
+.snake-badge--danger.snake-badge--dot {
+  background-color: transparent;
+  color: var(--color-danger);
+}
+
+/* Info variant */
+.snake-badge--info {
+  background-color: rgba(97, 218, 251, 0.2);
+  color: #61dafb;
+  border-color: rgba(97, 218, 251, 0.4);
+}
+
+.snake-badge--info.snake-badge--outline {
+  background-color: transparent;
+  border-color: #61dafb;
+  color: #61dafb;
+}
+
+.snake-badge--info.snake-badge--dot {
+  background-color: transparent;
+  color: #61dafb;
+}
+
+/* Ghost variant */
+.snake-badge--ghost {
+  background-color: rgba(189, 189, 189, 0.1);
+  color: #8e8e90;
+  border-color: transparent;
+}
+
+.snake-badge--ghost.snake-badge--outline {
+  background-color: transparent;
+  border-color: #3a3a3a;
+  color: #8e8e90;
+}
+
+.snake-badge--ghost.snake-badge--dot {
+  background-color: transparent;
+  color: #8e8e90;
+}
+
+/* Focus state */
+.snake-badge--clickable:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px rgba(189, 189, 189, 0.3);
+}

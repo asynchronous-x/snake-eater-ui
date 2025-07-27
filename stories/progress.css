@@ -1,0 +1,196 @@
+@import './theme.css';
+
+.snake-progress {
+  width: 100%;
+}
+
+.snake-progress__track {
+  position: relative;
+  background-color: rgba(16, 16, 16, 0.8);
+  border: 1px solid #3a3a3a;
+  overflow: hidden;
+}
+
+/* Sizes */
+.snake-progress--small .snake-progress__track {
+  height: 8px;
+}
+
+.snake-progress--medium .snake-progress__track {
+  height: 16px;
+}
+
+.snake-progress--large .snake-progress__track {
+  height: 24px;
+}
+
+/* Progress bar */
+.snake-progress__bar {
+  height: 100%;
+  transition: width var(--transition-normal) ease-out;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Striped pattern */
+.snake-progress__bar--striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 20px 20px;
+}
+
+/* Animated stripes */
+.snake-progress--animated .snake-progress__bar--striped {
+  animation: progress-stripes 1s linear infinite;
+}
+
+@keyframes progress-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 20px 0;
+  }
+}
+
+/* Indeterminate state */
+.snake-progress--indeterminate .snake-progress__bar {
+  width: 30% !important;
+  animation: progress-indeterminate 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+/* Labels */
+.snake-progress__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.snake-progress__label--outside {
+  display: block;
+  text-align: right;
+  margin-bottom: var(--spacing-xs);
+}
+
+.snake-progress__label--inside {
+  position: absolute;
+  white-space: nowrap;
+}
+
+.snake-progress--small .snake-progress__label--inside {
+  font-size: 10px;
+}
+
+/* Corner decorations */
+.snake-progress__corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #8e8e90;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snake-progress__corner--top-left {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-progress__corner--top-right {
+  top: -1px;
+  right: -1px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.snake-progress__corner--bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-right: none;
+  border-top: none;
+}
+
+.snake-progress__corner--bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Default variant */
+.snake-progress--default .snake-progress__bar {
+  background-color: #8e8e90;
+}
+
+/* Success variant */
+.snake-progress--success .snake-progress__bar {
+  background-color: var(--color-success);
+}
+
+.snake-progress--success .snake-progress__track {
+  border-color: rgba(80, 250, 123, 0.3);
+}
+
+.snake-progress--success .snake-progress__corner {
+  border-color: var(--color-success);
+}
+
+/* Warning variant */
+.snake-progress--warning .snake-progress__bar {
+  background-color: var(--color-warning);
+}
+
+.snake-progress--warning .snake-progress__track {
+  border-color: rgba(241, 250, 140, 0.3);
+}
+
+.snake-progress--warning .snake-progress__corner {
+  border-color: var(--color-warning);
+}
+
+/* Danger variant */
+.snake-progress--danger .snake-progress__bar {
+  background-color: var(--color-danger);
+}
+
+.snake-progress--danger .snake-progress__track {
+  border-color: rgba(255, 85, 85, 0.3);
+}
+
+.snake-progress--danger .snake-progress__corner {
+  border-color: var(--color-danger);
+}
+
+/* Info variant */
+.snake-progress--info .snake-progress__bar {
+  background-color: #61dafb;
+}
+
+.snake-progress--info .snake-progress__track {
+  border-color: rgba(97, 218, 251, 0.3);
+}
+
+.snake-progress--info .snake-progress__corner {
+  border-color: #61dafb;
+}

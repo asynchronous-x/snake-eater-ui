@@ -1,0 +1,204 @@
+@import './theme.css';
+
+.snake-toggle-wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.snake-toggle-wrapper--left {
+  flex-direction: row-reverse;
+}
+
+.snake-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: opacity var(--transition-fast);
+}
+
+.snake-toggle__track {
+  display: block;
+  background-color: #3a3a3a;
+  border: 1px solid #4a4a4a;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+/* Sizes */
+.snake-toggle--small .snake-toggle__track {
+  width: 36px;
+  height: 20px;
+}
+
+.snake-toggle--medium .snake-toggle__track {
+  width: 44px;
+  height: 24px;
+}
+
+.snake-toggle--large .snake-toggle__track {
+  width: 52px;
+  height: 28px;
+}
+
+/* Thumb */
+.snake-toggle__thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #8e8e90;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.snake-toggle--small .snake-toggle__thumb {
+  width: 16px;
+  height: 16px;
+  left: 2px;
+}
+
+.snake-toggle--medium .snake-toggle__thumb {
+  width: 20px;
+  height: 20px;
+  left: 2px;
+}
+
+.snake-toggle--large .snake-toggle__thumb {
+  width: 24px;
+  height: 24px;
+  left: 2px;
+}
+
+/* Checked state */
+.snake-toggle--checked .snake-toggle__track {
+  background-color: rgba(189, 189, 189, 0.2);
+  border-color: var(--color-text-primary);
+}
+
+.snake-toggle--checked .snake-toggle__thumb {
+  background-color: var(--color-text-primary);
+}
+
+.snake-toggle--checked.snake-toggle--small .snake-toggle__thumb {
+  left: 18px;
+}
+
+.snake-toggle--checked.snake-toggle--medium .snake-toggle__thumb {
+  left: 22px;
+}
+
+.snake-toggle--checked.snake-toggle--large .snake-toggle__thumb {
+  left: 26px;
+}
+
+/* Hover states */
+.snake-toggle:hover:not(:disabled) .snake-toggle__track {
+  border-color: #5a5a5a;
+}
+
+.snake-toggle--checked:hover:not(:disabled) .snake-toggle__track {
+  border-color: var(--color-text-primary);
+  background-color: rgba(189, 189, 189, 0.3);
+}
+
+/* Label */
+.snake-toggle__label-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.snake-toggle__label {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.snake-toggle__helper-text {
+  font-size: var(--font-size-sm);
+  color: #8e8e90;
+}
+
+/* Disabled state */
+.snake-toggle--disabled,
+.snake-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.snake-toggle--disabled .snake-toggle__label {
+  cursor: not-allowed;
+}
+
+/* Variant: Success */
+.snake-toggle--success.snake-toggle--checked .snake-toggle__track {
+  background-color: rgba(80, 250, 123, 0.2);
+  border-color: var(--color-success);
+}
+
+.snake-toggle--success.snake-toggle--checked .snake-toggle__thumb {
+  background-color: var(--color-success);
+}
+
+.snake-toggle--success.snake-toggle--checked:hover:not(:disabled) .snake-toggle__track {
+  background-color: rgba(80, 250, 123, 0.3);
+  border-color: var(--color-success);
+}
+
+/* Variant: Warning */
+.snake-toggle--warning.snake-toggle--checked .snake-toggle__track {
+  background-color: rgba(241, 250, 140, 0.2);
+  border-color: var(--color-warning);
+}
+
+.snake-toggle--warning.snake-toggle--checked .snake-toggle__thumb {
+  background-color: var(--color-warning);
+}
+
+.snake-toggle--warning.snake-toggle--checked:hover:not(:disabled) .snake-toggle__track {
+  background-color: rgba(241, 250, 140, 0.3);
+  border-color: var(--color-warning);
+}
+
+/* Variant: Danger */
+.snake-toggle--danger.snake-toggle--checked .snake-toggle__track {
+  background-color: rgba(255, 85, 85, 0.2);
+  border-color: var(--color-danger);
+}
+
+.snake-toggle--danger.snake-toggle--checked .snake-toggle__thumb {
+  background-color: var(--color-danger);
+}
+
+.snake-toggle--danger.snake-toggle--checked:hover:not(:disabled) .snake-toggle__track {
+  background-color: rgba(255, 85, 85, 0.3);
+  border-color: var(--color-danger);
+}
+
+/* Variant: Info */
+.snake-toggle--info.snake-toggle--checked .snake-toggle__track {
+  background-color: rgba(97, 218, 251, 0.2);
+  border-color: #61dafb;
+}
+
+.snake-toggle--info.snake-toggle--checked .snake-toggle__thumb {
+  background-color: #61dafb;
+}
+
+.snake-toggle--info.snake-toggle--checked:hover:not(:disabled) .snake-toggle__track {
+  background-color: rgba(97, 218, 251, 0.3);
+  border-color: #61dafb;
+}
+
+/* Focus state */
+.snake-toggle:focus {
+  outline: none;
+}
+
+.snake-toggle:focus-visible .snake-toggle__track {
+  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px rgba(189, 189, 189, 0.3);
+}
