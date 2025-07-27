@@ -3,6 +3,7 @@ import { Header } from './Header';
 import { Button } from './Button';
 import { Card } from './Card';
 import { Filter } from './Filter';
+import { SubCard } from './SubCard';
 import './page.css';
 
 interface User {
@@ -174,6 +175,44 @@ export const Page: React.FC = () => {
               <Filter size="large" count={15}>Large</Filter>
             </div>
           </Card>
+        </section>
+
+        <section className="snake-page__section">
+          <h2>SubCard Components</h2>
+          <div className="snake-grid" style={{ marginTop: 'var(--spacing-lg)' }}>
+            <SubCard>
+              <h3>Default SubCard</h3>
+              <p>Features plus symbols in corners instead of elbow borders.</p>
+            </SubCard>
+            <SubCard variant="success" interactive onClick={() => console.log('Success subcard clicked')}>
+              <h3>Success State</h3>
+              <p>Click for positive actions or confirmations.</p>
+            </SubCard>
+            <SubCard variant="warning">
+              <h3>Warning State</h3>
+              <p>Highlights important information that requires attention.</p>
+            </SubCard>
+            <SubCard variant="danger" interactive onClick={() => console.log('Danger subcard clicked')}>
+              <h3>Danger State</h3>
+              <p>For critical actions or error states.</p>
+            </SubCard>
+            <SubCard variant="info">
+              <h3>Info State</h3>
+              <p>Provides additional context or information.</p>
+            </SubCard>
+            <SubCard variant="inactive" interactive>
+              <h3>Inactive State</h3>
+              <p>Disabled or unavailable functionality.</p>
+            </SubCard>
+            <SubCard cornerColor="#f1fa8c">
+              <h3>Custom Corner Color</h3>
+              <p>Default card with yellow corner symbols.</p>
+            </SubCard>
+            <SubCard variant="success" cornerColor="#ff5555">
+              <h3>Mixed Styling</h3>
+              <p>Success variant with red corner symbols.</p>
+            </SubCard>
+          </div>
         </section>
       </main>
     </div>
