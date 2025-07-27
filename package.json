@@ -1,0 +1,30 @@
+{
+  "name": "snake-eater-ui",
+  "version": "1.0.0",
+  "description": "Snake Eater Component Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "author": "asynchronousx",
+  "license": "ISC",
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.1",
+    "@storybook/addon-a11y": "^9.0.18",
+    "@storybook/addon-docs": "^9.0.18",
+    "@storybook/addon-vitest": "^9.0.18",
+    "@storybook/react-vite": "^9.0.18",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "playwright": "^1.54.1",
+    "storybook": "^9.0.18",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

@@ -1,0 +1,279 @@
+@import './theme.css';
+
+.snake-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  text-decoration: none;
+  border: var(--border-width) solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Sizes */
+.snake-button--small {
+  padding: 2px var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  min-height: 24px;
+}
+
+.snake-button--medium {
+  padding: 4px var(--spacing-md);
+  font-size: var(--font-size-base);
+  min-height: 32px;
+}
+
+.snake-button--large {
+  padding: 6px var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  min-height: 40px;
+}
+
+/* Variants */
+.snake-button--primary {
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-base);
+  border-color: var(--color-text-primary);
+}
+
+.snake-button--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.snake-button--primary:active:not(:disabled) {
+  background-color: var(--color-primary-active);
+  border-color: var(--color-primary-active);
+}
+
+.snake-button--secondary {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+.snake-button--secondary:hover:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+  border-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
+}
+
+.snake-button--secondary:active:not(:disabled) {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-primary-active);
+  color: var(--color-primary-active);
+}
+
+.snake-button--ghost {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border-color: transparent;
+}
+
+.snake-button--ghost:hover:not(:disabled) {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+.snake-button--ghost:active:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+}
+
+.snake-button--danger {
+  background-color: transparent;
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.snake-button--danger:hover:not(:disabled) {
+  background-color: var(--color-danger);
+  color: var(--color-bg-base);
+}
+
+.snake-button--danger:active:not(:disabled) {
+  background-color: var(--color-danger-active);
+  border-color: var(--color-danger-active);
+}
+
+.snake-button--cyber {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border-color: transparent;
+  position: relative;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%
+  );
+  transition: all var(--transition-fast), clip-path var(--transition-base);
+}
+
+.snake-button--cyber::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: var(--color-border);
+  z-index: -1;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%
+  );
+}
+
+.snake-button--cyber::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 30%, var(--color-primary) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.snake-button--cyber:hover:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+  color: var(--color-primary-hover);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    0 100%
+  );
+}
+
+.snake-button--cyber:hover:not(:disabled)::before {
+  background: var(--color-primary);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    0 100%
+  );
+}
+
+.snake-button--cyber:hover:not(:disabled)::after {
+  opacity: 0.1;
+}
+
+.snake-button--cyber:active:not(:disabled) {
+  background-color: var(--color-bg-card);
+  transform: translateY(1px);
+}
+
+.snake-button--cyber.snake-button--small {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    0 100%
+  );
+}
+
+.snake-button--cyber.snake-button--small::before {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    0 100%
+  );
+}
+
+.snake-button--cyber.snake-button--small:hover:not(:disabled),
+.snake-button--cyber.snake-button--small:hover:not(:disabled)::before {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%
+  );
+}
+
+.snake-button--cyber.snake-button--large {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    0 100%
+  );
+}
+
+.snake-button--cyber.snake-button--large::before {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    0 100%
+  );
+}
+
+.snake-button--cyber.snake-button--large:hover:not(:disabled),
+.snake-button--cyber.snake-button--large:hover:not(:disabled)::before {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    0 100%
+  );
+}
+
+/* States */
+.snake-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px var(--color-primary);
+}
+
+.snake-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.snake-button--full-width {
+  width: 100%;
+}
+
+.snake-button--loading {
+  cursor: wait;
+}
+
+.snake-button__loader {
+  display: inline-block;
+  animation: snake-button-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes snake-button-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
