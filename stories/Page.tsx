@@ -90,20 +90,6 @@ export const Page: React.FC = () => {
         </section>
 
         <section className="snake-page__section">
-          <div className="snake-card elevated">
-            <h2>Elevated Card</h2>
-            <p>
-              This is an example of an elevated card component. It uses a slightly 
-              lighter background color to create visual hierarchy within the dark theme.
-            </p>
-            <div className="snake-page__button-group" style={{ marginTop: 'var(--spacing-md)' }}>
-              <Button variant="primary">Learn More</Button>
-              <Button variant="ghost">Dismiss</Button>
-            </div>
-          </div>
-        </section>
-
-        <section className="snake-page__section">
           <h2>Card Components</h2>
           <div className="snake-grid" style={{ marginTop: 'var(--spacing-lg)' }}>
             <Card>

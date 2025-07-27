@@ -15,6 +15,13 @@ const config = {
   "framework": {
     "name": "@storybook/react-vite",
     "options": {}
+  },
+  viteFinal: async (config) => {
+    // Set base URL for GitHub Pages deployment
+    if (process.env.NODE_ENV === 'production') {
+      config.base = '/snake-eater-ui/';
+    }
+    return config;
   }
 };
 export default config;

@@ -31,177 +31,136 @@ export const RightArrow = () => <svg
   <path d="m11.1 7.35-5.5 5.5a.5.5 0 0 1-.7-.7L10.04 7 4.9 1.85a.5.5 0 1 1 .7-.7l5.5 5.5c.2.2.2.5 0 .7Z" />
 </svg>
 
-<Meta title="Configure your project" />
+<Meta title="Snake Eater UI" />
 
 <div className="sb-container">
   <div className='sb-section-title'>
-    # Configure your project
+    # Snake Eater UI Component Library
 
-    Because Storybook works separately from your app, you'll need to configure it for your specific stack and setup. Below, explore guides for configuring Storybook with popular frameworks and tools. If you get stuck, learn how you can ask for help from our community.
+    A dark-themed React component library featuring boxy, minimalist design with thin borders and no rounded corners. Built for modern web applications that demand a sleek, cyberpunk aesthetic.
   </div>
   <div className="sb-section">
     <div className="sb-section-item">
-      <img
-        src={Styling}
-        alt="A wall of logos representing different styling technologies"
-      />
-      <h4 className="sb-section-item-heading">Add styling and CSS</h4>
-      <p className="sb-section-item-paragraph">Like with web applications, there are many ways to include CSS within Storybook. Learn more about setting up styling within Storybook.</p>
-      <a
-        href="https://storybook.js.org/docs/configure/styling-and-css/?renderer=react"
-        target="_blank"
-      >Learn more<RightArrow /></a>
+      <h4 className="sb-section-item-heading">🎨 Design Philosophy</h4>
+      <p className="sb-section-item-paragraph">Snake Eater UI embraces a dark, minimalist aesthetic with sharp corners and subtle borders. Every component is designed to reduce eye strain while maintaining high contrast and readability.</p>
     </div>
     <div className="sb-section-item">
-      <img
-        src={Context}
-        alt="An abstraction representing the composition of data for a component"
-      />
-      <h4 className="sb-section-item-heading">Provide context and mocking</h4>
-      <p className="sb-section-item-paragraph">Often when a story doesn't render, it's because your component is expecting a specific environment or context (like a theme provider) to be available.</p>
-      <a
-        href="https://storybook.js.org/docs/writing-stories/decorators/?renderer=react#context-for-mocking"
-        target="_blank"
-      >Learn more<RightArrow /></a>
+      <h4 className="sb-section-item-heading">🚀 Quick Start</h4>
+      <p className="sb-section-item-paragraph">Install the library and start using our pre-built components immediately. All components are TypeScript-ready and include comprehensive props for customization.</p>
     </div>
     <div className="sb-section-item">
-      <img src={Assets} alt="A representation of typography and image assets" />
-      <div>
-        <h4 className="sb-section-item-heading">Load assets and resources</h4>
-        <p className="sb-section-item-paragraph">To link static files (like fonts) to your projects and stories, use the
-        `staticDirs` configuration option to specify folders to load when
-        starting Storybook.</p>
-        <a
-          href="https://storybook.js.org/docs/configure/images-and-assets/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
+      <h4 className="sb-section-item-heading">🔧 Built with Modern Tech</h4>
+      <p className="sb-section-item-paragraph">Developed using React 18, TypeScript, and Storybook 9. Every component is thoroughly tested and documented with interactive examples.</p>
     </div>
   </div>
 </div>
+
 <div className="sb-container">
   <div className='sb-section-title'>
-    # Do more with Storybook
+    # Component Overview
 
-    Now that you know the basics, let's explore other parts of Storybook that will improve your experience. This list is just to get you started. You can customise Storybook in many ways to fit your needs.
+    Explore our growing collection of dark-themed components, each designed with flexibility and consistency in mind.
   </div>
 
   <div className="sb-section">
     <div className="sb-features-grid">
       <div className="sb-grid-item">
-        <img src={Docs} alt="A screenshot showing the autodocs tag being set, pointing a docs page being generated" />
-        <h4 className="sb-section-item-heading">Autodocs</h4>
-        <p className="sb-section-item-paragraph">Auto-generate living,
-          interactive reference documentation from your components and stories.</p>
-        <a
-          href="https://storybook.js.org/docs/writing-docs/autodocs/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">Button Component</h4>
+        <p className="sb-section-item-paragraph">Multiple variants including primary, secondary, ghost, danger, and a unique cyber variant with clipped corners. Supports loading states and full customization.</p>
+        <a href="?path=/story/components-button--default">View Button Stories<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
-        <img src={Share} alt="A browser window showing a Storybook being published to a chromatic.com URL" />
-        <h4 className="sb-section-item-heading">Publish to Chromatic</h4>
-        <p className="sb-section-item-paragraph">Publish your Storybook to review and collaborate with your entire team.</p>
-        <a
-          href="https://storybook.js.org/docs/sharing/publish-storybook/?renderer=react#publish-storybook-with-chromatic"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">Card Components</h4>
+        <p className="sb-section-item-paragraph">Two card variants: Card with decorative corner elbows and SubCard with plus symbols. Both support multiple color schemes, sizes, and interactive states.</p>
+        <a href="?path=/story/components-card--default">View Card Stories<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
-        <img src={FigmaPlugin} alt="Windows showing the Storybook plugin in Figma" />
-        <h4 className="sb-section-item-heading">Figma Plugin</h4>
-        <p className="sb-section-item-paragraph">Embed your stories into Figma to cross-reference the design and live
-          implementation in one place.</p>
-        <a
-          href="https://storybook.js.org/docs/sharing/design-integrations/?renderer=react#embed-storybook-in-figma-with-the-plugin"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">Filter Component</h4>
+        <p className="sb-section-item-paragraph">Unique bracketed design with gaps in borders. Perfect for toggleable filters with support for icons, counts, and multiple color variants.</p>
+        <a href="?path=/story/components-filter--default">View Filter Stories<RightArrow /></a>
       </div>
       <div className="sb-grid-item">
-        <img src={Testing} alt="Screenshot of tests passing and failing" />
-        <h4 className="sb-section-item-heading">Testing</h4>
-        <p className="sb-section-item-paragraph">Use stories to test a component in all its variations, no matter how
-          complex.</p>
-        <a
-          href="https://storybook.js.org/docs/writing-tests/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <img src={Accessibility} alt="Screenshot of accessibility tests passing and failing" />
-        <h4 className="sb-section-item-heading">Accessibility</h4>
-        <p className="sb-section-item-paragraph">Automatically test your components for a11y issues as you develop.</p>
-        <a
-          href="https://storybook.js.org/docs/writing-tests/accessibility-testing/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
-      </div>
-      <div className="sb-grid-item">
-        <img src={Theming} alt="Screenshot of Storybook in light and dark mode" />
-        <h4 className="sb-section-item-heading">Theming</h4>
-        <p className="sb-section-item-paragraph">Theme Storybook's UI to personalize it to your project.</p>
-        <a
-          href="https://storybook.js.org/docs/configure/theming/?renderer=react"
-          target="_blank"
-        >Learn more<RightArrow /></a>
+        <h4 className="sb-section-item-heading">Header Component</h4>
+        <p className="sb-section-item-paragraph">Responsive header with authentication controls and user menu. Automatically adapts to different screen sizes with a mobile-friendly design.</p>
+        <a href="?path=/story/components-header--logged-in">View Header Stories<RightArrow /></a>
       </div>
     </div>
   </div>
 </div>
+
 <div className='sb-addon'>
   <div className='sb-addon-text'>
-    <h4>Addons</h4>
-    <p className="sb-section-item-paragraph">Integrate your tools with Storybook to connect workflows.</p>
-    <a
-        href="https://storybook.js.org/addons/"
-        target="_blank"
-      >Discover all addons<RightArrow /></a>
+    <h4>Design System</h4>
+    <p className="sb-section-item-paragraph">Built on a comprehensive token system for colors, spacing, typography, and transitions.</p>
+    <a href="?path=/story/page--default">View Complete Demo<RightArrow /></a>
   </div>
   <div className='sb-addon-img'>
-    <img src={AddonLibrary} alt="Integrate your tools with Storybook to connect workflows." />
+    <img src={AddonLibrary} alt="Snake Eater UI Design System" />
+  </div>
+</div>
+
+<div className="sb-container">
+  <div className='sb-section-title'>
+    # Key Features
+
+    What makes Snake Eater UI special
+  </div>
+  <div className="sb-section">
+    <div className="sb-section-item">
+      <h4 className="sb-section-item-heading">Dark Theme First</h4>
+      <p className="sb-section-item-paragraph">Every component is designed from the ground up for dark interfaces. Colors are carefully chosen to reduce eye strain while maintaining excellent readability.</p>
+    </div>
+    <div className="sb-section-item">
+      <h4 className="sb-section-item-heading">Geometric Design</h4>
+      <p className="sb-section-item-paragraph">No rounded corners here. Every element features sharp, clean edges with thin borders that create clear visual hierarchy without overwhelming the interface.</p>
+    </div>
+    <div className="sb-section-item">
+      <h4 className="sb-section-item-heading">Flexible Theming</h4>
+      <p className="sb-section-item-paragraph">While dark-themed by default, components support variant colors for success, warning, danger, and info states. Mix and match to create your perfect palette.</p>
+    </div>
   </div>
 </div>
 
 <div className="sb-section sb-socials">
     <div className="sb-section-item">
       <img src={Github} alt="Github logo" className="sb-explore-image"/>
-      Join our contributors building the future of UI development.
+      Contribute to Snake Eater UI development.
 
       <a
-        href="https://github.com/storybookjs/storybook"
+        href="https://github.com/your-repo/snake-eater-ui"
         target="_blank"
       >Star on GitHub<RightArrow /></a>
     </div>
     <div className="sb-section-item">
       <img src={Discord} alt="Discord logo" className="sb-explore-image"/>
       <div>
-        Get support and chat with frontend developers.
+        Join our community for support and updates.
 
         <a
-          href="https://discord.gg/storybook"
+          href="https://discord.gg/your-discord"
           target="_blank"
-        >Join Discord server<RightArrow /></a>
+        >Join Discord<RightArrow /></a>
       </div>
     </div>
     <div className="sb-section-item">
-      <img src={Youtube} alt="Youtube logo" className="sb-explore-image"/>
+      <img src={Docs} alt="Documentation" className="sb-explore-image"/>
       <div>
-        Watch tutorials, feature previews and interviews.
+        Read the full documentation and API reference.
 
         <a
-          href="https://www.youtube.com/@chromaticui"
+          href="?path=/docs/components-button--docs"
           target="_blank"
-        >Watch on YouTube<RightArrow /></a>
+        >Browse Docs<RightArrow /></a>
       </div>
     </div>
     <div className="sb-section-item">
-      <img src={Tutorials} alt="A book" className="sb-explore-image"/>
-      <p>Follow guided walkthroughs on for key workflows.</p>
+      <img src={Tutorials} alt="Getting Started" className="sb-explore-image"/>
+      <p>Learn how to integrate Snake Eater UI into your project.</p>
 
       <a
-          href="https://storybook.js.org/tutorials/"
+          href="?path=/story/page--default"
           target="_blank"
-        >Discover tutorials<RightArrow /></a>
+        >Get Started<RightArrow /></a>
     </div>
 </div>
 
@@ -228,6 +187,7 @@ export const RightArrow = () => <svg
 
   .sb-section a:not(h1 a, h2 a, h3 a) {
     font-size: 14px;
+    color: #61dafb;
   }
 
   .sb-section-item, .sb-grid-item {
@@ -240,10 +200,12 @@ export const RightArrow = () => <svg
     padding-top: 20px !important;
     padding-bottom: 5px !important;
     margin: 0 !important;
+    color: #bdbdbd;
   }
   .sb-section-item-paragraph {
     margin: 0;
     padding-bottom: 10px;
+    color: #8e8e90;
   }
 
   .sb-chevron {
@@ -263,6 +225,7 @@ export const RightArrow = () => <svg
 
   .sb-socials p {
     margin-bottom: 10px;
+    color: #8e8e90;
   }
 
   .sb-explore-image {
@@ -275,10 +238,10 @@ export const RightArrow = () => <svg
     display: flex;
     align-items: center;
     position: relative;
-    background-color: #EEF3F8;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    background: #EEF3F8;
+    background-color: #1f1d20;
+    border-radius: 0;
+    border: 1px solid #3a3a3a;
+    background: #1f1d20;
     height: 180px;
     margin-bottom: 48px;
     overflow: hidden;
@@ -291,6 +254,7 @@ export const RightArrow = () => <svg
 
   .sb-addon-text h4 {
     padding-top: 0px;
+    color: #bdbdbd;
   }
 
   .sb-addon-img {
