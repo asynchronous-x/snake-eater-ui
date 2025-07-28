@@ -63,11 +63,7 @@ export const Modal: React.FC<ModalProps> = ({
     }
   };
 
-  const modalClasses = [
-    'snake-modal',
-    `snake-modal--${size}`,
-    className
-  ].filter(Boolean).join(' ');
+  const modalClasses = ['snake-modal', `snake-modal--${size}`, className].filter(Boolean).join(' ');
 
   return (
     <div className="snake-modal-overlay" onClick={handleOverlayClick}>
@@ -87,17 +83,11 @@ export const Modal: React.FC<ModalProps> = ({
             )}
           </div>
         )}
-        
-        <div className="snake-modal__content">
-          {children}
-        </div>
-        
-        {footer && (
-          <div className="snake-modal__footer">
-            {footer}
-          </div>
-        )}
-        
+
+        <div className="snake-modal__content">{children}</div>
+
+        {footer && <div className="snake-modal__footer">{footer}</div>}
+
         <div className="snake-modal__corner snake-modal__corner--top-left" />
         <div className="snake-modal__corner snake-modal__corner--top-right" />
         <div className="snake-modal__corner snake-modal__corner--bottom-left" />

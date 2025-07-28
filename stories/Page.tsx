@@ -36,17 +36,17 @@ type ExamplePage = 'analytics' | 'projects' | 'monitor';
 
 export const Page: React.FC = () => {
   const [currentExample, setCurrentExample] = useState<ExamplePage>('analytics');
-  
+
   // Analytics Dashboard state
   const [timeRange, setTimeRange] = useState('24h');
   const [showDetails, setShowDetails] = useState(false);
   const [alertsExpanded, setAlertsExpanded] = useState(true);
-  
+
   // Project Management state
   const [selectedView, setSelectedView] = useState('board');
   const [filterStatus, setFilterStatus] = useState('all');
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
-  
+
   // System Monitor state
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [refreshInterval, setRefreshInterval] = useState('5');
@@ -59,18 +59,20 @@ export const Page: React.FC = () => {
   // System Monitor real-time updates effect
   useEffect(() => {
     if (!autoRefresh || currentExample !== 'monitor') return;
-    
-    const interval = setInterval(() => {
-      setCpuUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 10)));
-      setMemoryUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 8)));
-      setNetworkUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 15)));
-    }, parseInt(refreshInterval) * 1000);
-    
+
+    const interval = setInterval(
+      () => {
+        setCpuUsage((prev) => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 10)));
+        setMemoryUsage((prev) => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 8)));
+        setNetworkUsage((prev) => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 15)));
+      },
+      parseInt(refreshInterval) * 1000,
+    );
+
     return () => clearInterval(interval);
   }, [autoRefresh, refreshInterval, currentExample]);
 
   const renderAnalyticsDashboard = () => {
-    
     const metrics = [
       { label: 'Total Requests', value: '2.4M', change: '+12.5%', trend: 'up' },
       { label: 'Avg Response Time', value: '124ms', change: '-8.2%', trend: 'down' },
@@ -89,7 +91,9 @@ export const Page: React.FC = () => {
       <div className="snake-page__example">
         <div className="snake-page__header">
           <div>
-            <Heading as="h1" size="xl">Analytics Dashboard</Heading>
+            <Heading as="h1" size="xl">
+              Analytics Dashboard
+            </Heading>
             <Text variant="muted">Real-time system performance metrics</Text>
           </div>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -104,7 +108,9 @@ export const Page: React.FC = () => {
               ]}
               size="small"
             />
-            <Button variant="secondary" size="small">Export Report</Button>
+            <Button variant="secondary" size="small">
+              Export Report
+            </Button>
             <Button variant="primary" size="small" onClick={() => setShowDetails(!showDetails)}>
               {showDetails ? 'Hide' : 'Show'} Details
             </Button>
@@ -119,24 +125,35 @@ export const Page: React.FC = () => {
               <Stat
                 label={metric.label}
                 value={metric.value}
-                change={{ 
-                  value: metric.change, 
-                  type: metric.trend === 'up' ? 'increase' : 'decrease' 
+                change={{
+                  value: metric.change,
+                  type: metric.trend === 'up' ? 'increase' : 'decrease',
                 }}
                 variant="stacked"
-                color={metric.trend === 'up' && metric.label !== 'Error Rate' ? 'success' : 
-                       metric.trend === 'down' && metric.label === 'Error Rate' ? 'success' : 'danger'}
+                color={
+                  metric.trend === 'up' && metric.label !== 'Error Rate'
+                    ? 'success'
+                    : metric.trend === 'down' && metric.label === 'Error Rate'
+                      ? 'success'
+                      : 'danger'
+                }
               />
             </Card>
           ))}
         </div>
 
         <div className="snake-page__content-grid">
-          <Card 
+          <Card
             header={
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading as="h3" size="md">Performance Overview</Heading>
-                <Badge variant="success" style="dot">Live</Badge>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
+                <Heading as="h3" size="md">
+                  Performance Overview
+                </Heading>
+                <Badge variant="success" style="dot">
+                  Live
+                </Badge>
               </div>
             }
             size="large"
@@ -150,7 +167,7 @@ export const Page: React.FC = () => {
               variant="underline"
               size="small"
             />
-            
+
             <div style={{ marginTop: '20px' }}>
               <Table
                 data={performanceData}
@@ -159,18 +176,15 @@ export const Page: React.FC = () => {
                   { key: 'calls', header: 'Total Calls', align: 'right' },
                   { key: 'avgTime', header: 'Avg Time', align: 'right' },
                   { key: 'p99', header: '99th Percentile', align: 'right' },
-                  { 
-                    key: 'errors', 
-                    header: 'Error Rate', 
+                  {
+                    key: 'errors',
+                    header: 'Error Rate',
                     align: 'right',
                     render: (value) => (
-                      <Badge 
-                        variant={parseFloat(value) > 0.2 ? 'danger' : 'success'}
-                        size="small"
-                      >
+                      <Badge variant={parseFloat(value) > 0.2 ? 'danger' : 'success'} size="small">
                         {value}
                       </Badge>
-                    )
+                    ),
                   },
                 ]}
                 size="small"
@@ -183,15 +197,21 @@ export const Page: React.FC = () => {
                 <Divider spacing="small" />
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
                   <div>
-                    <Text size="sm" variant="muted">Database Latency</Text>
+                    <Text size="sm" variant="muted">
+                      Database Latency
+                    </Text>
                     <Progress value={23} variant="success" size="small" showLabel />
                   </div>
                   <div>
-                    <Text size="sm" variant="muted">Cache Hit Rate</Text>
+                    <Text size="sm" variant="muted">
+                      Cache Hit Rate
+                    </Text>
                     <Progress value={87} variant="primary" size="small" showLabel />
                   </div>
                   <div>
-                    <Text size="sm" variant="muted">Queue Depth</Text>
+                    <Text size="sm" variant="muted">
+                      Queue Depth
+                    </Text>
                     <Progress value={45} variant="warning" size="small" showLabel />
                   </div>
                 </div>
@@ -200,11 +220,15 @@ export const Page: React.FC = () => {
           </Card>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <Card 
+            <Card
               header={
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Heading as="h3" size="md">System Alerts</Heading>
-                  <IconButton 
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                >
+                  <Heading as="h3" size="md">
+                    System Alerts
+                  </Heading>
+                  <IconButton
                     icon={alertsExpanded ? '−' : '+'}
                     size="small"
                     variant="ghost"
@@ -231,7 +255,13 @@ export const Page: React.FC = () => {
               )}
             </Card>
 
-            <Card header={<Heading as="h3" size="md">Quick Actions</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Quick Actions
+                </Heading>
+              }
+            >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <Button variant="secondary" size="small" fullWidth>
                   Clear Cache
@@ -245,7 +275,13 @@ export const Page: React.FC = () => {
               </div>
             </Card>
 
-            <Card header={<Heading as="h3" size="md">Traffic Distribution</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Traffic Distribution
+                </Heading>
+              }
+            >
               <List
                 items={[
                   { content: 'North America', meta: '45%' },
@@ -312,24 +348,26 @@ export const Page: React.FC = () => {
     ];
 
     const statusColors = {
-      'planning': 'info',
+      planning: 'info',
       'in-progress': 'warning',
-      'review': 'primary',
-      'completed': 'success',
+      review: 'primary',
+      completed: 'success',
     };
 
     const priorityColors = {
-      'low': 'default',
-      'medium': 'info',
-      'high': 'warning',
-      'critical': 'danger',
+      low: 'default',
+      medium: 'info',
+      high: 'warning',
+      critical: 'danger',
     };
 
     return (
       <div className="snake-page__example">
         <div className="snake-page__header">
           <div>
-            <Heading as="h1" size="xl">Project Management</Heading>
+            <Heading as="h1" size="xl">
+              Project Management
+            </Heading>
             <Text variant="muted">Track and manage all active projects</Text>
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
@@ -341,47 +379,47 @@ export const Page: React.FC = () => {
 
         <div style={{ display: 'flex', gap: '16px', marginTop: '24px', marginBottom: '24px' }}>
           <div style={{ display: 'flex', gap: '8px' }}>
-            <Filter 
-              active={filterStatus === 'all'} 
+            <Filter
+              active={filterStatus === 'all'}
               onClick={() => setFilterStatus('all')}
               count={projects.length}
             >
               All Projects
             </Filter>
-            <Filter 
+            <Filter
               active={filterStatus === 'planning'}
               onClick={() => setFilterStatus('planning')}
               variant="info"
-              count={projects.filter(p => p.status === 'planning').length}
+              count={projects.filter((p) => p.status === 'planning').length}
             >
               Planning
             </Filter>
-            <Filter 
+            <Filter
               active={filterStatus === 'in-progress'}
               onClick={() => setFilterStatus('in-progress')}
               variant="warning"
-              count={projects.filter(p => p.status === 'in-progress').length}
+              count={projects.filter((p) => p.status === 'in-progress').length}
             >
               In Progress
             </Filter>
-            <Filter 
+            <Filter
               active={filterStatus === 'review'}
               onClick={() => setFilterStatus('review')}
               variant="primary"
-              count={projects.filter(p => p.status === 'review').length}
+              count={projects.filter((p) => p.status === 'review').length}
             >
               Review
             </Filter>
-            <Filter 
+            <Filter
               active={filterStatus === 'completed'}
               onClick={() => setFilterStatus('completed')}
               variant="success"
-              count={projects.filter(p => p.status === 'completed').length}
+              count={projects.filter((p) => p.status === 'completed').length}
             >
               Completed
             </Filter>
           </div>
-          
+
           <div style={{ marginLeft: 'auto' }}>
             <RadioButton
               name="view"
@@ -407,32 +445,48 @@ export const Page: React.FC = () => {
                       {status.replace('-', ' ')}
                     </Heading>
                     <Badge variant={statusColors[status as keyof typeof statusColors]} size="small">
-                      {projects.filter(p => p.status === status).length}
+                      {projects.filter((p) => p.status === status).length}
                     </Badge>
                   </div>
                   <Divider spacing="small" />
                   <div className="snake-page__kanban-items">
                     {projects
-                      .filter(p => filterStatus === 'all' || p.status === filterStatus)
-                      .filter(p => p.status === status)
+                      .filter((p) => filterStatus === 'all' || p.status === filterStatus)
+                      .filter((p) => p.status === status)
                       .map((project) => (
                         <SubCard key={project.id} variant="default" hoverable>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                            <Text size="sm" weight="medium">{project.name}</Text>
-                            <Badge 
-                              variant={priorityColors[project.priority as keyof typeof priorityColors]}
+                          <div
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              marginBottom: '8px',
+                            }}
+                          >
+                            <Text size="sm" weight="medium">
+                              {project.name}
+                            </Text>
+                            <Badge
+                              variant={
+                                priorityColors[project.priority as keyof typeof priorityColors]
+                              }
                               size="small"
                             >
                               {project.priority}
                             </Badge>
                           </div>
-                          <Progress 
-                            value={project.completion} 
-                            size="small" 
+                          <Progress
+                            value={project.completion}
+                            size="small"
                             variant={project.completion === 100 ? 'success' : 'primary'}
                             showLabel
                           />
-                          <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'space-between' }}>
+                          <div
+                            style={{
+                              marginTop: '12px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                            }}
+                          >
                             <Text size="xs" variant="muted">
                               {project.completedTasks}/{project.tasks} tasks
                             </Text>
@@ -457,44 +511,46 @@ export const Page: React.FC = () => {
         {selectedView === 'list' && (
           <Card>
             <Table
-              data={projects.filter(p => filterStatus === 'all' || p.status === filterStatus)}
+              data={projects.filter((p) => filterStatus === 'all' || p.status === filterStatus)}
               columns={[
-                { 
-                  key: 'name', 
+                {
+                  key: 'name',
                   header: 'Project Name',
-                  render: (value) => <Link href="#" variant="primary">{value}</Link>
+                  render: (value) => (
+                    <Link href="#" variant="primary">
+                      {value}
+                    </Link>
+                  ),
                 },
-                { 
-                  key: 'status', 
+                {
+                  key: 'status',
                   header: 'Status',
                   render: (value) => (
                     <Badge variant={statusColors[value as keyof typeof statusColors]} style="dot">
                       {value}
                     </Badge>
-                  )
+                  ),
                 },
-                { 
-                  key: 'priority', 
+                {
+                  key: 'priority',
                   header: 'Priority',
                   render: (value) => (
                     <Badge variant={priorityColors[value as keyof typeof priorityColors]}>
                       {value}
                     </Badge>
-                  )
+                  ),
                 },
-                { 
-                  key: 'completion', 
+                {
+                  key: 'completion',
                   header: 'Progress',
-                  render: (value) => (
-                    <Progress value={value} size="small" showLabel />
-                  )
+                  render: (value) => <Progress value={value} size="small" showLabel />,
                 },
                 { key: 'assignees', header: 'Team', render: (value) => value.join(', ') },
                 { key: 'dueDate', header: 'Due Date' },
-                { 
-                  key: 'tasks', 
+                {
+                  key: 'tasks',
                   header: 'Tasks',
-                  render: (_, row) => `${row.completedTasks}/${row.tasks}`
+                  render: (_, row) => `${row.completedTasks}/${row.tasks}`,
                 },
               ]}
               striped
@@ -526,7 +582,9 @@ export const Page: React.FC = () => {
               <Input label="Due Date" type="date" />
             </div>
             <div>
-              <Text size="sm" variant="muted" style={{ marginBottom: '8px' }}>Assign Team Members</Text>
+              <Text size="sm" variant="muted" style={{ marginBottom: '8px' }}>
+                Assign Team Members
+              </Text>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <Checkbox label="John D." />
                 <Checkbox label="Sarah M." />
@@ -553,10 +611,34 @@ export const Page: React.FC = () => {
 
   const renderSystemMonitor = () => {
     const servers = [
-      { id: 'server-1', name: 'Production Server 1', status: 'online', uptime: '45 days', location: 'US-East' },
-      { id: 'server-2', name: 'Production Server 2', status: 'online', uptime: '23 days', location: 'US-West' },
-      { id: 'server-3', name: 'Database Server', status: 'online', uptime: '67 days', location: 'EU-Central' },
-      { id: 'server-4', name: 'Backup Server', status: 'maintenance', uptime: '12 days', location: 'Asia-Pacific' },
+      {
+        id: 'server-1',
+        name: 'Production Server 1',
+        status: 'online',
+        uptime: '45 days',
+        location: 'US-East',
+      },
+      {
+        id: 'server-2',
+        name: 'Production Server 2',
+        status: 'online',
+        uptime: '23 days',
+        location: 'US-West',
+      },
+      {
+        id: 'server-3',
+        name: 'Database Server',
+        status: 'online',
+        uptime: '67 days',
+        location: 'EU-Central',
+      },
+      {
+        id: 'server-4',
+        name: 'Backup Server',
+        status: 'maintenance',
+        uptime: '12 days',
+        location: 'Asia-Pacific',
+      },
     ];
 
     const systemLogs = [
@@ -578,7 +660,9 @@ export const Page: React.FC = () => {
       <div className="snake-page__example">
         <div className="snake-page__header">
           <div>
-            <Heading as="h1" size="xl">System Monitor</Heading>
+            <Heading as="h1" size="xl">
+              System Monitor
+            </Heading>
             <Text variant="muted">Real-time infrastructure monitoring</Text>
           </div>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -599,11 +683,7 @@ export const Page: React.FC = () => {
                 size="small"
               />
             )}
-            <Button 
-              variant="danger" 
-              size="small"
-              onClick={() => setShowAlert(true)}
-            >
+            <Button variant="danger" size="small" onClick={() => setShowAlert(true)}>
               Emergency Stop
             </Button>
           </div>
@@ -619,19 +699,27 @@ export const Page: React.FC = () => {
 
         <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '20px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <Card header={<Heading as="h3" size="md">Server List</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Server List
+                </Heading>
+              }
+            >
               <List
-                items={servers.map(server => ({
+                items={servers.map((server) => ({
                   id: server.id,
                   content: (
                     <div>
                       <Text size="sm">{server.name}</Text>
-                      <Text size="xs" variant="muted">{server.location}</Text>
+                      <Text size="xs" variant="muted">
+                        {server.location}
+                      </Text>
                     </div>
                   ),
                   meta: (
-                    <Badge 
-                      variant={server.status === 'online' ? 'success' : 'warning'} 
+                    <Badge
+                      variant={server.status === 'online' ? 'success' : 'warning'}
                       style="dot"
                       size="small"
                     >
@@ -645,14 +733,15 @@ export const Page: React.FC = () => {
               />
             </Card>
 
-            <Card header={<Heading as="h3" size="md">Quick Stats</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Quick Stats
+                </Heading>
+              }
+            >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <Stat
-                  label="Total Servers"
-                  value="4"
-                  variant="horizontal"
-                  size="small"
-                />
+                <Stat label="Total Servers" value="4" variant="horizontal" size="small" />
                 <Stat
                   label="Active Connections"
                   value="1,247"
@@ -679,55 +768,84 @@ export const Page: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <Card 
+            <Card
               header={
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Heading as="h3" size="md">Resource Usage</Heading>
-                  <Badge variant="success" style="dot">Live</Badge>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                >
+                  <Heading as="h3" size="md">
+                    Resource Usage
+                  </Heading>
+                  <Badge variant="success" style="dot">
+                    Live
+                  </Badge>
                 </div>
               }
             >
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px' }}>
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginBottom: '8px',
+                    }}
+                  >
                     <Text size="sm">CPU Usage</Text>
-                    <Text size="sm" variant={cpuUsage > 80 ? 'danger' : 'primary'}>{cpuUsage}%</Text>
+                    <Text size="sm" variant={cpuUsage > 80 ? 'danger' : 'primary'}>
+                      {cpuUsage}%
+                    </Text>
                   </div>
-                  <Progress 
-                    value={cpuUsage} 
+                  <Progress
+                    value={cpuUsage}
                     variant={cpuUsage > 80 ? 'danger' : cpuUsage > 60 ? 'warning' : 'success'}
                     type="striped"
                     animated={cpuUsage > 80}
                   />
                 </div>
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginBottom: '8px',
+                    }}
+                  >
                     <Text size="sm">Memory Usage</Text>
-                    <Text size="sm" variant={memoryUsage > 80 ? 'danger' : 'primary'}>{memoryUsage}%</Text>
+                    <Text size="sm" variant={memoryUsage > 80 ? 'danger' : 'primary'}>
+                      {memoryUsage}%
+                    </Text>
                   </div>
-                  <Progress 
-                    value={memoryUsage} 
+                  <Progress
+                    value={memoryUsage}
                     variant={memoryUsage > 80 ? 'danger' : memoryUsage > 60 ? 'warning' : 'success'}
                     type="striped"
                     animated={memoryUsage > 80}
                   />
                 </div>
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginBottom: '8px',
+                    }}
+                  >
                     <Text size="sm">Network I/O</Text>
-                    <Text size="sm" variant="primary">{networkUsage}%</Text>
+                    <Text size="sm" variant="primary">
+                      {networkUsage}%
+                    </Text>
                   </div>
-                  <Progress 
-                    value={networkUsage} 
-                    variant="primary"
-                  />
+                  <Progress value={networkUsage} variant="primary" />
                 </div>
               </div>
 
               <Divider spacing="md" />
 
               <div>
-                <Heading as="h4" size="sm" style={{ marginBottom: '12px' }}>Running Processes</Heading>
+                <Heading as="h4" size="sm" style={{ marginBottom: '12px' }}>
+                  Running Processes
+                </Heading>
                 <Table
                   data={processes}
                   columns={[
@@ -735,14 +853,14 @@ export const Page: React.FC = () => {
                     { key: 'cpu', header: 'CPU', align: 'right' },
                     { key: 'memory', header: 'Memory', align: 'right' },
                     { key: 'threads', header: 'Threads', align: 'right' },
-                    { 
-                      key: 'status', 
+                    {
+                      key: 'status',
                       header: 'Status',
                       render: (value) => (
                         <Badge variant="success" size="small" style="dot">
                           {value}
                         </Badge>
-                      )
+                      ),
                     },
                   ]}
                   size="small"
@@ -750,31 +868,47 @@ export const Page: React.FC = () => {
               </div>
             </Card>
 
-            <Card header={<Heading as="h3" size="md">System Logs</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  System Logs
+                </Heading>
+              }
+            >
               <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-                <Filter variant="default" active>All</Filter>
+                <Filter variant="default" active>
+                  All
+                </Filter>
                 <Filter variant="danger">Errors</Filter>
                 <Filter variant="warning">Warnings</Filter>
                 <Filter variant="info">Info</Filter>
               </div>
-              
-              <div style={{ 
-                backgroundColor: '#0a0a0c', 
-                padding: '12px', 
-                borderRadius: '4px',
-                fontFamily: 'monospace',
-                fontSize: '12px',
-                maxHeight: '200px',
-                overflowY: 'auto'
-              }}>
+
+              <div
+                style={{
+                  backgroundColor: '#0a0a0c',
+                  padding: '12px',
+                  borderRadius: '4px',
+                  fontFamily: 'monospace',
+                  fontSize: '12px',
+                  maxHeight: '200px',
+                  overflowY: 'auto',
+                }}
+              >
                 {systemLogs.map((log, index) => (
                   <div key={index} style={{ marginBottom: '8px' }}>
                     <span style={{ color: '#5a5a5a' }}>{log.time}</span>
-                    <span style={{ 
-                      marginLeft: '12px',
-                      color: log.level === 'error' ? '#ff5555' : 
-                             log.level === 'warning' ? '#f1fa8c' : '#50fa7b'
-                    }}>
+                    <span
+                      style={{
+                        marginLeft: '12px',
+                        color:
+                          log.level === 'error'
+                            ? '#ff5555'
+                            : log.level === 'warning'
+                              ? '#f1fa8c'
+                              : '#50fa7b',
+                      }}
+                    >
                       [{log.level.toUpperCase()}]
                     </span>
                     <span style={{ marginLeft: '12px', color: '#bdbdbd' }}>{log.message}</span>
@@ -783,14 +917,32 @@ export const Page: React.FC = () => {
               </div>
             </Card>
 
-            <Card header={<Heading as="h3" size="md">Server Actions</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Server Actions
+                </Heading>
+              }
+            >
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
-                <Button variant="secondary" size="small">Restart Service</Button>
-                <Button variant="secondary" size="small">Clear Cache</Button>
-                <Button variant="secondary" size="small">View Logs</Button>
-                <Button variant="cyber" size="small">Run Diagnostics</Button>
-                <Button variant="primary" size="small">Deploy Update</Button>
-                <Button variant="danger" size="small">Force Stop</Button>
+                <Button variant="secondary" size="small">
+                  Restart Service
+                </Button>
+                <Button variant="secondary" size="small">
+                  Clear Cache
+                </Button>
+                <Button variant="secondary" size="small">
+                  View Logs
+                </Button>
+                <Button variant="cyber" size="small">
+                  Run Diagnostics
+                </Button>
+                <Button variant="primary" size="small">
+                  Deploy Update
+                </Button>
+                <Button variant="danger" size="small">
+                  Force Stop
+                </Button>
               </div>
             </Card>
           </div>
@@ -815,21 +967,21 @@ export const Page: React.FC = () => {
           Snake Eater UI Examples
         </Heading>
         <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', gap: '8px' }}>
-          <Button 
+          <Button
             variant={currentExample === 'analytics' ? 'primary' : 'ghost'}
             onClick={() => setCurrentExample('analytics')}
             size="small"
           >
             Analytics Dashboard
           </Button>
-          <Button 
+          <Button
             variant={currentExample === 'projects' ? 'primary' : 'ghost'}
             onClick={() => setCurrentExample('projects')}
             size="small"
           >
             Project Management
           </Button>
-          <Button 
+          <Button
             variant={currentExample === 'monitor' ? 'primary' : 'ghost'}
             onClick={() => setCurrentExample('monitor')}
             size="small"
@@ -838,9 +990,9 @@ export const Page: React.FC = () => {
           </Button>
         </div>
       </div>
-      
+
       <Divider variant="dashed" spacing="large" />
-      
+
       <div className="snake-page__example-container">
         {currentExample === 'analytics' && renderAnalyticsDashboard()}
         {currentExample === 'projects' && renderProjectManagement()}

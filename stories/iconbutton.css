@@ -154,7 +154,9 @@
 /* Focus state */
 .snake-icon-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px rgba(189, 189, 189, 0.3);
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px rgba(189, 189, 189, 0.3);
 }
 
 /* Badge */

@@ -49,9 +49,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   ...props
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [charCount, setCharCount] = React.useState(
-    value ? String(value).length : 0
-  );
+  const [charCount, setCharCount] = React.useState(value ? String(value).length : 0);
 
   const adjustHeight = () => {
     const textarea = textareaRef.current;
@@ -59,11 +57,11 @@ export const Textarea: React.FC<TextareaProps> = ({
 
     // Reset height to get accurate scrollHeight
     textarea.style.height = 'auto';
-    
+
     const lineHeight = parseInt(getComputedStyle(textarea).lineHeight);
     const minHeight = minRows * lineHeight;
     const maxHeight = maxRows * lineHeight;
-    
+
     const newHeight = Math.min(Math.max(textarea.scrollHeight, minHeight), maxHeight);
     textarea.style.height = `${newHeight}px`;
   };
@@ -84,23 +82,25 @@ export const Textarea: React.FC<TextareaProps> = ({
     fullWidth && 'snake-textarea-wrapper--full-width',
     error && 'snake-textarea-wrapper--error',
     disabled && 'snake-textarea-wrapper--disabled',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const textareaClasses = [
     'snake-textarea',
     `snake-textarea--${variant}`,
     autoResize && 'snake-textarea--auto-resize',
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const resizeStyle = autoResize ? 'none' : resize;
 
   return (
     <div className={wrapperClasses}>
-      {label && (
-        <label className="snake-textarea__label">{label}</label>
-      )}
-      
+      {label && <label className="snake-textarea__label">{label}</label>}
+
       <div className="snake-textarea__container">
         <textarea
           ref={textareaRef}
@@ -113,20 +113,20 @@ export const Textarea: React.FC<TextareaProps> = ({
           style={{ resize: resizeStyle }}
           {...props}
         />
-        
+
         <div className="snake-textarea__corner snake-textarea__corner--top-left" />
         <div className="snake-textarea__corner snake-textarea__corner--top-right" />
         <div className="snake-textarea__corner snake-textarea__corner--bottom-left" />
         <div className="snake-textarea__corner snake-textarea__corner--bottom-right" />
       </div>
-      
+
       <div className="snake-textarea__footer">
         {error ? (
           <span className="snake-textarea__error">{error}</span>
         ) : helperText ? (
           <span className="snake-textarea__helper">{helperText}</span>
         ) : null}
-        
+
         {showCount && (
           <span className="snake-textarea__count">
             {charCount}

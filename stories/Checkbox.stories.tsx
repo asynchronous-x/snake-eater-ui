@@ -65,12 +65,9 @@ export const Variants: Story = {
 export const WithHelperText: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <Checkbox 
-        label="Subscribe to newsletter" 
-        helperText="We'll send you updates once a week"
-      />
-      <Checkbox 
-        label="Enable notifications" 
+      <Checkbox label="Subscribe to newsletter" helperText="We'll send you updates once a week" />
+      <Checkbox
+        label="Enable notifications"
         helperText="Get notified about important updates"
         defaultChecked
       />
@@ -144,30 +141,29 @@ export const IndeterminateExample: Story = {
 
 export const FormExample: Story = {
   render: () => (
-    <div style={{
-      padding: '24px',
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-      width: '400px',
-    }}>
+    <div
+      style={{
+        padding: '24px',
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+        width: '400px',
+      }}
+    >
       <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '16px' }}>Preferences</h3>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <Checkbox 
-          label="Email notifications" 
+        <Checkbox
+          label="Email notifications"
           defaultChecked
           helperText="Receive updates via email"
         />
-        <Checkbox 
-          label="SMS notifications" 
-          helperText="Receive updates via text message"
-        />
-        <Checkbox 
-          label="Marketing emails" 
+        <Checkbox label="SMS notifications" helperText="Receive updates via text message" />
+        <Checkbox
+          label="Marketing emails"
           variant="info"
           helperText="Receive promotional content and offers"
         />
-        <Checkbox 
-          label="Data collection" 
+        <Checkbox
+          label="Data collection"
           variant="warning"
           helperText="Allow us to collect usage data"
         />
@@ -179,18 +175,20 @@ export const FormExample: Story = {
 export const TermsAndConditions: Story = {
   render: () => {
     const [agreed, setAgreed] = useState(false);
-    
+
     return (
-      <div style={{
-        padding: '24px',
-        backgroundColor: '#1f1d20',
-        border: '1px solid #3a3a3a',
-        width: '400px',
-      }}>
+      <div
+        style={{
+          padding: '24px',
+          backgroundColor: '#1f1d20',
+          border: '1px solid #3a3a3a',
+          width: '400px',
+        }}
+      >
         <div style={{ marginBottom: '16px' }}>
           <p style={{ color: '#8e8e90', fontSize: '14px', lineHeight: '1.6', margin: 0 }}>
-            By creating an account, you agree to our terms of service and privacy policy. 
-            Please read them carefully before proceeding.
+            By creating an account, you agree to our terms of service and privacy policy. Please
+            read them carefully before proceeding.
           </p>
         </div>
         <Checkbox

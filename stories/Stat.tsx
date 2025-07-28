@@ -46,20 +46,24 @@ export const Stat: React.FC<StatProps> = ({
     `snake-stat--${variant}`,
     `snake-stat--${color}`,
     loading && 'snake-stat--loading',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const changeClasses = [
-    'snake-stat__change',
-    change && `snake-stat__change--${change.type}`
-  ].filter(Boolean).join(' ');
+  const changeClasses = ['snake-stat__change', change && `snake-stat__change--${change.type}`]
+    .filter(Boolean)
+    .join(' ');
 
   const getChangeIcon = () => {
     if (!change) return null;
     switch (change.type) {
-      case 'increase': return '↑';
-      case 'decrease': return '↓';
-      default: return '→';
+      case 'increase':
+        return '↑';
+      case 'decrease':
+        return '↓';
+      default:
+        return '→';
     }
   };
 
@@ -67,16 +71,12 @@ export const Stat: React.FC<StatProps> = ({
     <div className={statClasses}>
       <div className="snake-stat__corner snake-stat__corner--top-left" />
       <div className="snake-stat__corner snake-stat__corner--top-right" />
-      
-      {icon && (
-        <div className="snake-stat__icon">
-          {icon}
-        </div>
-      )}
-      
+
+      {icon && <div className="snake-stat__icon">{icon}</div>}
+
       <div className="snake-stat__content">
         <div className="snake-stat__label">{label}</div>
-        
+
         {loading ? (
           <div className="snake-stat__value">
             <span className="snake-stat__loading-bar" />
@@ -84,7 +84,7 @@ export const Stat: React.FC<StatProps> = ({
         ) : (
           <div className="snake-stat__value">{value}</div>
         )}
-        
+
         {(info || change) && (
           <div className="snake-stat__footer">
             {info && <div className="snake-stat__info">{info}</div>}
@@ -97,7 +97,7 @@ export const Stat: React.FC<StatProps> = ({
           </div>
         )}
       </div>
-      
+
       <div className="snake-stat__corner snake-stat__corner--bottom-left" />
       <div className="snake-stat__corner snake-stat__corner--bottom-right" />
     </div>

@@ -164,21 +164,36 @@ export const CustomIcon: Story = {
 export const Closable: Story = {
   render: () => {
     const [alerts, setAlerts] = useState([
-      { id: 1, variant: 'info' as const, title: 'Tip', description: 'Click the X to close this alert.' },
-      { id: 2, variant: 'success' as const, title: 'Success', description: 'This alert can be dismissed.' },
-      { id: 3, variant: 'warning' as const, title: 'Warning', description: 'Don\'t forget to save your work!' },
+      {
+        id: 1,
+        variant: 'info' as const,
+        title: 'Tip',
+        description: 'Click the X to close this alert.',
+      },
+      {
+        id: 2,
+        variant: 'success' as const,
+        title: 'Success',
+        description: 'This alert can be dismissed.',
+      },
+      {
+        id: 3,
+        variant: 'warning' as const,
+        title: 'Warning',
+        description: "Don't forget to save your work!",
+      },
     ]);
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        {alerts.map(alert => (
+        {alerts.map((alert) => (
           <Alert
             key={alert.id}
             variant={alert.variant}
             title={alert.title}
             description={alert.description}
             closable
-            onClose={() => setAlerts(alerts.filter(a => a.id !== alert.id))}
+            onClose={() => setAlerts(alerts.filter((a) => a.id !== alert.id))}
           />
         ))}
         {alerts.length === 0 && (
@@ -198,22 +213,26 @@ export const WithActions: Story = {
         description="You have unsaved changes. What would you like to do?"
         actions={
           <>
-            <button style={{
-              padding: '4px 12px',
-              backgroundColor: '#ffb86c',
-              border: '1px solid #ffb86c',
-              color: '#0b0b0d',
-              cursor: 'pointer',
-            }}>
+            <button
+              style={{
+                padding: '4px 12px',
+                backgroundColor: '#ffb86c',
+                border: '1px solid #ffb86c',
+                color: '#0b0b0d',
+                cursor: 'pointer',
+              }}
+            >
               Save Now
             </button>
-            <button style={{
-              padding: '4px 12px',
-              backgroundColor: 'transparent',
-              border: '1px solid #ffb86c',
-              color: '#ffb86c',
-              cursor: 'pointer',
-            }}>
+            <button
+              style={{
+                padding: '4px 12px',
+                backgroundColor: 'transparent',
+                border: '1px solid #ffb86c',
+                color: '#ffb86c',
+                cursor: 'pointer',
+              }}
+            >
               Discard
             </button>
           </>
@@ -236,12 +255,8 @@ export const WithActions: Story = {
 export const DescriptionOnly: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <Alert variant="success">
-        Operation completed successfully.
-      </Alert>
-      <Alert variant="danger">
-        An unexpected error occurred. Please try again.
-      </Alert>
+      <Alert variant="success">Operation completed successfully.</Alert>
+      <Alert variant="danger">An unexpected error occurred. Please try again.</Alert>
       <Alert variant="info" showIcon={false}>
         Your profile was last updated 3 days ago.
       </Alert>
@@ -251,23 +266,15 @@ export const DescriptionOnly: Story = {
 
 export const ComplexContent: Story = {
   render: () => (
-    <Alert
-      variant="info"
-      title="System Maintenance"
-      closable
-    >
+    <Alert variant="info" title="System Maintenance" closable>
       <div>
-        <p style={{ margin: '0 0 8px 0' }}>
-          We'll be performing scheduled maintenance on:
-        </p>
+        <p style={{ margin: '0 0 8px 0' }}>We'll be performing scheduled maintenance on:</p>
         <ul style={{ margin: '0 0 8px 0', paddingLeft: '20px' }}>
           <li>Database servers: 2:00 AM - 2:30 AM EST</li>
           <li>API services: 2:30 AM - 3:00 AM EST</li>
           <li>CDN refresh: 3:00 AM - 3:15 AM EST</li>
         </ul>
-        <p style={{ margin: 0 }}>
-          During this time, some features may be temporarily unavailable.
-        </p>
+        <p style={{ margin: 0 }}>During this time, some features may be temporarily unavailable.</p>
       </div>
     </Alert>
   ),
@@ -276,22 +283,39 @@ export const ComplexContent: Story = {
 export const NotificationStack: Story = {
   render: () => {
     const [notifications, setNotifications] = useState([
-      { id: 1, variant: 'success' as const, title: 'File uploaded', description: 'document.pdf has been uploaded successfully.' },
-      { id: 2, variant: 'info' as const, title: 'New message', description: 'You have 3 unread messages in your inbox.' },
-      { id: 3, variant: 'warning' as const, title: 'Storage limit', description: 'You\'re using 80% of your storage quota.' },
+      {
+        id: 1,
+        variant: 'success' as const,
+        title: 'File uploaded',
+        description: 'document.pdf has been uploaded successfully.',
+      },
+      {
+        id: 2,
+        variant: 'info' as const,
+        title: 'New message',
+        description: 'You have 3 unread messages in your inbox.',
+      },
+      {
+        id: 3,
+        variant: 'warning' as const,
+        title: 'Storage limit',
+        description: "You're using 80% of your storage quota.",
+      },
     ]);
 
     return (
-      <div style={{
-        position: 'fixed',
-        top: '20px',
-        right: '20px',
-        width: '400px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '12px',
-      }}>
-        {notifications.map(notification => (
+      <div
+        style={{
+          position: 'fixed',
+          top: '20px',
+          right: '20px',
+          width: '400px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+        }}
+      >
+        {notifications.map((notification) => (
           <Alert
             key={notification.id}
             variant={notification.variant}
@@ -299,7 +323,7 @@ export const NotificationStack: Story = {
             description={notification.description}
             size="small"
             closable
-            onClose={() => setNotifications(notifications.filter(n => n.id !== notification.id))}
+            onClose={() => setNotifications(notifications.filter((n) => n.id !== notification.id))}
           />
         ))}
       </div>
@@ -309,16 +333,18 @@ export const NotificationStack: Story = {
 
 export const StatusMessages: Story = {
   render: () => (
-    <div style={{
-      padding: '24px',
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '16px',
-    }}>
+    <div
+      style={{
+        padding: '24px',
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+      }}
+    >
       <h3 style={{ color: '#bdbdbd', marginTop: 0 }}>System Status</h3>
-      
+
       <Alert
         variant="success"
         title="All Systems Operational"
@@ -326,7 +352,7 @@ export const StatusMessages: Story = {
         borderPosition="all"
         icon="✓"
       />
-      
+
       <Alert
         variant="warning"
         title="Degraded Performance"
@@ -334,7 +360,7 @@ export const StatusMessages: Story = {
         borderPosition="all"
         icon="⚠"
       />
-      
+
       <Alert
         variant="danger"
         title="Service Outage"

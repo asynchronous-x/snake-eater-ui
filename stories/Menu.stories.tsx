@@ -56,28 +56,43 @@ export const Default: Story = {
 export const WithSubmenu: Story = {
   render: () => {
     const [lastAction, setLastAction] = useState('');
-    
+
     const itemsWithSubmenu = [
-      { id: 'file', label: 'File', icon: '📁', submenu: [
-        { id: 'new', label: 'New', icon: '📄' },
-        { id: 'open', label: 'Open', icon: '📂' },
-        { id: 'recent', label: 'Recent Files', icon: '🕒', submenu: [
-          { id: 'file1', label: 'document.txt' },
-          { id: 'file2', label: 'image.png' },
-          { id: 'file3', label: 'data.json' },
-        ]},
-        { id: 'divider1', divider: true },
-        { id: 'save', label: 'Save', icon: '💾' },
-        { id: 'saveAs', label: 'Save As...', icon: '💾' },
-      ]},
-      { id: 'edit', label: 'Edit', icon: '✏️', submenu: [
-        { id: 'undo', label: 'Undo', shortcut: 'Ctrl+Z' },
-        { id: 'redo', label: 'Redo', shortcut: 'Ctrl+Y' },
-        { id: 'divider1', divider: true },
-        { id: 'cut', label: 'Cut', shortcut: 'Ctrl+X' },
-        { id: 'copy', label: 'Copy', shortcut: 'Ctrl+C' },
-        { id: 'paste', label: 'Paste', shortcut: 'Ctrl+V' },
-      ]},
+      {
+        id: 'file',
+        label: 'File',
+        icon: '📁',
+        submenu: [
+          { id: 'new', label: 'New', icon: '📄' },
+          { id: 'open', label: 'Open', icon: '📂' },
+          {
+            id: 'recent',
+            label: 'Recent Files',
+            icon: '🕒',
+            submenu: [
+              { id: 'file1', label: 'document.txt' },
+              { id: 'file2', label: 'image.png' },
+              { id: 'file3', label: 'data.json' },
+            ],
+          },
+          { id: 'divider1', divider: true },
+          { id: 'save', label: 'Save', icon: '💾' },
+          { id: 'saveAs', label: 'Save As...', icon: '💾' },
+        ],
+      },
+      {
+        id: 'edit',
+        label: 'Edit',
+        icon: '✏️',
+        submenu: [
+          { id: 'undo', label: 'Undo', shortcut: 'Ctrl+Z' },
+          { id: 'redo', label: 'Redo', shortcut: 'Ctrl+Y' },
+          { id: 'divider1', divider: true },
+          { id: 'cut', label: 'Cut', shortcut: 'Ctrl+X' },
+          { id: 'copy', label: 'Copy', shortcut: 'Ctrl+C' },
+          { id: 'paste', label: 'Paste', shortcut: 'Ctrl+V' },
+        ],
+      },
       { id: 'view', label: 'View', icon: '👁️' },
       { id: 'divider1', divider: true },
       { id: 'settings', label: 'Settings', icon: '⚙️' },
@@ -92,9 +107,7 @@ export const WithSubmenu: Story = {
           onItemClick={setLastAction}
         />
         {lastAction && (
-          <p style={{ marginTop: '16px', color: '#bdbdbd' }}>
-            Last action: {lastAction}
-          </p>
+          <p style={{ marginTop: '16px', color: '#bdbdbd' }}>Last action: {lastAction}</p>
         )}
       </div>
     );
@@ -109,11 +122,7 @@ export const Sizes: Story = {
         size="small"
         trigger={<Button size="small">Small Menu</Button>}
       />
-      <Menu
-        items={basicItems.slice(0, 4)}
-        size="medium"
-        trigger={<Button>Medium Menu</Button>}
-      />
+      <Menu items={basicItems.slice(0, 4)} size="medium" trigger={<Button>Medium Menu</Button>} />
       <Menu
         items={basicItems.slice(0, 4)}
         size="large"
@@ -125,13 +134,15 @@ export const Sizes: Story = {
 
 export const Placements: Story = {
   render: () => (
-    <div style={{ 
-      display: 'grid', 
-      gridTemplateColumns: 'repeat(3, 1fr)', 
-      gap: '60px',
-      padding: '100px',
-      placeItems: 'center',
-    }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '60px',
+        padding: '100px',
+        placeItems: 'center',
+      }}
+    >
       <Menu
         items={basicItems.slice(0, 3)}
         placement="top-start"
@@ -171,11 +182,7 @@ export const Placements: Story = {
 export const WithArrow: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px' }}>
-      <Menu
-        items={basicItems}
-        showArrow
-        trigger={<Button>With Arrow</Button>}
-      />
+      <Menu items={basicItems} showArrow trigger={<Button>With Arrow</Button>} />
       <Menu
         items={basicItems}
         showArrow
@@ -195,11 +202,16 @@ export const ContextMenu: Story = {
       { id: 'refresh', label: 'Refresh', icon: '🔄', shortcut: 'F5' },
       { id: 'fullscreen', label: 'Fullscreen', icon: '⛶', shortcut: 'F11' },
       { id: 'divider2', divider: true },
-      { id: 'developer', label: 'Developer Tools', icon: '🛠️', submenu: [
-        { id: 'console', label: 'Console' },
-        { id: 'network', label: 'Network' },
-        { id: 'performance', label: 'Performance' },
-      ]},
+      {
+        id: 'developer',
+        label: 'Developer Tools',
+        icon: '🛠️',
+        submenu: [
+          { id: 'console', label: 'Console' },
+          { id: 'network', label: 'Network' },
+          { id: 'performance', label: 'Performance' },
+        ],
+      },
     ];
 
     const [menuOpen, setMenuOpen] = useState(false);
@@ -225,7 +237,7 @@ export const ContextMenu: Story = {
         onContextMenu={handleContextMenu}
       >
         <p style={{ color: '#8e8e90' }}>Right-click anywhere in this area</p>
-        
+
         {menuOpen && (
           <div style={{ position: 'fixed', left: menuPosition.x, top: menuPosition.y }}>
             <Menu
@@ -244,10 +256,7 @@ export const ContextMenu: Story = {
 export const IconButtonTrigger: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px' }}>
-      <Menu
-        items={basicItems}
-        trigger={<IconButton icon="⚙️" />}
-      />
+      <Menu items={basicItems} trigger={<IconButton icon="⚙️" />} />
       <Menu
         items={[
           { id: 'profile', label: 'Profile', icon: '👤' },
@@ -265,7 +274,7 @@ export const IconButtonTrigger: Story = {
 export const ControlledMenu: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <div>
         <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
@@ -276,7 +285,7 @@ export const ControlledMenu: Story = {
             Close Menu
           </Button>
         </div>
-        
+
         <Menu
           items={basicItems}
           isOpen={isOpen}
@@ -296,11 +305,6 @@ export const LongList: Story = {
       icon: i % 3 === 0 ? '📄' : i % 3 === 1 ? '📁' : '⚙️',
     }));
 
-    return (
-      <Menu
-        items={longItems}
-        trigger={<Button>Long Menu List</Button>}
-      />
-    );
+    return <Menu items={longItems} trigger={<Button>Long Menu List</Button>} />;
   },
 };

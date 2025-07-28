@@ -47,15 +47,17 @@ export const Tabs: React.FC<TabsProps> = ({
     }
   };
 
-  const activeTabContent = tabs.find(tab => tab.id === activeTab)?.content;
+  const activeTabContent = tabs.find((tab) => tab.id === activeTab)?.content;
 
   const tabsClasses = [
     'snake-tabs',
     `snake-tabs--${variant}`,
     `snake-tabs--${size}`,
     fullWidth && 'snake-tabs--full-width',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={tabsClasses}>
@@ -72,7 +74,9 @@ export const Tabs: React.FC<TabsProps> = ({
                 'snake-tabs__tab',
                 activeTab === tab.id && 'snake-tabs__tab--active',
                 tab.disabled && 'snake-tabs__tab--disabled',
-              ].filter(Boolean).join(' ')}
+              ]
+                .filter(Boolean)
+                .join(' ')}
               onClick={() => !tab.disabled && handleTabClick(tab.id)}
               disabled={tab.disabled}
             >
@@ -83,7 +87,7 @@ export const Tabs: React.FC<TabsProps> = ({
         </div>
         <div className="snake-tabs__indicator" />
       </div>
-      
+
       <div className="snake-tabs__content">
         {tabs.map((tab) => (
           <div
@@ -91,10 +95,9 @@ export const Tabs: React.FC<TabsProps> = ({
             id={`tabpanel-${tab.id}`}
             role="tabpanel"
             aria-labelledby={tab.id}
-            className={[
-              'snake-tabs__panel',
-              activeTab === tab.id && 'snake-tabs__panel--active',
-            ].filter(Boolean).join(' ')}
+            className={['snake-tabs__panel', activeTab === tab.id && 'snake-tabs__panel--active']
+              .filter(Boolean)
+              .join(' ')}
           >
             {activeTab === tab.id && tab.content}
           </div>

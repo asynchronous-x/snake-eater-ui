@@ -153,7 +153,8 @@ export const Truncated: Story = {
   render: () => (
     <div style={{ maxWidth: '400px' }}>
       <Heading truncate>
-        This is a very long heading that will be truncated with an ellipsis when it exceeds the container width
+        This is a very long heading that will be truncated with an ellipsis when it exceeds the
+        container width
       </Heading>
     </div>
   ),
@@ -161,11 +162,13 @@ export const Truncated: Story = {
 
 export const PageHeader: Story = {
   render: () => (
-    <header style={{
-      padding: '32px',
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-    }}>
+    <header
+      style={{
+        padding: '32px',
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+      }}
+    >
       <Heading as="h1" size="xl" variant="primary" decorated decorationPosition="left">
         Dashboard
       </Heading>
@@ -185,14 +188,14 @@ export const SectionHeaders: Story = {
       <p style={{ color: '#8e8e90', marginTop: '16px', marginBottom: '32px' }}>
         Explore the powerful features of Snake Eater UI components.
       </p>
-      
+
       <Heading as="h3" size="md" weight="medium">
         Component Library
       </Heading>
       <p style={{ color: '#8e8e90', marginTop: '8px', marginBottom: '24px' }}>
         A comprehensive set of dark-themed React components.
       </p>
-      
+
       <Heading as="h3" size="md" weight="medium">
         Design System
       </Heading>
@@ -205,12 +208,14 @@ export const SectionHeaders: Story = {
 
 export const HeroSection: Story = {
   render: () => (
-    <div style={{
-      padding: '64px 32px',
-      textAlign: 'center',
-      background: 'linear-gradient(180deg, #1f1d20 0%, #0b0b0d 100%)',
-      border: '1px solid #3a3a3a',
-    }}>
+    <div
+      style={{
+        padding: '64px 32px',
+        textAlign: 'center',
+        background: 'linear-gradient(180deg, #1f1d20 0%, #0b0b0d 100%)',
+        border: '1px solid #3a3a3a',
+      }}
+    >
       <Heading as="h1" size="2xl" variant="secondary" align="center">
         SNAKE EATER UI
       </Heading>
@@ -224,41 +229,41 @@ export const HeroSection: Story = {
 export const CardHeaders: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-      <div style={{
-        padding: '24px',
-        backgroundColor: '#1f1d20',
-        border: '1px solid #3a3a3a',
-      }}>
+      <div
+        style={{
+          padding: '24px',
+          backgroundColor: '#1f1d20',
+          border: '1px solid #3a3a3a',
+        }}
+      >
         <Heading as="h3" size="md" variant="primary" transform="uppercase">
           Premium
         </Heading>
-        <p style={{ color: '#8e8e90', marginTop: '8px' }}>
-          Best for professionals
-        </p>
+        <p style={{ color: '#8e8e90', marginTop: '8px' }}>Best for professionals</p>
       </div>
-      <div style={{
-        padding: '24px',
-        backgroundColor: '#1f1d20',
-        border: '1px solid #3a3a3a',
-      }}>
+      <div
+        style={{
+          padding: '24px',
+          backgroundColor: '#1f1d20',
+          border: '1px solid #3a3a3a',
+        }}
+      >
         <Heading as="h3" size="md" variant="secondary" transform="uppercase">
           Standard
         </Heading>
-        <p style={{ color: '#8e8e90', marginTop: '8px' }}>
-          Great for teams
-        </p>
+        <p style={{ color: '#8e8e90', marginTop: '8px' }}>Great for teams</p>
       </div>
-      <div style={{
-        padding: '24px',
-        backgroundColor: '#1f1d20',
-        border: '1px solid #3a3a3a',
-      }}>
+      <div
+        style={{
+          padding: '24px',
+          backgroundColor: '#1f1d20',
+          border: '1px solid #3a3a3a',
+        }}
+      >
         <Heading as="h3" size="md" transform="uppercase">
           Basic
         </Heading>
-        <p style={{ color: '#8e8e90', marginTop: '8px' }}>
-          Perfect for starters
-        </p>
+        <p style={{ color: '#8e8e90', marginTop: '8px' }}>Perfect for starters</p>
       </div>
     </div>
   ),

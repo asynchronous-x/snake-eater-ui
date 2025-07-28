@@ -199,7 +199,7 @@
   .snake-list__number {
     font-size: 0.9em;
   }
-  
+
   .snake-list__subitems {
     padding-left: var(--spacing-md);
   }

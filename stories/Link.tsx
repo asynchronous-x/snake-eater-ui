@@ -40,8 +40,10 @@ export const Link: React.FC<LinkProps> = ({
     `snake-link--${variant}`,
     `snake-link--${size}`,
     disabled && 'snake-link--disabled',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   // Ensure security for external links
   const linkTarget = external ? '_blank' : target;

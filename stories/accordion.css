@@ -231,7 +231,9 @@
   border-bottom: 1px solid #3a3a3a;
 }
 
-.snake-accordion--header.snake-accordion--boxed .snake-accordion__item--open .snake-accordion__header {
+.snake-accordion--header.snake-accordion--boxed
+  .snake-accordion__item--open
+  .snake-accordion__header {
   border-bottom-color: #4a4a4a;
 }
 

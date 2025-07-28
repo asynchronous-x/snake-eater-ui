@@ -113,13 +113,7 @@
   border: none;
   position: relative;
   overflow: visible;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 10px),
-    calc(100% - 10px) 100%,
-    0 100%
-  );
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
   transition: all var(--transition-fast);
 }
 
@@ -138,23 +132,11 @@
 
 /* Size adjustments for cyber variant */
 .snake-button--cyber.snake-button--small {
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 6px),
-    calc(100% - 6px) 100%,
-    0 100%
-  );
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
 }
 
 .snake-button--cyber.snake-button--large {
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - 14px),
-    calc(100% - 14px) 100%,
-    0 100%
-  );
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
 }
 
 /* Clipped variant - bottom-left and top-right corners cut */
@@ -190,14 +172,7 @@
 
 /* Size adjustments for clipped variant */
 .snake-button--clipped.snake-button--small {
-  clip-path: polygon(
-    6px 0,
-    100% 0,
-    100% calc(100% - 6px),
-    calc(100% - 6px) 100%,
-    0 100%,
-    0 6px
-  );
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
 }
 
 .snake-button--clipped.snake-button--large {
@@ -214,7 +189,9 @@
 /* States */
 .snake-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px var(--color-primary);
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px var(--color-primary);
 }
 
 .snake-button:disabled {
@@ -236,7 +213,8 @@
 }
 
 @keyframes snake-button-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {

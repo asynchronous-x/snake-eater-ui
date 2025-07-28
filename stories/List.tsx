@@ -56,32 +56,37 @@ export const List: React.FC<ListProps> = ({
   const getFormattedNumber = formatNumber || defaultFormatNumber;
 
   const renderListItem = (item: ListItem, index: number, parentNumber?: string) => {
-    const currentNumber = parentNumber 
+    const currentNumber = parentNumber
       ? `${parentNumber}.${getFormattedNumber(index + 1)}`
       : getFormattedNumber(startNumber + index);
 
     const isInteractive = interactive && !parentNumber && item.onClick;
 
     return (
-      <li key={index} className={`snake-list__item ${isInteractive ? 'snake-list__item--interactive' : ''}`}>
-        <div 
+      <li
+        key={index}
+        className={`snake-list__item ${isInteractive ? 'snake-list__item--interactive' : ''}`}
+      >
+        <div
           className="snake-list__content"
           onClick={isInteractive ? item.onClick : undefined}
           role={isInteractive ? 'button' : undefined}
           tabIndex={isInteractive ? 0 : undefined}
-          onKeyDown={isInteractive ? (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              item.onClick?.();
-            }
-          } : undefined}
+          onKeyDown={
+            isInteractive
+              ? (e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.onClick?.();
+                  }
+                }
+              : undefined
+          }
         >
           <span className="snake-list__bullet">
             <span className="snake-list__square" />
           </span>
-          {showNumbers && (
-            <span className="snake-list__number">{currentNumber}</span>
-          )}
+          {showNumbers && <span className="snake-list__number">{currentNumber}</span>}
           <span className="snake-list__text">{item.content}</span>
         </div>
         {item.subitems && item.subitems.length > 0 && (
@@ -89,10 +94,7 @@ export const List: React.FC<ListProps> = ({
             {item.subitems.map((subitem, subIndex) => (
               <li key={subIndex} className="snake-list__subitem">
                 <div className="snake-list__content">
-                  <span 
-                    className="snake-list__arrow" 
-                    style={{ color: arrowColor }}
-                  >
+                  <span className="snake-list__arrow" style={{ color: arrowColor }}>
                     ▶
                   </span>
                   {showNumbers && (
@@ -105,17 +107,21 @@ export const List: React.FC<ListProps> = ({
                 {subitem.subitems && subitem.subitems.length > 0 && (
                   <ul className="snake-list__subitems">
                     {subitem.subitems.map((subSubitem, subSubIndex) => (
-                      <li key={subSubIndex} className="snake-list__subitem snake-list__subitem--nested">
+                      <li
+                        key={subSubIndex}
+                        className="snake-list__subitem snake-list__subitem--nested"
+                      >
                         <div className="snake-list__content">
-                          <span 
-                            className="snake-list__arrow" 
+                          <span
+                            className="snake-list__arrow"
                             style={{ color: arrowColor, opacity: 0.7 }}
                           >
                             ▶
                           </span>
                           {showNumbers && (
                             <span className="snake-list__number">
-                              {currentNumber}.{getFormattedNumber(subIndex + 1)}.{getFormattedNumber(subSubIndex + 1)}
+                              {currentNumber}.{getFormattedNumber(subIndex + 1)}.
+                              {getFormattedNumber(subSubIndex + 1)}
                             </span>
                           )}
                           <span className="snake-list__text">{subSubitem.content}</span>
@@ -139,12 +145,10 @@ export const List: React.FC<ListProps> = ({
     !showNumbers && 'snake-list--no-numbers',
     uppercase && 'snake-list--uppercase',
     interactive && 'snake-list--interactive',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  return (
-    <ul className={listClasses}>
-      {items.map((item, index) => renderListItem(item, index))}
-    </ul>
-  );
+  return <ul className={listClasses}>{items.map((item, index) => renderListItem(item, index))}</ul>;
 };

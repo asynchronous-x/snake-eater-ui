@@ -17,9 +17,23 @@ interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Justify items within grid cells */
   justifyItems?: 'start' | 'center' | 'end' | 'stretch';
   /** Align content within the grid container */
-  alignContent?: 'start' | 'center' | 'end' | 'stretch' | 'space-between' | 'space-around' | 'space-evenly';
+  alignContent?:
+    | 'start'
+    | 'center'
+    | 'end'
+    | 'stretch'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
   /** Justify content within the grid container */
-  justifyContent?: 'start' | 'center' | 'end' | 'stretch' | 'space-between' | 'space-around' | 'space-evenly';
+  justifyContent?:
+    | 'start'
+    | 'center'
+    | 'end'
+    | 'stretch'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
   /** Auto flow direction */
   autoFlow?: 'row' | 'column' | 'row dense' | 'column dense';
   /** Template areas for named grid areas */
@@ -87,13 +101,18 @@ export const Grid: React.FC<GridProps> = ({
     autoFlow !== 'row' && `snake-grid--auto-flow-${autoFlow.replace(' ', '-')}`,
     fullWidth && 'snake-grid--full-width',
     fullHeight && 'snake-grid--full-height',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const gridStyle: React.CSSProperties = {
     ...style,
-    '--grid-columns': minColumnWidth ? `repeat(auto-fit, minmax(${minColumnWidth}, 1fr))` : 
-                      typeof columns === 'string' ? columns : `repeat(${columns}, 1fr)`,
+    '--grid-columns': minColumnWidth
+      ? `repeat(auto-fit, minmax(${minColumnWidth}, 1fr))`
+      : typeof columns === 'string'
+        ? columns
+        : `repeat(${columns}, 1fr)`,
     '--grid-rows': typeof rows === 'string' ? rows : rows ? `repeat(${rows}, 1fr)` : undefined,
     '--grid-areas': areas ? `"${areas.join('" "')}"` : undefined,
   } as React.CSSProperties;
@@ -124,8 +143,10 @@ export const GridItem: React.FC<GridItemProps> = ({
     'snake-grid-item',
     alignSelf && `snake-grid-item--align-self-${alignSelf}`,
     justifySelf && `snake-grid-item--justify-self-${justifySelf}`,
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const itemStyle: React.CSSProperties = {
     ...style,

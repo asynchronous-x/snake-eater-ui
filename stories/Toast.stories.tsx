@@ -24,7 +24,14 @@ const meta = {
     },
     position: {
       control: { type: 'select' },
-      options: ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'],
+      options: [
+        'top-left',
+        'top-center',
+        'top-right',
+        'bottom-left',
+        'bottom-center',
+        'bottom-right',
+      ],
     },
     duration: { control: 'number' },
     closable: { control: 'boolean' },
@@ -61,7 +68,7 @@ export const Variants: Story = {
             message={toast.message}
             variant={toast.variant}
             duration={0}
-            onClose={() => setToasts(toasts.filter(t => t.id !== toast.id))}
+            onClose={() => setToasts(toasts.filter((t) => t.id !== toast.id))}
           />
         ))}
       </div>
@@ -118,9 +125,7 @@ export const WithProgress: Story = {
             onClose={() => setShow(false)}
           />
         )}
-        {!show && (
-          <Button onClick={() => setShow(true)}>Show Toast</Button>
-        )}
+        {!show && <Button onClick={() => setShow(true)}>Show Toast</Button>}
       </div>
     );
   },
@@ -129,45 +134,20 @@ export const WithProgress: Story = {
 export const CustomIcons: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      <Toast
-        message="File uploaded successfully"
-        variant="success"
-        icon="📄"
-        duration={0}
-      />
-      <Toast
-        message="Security alert"
-        variant="danger"
-        icon="🔒"
-        duration={0}
-      />
-      <Toast
-        message="New message received"
-        variant="info"
-        icon="💬"
-        duration={0}
-      />
+      <Toast message="File uploaded successfully" variant="success" icon="📄" duration={0} />
+      <Toast message="Security alert" variant="danger" icon="🔒" duration={0} />
+      <Toast message="New message received" variant="info" icon="💬" duration={0} />
     </div>
   ),
 };
 
 export const NoIcon: Story = {
-  render: () => (
-    <Toast
-      message="Simple toast without icon"
-      showIcon={false}
-      duration={0}
-    />
-  ),
+  render: () => <Toast message="Simple toast without icon" showIcon={false} duration={0} />,
 };
 
 export const NotClosable: Story = {
   render: () => (
-    <Toast
-      message="This toast cannot be closed manually"
-      closable={false}
-      duration={0}
-    />
+    <Toast message="This toast cannot be closed manually" closable={false} duration={0} />
   ),
 };
 
@@ -183,14 +163,16 @@ export const LongMessage: Story = {
 
 export const ToastStack: Story = {
   render: () => {
-    const [toasts, setToasts] = useState<Array<{
-      id: string;
-      message: string;
-      variant?: any;
-      duration?: number;
-      action?: any;
-    }>>([]);
-    
+    const [toasts, setToasts] = useState<
+      Array<{
+        id: string;
+        message: string;
+        variant?: any;
+        duration?: number;
+        action?: any;
+      }>
+    >([]);
+
     let nextId = 1;
 
     const addToast = (variant?: any) => {
@@ -204,24 +186,28 @@ export const ToastStack: Story = {
     };
 
     const removeToast = (id: string) => {
-      setToasts(toasts.filter(t => t.id !== id));
+      setToasts(toasts.filter((t) => t.id !== id));
     };
 
     return (
       <div>
         <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
           <Button onClick={() => addToast()}>Add Default</Button>
-          <Button onClick={() => addToast('success')} variant="secondary">Add Success</Button>
-          <Button onClick={() => addToast('warning')} variant="secondary">Add Warning</Button>
-          <Button onClick={() => addToast('danger')} variant="secondary">Add Danger</Button>
-          <Button onClick={() => addToast('info')} variant="secondary">Add Info</Button>
+          <Button onClick={() => addToast('success')} variant="secondary">
+            Add Success
+          </Button>
+          <Button onClick={() => addToast('warning')} variant="secondary">
+            Add Warning
+          </Button>
+          <Button onClick={() => addToast('danger')} variant="secondary">
+            Add Danger
+          </Button>
+          <Button onClick={() => addToast('info')} variant="secondary">
+            Add Info
+          </Button>
         </div>
-        
-        <ToastContainer
-          toasts={toasts}
-          position="bottom-right"
-          onClose={removeToast}
-        />
+
+        <ToastContainer toasts={toasts} position="bottom-right" onClose={removeToast} />
       </div>
     );
   },
@@ -230,13 +216,13 @@ export const ToastStack: Story = {
 export const Positions: Story = {
   render: () => {
     const [position, setPosition] = useState<any>('bottom-right');
-    const [toasts, setToasts] = useState<Array<{
-      id: string;
-      message: string;
-      variant?: any;
-    }>>([
-      { id: '1', message: 'Toast in selected position', variant: 'info' }
-    ]);
+    const [toasts, setToasts] = useState<
+      Array<{
+        id: string;
+        message: string;
+        variant?: any;
+      }>
+    >([{ id: '1', message: 'Toast in selected position', variant: 'info' }]);
 
     return (
       <div>
@@ -262,11 +248,11 @@ export const Positions: Story = {
             <option value="bottom-right">Bottom Right</option>
           </select>
         </div>
-        
+
         <ToastContainer
           toasts={toasts}
           position={position}
-          onClose={(id) => setToasts(toasts.filter(t => t.id !== id))}
+          onClose={(id) => setToasts(toasts.filter((t) => t.id !== id))}
         />
       </div>
     );

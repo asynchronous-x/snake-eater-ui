@@ -37,17 +37,20 @@ const sampleItems = [
   {
     id: 'item1',
     title: 'What is Snake Eater UI?',
-    content: 'Snake Eater UI is a dark-themed React component library featuring boxy, minimalist design with thin borders and no rounded corners. Built for modern web applications that demand a sleek, cyberpunk aesthetic.',
+    content:
+      'Snake Eater UI is a dark-themed React component library featuring boxy, minimalist design with thin borders and no rounded corners. Built for modern web applications that demand a sleek, cyberpunk aesthetic.',
   },
   {
     id: 'item2',
     title: 'How do I install it?',
-    content: 'You can install Snake Eater UI via npm or yarn. Simply run npm install snake-eater-ui or yarn add snake-eater-ui in your project directory.',
+    content:
+      'You can install Snake Eater UI via npm or yarn. Simply run npm install snake-eater-ui or yarn add snake-eater-ui in your project directory.',
   },
   {
     id: 'item3',
     title: 'Is it customizable?',
-    content: 'Yes! All components support various props for customization including size, variant, and color options. The design system is built on CSS custom properties for easy theming.',
+    content:
+      'Yes! All components support various props for customization including size, variant, and color options. The design system is built on CSS custom properties for easy theming.',
   },
 ];
 
@@ -86,19 +89,22 @@ export const WithIcons: Story = {
         id: 'features',
         icon: '✨',
         title: 'Features',
-        content: 'Dark theme, sharp corners, minimal design, TypeScript support, and comprehensive documentation.',
+        content:
+          'Dark theme, sharp corners, minimal design, TypeScript support, and comprehensive documentation.',
       },
       {
         id: 'components',
         icon: '🧩',
         title: 'Components',
-        content: 'Buttons, Cards, Inputs, Modals, Tooltips, Progress bars, and many more components available.',
+        content:
+          'Buttons, Cards, Inputs, Modals, Tooltips, Progress bars, and many more components available.',
       },
       {
         id: 'support',
         icon: '💬',
         title: 'Support',
-        content: 'Get help through our GitHub issues, Discord community, or comprehensive documentation.',
+        content:
+          'Get help through our GitHub issues, Discord community, or comprehensive documentation.',
       },
     ],
     variant: 'boxed',
@@ -145,7 +151,7 @@ export const Large: Story = {
 export const ControlledAccordion: Story = {
   render: () => {
     const [openItems, setOpenItems] = useState<string[]>(['item1']);
-    
+
     const items = [
       {
         id: 'item1',
@@ -192,12 +198,7 @@ export const ControlledAccordion: Story = {
             Close All
           </button>
         </div>
-        <Accordion
-          items={items}
-          openItems={openItems}
-          onChange={setOpenItems}
-          multiple
-        />
+        <Accordion items={items} openItems={openItems} onChange={setOpenItems} multiple />
       </div>
     );
   },
@@ -223,7 +224,8 @@ export const FAQ: Story = {
       {
         id: 'refund',
         title: 'Is there a refund policy?',
-        content: 'Yes, we offer a 30-day money-back guarantee. If you\'re not satisfied with our service, contact support for a full refund.',
+        content:
+          "Yes, we offer a 30-day money-back guarantee. If you're not satisfied with our service, contact support for a full refund.",
       },
       {
         id: 'trial',
@@ -233,7 +235,8 @@ export const FAQ: Story = {
       {
         id: 'cancel',
         title: 'Can I cancel anytime?',
-        content: 'Yes, you can cancel your subscription at any time. You\'ll continue to have access until the end of your billing period.',
+        content:
+          "Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period.",
       },
     ],
     variant: 'minimal',
@@ -248,14 +251,16 @@ export const CodeExamples: Story = {
         icon: '📦',
         title: 'Installation',
         content: (
-          <pre style={{ 
-            backgroundColor: 'rgba(0, 0, 0, 0.3)', 
-            padding: '12px', 
-            margin: 0,
-            fontFamily: 'monospace',
-            fontSize: '14px',
-          }}>
-{`npm install snake-eater-ui
+          <pre
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              padding: '12px',
+              margin: 0,
+              fontFamily: 'monospace',
+              fontSize: '14px',
+            }}
+          >
+            {`npm install snake-eater-ui
 # or
 yarn add snake-eater-ui`}
           </pre>
@@ -266,14 +271,16 @@ yarn add snake-eater-ui`}
         icon: '💻',
         title: 'Basic Usage',
         content: (
-          <pre style={{ 
-            backgroundColor: 'rgba(0, 0, 0, 0.3)', 
-            padding: '12px', 
-            margin: 0,
-            fontFamily: 'monospace',
-            fontSize: '14px',
-          }}>
-{`import { Button, Card } from 'snake-eater-ui';
+          <pre
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              padding: '12px',
+              margin: 0,
+              fontFamily: 'monospace',
+              fontSize: '14px',
+            }}
+          >
+            {`import { Button, Card } from 'snake-eater-ui';
 
 function App() {
   return (
@@ -292,14 +299,16 @@ function App() {
         icon: '🎨',
         title: 'Custom Theming',
         content: (
-          <pre style={{ 
-            backgroundColor: 'rgba(0, 0, 0, 0.3)', 
-            padding: '12px', 
-            margin: 0,
-            fontFamily: 'monospace',
-            fontSize: '14px',
-          }}>
-{`:root {
+          <pre
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              padding: '12px',
+              margin: 0,
+              fontFamily: 'monospace',
+              fontSize: '14px',
+            }}
+          >
+            {`:root {
   --color-primary: #50fa7b;
   --color-danger: #ff5555;
   --spacing-base: 8px;

@@ -48,49 +48,46 @@ export const Alert: React.FC<AlertProps> = ({
     `snake-alert--${variant}`,
     `snake-alert--${size}`,
     `snake-alert--border-${borderPosition}`,
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const getDefaultIcon = () => {
     if (icon) return icon;
-    
+
     switch (variant) {
-      case 'success': return '✓';
-      case 'warning': return '⚠';
-      case 'danger': return '✕';
-      case 'info': return 'ℹ';
-      default: return '→';
+      case 'success':
+        return '✓';
+      case 'warning':
+        return '⚠';
+      case 'danger':
+        return '✕';
+      case 'info':
+        return 'ℹ';
+      default:
+        return '→';
     }
   };
 
   return (
     <div className={alertClasses} role="alert">
-      {showIcon && (
-        <div className="snake-alert__icon">
-          {getDefaultIcon()}
-        </div>
-      )}
-      
+      {showIcon && <div className="snake-alert__icon">{getDefaultIcon()}</div>}
+
       <div className="snake-alert__content">
         {title && <div className="snake-alert__title">{title}</div>}
         {(description || children) && (
-          <div className="snake-alert__description">
-            {description || children}
-          </div>
+          <div className="snake-alert__description">{description || children}</div>
         )}
         {actions && <div className="snake-alert__actions">{actions}</div>}
       </div>
-      
+
       {closable && (
-        <button
-          className="snake-alert__close"
-          onClick={onClose}
-          aria-label="Close alert"
-        >
+        <button className="snake-alert__close" onClick={onClose} aria-label="Close alert">
           ✕
         </button>
       )}
-      
+
       <div className="snake-alert__corner snake-alert__corner--top-left" />
       <div className="snake-alert__corner snake-alert__corner--top-right" />
       <div className="snake-alert__corner snake-alert__corner--bottom-left" />

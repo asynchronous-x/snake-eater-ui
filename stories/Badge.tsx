@@ -29,22 +29,20 @@ export const Badge: React.FC<BadgeProps> = ({
   className = '',
 }) => {
   const Component = onClick ? 'button' : 'span';
-  
+
   const badgeClasses = [
     'snake-badge',
     `snake-badge--${variant}`,
     `snake-badge--${size}`,
     `snake-badge--${style}`,
     onClick && 'snake-badge--clickable',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <Component
-      className={badgeClasses}
-      onClick={onClick}
-      type={onClick ? 'button' : undefined}
-    >
+    <Component className={badgeClasses} onClick={onClick} type={onClick ? 'button' : undefined}>
       {style === 'dot' && <span className="snake-badge__dot" />}
       {icon && <span className="snake-badge__icon">{icon}</span>}
       <span className="snake-badge__text">{children}</span>

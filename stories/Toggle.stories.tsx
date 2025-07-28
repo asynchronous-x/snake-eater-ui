@@ -147,14 +147,14 @@ export const ToggleGroup: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
         <h3 style={{ color: '#bdbdbd', margin: 0 }}>Settings</h3>
-        
+
         <Toggle
           label="Push notifications"
           helperText="Get alerts for important updates"
           checked={settings.notifications}
           onChange={(checked) => setSettings({ ...settings, notifications: checked })}
         />
-        
+
         <Toggle
           label="Dark mode"
           helperText="Easier on the eyes"
@@ -162,7 +162,7 @@ export const ToggleGroup: Story = {
           checked={settings.darkMode}
           onChange={(checked) => setSettings({ ...settings, darkMode: checked })}
         />
-        
+
         <Toggle
           label="Auto-save"
           helperText="Save changes automatically"
@@ -170,7 +170,7 @@ export const ToggleGroup: Story = {
           checked={settings.autoSave}
           onChange={(checked) => setSettings({ ...settings, autoSave: checked })}
         />
-        
+
         <Toggle
           label="Share analytics"
           helperText="Help us improve the product"

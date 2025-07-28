@@ -40,7 +40,9 @@ export const PageAnalytics: React.FC = () => {
       <div className="snake-page__example">
         <div className="snake-page__header">
           <div>
-            <Heading as="h1" size="xl">Analytics Dashboard</Heading>
+            <Heading as="h1" size="xl">
+              Analytics Dashboard
+            </Heading>
             <Text variant="muted">Real-time system performance metrics</Text>
           </div>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -55,7 +57,9 @@ export const PageAnalytics: React.FC = () => {
               ]}
               size="small"
             />
-            <Button variant="secondary" size="small">Export Report</Button>
+            <Button variant="secondary" size="small">
+              Export Report
+            </Button>
             <Button variant="primary" size="small" onClick={() => setShowDetails(!showDetails)}>
               {showDetails ? 'Hide' : 'Show'} Details
             </Button>
@@ -73,11 +77,16 @@ export const PageAnalytics: React.FC = () => {
                   value={metric.value}
                   change={{
                     value: metric.change,
-                    type: metric.trend === 'up' ? 'increase' : 'decrease'
+                    type: metric.trend === 'up' ? 'increase' : 'decrease',
                   }}
                   variant="stacked"
-                  color={metric.trend === 'up' && metric.label !== 'Error Rate' ? 'success' :
-                    metric.trend === 'down' && metric.label === 'Error Rate' ? 'success' : 'danger'}
+                  color={
+                    metric.trend === 'up' && metric.label !== 'Error Rate'
+                      ? 'success'
+                      : metric.trend === 'down' && metric.label === 'Error Rate'
+                        ? 'success'
+                        : 'danger'
+                  }
                 />
               </SubCard>
             ))}
@@ -86,13 +95,18 @@ export const PageAnalytics: React.FC = () => {
 
         <Divider variant="dashed" />
 
-
         <div className="snake-page__content-grid">
           <Card
             header={
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Heading as="h3" size="md">Performance Overview</Heading>
-                <Badge variant="success" style="dot">Live</Badge>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
+                <Heading as="h3" size="md">
+                  Performance Overview
+                </Heading>
+                <Badge variant="success" style="dot">
+                  Live
+                </Badge>
               </div>
             }
             size="large"
@@ -120,13 +134,10 @@ export const PageAnalytics: React.FC = () => {
                     header: 'Error Rate',
                     align: 'right',
                     render: (value) => (
-                      <Badge
-                        variant={parseFloat(value) > 0.2 ? 'danger' : 'success'}
-                        size="small"
-                      >
+                      <Badge variant={parseFloat(value) > 0.2 ? 'danger' : 'success'} size="small">
                         {value}
                       </Badge>
-                    )
+                    ),
                   },
                 ]}
                 size="small"
@@ -139,15 +150,21 @@ export const PageAnalytics: React.FC = () => {
                 <Divider spacing="small" />
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
                   <div>
-                    <Text size="sm" variant="muted">Database Latency</Text>
+                    <Text size="sm" variant="muted">
+                      Database Latency
+                    </Text>
                     <Progress value={23} variant="success" size="small" showLabel />
                   </div>
                   <div>
-                    <Text size="sm" variant="muted">Cache Hit Rate</Text>
+                    <Text size="sm" variant="muted">
+                      Cache Hit Rate
+                    </Text>
                     <Progress value={87} variant="primary" size="small" showLabel />
                   </div>
                   <div>
-                    <Text size="sm" variant="muted">Queue Depth</Text>
+                    <Text size="sm" variant="muted">
+                      Queue Depth
+                    </Text>
                     <Progress value={45} variant="warning" size="small" showLabel />
                   </div>
                 </div>
@@ -158,8 +175,12 @@ export const PageAnalytics: React.FC = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <Card
               header={
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Heading as="h3" size="md">System Alerts</Heading>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                >
+                  <Heading as="h3" size="md">
+                    System Alerts
+                  </Heading>
                   <IconButton
                     icon={alertsExpanded ? '−' : '+'}
                     size="small"
@@ -187,7 +208,13 @@ export const PageAnalytics: React.FC = () => {
               )}
             </Card>
 
-            <Card header={<Heading as="h3" size="md">Quick Actions</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Quick Actions
+                </Heading>
+              }
+            >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <Button variant="secondary" size="small" fullWidth>
                   Clear Cache
@@ -201,7 +228,13 @@ export const PageAnalytics: React.FC = () => {
               </div>
             </Card>
 
-            <Card header={<Heading as="h3" size="md">Traffic Distribution</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Traffic Distribution
+                </Heading>
+              }
+            >
               <List
                 items={[
                   { content: 'North America', meta: '45%' },

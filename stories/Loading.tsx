@@ -33,8 +33,10 @@ export const Loading: React.FC<LoadingProps> = ({
     `snake-loading--${type}`,
     `snake-loading--${size}`,
     `snake-loading--${variant}`,
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const renderLoader = () => {
     switch (type) {
@@ -46,7 +48,7 @@ export const Loading: React.FC<LoadingProps> = ({
             <span className="snake-loading__dot" />
           </div>
         );
-      
+
       case 'bars':
         return (
           <div className="snake-loading__bars">
@@ -56,7 +58,7 @@ export const Loading: React.FC<LoadingProps> = ({
             <span className="snake-loading__bar" />
           </div>
         );
-      
+
       case 'pulse':
         return (
           <div className="snake-loading__pulse">
@@ -64,7 +66,7 @@ export const Loading: React.FC<LoadingProps> = ({
             <span className="snake-loading__pulse-ring" />
           </div>
         );
-      
+
       case 'grid':
         return (
           <div className="snake-loading__grid">
@@ -73,7 +75,7 @@ export const Loading: React.FC<LoadingProps> = ({
             ))}
           </div>
         );
-      
+
       default:
         return null;
     }
@@ -89,19 +91,11 @@ export const Loading: React.FC<LoadingProps> = ({
   );
 
   if (fullscreen) {
-    return (
-      <div className="snake-loading__fullscreen">
-        {content}
-      </div>
-    );
+    return <div className="snake-loading__fullscreen">{content}</div>;
   }
 
   if (backdrop) {
-    return (
-      <div className="snake-loading__backdrop">
-        {content}
-      </div>
-    );
+    return <div className="snake-loading__backdrop">{content}</div>;
   }
 
   return content;

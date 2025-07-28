@@ -232,7 +232,7 @@
   .snake-page__sidebar {
     width: 240px;
   }
-  
+
   .snake-page__stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -242,39 +242,39 @@
   .snake-page {
     flex-direction: column;
   }
-  
+
   .snake-page__sidebar {
     width: 100%;
     height: auto;
     border-right: none;
     border-bottom: 1px solid var(--color-text-muted);
   }
-  
+
   .snake-page__nav {
     max-height: 200px;
   }
-  
+
   .snake-page__header {
     flex-wrap: wrap;
     height: auto;
     padding: 16px;
   }
-  
+
   .snake-page__header-center {
     order: -1;
     width: 100%;
     margin-bottom: 16px;
   }
-  
+
   .snake-page__stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .snake-page__dashboard-grid,
   .snake-page__analytics-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .snake-page__projects-header {
     flex-direction: column;
     align-items: flex-start;
@@ -389,7 +389,7 @@
   .snake-page__content-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .snake-page__kanban-board {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -399,11 +399,11 @@
   .snake-page__example {
     padding: 20px;
   }
-  
+
   .snake-page__kanban-board {
     grid-template-columns: 1fr;
   }
-  
+
   .snake-page__metrics-grid {
     grid-template-columns: 1fr;
   }

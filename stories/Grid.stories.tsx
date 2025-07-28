@@ -115,11 +115,17 @@ export const DashboardLayout: Story = {
     <Grid columns={12} rows={3} gap="lg" style={{ minHeight: '500px' }}>
       <GridItem colSpan={3} rowSpan={3}>
         <Card fullHeight>
-          <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>Sidebar</Text>
+          <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>
+            Sidebar
+          </Text>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-sm)' }}>
             <Button fullWidth>Dashboard</Button>
-            <Button fullWidth variant="ghost">Analytics</Button>
-            <Button fullWidth variant="ghost">Settings</Button>
+            <Button fullWidth variant="ghost">
+              Analytics
+            </Button>
+            <Button fullWidth variant="ghost">
+              Settings
+            </Button>
           </div>
         </Card>
       </GridItem>
@@ -130,7 +136,9 @@ export const DashboardLayout: Story = {
       </GridItem>
       <GridItem colSpan={9} rowSpan={2}>
         <Card fullHeight>
-          <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>Main Content</Text>
+          <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>
+            Main Content
+          </Text>
           <Grid columns={3} gap="md">
             <Stat label="Total Users" value="1,234" />
             <Stat label="Active Sessions" value="567" />
@@ -195,11 +203,7 @@ export const NamedAreas: Story = {
     <Grid
       columns="200px 1fr 200px"
       rows="auto 1fr auto"
-      areas={[
-        "header header header",
-        "sidebar main aside",
-        "footer footer footer"
-      ]}
+      areas={['header header header', 'sidebar main aside', 'footer footer footer']}
       gap="md"
       style={{ minHeight: '400px' }}
     >
@@ -236,7 +240,9 @@ export const DifferentGaps: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-xl)' }}>
       <div>
-        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>Column Gap Only</Text>
+        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>
+          Column Gap Only
+        </Text>
         <Grid columns={4} columnGap="lg" rowGap="none">
           {[...Array(8)].map((_, i) => (
             <Card key={i}>
@@ -246,7 +252,9 @@ export const DifferentGaps: Story = {
         </Grid>
       </div>
       <div>
-        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>Row Gap Only</Text>
+        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>
+          Row Gap Only
+        </Text>
         <Grid columns={4} columnGap="none" rowGap="lg">
           {[...Array(8)].map((_, i) => (
             <Card key={i}>
@@ -263,8 +271,16 @@ export const Alignment: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-xl)' }}>
       <div>
-        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>Center Aligned Items</Text>
-        <Grid columns={3} gap="md" alignItems="center" justifyItems="center" style={{ height: '200px' }}>
+        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>
+          Center Aligned Items
+        </Text>
+        <Grid
+          columns={3}
+          gap="md"
+          alignItems="center"
+          justifyItems="center"
+          style={{ height: '200px' }}
+        >
           <Card style={{ padding: 'var(--spacing-xs)' }}>
             <Text size="sm">Centered</Text>
           </Card>
@@ -277,7 +293,9 @@ export const Alignment: Story = {
         </Grid>
       </div>
       <div>
-        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>Individual Alignment</Text>
+        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>
+          Individual Alignment
+        </Text>
         <Grid columns={3} gap="md" style={{ height: '150px', background: 'var(--color-bg-card)' }}>
           <GridItem alignSelf="start" justifySelf="start">
             <Card>
@@ -341,7 +359,9 @@ export const AutoFlow: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-xl)' }}>
       <div>
-        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>Row Dense</Text>
+        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>
+          Row Dense
+        </Text>
         <Grid columns={3} gap="md" autoFlow="row dense">
           <GridItem colSpan={2}>
             <Card>
@@ -365,7 +385,9 @@ export const AutoFlow: Story = {
         </Grid>
       </div>
       <div>
-        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>Column Flow</Text>
+        <Text weight="semibold" style={{ marginBottom: 'var(--spacing-md)' }}>
+          Column Flow
+        </Text>
         <Grid columns={3} rows={3} gap="md" autoFlow="column" style={{ height: '200px' }}>
           {[...Array(7)].map((_, i) => (
             <Card key={i}>

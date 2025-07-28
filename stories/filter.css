@@ -139,7 +139,9 @@
 
 .snake-filter:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px rgba(132, 132, 132, 0.5);
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px rgba(132, 132, 132, 0.5);
 }
 
 /* Active state */

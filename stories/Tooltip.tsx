@@ -125,8 +125,12 @@ export const Tooltip: React.FC<TooltipProps> = ({
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (trigger === 'click' && isVisible) {
-        if (targetRef.current && !targetRef.current.contains(e.target as Node) &&
-            tooltipRef.current && !tooltipRef.current.contains(e.target as Node)) {
+        if (
+          targetRef.current &&
+          !targetRef.current.contains(e.target as Node) &&
+          tooltipRef.current &&
+          !tooltipRef.current.contains(e.target as Node)
+        ) {
           hideTooltip();
         }
       }
@@ -141,8 +145,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
     `snake-tooltip--${position}`,
     `snake-tooltip--${variant}`,
     isVisible && 'snake-tooltip--visible',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <>
@@ -161,9 +167,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
           className={tooltipClasses}
           style={{ top: coords.top, left: coords.left }}
         >
-          <div className="snake-tooltip__content">
-            {content}
-          </div>
+          <div className="snake-tooltip__content">{content}</div>
           <div className="snake-tooltip__arrow" />
         </div>
       )}

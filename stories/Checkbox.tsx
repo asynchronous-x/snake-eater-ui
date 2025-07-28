@@ -44,13 +44,14 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     `snake-checkbox-wrapper--${size}`,
     disabled && 'snake-checkbox-wrapper--disabled',
     error && 'snake-checkbox-wrapper--error',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const checkboxClasses = [
-    'snake-checkbox',
-    `snake-checkbox--${variant}`,
-  ].filter(Boolean).join(' ');
+  const checkboxClasses = ['snake-checkbox', `snake-checkbox--${variant}`]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={wrapperClasses}>
@@ -69,9 +70,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         </span>
         {label && <span className="snake-checkbox__text">{label}</span>}
       </label>
-      {helperText && (
-        <div className="snake-checkbox__helper">{helperText}</div>
-      )}
+      {helperText && <div className="snake-checkbox__helper">{helperText}</div>}
     </div>
   );
 };

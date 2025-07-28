@@ -44,19 +44,16 @@ export const Divider: React.FC<DividerProps> = ({
     `snake-divider--${thickness}`,
     `snake-divider--${color}`,
     `snake-divider--spacing-${spacing}`,
-    decorated && `snake-divider--decorated`,
+    decorated && 'snake-divider--decorated',
     decorated && `snake-divider--decoration-${decorationStyle}`,
     children && 'snake-divider--with-content',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <div 
-      className={dividerClasses} 
-      style={style}
-      role="separator"
-      aria-orientation={orientation}
-    >
+    <div className={dividerClasses} style={style} role="separator" aria-orientation={orientation}>
       {children && (
         <>
           <div className="snake-divider__line snake-divider__line--start" />

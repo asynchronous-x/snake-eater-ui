@@ -40,20 +40,22 @@ export const Skeleton: React.FC<SkeletonProps> = ({
     `snake-skeleton--${animation}`,
     `snake-skeleton--intensity-${intensity}`,
     decorated && 'snake-skeleton--decorated',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const getSkeletonStyle = (): React.CSSProperties => {
     const baseStyle: React.CSSProperties = { ...style };
-    
+
     if (width) {
       baseStyle.width = typeof width === 'number' ? `${width}px` : width;
     }
-    
+
     if (height && variant !== 'text') {
       baseStyle.height = typeof height === 'number' ? `${height}px` : height;
     }
-    
+
     return baseStyle;
   };
 

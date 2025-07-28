@@ -36,39 +36,31 @@ export const Card: React.FC<CardProps> = ({
     `snake-card-component--${size}`,
     `snake-card-component--${variant}`,
     interactive && 'snake-card-component--interactive',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const Component = interactive ? 'button' : 'div';
 
   return (
-    <Component 
+    <Component
       className={classes}
       onClick={interactive ? onClick : undefined}
       type={interactive ? 'button' : undefined}
     >
       {variant === 'grid' && <div className="snake-card-component__grid" />}
-      
+
       <div className="snake-card-component__elbow snake-card-component__elbow--top-left" />
       <div className="snake-card-component__elbow snake-card-component__elbow--top-right" />
       <div className="snake-card-component__elbow snake-card-component__elbow--bottom-left" />
       <div className="snake-card-component__elbow snake-card-component__elbow--bottom-right" />
-      
-      {header && (
-        <div className="snake-card-component__header">
-          {header}
-        </div>
-      )}
-      
-      <div className="snake-card-component__content">
-        {children}
-      </div>
-      
-      {footer && (
-        <div className="snake-card-component__footer">
-          {footer}
-        </div>
-      )}
+
+      {header && <div className="snake-card-component__header">{header}</div>}
+
+      <div className="snake-card-component__content">{children}</div>
+
+      {footer && <div className="snake-card-component__footer">{footer}</div>}
     </Component>
   );
 };

@@ -198,12 +198,7 @@
   display: inline-block;
   width: 80px;
   height: 24px;
-  background: linear-gradient(
-    90deg,
-    #3a3a3a 0%,
-    #4a4a4a 50%,
-    #3a3a3a 100%
-  );
+  background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%);
   background-size: 200% 100%;
   animation: snake-stat-loading 1.5s ease-in-out infinite;
 }
@@ -267,13 +262,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    #2a2a2a 20%,
-    #2a2a2a 80%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, transparent 0%, #2a2a2a 20%, #2a2a2a 80%, transparent 100%);
   opacity: 0.3;
   pointer-events: none;
 }

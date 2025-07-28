@@ -161,7 +161,7 @@ export const Large: Story = {
 export const ControlledRadio: Story = {
   render: () => {
     const [value, setValue] = useState('');
-    
+
     const options = [
       { value: 'react', label: 'React' },
       { value: 'vue', label: 'Vue' },
@@ -190,7 +190,7 @@ export const SurveyForm: Story = {
   render: () => {
     const [experience, setExperience] = useState('');
     const [frequency, setFrequency] = useState('');
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '400px' }}>
         <RadioButton
@@ -206,7 +206,7 @@ export const SurveyForm: Story = {
           onChange={setExperience}
           variant="info"
         />
-        
+
         <RadioButton
           name="frequency"
           label="How often do you use our service?"

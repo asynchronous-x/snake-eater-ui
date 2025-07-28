@@ -62,7 +62,9 @@ a.snake-breadcrumb__item:active {
 /* Focus state */
 a.snake-breadcrumb__item:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px rgba(189, 189, 189, 0.3);
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px rgba(189, 189, 189, 0.3);
 }
 
 /* Icon */
@@ -144,7 +146,6 @@ a.snake-breadcrumb__item:hover::before,
 a.snake-breadcrumb__item:hover::after {
   opacity: 0.5;
 }
-
 
 /* Alternative separator styles */
 .snake-breadcrumb__separator--chevron {

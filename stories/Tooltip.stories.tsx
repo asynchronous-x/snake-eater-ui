@@ -47,7 +47,14 @@ export const Default: Story = {
 
 export const AllPositions: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: '40px', gridTemplateColumns: 'repeat(2, 1fr)', padding: '40px' }}>
+    <div
+      style={{
+        display: 'grid',
+        gap: '40px',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        padding: '40px',
+      }}
+    >
       <Tooltip content="Top tooltip" position="top">
         <Button>Top</Button>
       </Tooltip>
@@ -104,10 +111,12 @@ export const Variants: Story = {
 
 export const LongContent: Story = {
   render: () => (
-    <Tooltip 
+    <Tooltip
       content={
         <div>
-          <p><strong>Extended Information</strong></p>
+          <p>
+            <strong>Extended Information</strong>
+          </p>
           <p>This tooltip contains multiple lines of text and will wrap accordingly.</p>
           <p>Maximum width is 300px.</p>
         </div>
@@ -122,16 +131,24 @@ export const IconButtons: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '16px' }}>
       <Tooltip content="Settings">
-        <Button variant="ghost" size="small">⚙️</Button>
+        <Button variant="ghost" size="small">
+          ⚙️
+        </Button>
       </Tooltip>
       <Tooltip content="Edit">
-        <Button variant="ghost" size="small">✏️</Button>
+        <Button variant="ghost" size="small">
+          ✏️
+        </Button>
       </Tooltip>
       <Tooltip content="Delete" variant="danger">
-        <Button variant="ghost" size="small">🗑️</Button>
+        <Button variant="ghost" size="small">
+          🗑️
+        </Button>
       </Tooltip>
       <Tooltip content="Share">
-        <Button variant="ghost" size="small">📤</Button>
+        <Button variant="ghost" size="small">
+          📤
+        </Button>
       </Tooltip>
     </div>
   ),
@@ -142,30 +159,24 @@ export const FormHelp: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <span style={{ color: '#bdbdbd' }}>Password</span>
-        <Tooltip 
+        <Tooltip
           content="Must be at least 8 characters with one uppercase, one lowercase, and one number"
           variant="info"
         >
           <span style={{ cursor: 'help', color: '#61dafb' }}>ℹ</span>
         </Tooltip>
       </div>
-      
+
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <span style={{ color: '#bdbdbd' }}>API Key</span>
-        <Tooltip 
-          content="Keep this secret! Never share your API key"
-          variant="warning"
-        >
+        <Tooltip content="Keep this secret! Never share your API key" variant="warning">
           <span style={{ cursor: 'help', color: '#f1fa8c' }}>⚠</span>
         </Tooltip>
       </div>
-      
+
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <span style={{ color: '#bdbdbd' }}>Delete Account</span>
-        <Tooltip 
-          content="This action is permanent and cannot be undone!"
-          variant="danger"
-        >
+        <Tooltip content="This action is permanent and cannot be undone!" variant="danger">
           <span style={{ cursor: 'help', color: '#ff5555' }}>⚠</span>
         </Tooltip>
       </div>

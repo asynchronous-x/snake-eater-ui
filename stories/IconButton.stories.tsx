@@ -149,13 +149,15 @@ export const MediaControls: Story = {
 
 export const Toolbar: Story = {
   render: () => (
-    <div style={{ 
-      display: 'flex', 
-      gap: '4px', 
-      padding: '8px',
-      backgroundColor: '#101010',
-      border: '1px solid #3a3a3a',
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        gap: '4px',
+        padding: '8px',
+        backgroundColor: '#101010',
+        border: '1px solid #3a3a3a',
+      }}
+    >
       <IconButton icon="📁" size="small" variant="ghost" tooltip="New file" />
       <IconButton icon="💾" size="small" variant="ghost" tooltip="Save" />
       <div style={{ width: '1px', backgroundColor: '#3a3a3a', margin: '0 4px' }} />
@@ -171,15 +173,17 @@ export const Toolbar: Story = {
 
 export const NavigationBar: Story = {
   render: () => (
-    <div style={{ 
-      display: 'flex', 
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '12px 16px',
-      backgroundColor: '#101010',
-      border: '1px solid #3a3a3a',
-      width: '400px',
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '12px 16px',
+        backgroundColor: '#101010',
+        border: '1px solid #3a3a3a',
+        width: '400px',
+      }}
+    >
       <IconButton icon="☰" variant="ghost" tooltip="Menu" />
       <div style={{ display: 'flex', gap: '8px' }}>
         <IconButton icon="🔍" variant="ghost" tooltip="Search" />

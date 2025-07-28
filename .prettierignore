@@ -1,0 +1,9 @@
+node_modules
+storybook-static
+coverage
+dist
+*.min.js
+*.min.css
+package-lock.json
+pnpm-lock.yaml
+yarn.lock

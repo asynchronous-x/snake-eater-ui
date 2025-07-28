@@ -34,11 +34,9 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
   onItemClick,
   className = '',
 }) => {
-  const breadcrumbClasses = [
-    'snake-breadcrumb',
-    `snake-breadcrumb--${size}`,
-    className
-  ].filter(Boolean).join(' ');
+  const breadcrumbClasses = ['snake-breadcrumb', `snake-breadcrumb--${size}`, className]
+    .filter(Boolean)
+    .join(' ');
 
   const displayItems = React.useMemo(() => {
     if (maxItems === 0 || items.length <= maxItems) {
@@ -47,12 +45,8 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 
     const firstItem = items[0];
     const lastItems = items.slice(-(maxItems - 2));
-    
-    return [
-      firstItem,
-      { label: '...', href: undefined },
-      ...lastItems
-    ];
+
+    return [firstItem, { label: '...', href: undefined }, ...lastItems];
   }, [items, maxItems]);
 
   const handleClick = (item: BreadcrumbItem, index: number, e: React.MouseEvent) => {
@@ -66,8 +60,10 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
     const itemClasses = [
       'snake-breadcrumb__item',
       isLast && 'snake-breadcrumb__item--current',
-      !item.href && 'snake-breadcrumb__item--disabled'
-    ].filter(Boolean).join(' ');
+      !item.href && 'snake-breadcrumb__item--disabled',
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const content = (
       <>
@@ -78,11 +74,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
 
     if (!isLast && item.href) {
       return (
-        <a
-          href={item.href}
-          className={itemClasses}
-          onClick={(e) => handleClick(item, index, e)}
-        >
+        <a href={item.href} className={itemClasses} onClick={(e) => handleClick(item, index, e)}>
           {content}
         </a>
       );
@@ -100,10 +92,12 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
       <ol className="snake-breadcrumb__list">
         {displayItems.map((item, index) => {
           const isLast = index === displayItems.length - 1;
-          
+
           return (
             <li key={index} className="snake-breadcrumb__list-item">
-              {renderItem ? renderItem(item, index, isLast) : defaultRenderItem(item, index, isLast)}
+              {renderItem
+                ? renderItem(item, index, isLast)
+                : defaultRenderItem(item, index, isLast)}
               {!isLast && (
                 <span className="snake-breadcrumb__separator" aria-hidden="true">
                   {separator}

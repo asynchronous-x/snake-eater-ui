@@ -41,7 +41,7 @@ export const Heading: React.FC<HeadingProps> = ({
   children,
 }) => {
   const Component = as;
-  
+
   const headingClasses = [
     'snake-heading',
     size ? `snake-heading--${size}` : `snake-heading--${as}`,
@@ -52,8 +52,10 @@ export const Heading: React.FC<HeadingProps> = ({
     truncate && 'snake-heading--truncate',
     decorated && 'snake-heading--decorated',
     decorated && `snake-heading--decorated-${decorationPosition}`,
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <Component className={headingClasses}>

@@ -30,7 +30,7 @@ const meta = {
     disabled: { control: 'boolean' },
     fullWidth: { control: 'boolean' },
   },
-  args: { 
+  args: {
     onClick: () => console.log('Button clicked'),
     children: 'Button',
   },

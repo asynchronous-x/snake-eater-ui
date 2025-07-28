@@ -48,28 +48,18 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     const [value, setValue] = useState(50);
-    
-    return (
-      <Slider
-        value={value}
-        onChange={setValue}
-      />
-    );
+
+    return <Slider value={value} onChange={setValue} />;
   },
 };
 
 export const Controlled: Story = {
   render: () => {
     const [value, setValue] = useState(30);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        <Slider
-          value={value}
-          onChange={setValue}
-          showValue
-          valueLabelPosition="bottom"
-        />
+        <Slider value={value} onChange={setValue} showValue valueLabelPosition="bottom" />
         <div style={{ display: 'flex', gap: '16px' }}>
           <button
             onClick={() => setValue(0)}
@@ -140,35 +130,20 @@ export const WithValue: Story = {
     const [value1, setValue1] = useState(25);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(75);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
         <div>
           <h4 style={{ color: '#bdbdbd', marginBottom: '12px' }}>Top Position</h4>
-          <Slider
-            value={value1}
-            onChange={setValue1}
-            showValue
-            valueLabelPosition="top"
-          />
+          <Slider value={value1} onChange={setValue1} showValue valueLabelPosition="top" />
         </div>
         <div>
           <h4 style={{ color: '#bdbdbd', marginBottom: '12px' }}>Bottom Position</h4>
-          <Slider
-            value={value2}
-            onChange={setValue2}
-            showValue
-            valueLabelPosition="bottom"
-          />
+          <Slider value={value2} onChange={setValue2} showValue valueLabelPosition="bottom" />
         </div>
         <div>
           <h4 style={{ color: '#bdbdbd', marginBottom: '12px' }}>Tooltip (hover to see)</h4>
-          <Slider
-            value={value3}
-            onChange={setValue3}
-            showValue
-            valueLabelPosition="tooltip"
-          />
+          <Slider value={value3} onChange={setValue3} showValue valueLabelPosition="tooltip" />
         </div>
       </div>
     );
@@ -178,7 +153,7 @@ export const WithValue: Story = {
 export const WithTicks: Story = {
   render: () => {
     const [value, setValue] = useState(60);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
         <Slider
@@ -203,7 +178,7 @@ export const WithTicks: Story = {
 export const WithMarks: Story = {
   render: () => {
     const [value, setValue] = useState(50);
-    
+
     const marks = [
       { value: 0, label: 'Min' },
       { value: 25, label: '25%' },
@@ -211,15 +186,10 @@ export const WithMarks: Story = {
       { value: 75, label: '75%' },
       { value: 100, label: 'Max' },
     ];
-    
+
     return (
       <div style={{ marginBottom: '40px' }}>
-        <Slider
-          value={value}
-          onChange={setValue}
-          marks={marks}
-          label="Custom marks with labels"
-        />
+        <Slider value={value} onChange={setValue} marks={marks} label="Custom marks with labels" />
       </div>
     );
   },
@@ -230,7 +200,7 @@ export const Steps: Story = {
     const [value1, setValue1] = useState(0);
     const [value2, setValue2] = useState(50);
     const [value3, setValue3] = useState(5);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
         <Slider
@@ -269,7 +239,7 @@ export const CustomRange: Story = {
     const [value1, setValue1] = useState(50);
     const [value2, setValue2] = useState(0);
     const [value3, setValue3] = useState(20);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
         <Slider
@@ -309,7 +279,7 @@ export const Vertical: Story = {
     const [value1, setValue1] = useState(30);
     const [value2, setValue2] = useState(60);
     const [value3, setValue3] = useState(80);
-    
+
     return (
       <div style={{ display: 'flex', gap: '60px', height: '300px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -365,18 +335,18 @@ export const AudioMixer: Story = {
     const [music, setMusic] = useState(60);
     const [effects, setEffects] = useState(90);
     const [voice, setVoice] = useState(70);
-    
+
     return (
-      <div style={{
-        backgroundColor: '#1f1d20',
-        border: '1px solid #3a3a3a',
-        padding: '24px',
-        maxWidth: '400px',
-      }}>
-        <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '24px' }}>
-          Audio Mixer
-        </h3>
-        
+      <div
+        style={{
+          backgroundColor: '#1f1d20',
+          border: '1px solid #3a3a3a',
+          padding: '24px',
+          maxWidth: '400px',
+        }}
+      >
+        <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '24px' }}>Audio Mixer</h3>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <Slider
             value={master}
@@ -425,20 +395,20 @@ export const ColorPicker: Story = {
     const [r, setR] = useState(80);
     const [g, setG] = useState(250);
     const [b, setB] = useState(123);
-    
+
     const color = `rgb(${r}, ${g}, ${b})`;
-    
+
     return (
-      <div style={{
-        backgroundColor: '#1f1d20',
-        border: '1px solid #3a3a3a',
-        padding: '24px',
-        maxWidth: '400px',
-      }}>
-        <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '24px' }}>
-          RGB Color Picker
-        </h3>
-        
+      <div
+        style={{
+          backgroundColor: '#1f1d20',
+          border: '1px solid #3a3a3a',
+          padding: '24px',
+          maxWidth: '400px',
+        }}
+      >
+        <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '24px' }}>RGB Color Picker</h3>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <Slider
             value={r}
@@ -471,19 +441,21 @@ export const ColorPicker: Story = {
             size="small"
           />
         </div>
-        
-        <div style={{
-          marginTop: '24px',
-          height: '60px',
-          backgroundColor: color,
-          border: '1px solid #3a3a3a',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontFamily: 'monospace',
-          fontSize: '14px',
-          color: r + g + b > 380 ? '#000' : '#fff',
-        }}>
+
+        <div
+          style={{
+            marginTop: '24px',
+            height: '60px',
+            backgroundColor: color,
+            border: '1px solid #3a3a3a',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: 'monospace',
+            fontSize: '14px',
+            color: r + g + b > 380 ? '#000' : '#fff',
+          }}
+        >
           {color}
         </div>
       </div>

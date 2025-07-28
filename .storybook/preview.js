@@ -5,8 +5,8 @@ const preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
 
@@ -14,9 +14,9 @@ const preview = {
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
-      test: "todo"
+      test: 'todo',
     },
-    
+
     backgrounds: {
       default: 'dark',
       values: [
@@ -34,7 +34,7 @@ const preview = {
         },
       ],
     },
-    
+
     docs: {
       canvas: {
         backgroundColor: '#0b0b0d',

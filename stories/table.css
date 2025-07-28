@@ -198,7 +198,9 @@
 }
 
 @keyframes snake-table-loading {
-  0%, 60%, 100% {
+  0%,
+  60%,
+  100% {
     transform: scaleY(0.4);
     opacity: 0.5;
   }

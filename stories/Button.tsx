@@ -31,21 +31,14 @@ export const Button: React.FC<ButtonProps> = ({
     `snake-button--${size}`,
     fullWidth && 'snake-button--full-width',
     loading && 'snake-button--loading',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <button
-      type="button"
-      className={classes}
-      disabled={disabled || loading}
-      {...props}
-    >
-      {loading ? (
-        <span className="snake-button__loader">Loading...</span>
-      ) : (
-        children
-      )}
+    <button type="button" className={classes} disabled={disabled || loading} {...props}>
+      {loading ? <span className="snake-button__loader">Loading...</span> : children}
     </button>
   );
 };

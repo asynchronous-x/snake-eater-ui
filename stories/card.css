@@ -107,7 +107,9 @@
 
 .snake-card-component--interactive:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px #8e8e90;
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px #8e8e90;
 }
 
 /* Responsive adjustments for small size */
@@ -135,7 +137,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
+  background-image:
     linear-gradient(0deg, rgba(189, 189, 189, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(189, 189, 189, 0.05) 1px, transparent 1px);
   background-size: 60px 60px;

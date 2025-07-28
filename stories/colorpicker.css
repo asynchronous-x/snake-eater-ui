@@ -94,7 +94,9 @@
   opacity: 0;
   transform: translateY(-8px);
   pointer-events: none;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .snake-colorpicker--inline .snake-colorpicker__panel {
@@ -166,7 +168,9 @@
   width: 12px;
   height: 12px;
   border: 2px solid #fff;
-  box-shadow: 0 0 0 1px #000, 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 0 0 1px #000,
+    0 2px 4px rgba(0, 0, 0, 0.5);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -198,13 +202,14 @@
   -webkit-appearance: none;
   width: 100%;
   height: 12px;
-  background: linear-gradient(to right, 
-    #ff0000 0%, 
-    #ffff00 17%, 
-    #00ff00 33%, 
-    #00ffff 50%, 
-    #0000ff 67%, 
-    #ff00ff 83%, 
+  background: linear-gradient(
+    to right,
+    #ff0000 0%,
+    #ffff00 17%,
+    #00ff00 33%,
+    #00ffff 50%,
+    #0000ff 67%,
+    #ff00ff 83%,
     #ff0000 100%
   );
   outline: none;
@@ -212,10 +217,7 @@
 }
 
 .snake-colorpicker__alpha-slider {
-  background: linear-gradient(to right,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) 100%
-  );
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
 }
 
 .snake-colorpicker__hue-slider::-webkit-slider-thumb,
@@ -338,5 +340,7 @@
 /* Focus styles */
 .snake-colorpicker__trigger:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-bg-base), 0 0 0 4px rgba(189, 189, 189, 0.3);
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px rgba(189, 189, 189, 0.3);
 }

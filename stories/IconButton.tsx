@@ -41,8 +41,10 @@ export const IconButton: React.FC<IconButtonProps> = ({
     `snake-icon-button--${shape}`,
     loading && 'snake-icon-button--loading',
     disabled && 'snake-icon-button--disabled',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <button
@@ -54,19 +56,15 @@ export const IconButton: React.FC<IconButtonProps> = ({
       {...props}
     >
       <span className="snake-icon-button__content">
-        {loading ? (
-          <span className="snake-icon-button__loader" />
-        ) : (
-          icon
-        )}
+        {loading ? <span className="snake-icon-button__loader" /> : icon}
       </span>
-      
+
       {badge !== undefined && !loading && (
         <span className={`snake-icon-button__badge snake-icon-button__badge--${badgeVariant}`}>
           {badge}
         </span>
       )}
-      
+
       {shape === 'square' && (
         <>
           <span className="snake-icon-button__corner snake-icon-button__corner--top-left" />

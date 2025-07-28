@@ -34,27 +34,21 @@ export const Filter: React.FC<FilterProps> = ({
     `snake-filter--${size}`,
     active && 'snake-filter--active',
     disabled && 'snake-filter--disabled',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <button
-      type="button"
-      className={classes}
-      disabled={disabled}
-      aria-pressed={active}
-      {...props}
-    >
+    <button type="button" className={classes} disabled={disabled} aria-pressed={active} {...props}>
       <span className="snake-filter__bracket snake-filter__bracket--left" />
-      
+
       <span className="snake-filter__content">
         {icon && <span className="snake-filter__icon">{icon}</span>}
         <span className="snake-filter__label">{children}</span>
-        {count !== undefined && (
-          <span className="snake-filter__count">{count}</span>
-        )}
+        {count !== undefined && <span className="snake-filter__count">{count}</span>}
       </span>
-      
+
       <span className="snake-filter__bracket snake-filter__bracket--right" />
     </button>
   );

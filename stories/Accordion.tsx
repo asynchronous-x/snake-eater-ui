@@ -47,10 +47,10 @@ export const Accordion: React.FC<AccordionProps> = ({
 
   const handleToggle = (itemId: string) => {
     let newOpenItems: string[];
-    
+
     if (multiple) {
       newOpenItems = openItems.includes(itemId)
-        ? openItems.filter(id => id !== itemId)
+        ? openItems.filter((id) => id !== itemId)
         : [...openItems, itemId];
     } else {
       newOpenItems = openItems.includes(itemId) ? [] : [itemId];
@@ -68,8 +68,10 @@ export const Accordion: React.FC<AccordionProps> = ({
     `snake-accordion--${variant}`,
     `snake-accordion--${size}`,
     header && 'snake-accordion--header',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={accordionClasses}>
@@ -79,7 +81,9 @@ export const Accordion: React.FC<AccordionProps> = ({
           'snake-accordion__item',
           isOpen && 'snake-accordion__item--open',
           item.disabled && 'snake-accordion__item--disabled',
-        ].filter(Boolean).join(' ');
+        ]
+          .filter(Boolean)
+          .join(' ');
 
         return (
           <div key={item.id} className={itemClasses}>
@@ -92,24 +96,20 @@ export const Accordion: React.FC<AccordionProps> = ({
               aria-controls={`accordion-panel-${item.id}`}
             >
               <div className="snake-accordion__header-content">
-                {item.icon && (
-                  <span className="snake-accordion__icon">{item.icon}</span>
-                )}
+                {item.icon && <span className="snake-accordion__icon">{item.icon}</span>}
                 <span className="snake-accordion__title">{item.title}</span>
               </div>
               <span className="snake-accordion__chevron">▼</span>
             </button>
-            
+
             <div
               id={`accordion-panel-${item.id}`}
               className="snake-accordion__panel"
               aria-hidden={!isOpen}
             >
-              <div className="snake-accordion__content">
-                {item.content}
-              </div>
+              <div className="snake-accordion__content">{item.content}</div>
             </div>
-            
+
             {variant === 'default' && index < items.length - 1 && (
               <div className="snake-accordion__divider" />
             )}

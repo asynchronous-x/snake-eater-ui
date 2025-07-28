@@ -148,12 +148,14 @@ export const Decorated: Story = {
 
 export const CardSkeleton: Story = {
   render: () => (
-    <div style={{
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-      padding: '24px',
-      width: '300px',
-    }}>
+    <div
+      style={{
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+        padding: '24px',
+        width: '300px',
+      }}
+    >
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
         <Skeleton variant="circular" width={48} height={48} />
         <div style={{ flex: 1 }}>
@@ -173,11 +175,13 @@ export const CardSkeleton: Story = {
 
 export const TableSkeleton: Story = {
   render: () => (
-    <div style={{
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-      padding: '24px',
-    }}>
+    <div
+      style={{
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+        padding: '24px',
+      }}
+    >
       <Skeleton variant="text" width="200px" height="24px" style={{ marginBottom: '16px' }} />
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {[1, 2, 3, 4].map((row) => (
@@ -199,13 +203,13 @@ export const FormSkeleton: Story = {
     <div style={{ width: '400px' }}>
       <Skeleton variant="text" width="100px" style={{ marginBottom: '8px' }} />
       <Skeleton variant="rectangular" height={40} style={{ marginBottom: '16px' }} />
-      
+
       <Skeleton variant="text" width="120px" style={{ marginBottom: '8px' }} />
       <Skeleton variant="rectangular" height={40} style={{ marginBottom: '16px' }} />
-      
+
       <Skeleton variant="text" width="80px" style={{ marginBottom: '8px' }} />
       <Skeleton variant="rectangular" height={80} style={{ marginBottom: '16px' }} />
-      
+
       <div style={{ display: 'flex', gap: '8px' }}>
         <Skeleton variant="button" width={100} />
         <Skeleton variant="button" width={80} />

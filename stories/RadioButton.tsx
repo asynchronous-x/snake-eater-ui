@@ -53,17 +53,23 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
     `snake-radio-group--${direction}`,
     `snake-radio-group--${size}`,
     error && 'snake-radio-group--error',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <div className={groupClasses} role="radiogroup" aria-labelledby={label ? `${name}-label` : undefined}>
+    <div
+      className={groupClasses}
+      role="radiogroup"
+      aria-labelledby={label ? `${name}-label` : undefined}
+    >
       {label && (
         <div className="snake-radio-group__label" id={`${name}-label`}>
           {label}
         </div>
       )}
-      
+
       <div className="snake-radio-group__options">
         {options.map((option) => {
           const isChecked = value === option.value;
@@ -72,7 +78,9 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
             `snake-radio--${variant}`,
             isChecked && 'snake-radio--checked',
             option.disabled && 'snake-radio--disabled',
-          ].filter(Boolean).join(' ');
+          ]
+            .filter(Boolean)
+            .join(' ');
 
           return (
             <label key={option.value} className={radioClasses}>
@@ -98,10 +106,8 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
           );
         })}
       </div>
-      
-      {error && (
-        <span className="snake-radio-group__error">{error}</span>
-      )}
+
+      {error && <span className="snake-radio-group__error">{error}</span>}
     </div>
   );
 };

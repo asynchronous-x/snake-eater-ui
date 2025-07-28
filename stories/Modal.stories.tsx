@@ -35,15 +35,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          title="Default Modal"
-        >
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Default Modal">
           <p>This is a default modal with standard styling and corner decorations.</p>
           <p>Click the close button or press Escape to close.</p>
         </Modal>
@@ -55,7 +51,7 @@ export const Default: Story = {
 export const WithFooter: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Modal with Footer</Button>
@@ -85,16 +81,11 @@ export const WithFooter: Story = {
 export const Small: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Small Modal</Button>
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          title="Small Modal"
-          size="small"
-        >
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Small Modal" size="small">
           <p>This is a small modal, perfect for simple confirmations.</p>
         </Modal>
       </>
@@ -105,20 +96,21 @@ export const Small: Story = {
 export const Large: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Large Modal</Button>
-        <Modal
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          title="Large Modal"
-          size="large"
-        >
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Large Modal" size="large">
           <h3>Extended Content</h3>
           <p>This large modal can contain more detailed information and complex layouts.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+          </p>
+          <p>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+          </p>
         </Modal>
       </>
     );
@@ -128,7 +120,7 @@ export const Large: Story = {
 export const NoCloseButton: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Modal without Close Button</Button>
@@ -154,7 +146,7 @@ export const NoCloseButton: Story = {
 export const NoOverlayClose: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Modal without Overlay Close</Button>
@@ -175,7 +167,7 @@ export const NoOverlayClose: Story = {
 export const FormModal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Form Modal</Button>
@@ -195,26 +187,10 @@ export const FormModal: Story = {
           }
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <Input
-              label="Display Name"
-              placeholder="Enter your name"
-              fullWidth
-            />
-            <Input
-              label="Email"
-              type="email"
-              placeholder="user@example.com"
-              fullWidth
-            />
-            <Toggle
-              label="Email notifications"
-              helperText="Receive updates about your account"
-            />
-            <Toggle
-              label="Dark mode"
-              helperText="Use dark theme across the application"
-              checked
-            />
+            <Input label="Display Name" placeholder="Enter your name" fullWidth />
+            <Input label="Email" type="email" placeholder="user@example.com" fullWidth />
+            <Toggle label="Email notifications" helperText="Receive updates about your account" />
+            <Toggle label="Dark mode" helperText="Use dark theme across the application" checked />
           </div>
         </Modal>
       </>
@@ -225,7 +201,7 @@ export const FormModal: Story = {
 export const ScrollableContent: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
         <Button onClick={() => setIsOpen(true)}>Open Scrollable Modal</Button>
@@ -248,22 +224,22 @@ export const ScrollableContent: Story = {
           <div style={{ maxHeight: '400px' }}>
             <h3>1. Introduction</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-            
+
             <h3>2. Use of Service</h3>
             <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-            
+
             <h3>3. Privacy Policy</h3>
             <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco...</p>
-            
+
             <h3>4. User Responsibilities</h3>
             <p>Duis aute irure dolor in reprehenderit in voluptate velit...</p>
-            
+
             <h3>5. Limitations</h3>
             <p>Excepteur sint occaecat cupidatat non proident...</p>
-            
+
             <h3>6. Termination</h3>
             <p>Sunt in culpa qui officia deserunt mollit anim id est laborum...</p>
-            
+
             <h3>7. Contact Information</h3>
             <p>For questions about these terms, please contact us...</p>
           </div>
@@ -276,10 +252,12 @@ export const ScrollableContent: Story = {
 export const DangerModal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false);
-    
+
     return (
       <>
-        <Button variant="danger" onClick={() => setIsOpen(true)}>Delete Account</Button>
+        <Button variant="danger" onClick={() => setIsOpen(true)}>
+          Delete Account
+        </Button>
         <Modal
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}

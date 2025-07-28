@@ -158,7 +158,7 @@ export const Slider: React.FC<SliderProps> = ({
     if (!showTicks && !marks) return null;
 
     const tickMarks = marks || [];
-    
+
     if (showTicks && !marks) {
       for (let i = min; i <= max; i += tickInterval) {
         tickMarks.push({ value: i });
@@ -167,19 +167,14 @@ export const Slider: React.FC<SliderProps> = ({
 
     return tickMarks.map((mark) => {
       const markPercentage = ((mark.value - min) / (max - min)) * 100;
-      const style = orientation === 'horizontal'
-        ? { left: `${markPercentage}%` }
-        : { bottom: `${markPercentage}%` };
+      const style =
+        orientation === 'horizontal'
+          ? { left: `${markPercentage}%` }
+          : { bottom: `${markPercentage}%` };
 
       return (
-        <div
-          key={mark.value}
-          className="snake-slider__tick"
-          style={style}
-        >
-          {mark.label && (
-            <span className="snake-slider__tick-label">{mark.label}</span>
-          )}
+        <div key={mark.value} className="snake-slider__tick" style={style}>
+          {mark.label && <span className="snake-slider__tick-label">{mark.label}</span>}
         </div>
       );
     });
@@ -192,42 +187,38 @@ export const Slider: React.FC<SliderProps> = ({
     `snake-slider--${orientation}`,
     disabled && 'snake-slider--disabled',
     isDragging && 'snake-slider--dragging',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const thumbStyle = orientation === 'horizontal'
-    ? { left: `${percentage}%` }
-    : { bottom: `${percentage}%` };
+  const thumbStyle =
+    orientation === 'horizontal' ? { left: `${percentage}%` } : { bottom: `${percentage}%` };
 
-  const fillStyle = orientation === 'horizontal'
-    ? { width: `${percentage}%` }
-    : { height: `${percentage}%` };
+  const fillStyle =
+    orientation === 'horizontal' ? { width: `${percentage}%` } : { height: `${percentage}%` };
 
   return (
     <div className={sliderClasses}>
       {label && <label className="snake-slider__label">{label}</label>}
-      
+
       <div className="snake-slider__container">
         {showValue && valueLabelPosition === 'top' && (
           <div className="snake-slider__value snake-slider__value--top">
             {formatValue(internalValue)}
           </div>
         )}
-        
+
         <div
           ref={sliderRef}
           className="snake-slider__wrapper"
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
         >
-          <div
-            ref={trackRef}
-            className="snake-slider__track"
-            onMouseDown={handleMouseDown}
-          >
+          <div ref={trackRef} className="snake-slider__track" onMouseDown={handleMouseDown}>
             <div className="snake-slider__fill" style={fillStyle} />
             {renderTicks()}
-            
+
             <div
               className="snake-slider__thumb"
               style={thumbStyle}
@@ -240,19 +231,17 @@ export const Slider: React.FC<SliderProps> = ({
               onKeyDown={handleKeyDown}
             >
               {showValue && valueLabelPosition === 'tooltip' && showTooltip && (
-                <div className="snake-slider__tooltip">
-                  {formatValue(internalValue)}
-                </div>
+                <div className="snake-slider__tooltip">{formatValue(internalValue)}</div>
               )}
             </div>
           </div>
-          
+
           <div className="snake-slider__corner snake-slider__corner--start-top" />
           <div className="snake-slider__corner snake-slider__corner--start-bottom" />
           <div className="snake-slider__corner snake-slider__corner--end-top" />
           <div className="snake-slider__corner snake-slider__corner--end-bottom" />
         </div>
-        
+
         {showValue && valueLabelPosition === 'bottom' && (
           <div className="snake-slider__value snake-slider__value--bottom">
             {formatValue(internalValue)}

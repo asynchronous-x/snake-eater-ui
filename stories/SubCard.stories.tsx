@@ -39,7 +39,10 @@ export const Default: Story = {
     children: (
       <>
         <h3>SubCard Title</h3>
-        <p>This is a SubCard component with plus symbols in the corners. It provides an alternative card styling.</p>
+        <p>
+          This is a SubCard component with plus symbols in the corners. It provides an alternative
+          card styling.
+        </p>
       </>
     ),
   },
@@ -115,8 +118,12 @@ export const WithHeaderAndFooter: Story = {
     ),
     footer: (
       <div style={{ display: 'flex', gap: '8px' }}>
-        <Button size="small" variant="primary">Approve</Button>
-        <Button size="small" variant="ghost">Reject</Button>
+        <Button size="small" variant="primary">
+          Approve
+        </Button>
+        <Button size="small" variant="ghost">
+          Reject
+        </Button>
       </div>
     ),
   },
@@ -159,7 +166,13 @@ export const Large: Story = {
 
 export const VariantShowcase: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+    <div
+      style={{
+        display: 'grid',
+        gap: '16px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      }}
+    >
       <SubCard>
         <h4>Default</h4>
         <p>Standard appearance</p>
@@ -190,7 +203,13 @@ export const VariantShowcase: Story = {
 
 export const InteractiveVariants: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+    <div
+      style={{
+        display: 'grid',
+        gap: '16px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      }}
+    >
       <SubCard interactive onClick={() => console.log('Default clicked')}>
         <h4>Click Me</h4>
         <p>Interactive default</p>
@@ -225,7 +244,13 @@ export const CustomCornerColor: Story = {
 
 export const MixedStyles: Story = {
   render: () => (
-    <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+    <div
+      style={{
+        display: 'grid',
+        gap: '16px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      }}
+    >
       <SubCard variant="success" cornerColor="#ff5555">
         <h4>Success with Red Corners</h4>
         <p>Green card with red corner symbols</p>

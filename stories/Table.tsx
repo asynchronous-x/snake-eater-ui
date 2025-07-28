@@ -66,12 +66,14 @@ export function Table<T extends Record<string, any>>({
     `snake-table--${size}`,
     `snake-table--${variant}`,
     stickyHeader && 'snake-table--sticky-header',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const handleSelectAll = () => {
     if (!onSelectionChange) return;
-    
+
     if (selectedRows.length === data.length) {
       onSelectionChange([]);
     } else {
@@ -81,9 +83,9 @@ export function Table<T extends Record<string, any>>({
 
   const handleSelectRow = (index: number) => {
     if (!onSelectionChange) return;
-    
+
     if (selectedRows.includes(index)) {
-      onSelectionChange(selectedRows.filter(i => i !== index));
+      onSelectionChange(selectedRows.filter((i) => i !== index));
     } else {
       onSelectionChange([...selectedRows, index]);
     }
@@ -91,20 +93,19 @@ export function Table<T extends Record<string, any>>({
 
   const handleSort = (column: string) => {
     if (!onSort) return;
-    
-    const newDirection = 
-      sortColumn === column && sortDirection === 'asc' ? 'desc' : 'asc';
+
+    const newDirection = sortColumn === column && sortDirection === 'asc' ? 'desc' : 'asc';
     onSort(column, newDirection);
   };
 
   const getValue = (row: T, key: string) => {
     const keys = key.split('.');
     let value: any = row;
-    
+
     for (const k of keys) {
       value = value?.[k];
     }
-    
+
     return value;
   };
 
@@ -132,18 +133,24 @@ export function Table<T extends Record<string, any>>({
                   'snake-table__cell',
                   'snake-table__cell--header',
                   column.align && `snake-table__cell--${column.align}`,
-                  column.sortable && 'snake-table__cell--sortable'
-                ].filter(Boolean).join(' ')}
+                  column.sortable && 'snake-table__cell--sortable',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
                 style={{ width: column.width }}
                 onClick={() => column.sortable && handleSort(column.key as string)}
               >
                 <div className="snake-table__header-content">
                   {column.header}
                   {column.sortable && (
-                    <span className={[
-                      'snake-table__sort-icon',
-                      sortColumn === column.key && `snake-table__sort-icon--${sortDirection}`
-                    ].filter(Boolean).join(' ')}>
+                    <span
+                      className={[
+                        'snake-table__sort-icon',
+                        sortColumn === column.key && `snake-table__sort-icon--${sortDirection}`,
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                    >
                       ▼
                     </span>
                   )}
@@ -155,7 +162,7 @@ export function Table<T extends Record<string, any>>({
         <tbody className="snake-table__body">
           {loading ? (
             <tr>
-              <td 
+              <td
                 colSpan={columns.length + (selectable ? 1 : 0)}
                 className="snake-table__cell snake-table__cell--loading"
               >
@@ -168,7 +175,7 @@ export function Table<T extends Record<string, any>>({
             </tr>
           ) : data.length === 0 ? (
             <tr>
-              <td 
+              <td
                 colSpan={columns.length + (selectable ? 1 : 0)}
                 className="snake-table__cell snake-table__cell--empty"
               >
@@ -182,8 +189,10 @@ export function Table<T extends Record<string, any>>({
                 className={[
                   'snake-table__row',
                   selectedRows.includes(rowIndex) && 'snake-table__row--selected',
-                  onRowClick && 'snake-table__row--clickable'
-                ].filter(Boolean).join(' ')}
+                  onRowClick && 'snake-table__row--clickable',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
                 onClick={() => onRowClick?.(row, rowIndex)}
               >
                 {selectable && (
@@ -204,17 +213,20 @@ export function Table<T extends Record<string, any>>({
                     key={colIndex}
                     className={[
                       'snake-table__cell',
-                      column.align && `snake-table__cell--${column.align}`
-                    ].filter(Boolean).join(' ')}
+                      column.align && `snake-table__cell--${column.align}`,
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
                   >
                     {/* Only add corner accent on bottom-right of each cell for bordered variant */}
-                    {variant === 'bordered' && rowIndex < data.length - 1 && colIndex < columns.length - 1 && (
-                      <span className="snake-table__corner">+</span>
-                    )}
+                    {variant === 'bordered' &&
+                      rowIndex < data.length - 1 &&
+                      colIndex < columns.length - 1 && (
+                        <span className="snake-table__corner">+</span>
+                      )}
                     {column.render
                       ? column.render(getValue(row, column.key as string), row, rowIndex)
-                      : getValue(row, column.key as string)
-                    }
+                      : getValue(row, column.key as string)}
                   </td>
                 ))}
               </tr>

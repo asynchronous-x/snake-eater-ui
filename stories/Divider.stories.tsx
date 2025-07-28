@@ -196,12 +196,14 @@ export const VerticalVariants: Story = {
 
 export const InCard: Story = {
   render: () => (
-    <div style={{
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-      padding: '24px',
-      maxWidth: '400px',
-    }}>
+    <div
+      style={{
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+        padding: '24px',
+        maxWidth: '400px',
+      }}
+    >
       <h3 style={{ color: '#bdbdbd', margin: '0 0 16px 0' }}>Account Settings</h3>
       <p style={{ color: '#8e8e90', margin: '0 0 16px 0' }}>
         Manage your account preferences and security settings.

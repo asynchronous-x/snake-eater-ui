@@ -44,7 +44,7 @@
   margin: 0;
 }
 
-.snake-input[type=number] {
+.snake-input[type='number'] {
   -moz-appearance: textfield;
 }
 

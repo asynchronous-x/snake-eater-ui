@@ -28,21 +28,48 @@ export const PageMonitor: React.FC = () => {
   // Real-time updates effect
   useEffect(() => {
     if (!autoRefresh) return;
-    
-    const interval = setInterval(() => {
-      setCpuUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 10)));
-      setMemoryUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 8)));
-      setNetworkUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 15)));
-    }, parseInt(refreshInterval) * 1000);
-    
+
+    const interval = setInterval(
+      () => {
+        setCpuUsage((prev) => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 10)));
+        setMemoryUsage((prev) => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 8)));
+        setNetworkUsage((prev) => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 15)));
+      },
+      parseInt(refreshInterval) * 1000,
+    );
+
     return () => clearInterval(interval);
   }, [autoRefresh, refreshInterval]);
 
   const servers = [
-    { id: 'server-1', name: 'Production Server 1', status: 'online', uptime: '45 days', location: 'US-East' },
-    { id: 'server-2', name: 'Production Server 2', status: 'online', uptime: '23 days', location: 'US-West' },
-    { id: 'server-3', name: 'Database Server', status: 'online', uptime: '67 days', location: 'EU-Central' },
-    { id: 'server-4', name: 'Backup Server', status: 'maintenance', uptime: '12 days', location: 'Asia-Pacific' },
+    {
+      id: 'server-1',
+      name: 'Production Server 1',
+      status: 'online',
+      uptime: '45 days',
+      location: 'US-East',
+    },
+    {
+      id: 'server-2',
+      name: 'Production Server 2',
+      status: 'online',
+      uptime: '23 days',
+      location: 'US-West',
+    },
+    {
+      id: 'server-3',
+      name: 'Database Server',
+      status: 'online',
+      uptime: '67 days',
+      location: 'EU-Central',
+    },
+    {
+      id: 'server-4',
+      name: 'Backup Server',
+      status: 'maintenance',
+      uptime: '12 days',
+      location: 'Asia-Pacific',
+    },
   ];
 
   const systemLogs = [
@@ -65,7 +92,9 @@ export const PageMonitor: React.FC = () => {
       <div className="snake-page__example">
         <div className="snake-page__header">
           <div>
-            <Heading as="h1" size="xl">System Monitor</Heading>
+            <Heading as="h1" size="xl">
+              System Monitor
+            </Heading>
             <Text variant="muted">Real-time infrastructure monitoring</Text>
           </div>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -86,11 +115,7 @@ export const PageMonitor: React.FC = () => {
                 size="small"
               />
             )}
-            <Button 
-              variant="danger" 
-              size="small"
-              onClick={() => setShowAlert(true)}
-            >
+            <Button variant="danger" size="small" onClick={() => setShowAlert(true)}>
               Emergency Stop
             </Button>
           </div>
@@ -106,19 +131,27 @@ export const PageMonitor: React.FC = () => {
 
         <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '20px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <Card header={<Heading as="h3" size="md">Server List</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Server List
+                </Heading>
+              }
+            >
               <List
-                items={servers.map(server => ({
+                items={servers.map((server) => ({
                   id: server.id,
                   content: (
                     <div>
                       <Text size="sm">{server.name}</Text>
-                      <Text size="xs" variant="muted">{server.location}</Text>
+                      <Text size="xs" variant="muted">
+                        {server.location}
+                      </Text>
                     </div>
                   ),
                   meta: (
-                    <Badge 
-                      variant={server.status === 'online' ? 'success' : 'warning'} 
+                    <Badge
+                      variant={server.status === 'online' ? 'success' : 'warning'}
                       style="dot"
                       size="small"
                     >
@@ -132,14 +165,15 @@ export const PageMonitor: React.FC = () => {
               />
             </Card>
 
-            <Card header={<Heading as="h3" size="md">Quick Stats</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Quick Stats
+                </Heading>
+              }
+            >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <Stat
-                  label="Total Servers"
-                  value="4"
-                  variant="horizontal"
-                  size="small"
-                />
+                <Stat label="Total Servers" value="4" variant="horizontal" size="small" />
                 <Stat
                   label="Active Connections"
                   value="1,247"
@@ -166,55 +200,84 @@ export const PageMonitor: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <Card 
+            <Card
               header={
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Heading as="h3" size="md">Resource Usage</Heading>
-                  <Badge variant="success" style="dot">Live</Badge>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                >
+                  <Heading as="h3" size="md">
+                    Resource Usage
+                  </Heading>
+                  <Badge variant="success" style="dot">
+                    Live
+                  </Badge>
                 </div>
               }
             >
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px' }}>
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginBottom: '8px',
+                    }}
+                  >
                     <Text size="sm">CPU Usage</Text>
-                    <Text size="sm" variant={cpuUsage > 80 ? 'danger' : 'primary'}>{cpuUsage}%</Text>
+                    <Text size="sm" variant={cpuUsage > 80 ? 'danger' : 'primary'}>
+                      {cpuUsage}%
+                    </Text>
                   </div>
-                  <Progress 
-                    value={cpuUsage} 
+                  <Progress
+                    value={cpuUsage}
                     variant={cpuUsage > 80 ? 'danger' : cpuUsage > 60 ? 'warning' : 'success'}
                     type="striped"
                     animated={cpuUsage > 80}
                   />
                 </div>
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginBottom: '8px',
+                    }}
+                  >
                     <Text size="sm">Memory Usage</Text>
-                    <Text size="sm" variant={memoryUsage > 80 ? 'danger' : 'primary'}>{memoryUsage}%</Text>
+                    <Text size="sm" variant={memoryUsage > 80 ? 'danger' : 'primary'}>
+                      {memoryUsage}%
+                    </Text>
                   </div>
-                  <Progress 
-                    value={memoryUsage} 
+                  <Progress
+                    value={memoryUsage}
                     variant={memoryUsage > 80 ? 'danger' : memoryUsage > 60 ? 'warning' : 'success'}
                     type="striped"
                     animated={memoryUsage > 80}
                   />
                 </div>
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      marginBottom: '8px',
+                    }}
+                  >
                     <Text size="sm">Network I/O</Text>
-                    <Text size="sm" variant="primary">{networkUsage}%</Text>
+                    <Text size="sm" variant="primary">
+                      {networkUsage}%
+                    </Text>
                   </div>
-                  <Progress 
-                    value={networkUsage} 
-                    variant="primary"
-                  />
+                  <Progress value={networkUsage} variant="primary" />
                 </div>
               </div>
 
               <Divider spacing="md" />
 
               <div>
-                <Heading as="h4" size="sm" style={{ marginBottom: '12px' }}>Running Processes</Heading>
+                <Heading as="h4" size="sm" style={{ marginBottom: '12px' }}>
+                  Running Processes
+                </Heading>
                 <Table
                   data={processes}
                   columns={[
@@ -222,14 +285,14 @@ export const PageMonitor: React.FC = () => {
                     { key: 'cpu', header: 'CPU', align: 'right' },
                     { key: 'memory', header: 'Memory', align: 'right' },
                     { key: 'threads', header: 'Threads', align: 'right' },
-                    { 
-                      key: 'status', 
+                    {
+                      key: 'status',
                       header: 'Status',
                       render: (value) => (
                         <Badge variant="success" size="small" style="dot">
                           {value}
                         </Badge>
-                      )
+                      ),
                     },
                   ]}
                   size="small"
@@ -237,31 +300,47 @@ export const PageMonitor: React.FC = () => {
               </div>
             </Card>
 
-            <Card header={<Heading as="h3" size="md">System Logs</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  System Logs
+                </Heading>
+              }
+            >
               <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-                <Filter variant="default" active>All</Filter>
+                <Filter variant="default" active>
+                  All
+                </Filter>
                 <Filter variant="danger">Errors</Filter>
                 <Filter variant="warning">Warnings</Filter>
                 <Filter variant="info">Info</Filter>
               </div>
-              
-              <div style={{ 
-                backgroundColor: '#0a0a0c', 
-                padding: '12px', 
-                borderRadius: '4px',
-                fontFamily: 'monospace',
-                fontSize: '12px',
-                maxHeight: '200px',
-                overflowY: 'auto'
-              }}>
+
+              <div
+                style={{
+                  backgroundColor: '#0a0a0c',
+                  padding: '12px',
+                  borderRadius: '4px',
+                  fontFamily: 'monospace',
+                  fontSize: '12px',
+                  maxHeight: '200px',
+                  overflowY: 'auto',
+                }}
+              >
                 {systemLogs.map((log, index) => (
                   <div key={index} style={{ marginBottom: '8px' }}>
                     <span style={{ color: '#5a5a5a' }}>{log.time}</span>
-                    <span style={{ 
-                      marginLeft: '12px',
-                      color: log.level === 'error' ? '#ff5555' : 
-                             log.level === 'warning' ? '#f1fa8c' : '#50fa7b'
-                    }}>
+                    <span
+                      style={{
+                        marginLeft: '12px',
+                        color:
+                          log.level === 'error'
+                            ? '#ff5555'
+                            : log.level === 'warning'
+                              ? '#f1fa8c'
+                              : '#50fa7b',
+                      }}
+                    >
                       [{log.level.toUpperCase()}]
                     </span>
                     <span style={{ marginLeft: '12px', color: '#bdbdbd' }}>{log.message}</span>
@@ -270,14 +349,32 @@ export const PageMonitor: React.FC = () => {
               </div>
             </Card>
 
-            <Card header={<Heading as="h3" size="md">Server Actions</Heading>}>
+            <Card
+              header={
+                <Heading as="h3" size="md">
+                  Server Actions
+                </Heading>
+              }
+            >
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
-                <Button variant="secondary" size="small">Restart Service</Button>
-                <Button variant="secondary" size="small">Clear Cache</Button>
-                <Button variant="secondary" size="small">View Logs</Button>
-                <Button variant="cyber" size="small">Run Diagnostics</Button>
-                <Button variant="primary" size="small">Deploy Update</Button>
-                <Button variant="danger" size="small">Force Stop</Button>
+                <Button variant="secondary" size="small">
+                  Restart Service
+                </Button>
+                <Button variant="secondary" size="small">
+                  Clear Cache
+                </Button>
+                <Button variant="secondary" size="small">
+                  View Logs
+                </Button>
+                <Button variant="cyber" size="small">
+                  Run Diagnostics
+                </Button>
+                <Button variant="primary" size="small">
+                  Deploy Update
+                </Button>
+                <Button variant="danger" size="small">
+                  Force Stop
+                </Button>
               </div>
             </Card>
           </div>

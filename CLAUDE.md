@@ -9,6 +9,7 @@ Snake Eater UI is a dark-themed TypeScript React component library built with St
 ### Design System
 
 #### Core Colors
+
 - **Base background**: `#0b0b0d` (--color-bg-base)
 - **Card background**: `#1f1d20` (--color-bg-card)
 - **Elevated background**: `#2a282b` (--color-bg-elevated)
@@ -17,6 +18,7 @@ Snake Eater UI is a dark-themed TypeScript React component library built with St
 - **Muted text**: `#5a5a5a` (--color-text-muted)
 
 #### Visual Characteristics
+
 - **Boxy design**: No rounded corners throughout
 - **Borders**: Thin 1px borders using text color
 - **Corner accents**: Some components (like Modal) feature decorative corner elements
@@ -24,6 +26,7 @@ Snake Eater UI is a dark-themed TypeScript React component library built with St
 - **Transitions**: Fast (150ms), base (250ms), and slow (350ms) easing
 
 #### State Colors
+
 - **Danger**: `#ff5555` (red)
 - **Success**: `#50fa7b` (green)
 - **Warning**: `#f1fa8c` (yellow)
@@ -31,6 +34,7 @@ Snake Eater UI is a dark-themed TypeScript React component library built with St
 ## Essential Commands
 
 ### Development
+
 ```bash
 # Start Storybook development server (default port 6006)
 npm run storybook
@@ -44,6 +48,7 @@ npm run build
 ```
 
 ### Testing
+
 ```bash
 # Run all tests through Storybook's Vitest integration
 npm test
@@ -55,6 +60,7 @@ npm test Button
 ## Architecture
 
 ### Component Structure
+
 Components are located in the `stories/` directory with organized subdirectories:
 
 ```
@@ -65,6 +71,7 @@ stories/
 ```
 
 ### File Patterns
+
 - `ComponentName.tsx` - React component implementation using function components with TypeScript interfaces
 - `ComponentName.stories.tsx` - Storybook stories defining component states and variations
 - `componentname.css` - Component-specific styles (lowercase naming)
@@ -72,6 +79,7 @@ stories/
 ### Component Implementation Patterns
 
 #### TypeScript Interfaces
+
 ```typescript
 interface ComponentProps extends React.HTMLAttributes<HTMLElement> {
   /** JSDoc comments for Storybook docs */
@@ -82,6 +90,7 @@ interface ComponentProps extends React.HTMLAttributes<HTMLElement> {
 ```
 
 #### Component Structure
+
 ```typescript
 export const Component: React.FC<ComponentProps> = ({
   variant = 'primary',
@@ -96,33 +105,39 @@ export const Component: React.FC<ComponentProps> = ({
     `snake-component--${size}`,
     className
   ].filter(Boolean).join(' ');
-  
+
   return <div className={classes} {...props}>{children}</div>;
 };
 ```
 
 #### CSS Naming Convention
+
 - BEM-style with `snake-` prefix
 - Component: `snake-component`
 - Modifiers: `snake-component--variant`
 - Elements: `snake-component__element`
 
 ### Global Styles
+
 - `theme.css` - CSS custom properties for design tokens
 - `global.css` - Base styles and utility classes
 - All components import global styles via component CSS files
 
 ### Testing Strategy
+
 Tests run through Storybook's Vitest integration using Playwright with headless Chromium. The test configuration is in `vitest.config.js` and setup in `.storybook/vitest.setup.js`.
 
 ### Storybook Configuration
+
 - Main configuration: `.storybook/main.ts`
 - Preview configuration: `.storybook/preview.js`
 - Test setup: `.storybook/vitest.setup.js`
 - Addons: essentials, onboarding, interactions, a11y (in "todo" mode), test, chromatic
 
 ### TypeScript Configuration
+
 Strict mode enabled with the following key settings:
+
 - Target: ES2020
 - Module: ESNext with bundler resolution
 - JSX: react-jsx
@@ -133,6 +148,7 @@ Strict mode enabled with the following key settings:
 ## Component Library Contents
 
 ### Current Components (40+ components)
+
 **Buttons**: Button, IconButton
 **Data Display**: Badge, Code, Stat, Table
 **Feedback**: Alert, Loading, Modal, Progress, Skeleton, Toast, Tooltip
@@ -142,6 +158,7 @@ Strict mode enabled with the following key settings:
 **Typography**: Heading, Text
 
 ### Common Props Patterns
+
 - `variant`: Visual style variations (primary, secondary, ghost, danger, cyber)
 - `size`: Component sizing (small, medium, large)
 - `loading`: Loading states for interactive components

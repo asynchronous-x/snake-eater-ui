@@ -46,13 +46,17 @@ export const Toggle: React.FC<ToggleProps> = ({
     `snake-toggle--${variant}`,
     checked && 'snake-toggle--checked',
     disabled && 'snake-toggle--disabled',
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const wrapperClasses = [
     'snake-toggle-wrapper',
     `snake-toggle-wrapper--${labelPosition}`,
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={wrapperClasses}>
@@ -73,11 +77,7 @@ export const Toggle: React.FC<ToggleProps> = ({
           <label className="snake-toggle__label" onClick={handleClick}>
             {label}
           </label>
-          {helperText && (
-            <span className="snake-toggle__helper-text">
-              {helperText}
-            </span>
-          )}
+          {helperText && <span className="snake-toggle__helper-text">{helperText}</span>}
         </div>
       )}
     </div>

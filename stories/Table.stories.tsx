@@ -12,11 +12,46 @@ interface User {
 }
 
 const sampleData: User[] = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'active', lastLogin: '2024-01-15' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'active', lastLogin: '2024-01-14' },
-  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'inactive', lastLogin: '2023-12-20' },
-  { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'Editor', status: 'active', lastLogin: '2024-01-13' },
-  { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', role: 'User', status: 'pending', lastLogin: '2024-01-10' },
+  {
+    id: 1,
+    name: 'John Doe',
+    email: 'john@example.com',
+    role: 'Admin',
+    status: 'active',
+    lastLogin: '2024-01-15',
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    email: 'jane@example.com',
+    role: 'User',
+    status: 'active',
+    lastLogin: '2024-01-14',
+  },
+  {
+    id: 3,
+    name: 'Bob Johnson',
+    email: 'bob@example.com',
+    role: 'User',
+    status: 'inactive',
+    lastLogin: '2023-12-20',
+  },
+  {
+    id: 4,
+    name: 'Alice Brown',
+    email: 'alice@example.com',
+    role: 'Editor',
+    status: 'active',
+    lastLogin: '2024-01-13',
+  },
+  {
+    id: 5,
+    name: 'Charlie Wilson',
+    email: 'charlie@example.com',
+    role: 'User',
+    status: 'pending',
+    lastLogin: '2024-01-10',
+  },
 ];
 
 const meta = {
@@ -73,8 +108,8 @@ export const WithCustomRender: Story = {
       { key: 'name', header: 'Name' },
       { key: 'email', header: 'Email' },
       { key: 'role', header: 'Role' },
-      { 
-        key: 'status', 
+      {
+        key: 'status',
         header: 'Status',
         render: (value: string) => {
           const statusColors = {
@@ -83,16 +118,18 @@ export const WithCustomRender: Story = {
             pending: '#ffb86c',
           };
           return (
-            <span style={{ 
-              color: statusColors[value as keyof typeof statusColors],
-              fontWeight: 'bold',
-              textTransform: 'uppercase',
-              fontSize: '0.85em',
-            }}>
+            <span
+              style={{
+                color: statusColors[value as keyof typeof statusColors],
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                fontSize: '0.85em',
+              }}
+            >
               {value}
             </span>
           );
-        }
+        },
       },
       { key: 'lastLogin', header: 'Last Login', align: 'right' },
     ],
@@ -102,7 +139,7 @@ export const WithCustomRender: Story = {
 export const Selectable: Story = {
   render: () => {
     const [selectedRows, setSelectedRows] = useState<number[]>([]);
-    
+
     return (
       <div>
         <div style={{ marginBottom: '16px', color: '#8e8e90' }}>
@@ -139,7 +176,7 @@ export const Sortable: Story = {
       const sorted = [...data].sort((a, b) => {
         const aVal = a[column as keyof User];
         const bVal = b[column as keyof User];
-        
+
         if (aVal < bVal) return direction === 'asc' ? -1 : 1;
         if (aVal > bVal) return direction === 'asc' ? 1 : -1;
         return 0;
@@ -283,7 +320,7 @@ export const Empty: Story = {
 export const ClickableRows: Story = {
   render: () => {
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    
+
     return (
       <div>
         <Table
@@ -298,13 +335,15 @@ export const ClickableRows: Story = {
           onRowClick={(row) => setSelectedUser(row)}
         />
         {selectedUser && (
-          <div style={{ 
-            marginTop: '16px', 
-            padding: '16px',
-            backgroundColor: '#1f1d20',
-            border: '1px solid #3a3a3a',
-            color: '#bdbdbd'
-          }}>
+          <div
+            style={{
+              marginTop: '16px',
+              padding: '16px',
+              backgroundColor: '#1f1d20',
+              border: '1px solid #3a3a3a',
+              color: '#bdbdbd',
+            }}
+          >
             Selected: {selectedUser.name} ({selectedUser.email})
           </div>
         )}
@@ -338,24 +377,26 @@ export const ProductTable: Story = {
           { key: 'id', header: 'SKU', width: '100px' },
           { key: 'name', header: 'Product Name' },
           { key: 'category', header: 'Category' },
-          { 
-            key: 'price', 
+          {
+            key: 'price',
             header: 'Price',
             align: 'right',
-            render: (value: number) => `$${value.toFixed(2)}`
+            render: (value: number) => `$${value.toFixed(2)}`,
           },
-          { 
-            key: 'stock', 
+          {
+            key: 'stock',
             header: 'Stock',
             align: 'center',
             render: (value: number) => (
-              <span style={{ 
-                color: value === 0 ? '#ff5555' : value < 20 ? '#ffb86c' : '#50fa7b',
-                fontWeight: 'bold'
-              }}>
+              <span
+                style={{
+                  color: value === 0 ? '#ff5555' : value < 20 ? '#ffb86c' : '#50fa7b',
+                  fontWeight: 'bold',
+                }}
+              >
                 {value === 0 ? 'Out of Stock' : value}
               </span>
-            )
+            ),
           },
         ]}
         variant="striped"

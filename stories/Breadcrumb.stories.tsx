@@ -182,11 +182,14 @@ export const NoLinks: Story = {
 export const Interactive: Story = {
   render: () => {
     const [currentPath, setCurrentPath] = React.useState('/home/documents/projects/snake-ui');
-    
-    const items = currentPath.split('/').filter(Boolean).map((segment, index, array) => ({
-      label: segment,
-      href: '/' + array.slice(0, index + 1).join('/'),
-    }));
+
+    const items = currentPath
+      .split('/')
+      .filter(Boolean)
+      .map((segment, index, array) => ({
+        label: segment,
+        href: '/' + array.slice(0, index + 1).join('/'),
+      }));
 
     return (
       <div>
@@ -208,11 +211,13 @@ export const Interactive: Story = {
 
 export const FileSystemExample: Story = {
   render: () => (
-    <div style={{
-      padding: '16px',
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-    }}>
+    <div
+      style={{
+        padding: '16px',
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+      }}
+    >
       <Breadcrumb
         items={[
           { label: 'root', href: '/', icon: '💾' },
@@ -229,11 +234,13 @@ export const FileSystemExample: Story = {
 
 export const ECommerceExample: Story = {
   render: () => (
-    <div style={{
-      padding: '24px',
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-    }}>
+    <div
+      style={{
+        padding: '24px',
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+      }}
+    >
       <Breadcrumb
         items={[
           { label: 'All Products', href: '/products' },
@@ -245,12 +252,8 @@ export const ECommerceExample: Story = {
         separator=">"
         size="small"
       />
-      <h1 style={{ color: '#bdbdbd', marginTop: '16px', marginBottom: '8px' }}>
-        Gaming Laptops
-      </h1>
-      <p style={{ color: '#8e8e90' }}>
-        High-performance laptops for gaming enthusiasts
-      </p>
+      <h1 style={{ color: '#bdbdbd', marginTop: '16px', marginBottom: '8px' }}>Gaming Laptops</h1>
+      <p style={{ color: '#8e8e90' }}>High-performance laptops for gaming enthusiasts</p>
     </div>
   ),
 };
@@ -267,18 +270,20 @@ export const CustomRenderer: Story = {
       renderItem={(item, index, isLast) => {
         if (isLast) {
           return (
-            <span style={{
-              color: '#50fa7b',
-              fontWeight: 'bold',
-              padding: '2px 8px',
-              backgroundColor: 'rgba(80, 250, 123, 0.1)',
-              border: '1px solid rgba(80, 250, 123, 0.3)',
-            }}>
+            <span
+              style={{
+                color: '#50fa7b',
+                fontWeight: 'bold',
+                padding: '2px 8px',
+                backgroundColor: 'rgba(80, 250, 123, 0.1)',
+                border: '1px solid rgba(80, 250, 123, 0.3)',
+              }}
+            >
               {item.label}
             </span>
           );
         }
-        
+
         return (
           <a
             href={item.href}
@@ -312,18 +317,15 @@ export const WizardSteps: Story = {
     ];
 
     return (
-      <div style={{
-        padding: '32px',
-        backgroundColor: '#1f1d20',
-        border: '1px solid #3a3a3a',
-      }}>
-        <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '24px' }}>
-          Setup Wizard
-        </h3>
-        <Breadcrumb
-          items={steps}
-          separator="→"
-        />
+      <div
+        style={{
+          padding: '32px',
+          backgroundColor: '#1f1d20',
+          border: '1px solid #3a3a3a',
+        }}
+      >
+        <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '24px' }}>Setup Wizard</h3>
+        <Breadcrumb items={steps} separator="→" />
         <div style={{ marginTop: '32px', color: '#8e8e90' }}>
           <p>Please review your information before completing setup.</p>
         </div>

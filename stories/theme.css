@@ -6,31 +6,31 @@
   --color-text-primary: #bdbdbd;
   --color-text-secondary: #8a8a8a;
   --color-text-muted: #5a5a5a;
-  
+
   /* Border */
   --color-border: #bdbdbd;
   --border-width: 1px;
-  
+
   /* Interactive states */
   --color-primary: #bdbdbd;
   --color-primary-hover: #ffffff;
   --color-primary-active: #8a8a8a;
-  
+
   /* Danger/Error */
   --color-danger: #ff5555;
   --color-danger-hover: #ff7777;
   --color-danger-active: #cc4444;
-  
+
   /* Success */
   --color-success: #50fa7b;
   --color-success-hover: #70ff9b;
   --color-success-active: #40da6b;
-  
+
   /* Warning */
   --color-warning: #f1fa8c;
   --color-warning-hover: #f4ffac;
   --color-warning-active: #d1da6c;
-  
+
   /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -38,11 +38,15 @@
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-2xl: 48px;
-  
+
   /* Typography */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  --font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-  
+  --font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family-mono:
+    'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Fira Mono', 'Droid Sans Mono', 'Courier New',
+    monospace;
+
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-base: 16px;
@@ -50,17 +54,17 @@
   --font-size-xl: 20px;
   --font-size-2xl: 24px;
   --font-size-3xl: 32px;
-  
+
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  
+
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
   --transition-base: 250ms ease-in-out;
   --transition-slow: 350ms ease-in-out;
-  
+
   /* Shadows (subtle for dark theme) */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
   --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.5);

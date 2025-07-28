@@ -42,15 +42,18 @@ function App() {
 ## Components
 
 ### Buttons
+
 - **Button** - Primary interactive element with multiple variants
 - **IconButton** - Compact button for icon-only actions
 
 ### Data Display
+
 - **Badge** - Status indicators and labels
 - **Stat** - Statistical data presentation
 - **Table** - Data tables with sorting and selection
 
 ### Feedback
+
 - **Alert** - Contextual feedback messages
 - **Loading** - Loading indicators
 - **Modal** - Overlay dialogs
@@ -60,6 +63,7 @@ function App() {
 - **Tooltip** - Contextual hints
 
 ### Forms
+
 - **Checkbox** - Multi-selection control
 - **ColorPicker** - Color selection tool
 - **Input** - Text input fields
@@ -70,6 +74,7 @@ function App() {
 - **Toggle** - On/off switch
 
 ### Layout
+
 - **Accordion** - Collapsible content panels
 - **Card** - Content containers with decorative corners
 - **Divider** - Visual separation with multiple styles
@@ -78,12 +83,14 @@ function App() {
 - **SubCard** - Nested content containers with accent corners
 
 ### Navigation
+
 - **Breadcrumb** - Navigation hierarchy
 - **Link** - Text links with hover effects
 - **Menu** - Dropdown navigation menus
 - **Tabs** - Tabbed navigation
 
 ### Typography
+
 - **Heading** - Section headers (h1-h6)
 - **Text** - Body text with variants
 - **List** - Styled lists with custom markers
@@ -93,18 +100,18 @@ function App() {
 ### Color Palette
 
 ```css
---color-bg-base: #0b0b0d;      /* Base background */
---color-bg-card: #1f1d20;      /* Card background */
---color-bg-elevated: #2a282b;  /* Elevated elements */
+--color-bg-base: #0b0b0d; /* Base background */
+--color-bg-card: #1f1d20; /* Card background */
+--color-bg-elevated: #2a282b; /* Elevated elements */
 --color-text-primary: #bdbdbd; /* Primary text */
 --color-text-secondary: #8a8a8a; /* Secondary text */
---color-text-muted: #5a5a5a;   /* Muted text */
+--color-text-muted: #5a5a5a; /* Muted text */
 ```
 
 ### State Colors
 
 ```css
---color-danger: #ff5555;  /* Error states */
+--color-danger: #ff5555; /* Error states */
 --color-success: #50fa7b; /* Success states */
 --color-warning: #f1fa8c; /* Warning states */
 ```
@@ -164,8 +171,8 @@ snake-eater-ui/
 Contributions are welcome! Please follow these guidelines:
 
 1. **TypeScript First** - All components must be written in TypeScript
-5. **Storybook Stories** - Every component needs comprehensive stories
-6. **Accessibility** - Ensure keyboard navigation and ARIA support
+2. **Storybook Stories** - Every component needs comprehensive stories
+3. **Accessibility** - Ensure keyboard navigation and ARIA support
 
 ## License
 
@@ -174,6 +181,7 @@ Unlicensed (for now)
 ## Acknowledgments
 
 Built with:
+
 - [React](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Storybook](https://storybook.js.org/)

@@ -43,40 +43,32 @@ export const Input: React.FC<InputProps> = ({
     disabled && 'snake-input--disabled',
     leftIcon && 'snake-input--has-left-icon',
     rightIcon && 'snake-input--has-right-icon',
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const wrapperClasses = [
     'snake-input-wrapper',
     fullWidth && 'snake-input-wrapper--full-width',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={wrapperClasses}>
-      {label && (
-        <label className="snake-input__label">
-          {label}
-        </label>
-      )}
+      {label && <label className="snake-input__label">{label}</label>}
       <div className="snake-input__container">
-        {leftIcon && (
-          <span className="snake-input__icon snake-input__icon--left">
-            {leftIcon}
-          </span>
-        )}
-        <input
-          className={inputClasses}
-          disabled={disabled}
-          {...props}
-        />
+        {leftIcon && <span className="snake-input__icon snake-input__icon--left">{leftIcon}</span>}
+        <input className={inputClasses} disabled={disabled} {...props} />
         {rightIcon && (
-          <span className="snake-input__icon snake-input__icon--right">
-            {rightIcon}
-          </span>
+          <span className="snake-input__icon snake-input__icon--right">{rightIcon}</span>
         )}
       </div>
       {(error || helperText) && (
-        <span className={`snake-input__helper-text ${error ? 'snake-input__helper-text--error' : ''}`}>
+        <span
+          className={`snake-input__helper-text ${error ? 'snake-input__helper-text--error' : ''}`}
+        >
           {error || helperText}
         </span>
       )}

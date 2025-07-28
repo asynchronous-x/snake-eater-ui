@@ -81,11 +81,7 @@ const deeplyNestedItems = [
     subitems: [
       {
         content: 'Source Code',
-        subitems: [
-          { content: 'Components' },
-          { content: 'Services' },
-          { content: 'Utilities' },
-        ],
+        subitems: [{ content: 'Components' }, { content: 'Services' }, { content: 'Utilities' }],
       },
       {
         content: 'Configuration',
@@ -184,23 +180,20 @@ export const LowercaseText: Story = {
 export const Interactive: Story = {
   args: {
     items: [
-      { 
+      {
         content: 'Click me to initialize protocols',
         onClick: () => alert('Initializing protocols...'),
       },
-      { 
+      {
         content: 'Select to establish connection',
         onClick: () => alert('Establishing connection...'),
       },
-      { 
+      {
         content: 'Load configuration',
         onClick: () => alert('Loading configuration...'),
-        subitems: [
-          { content: 'Database config' },
-          { content: 'Security settings' },
-        ],
+        subitems: [{ content: 'Database config' }, { content: 'Security settings' }],
       },
-      { 
+      {
         content: 'Start services',
         onClick: () => alert('Starting services...'),
       },
@@ -220,23 +213,28 @@ export const MixedContent: Story = {
   args: {
     items: [
       { content: 'Plain text item' },
-      { 
-        content: <span>Item with <strong>bold text</strong></span>,
+      {
+        content: (
+          <span>
+            Item with <strong>bold text</strong>
+          </span>
+        ),
         subitems: [
           { content: <span style={{ color: '#bd93f9' }}>Colored subitem</span> },
           { content: <code>Code snippet subitem</code> },
         ],
       },
-      { 
-        content: <span>Item with <em>italic text</em></span>,
+      {
+        content: (
+          <span>
+            Item with <em>italic text</em>
+          </span>
+        ),
         subitems: [
           { content: 'Regular subitem' },
-          { 
+          {
             content: 'Subitem with nested items',
-            subitems: [
-              { content: 'Deep nested item 1' },
-              { content: 'Deep nested item 2' },
-            ],
+            subitems: [{ content: 'Deep nested item 1' }, { content: 'Deep nested item 2' }],
           },
         ],
       },
@@ -259,7 +257,7 @@ export const RealWorldExample: Story = {
       {
         content: 'Configuration Options',
         subitems: [
-          { 
+          {
             content: 'Database Settings',
             subitems: [
               { content: 'Host: localhost' },
@@ -267,7 +265,7 @@ export const RealWorldExample: Story = {
               { content: 'Username: admin' },
             ],
           },
-          { 
+          {
             content: 'Security Settings',
             subitems: [
               { content: 'Enable SSL: true' },

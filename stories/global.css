@@ -20,7 +20,12 @@ body {
   background-color: var(--color-bg-base);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: var(--font-weight-semibold);
   line-height: 1.2;
   margin-bottom: var(--spacing-md);
@@ -42,7 +47,8 @@ h4 {
   font-size: var(--font-size-lg);
 }
 
-h5, h6 {
+h5,
+h6 {
   font-size: var(--font-size-base);
 }
 
@@ -93,7 +99,8 @@ pre code {
   border: none;
 }
 
-ul, ol {
+ul,
+ol {
   margin-bottom: var(--spacing-md);
   padding-left: var(--spacing-lg);
 }

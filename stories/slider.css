@@ -138,7 +138,10 @@
   border: 2px solid #3a3a3a;
   transform: translate(-50%, -50%);
   cursor: grab;
-  transition: transform var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
   z-index: 2;
 }
 

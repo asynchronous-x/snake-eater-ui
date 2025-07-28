@@ -28,9 +28,18 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
   onChange,
   showAlpha = false,
   presets = [
-    '#50fa7b', '#ffb86c', '#ff5555', '#61dafb',
-    '#bd93f9', '#ff79c6', '#f1fa8c', '#8be9fd',
-    '#bdbdbd', '#8e8e90', '#3a3a3a', '#1f1d20',
+    '#50fa7b',
+    '#ffb86c',
+    '#ff5555',
+    '#61dafb',
+    '#bd93f9',
+    '#ff79c6',
+    '#f1fa8c',
+    '#8be9fd',
+    '#bdbdbd',
+    '#8e8e90',
+    '#3a3a3a',
+    '#1f1d20',
   ],
   size = 'medium',
   showInput = true,
@@ -52,19 +61,19 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
     const hexToHsb = (hex: string) => {
       const rgb = hexToRgb(hex);
       if (!rgb) return;
-      
+
       const r = rgb.r / 255;
       const g = rgb.g / 255;
       const b = rgb.b / 255;
-      
+
       const max = Math.max(r, g, b);
       const min = Math.min(r, g, b);
       const delta = max - min;
-      
+
       let h = 0;
-      let s = max === 0 ? 0 : delta / max;
-      let v = max;
-      
+      const s = max === 0 ? 0 : delta / max;
+      const v = max;
+
       if (delta !== 0) {
         if (max === r) {
           h = ((g - b) / delta + (g < b ? 6 : 0)) / 6;
@@ -74,51 +83,79 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
           h = ((r - g) / delta + 4) / 6;
         }
       }
-      
+
       setHue(Math.round(h * 360));
       setSaturation(Math.round(s * 100));
       setBrightness(Math.round(v * 100));
     };
-    
+
     hexToHsb(value);
   }, [value]);
 
   const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : null;
   };
 
   const hsbToHex = (h: number, s: number, b: number) => {
     const hNorm = h / 360;
     const sNorm = s / 100;
     const bNorm = b / 100;
-    
+
     const i = Math.floor(hNorm * 6);
     const f = hNorm * 6 - i;
     const p = bNorm * (1 - sNorm);
     const q = bNorm * (1 - f * sNorm);
     const t = bNorm * (1 - (1 - f) * sNorm);
-    
-    let r = 0, g = 0, b_out = 0;
-    
+
+    let r = 0,
+      g = 0,
+      b_out = 0;
+
     switch (i % 6) {
-      case 0: r = bNorm; g = t; b_out = p; break;
-      case 1: r = q; g = bNorm; b_out = p; break;
-      case 2: r = p; g = bNorm; b_out = t; break;
-      case 3: r = p; g = q; b_out = bNorm; break;
-      case 4: r = t; g = p; b_out = bNorm; break;
-      case 5: r = bNorm; g = p; b_out = q; break;
+      case 0:
+        r = bNorm;
+        g = t;
+        b_out = p;
+        break;
+      case 1:
+        r = q;
+        g = bNorm;
+        b_out = p;
+        break;
+      case 2:
+        r = p;
+        g = bNorm;
+        b_out = t;
+        break;
+      case 3:
+        r = p;
+        g = q;
+        b_out = bNorm;
+        break;
+      case 4:
+        r = t;
+        g = p;
+        b_out = bNorm;
+        break;
+      case 5:
+        r = bNorm;
+        g = p;
+        b_out = q;
+        break;
     }
-    
+
     const toHex = (n: number) => {
       const hex = Math.round(n * 255).toString(16);
       return hex.length === 1 ? '0' + hex : hex;
     };
-    
+
     return `#${toHex(r)}${toHex(g)}${toHex(b_out)}`;
   };
 
@@ -130,14 +167,14 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
 
   const handleSaturationClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled || !saturationRef.current) return;
-    
+
     const rect = saturationRef.current.getBoundingClientRect();
     const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
     const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
-    
+
     const newSaturation = Math.round((x / rect.width) * 100);
     const newBrightness = Math.round((1 - y / rect.height) * 100);
-    
+
     setSaturation(newSaturation);
     setBrightness(newBrightness);
     updateColor(hue, newSaturation, newBrightness, alpha);
@@ -189,13 +226,14 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
     `snake-colorpicker--${size}`,
     disabled && 'snake-colorpicker--disabled',
     inline && 'snake-colorpicker--inline',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const panelClasses = [
-    'snake-colorpicker__panel',
-    isOpen && 'snake-colorpicker__panel--open',
-  ].filter(Boolean).join(' ');
+  const panelClasses = ['snake-colorpicker__panel', isOpen && 'snake-colorpicker__panel--open']
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div ref={pickerRef} className={pickerClasses}>
@@ -205,18 +243,18 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
           onClick={() => !disabled && setIsOpen(!isOpen)}
           disabled={disabled}
         >
-          <div 
-            className="snake-colorpicker__trigger-color" 
+          <div
+            className="snake-colorpicker__trigger-color"
             style={{ backgroundColor: currentColor }}
           />
           <span className="snake-colorpicker__trigger-value">{currentColor}</span>
           <span className="snake-colorpicker__trigger-arrow">▼</span>
         </button>
       )}
-      
+
       {(isOpen || inline) && (
         <div className={panelClasses}>
-          <div 
+          <div
             ref={saturationRef}
             className="snake-colorpicker__saturation"
             style={{ backgroundColor: hsbToHex(hue, 100, 100) }}
@@ -224,7 +262,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
           >
             <div className="snake-colorpicker__saturation-white" />
             <div className="snake-colorpicker__saturation-black" />
-            <div 
+            <div
               className="snake-colorpicker__saturation-pointer"
               style={{
                 left: `${saturation}%`,
@@ -232,7 +270,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
               }}
             />
           </div>
-          
+
           <div className="snake-colorpicker__controls">
             <div className="snake-colorpicker__slider">
               <label>Hue</label>
@@ -246,7 +284,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
                 disabled={disabled}
               />
             </div>
-            
+
             {showAlpha && (
               <div className="snake-colorpicker__slider">
                 <label>Alpha</label>
@@ -262,7 +300,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
               </div>
             )}
           </div>
-          
+
           {showInput && (
             <div className="snake-colorpicker__input-wrapper">
               <input
@@ -275,7 +313,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
               />
             </div>
           )}
-          
+
           {presets.length > 0 && (
             <div className="snake-colorpicker__presets">
               {presets.map((color, index) => (
@@ -290,7 +328,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
               ))}
             </div>
           )}
-          
+
           <div className="snake-colorpicker__corner snake-colorpicker__corner--top-left" />
           <div className="snake-colorpicker__corner snake-colorpicker__corner--top-right" />
           <div className="snake-colorpicker__corner snake-colorpicker__corner--bottom-left" />

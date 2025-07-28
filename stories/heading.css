@@ -193,30 +193,15 @@
 
 /* Variant-specific decorations */
 .snake-heading--primary .snake-heading__decoration {
-  background: linear-gradient(
-    to right,
-    #61dafb 0%,
-    #61dafb 70%,
-    transparent 100%
-  );
+  background: linear-gradient(to right, #61dafb 0%, #61dafb 70%, transparent 100%);
 }
 
 .snake-heading--secondary .snake-heading__decoration {
-  background: linear-gradient(
-    to right,
-    #50fa7b 0%,
-    #50fa7b 70%,
-    transparent 100%
-  );
+  background: linear-gradient(to right, #50fa7b 0%, #50fa7b 70%, transparent 100%);
 }
 
 .snake-heading--muted .snake-heading__decoration {
-  background: linear-gradient(
-    to right,
-    #8e8e90 0%,
-    #8e8e90 70%,
-    transparent 100%
-  );
+  background: linear-gradient(to right, #8e8e90 0%, #8e8e90 70%, transparent 100%);
 }
 
 /* Animated underline effect */
@@ -255,15 +240,15 @@
   .snake-heading--2xl {
     font-size: 3rem;
   }
-  
+
   .snake-heading--xl {
     font-size: 2.25rem;
   }
-  
+
   .snake-heading--h1 {
     font-size: 2.25rem;
   }
-  
+
   .snake-heading--h2 {
     font-size: 1.875rem;
   }

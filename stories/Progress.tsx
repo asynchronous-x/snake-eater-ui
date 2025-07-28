@@ -47,7 +47,7 @@ export const Progress: React.FC<ProgressProps> = ({
   ariaLabel,
 }) => {
   const percentage = Math.min(100, Math.max(0, (value / max) * 100));
-  
+
   const progressClasses = [
     'snake-progress',
     `snake-progress--${size}`,
@@ -55,40 +55,38 @@ export const Progress: React.FC<ProgressProps> = ({
     `snake-progress--${type}`,
     indeterminate && 'snake-progress--indeterminate',
     showLabel && `snake-progress--label-${labelPosition}`,
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const renderSegments = () => {
     if (type !== 'segmented') return null;
-    
+
     const segmentElements = [];
     const filledSegments = Math.floor((percentage / 100) * segments);
-    
+
     for (let i = 0; i < segments; i++) {
       segmentElements.push(
         <div
           key={i}
           className={`snake-progress__segment ${i < filledSegments ? 'snake-progress__segment--filled' : ''}`}
-        />
+        />,
       );
     }
-    
+
     return segmentElements;
   };
 
   const renderProgressBar = () => {
     if (type === 'segmented') {
-      return (
-        <div className="snake-progress__segments">
-          {renderSegments()}
-        </div>
-      );
+      return <div className="snake-progress__segments">{renderSegments()}</div>;
     }
 
     return (
       <>
-        <div 
-          className="snake-progress__fill" 
+        <div
+          className="snake-progress__fill"
           style={!indeterminate ? { width: `${percentage}%` } : undefined}
         />
         {type === 'striped' && <div className="snake-progress__stripes" />}
@@ -103,8 +101,8 @@ export const Progress: React.FC<ProgressProps> = ({
           {label || formatValue(value, max)}
         </div>
       )}
-      
-      <div 
+
+      <div
         className="snake-progress__container"
         role="progressbar"
         aria-valuenow={!indeterminate ? value : undefined}
@@ -112,22 +110,20 @@ export const Progress: React.FC<ProgressProps> = ({
         aria-valuemax={max}
         aria-label={ariaLabel || 'Progress'}
       >
-        <div className="snake-progress__track">
-          {renderProgressBar()}
-        </div>
-        
+        <div className="snake-progress__track">{renderProgressBar()}</div>
+
         {showLabel && labelPosition === 'outside' && (
           <span className="snake-progress__label snake-progress__label--outside">
             {label || formatValue(value, max)}
           </span>
         )}
-        
+
         <div className="snake-progress__corner snake-progress__corner--top-left" />
         <div className="snake-progress__corner snake-progress__corner--top-right" />
         <div className="snake-progress__corner snake-progress__corner--bottom-left" />
         <div className="snake-progress__corner snake-progress__corner--bottom-right" />
       </div>
-      
+
       {showLabel && labelPosition === 'bottom' && (
         <div className="snake-progress__label snake-progress__label--bottom">
           {label || formatValue(value, max)}

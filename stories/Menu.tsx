@@ -22,7 +22,13 @@ interface MenuProps {
   /** Open state change handler */
   onOpenChange?: (open: boolean) => void;
   /** Menu placement */
-  placement?: 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end' | 'right-start' | 'left-start';
+  placement?:
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'top-start'
+    | 'top-end'
+    | 'right-start'
+    | 'left-start';
   /** Menu size */
   size?: 'small' | 'medium' | 'large';
   /** Click handler */
@@ -49,7 +55,7 @@ export const Menu: React.FC<MenuProps> = ({
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
-  
+
   const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
   const setIsOpen = (open: boolean) => {
     if (controlledIsOpen === undefined) {
@@ -60,8 +66,12 @@ export const Menu: React.FC<MenuProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node) &&
-          triggerRef.current && !triggerRef.current.contains(event.target as Node)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        triggerRef.current &&
+        !triggerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
         setActiveSubmenu(null);
       }
@@ -93,7 +103,7 @@ export const Menu: React.FC<MenuProps> = ({
 
   const handleItemClick = (item: MenuItem) => {
     if (item.disabled || item.divider) return;
-    
+
     if (item.submenu) {
       setActiveSubmenu(activeSubmenu === item.id ? null : item.id);
     } else {
@@ -114,7 +124,9 @@ export const Menu: React.FC<MenuProps> = ({
       item.danger && 'snake-menu__item--danger',
       item.submenu && 'snake-menu__item--has-submenu',
       activeSubmenu === item.id && 'snake-menu__item--submenu-open',
-    ].filter(Boolean).join(' ');
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <div key={item.id} className="snake-menu__item-wrapper">
@@ -128,10 +140,12 @@ export const Menu: React.FC<MenuProps> = ({
           {item.shortcut && <span className="snake-menu__item-shortcut">{item.shortcut}</span>}
           {item.submenu && <span className="snake-menu__item-arrow">▶</span>}
         </button>
-        
+
         {item.submenu && activeSubmenu === item.id && (
-          <div className={`snake-menu__submenu snake-menu__submenu--${isSubmenuItem ? 'nested' : 'root'}`}>
-            {item.submenu.map(subItem => renderMenuItem(subItem, true))}
+          <div
+            className={`snake-menu__submenu snake-menu__submenu--${isSubmenuItem ? 'nested' : 'root'}`}
+          >
+            {item.submenu.map((subItem) => renderMenuItem(subItem, true))}
           </div>
         )}
       </div>
@@ -143,27 +157,23 @@ export const Menu: React.FC<MenuProps> = ({
     `snake-menu--${size}`,
     `snake-menu--${placement}`,
     isOpen && 'snake-menu--open',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className="snake-menu__container">
       {trigger && (
-        <div 
-          ref={triggerRef}
-          className="snake-menu__trigger" 
-          onClick={handleTriggerClick}
-        >
+        <div ref={triggerRef} className="snake-menu__trigger" onClick={handleTriggerClick}>
           {trigger}
         </div>
       )}
-      
+
       {isOpen && (
         <div ref={menuRef} className={menuClasses} role="menu">
           {showArrow && <div className="snake-menu__arrow" />}
-          <div className="snake-menu__content">
-            {items.map(item => renderMenuItem(item))}
-          </div>
+          <div className="snake-menu__content">{items.map((item) => renderMenuItem(item))}</div>
           <div className="snake-menu__corner snake-menu__corner--top-left" />
           <div className="snake-menu__corner snake-menu__corner--top-right" />
           <div className="snake-menu__corner snake-menu__corner--bottom-left" />

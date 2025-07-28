@@ -52,7 +52,7 @@ export const Select: React.FC<SelectProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
-  const selectedOption = options.find(opt => opt.value === value);
+  const selectedOption = options.find((opt) => opt.value === value);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -77,21 +77,21 @@ export const Select: React.FC<SelectProps> = ({
     isOpen && 'snake-select--open',
     error && 'snake-select--error',
     disabled && 'snake-select--disabled',
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const wrapperClasses = [
     'snake-select-wrapper',
     fullWidth && 'snake-select-wrapper--full-width',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={wrapperClasses} ref={selectRef}>
-      {label && (
-        <label className="snake-select__label">
-          {label}
-        </label>
-      )}
+      {label && <label className="snake-select__label">{label}</label>}
       <button
         type="button"
         className={selectClasses}
@@ -103,7 +103,7 @@ export const Select: React.FC<SelectProps> = ({
         </span>
         <span className="snake-select__arrow">▼</span>
       </button>
-      
+
       {isOpen && (
         <div className="snake-select__dropdown">
           {options.map((option) => (
@@ -114,7 +114,9 @@ export const Select: React.FC<SelectProps> = ({
                 'snake-select__option',
                 option.value === value && 'snake-select__option--selected',
                 option.disabled && 'snake-select__option--disabled',
-              ].filter(Boolean).join(' ')}
+              ]
+                .filter(Boolean)
+                .join(' ')}
               onClick={() => !option.disabled && handleSelect(option.value)}
               disabled={option.disabled}
             >
@@ -123,9 +125,11 @@ export const Select: React.FC<SelectProps> = ({
           ))}
         </div>
       )}
-      
+
       {(error || helperText) && (
-        <span className={`snake-select__helper-text ${error ? 'snake-select__helper-text--error' : ''}`}>
+        <span
+          className={`snake-select__helper-text ${error ? 'snake-select__helper-text--error' : ''}`}
+        >
           {error || helperText}
         </span>
       )}

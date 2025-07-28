@@ -7,7 +7,13 @@ interface ToastProps {
   /** Toast variant */
   variant?: 'default' | 'success' | 'warning' | 'danger' | 'info';
   /** Toast position */
-  position?: 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+  position?:
+    | 'top-left'
+    | 'top-center'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-center'
+    | 'bottom-right';
   /** Duration in milliseconds (0 for persistent) */
   duration?: number;
   /** Show close button */
@@ -56,7 +62,7 @@ export const Toast: React.FC<ToastProps> = ({
       if (showProgress) {
         const interval = setInterval(() => {
           setProgress((prev) => {
-            const newProgress = prev - (100 / (duration / 100));
+            const newProgress = prev - 100 / (duration / 100);
             return newProgress > 0 ? newProgress : 0;
           });
         }, 100);
@@ -78,13 +84,18 @@ export const Toast: React.FC<ToastProps> = ({
 
   const getDefaultIcon = () => {
     if (icon) return icon;
-    
+
     switch (variant) {
-      case 'success': return '✓';
-      case 'warning': return '⚠';
-      case 'danger': return '✕';
-      case 'info': return 'ℹ';
-      default: return '→';
+      case 'success':
+        return '✓';
+      case 'warning':
+        return '⚠';
+      case 'danger':
+        return '✕';
+      case 'info':
+        return 'ℹ';
+      default:
+        return '→';
     }
   };
 
@@ -93,48 +104,36 @@ export const Toast: React.FC<ToastProps> = ({
     `snake-toast--${variant}`,
     `snake-toast--${position}`,
     !isVisible && 'snake-toast--hidden',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className={toastClasses} role="alert">
-      {showIcon && (
-        <div className="snake-toast__icon">
-          {getDefaultIcon()}
-        </div>
-      )}
-      
+      {showIcon && <div className="snake-toast__icon">{getDefaultIcon()}</div>}
+
       <div className="snake-toast__content">
         <div className="snake-toast__message">{message}</div>
         {action && (
-          <button
-            className="snake-toast__action"
-            onClick={action.onClick}
-          >
+          <button className="snake-toast__action" onClick={action.onClick}>
             {action.label}
           </button>
         )}
       </div>
-      
+
       {closable && (
-        <button
-          className="snake-toast__close"
-          onClick={handleClose}
-          aria-label="Close"
-        >
+        <button className="snake-toast__close" onClick={handleClose} aria-label="Close">
           ✕
         </button>
       )}
-      
+
       {showProgress && duration > 0 && (
         <div className="snake-toast__progress">
-          <div 
-            className="snake-toast__progress-bar" 
-            style={{ width: `${progress}%` }}
-          />
+          <div className="snake-toast__progress-bar" style={{ width: `${progress}%` }} />
         </div>
       )}
-      
+
       <div className="snake-toast__corner snake-toast__corner--top-left" />
       <div className="snake-toast__corner snake-toast__corner--top-right" />
       <div className="snake-toast__corner snake-toast__corner--bottom-left" />
@@ -161,10 +160,9 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
   position = 'bottom-right',
   onClose,
 }) => {
-  const containerClasses = [
-    'snake-toast-container',
-    `snake-toast-container--${position}`,
-  ].join(' ');
+  const containerClasses = ['snake-toast-container', `snake-toast-container--${position}`].join(
+    ' ',
+  );
 
   return (
     <div className={containerClasses}>

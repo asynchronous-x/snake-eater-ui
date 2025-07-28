@@ -38,7 +38,10 @@ export const Default: Story = {
     children: (
       <>
         <h3>Card Title</h3>
-        <p>This is a card component with decorative corner elbows. It features a dark background and subtle border styling.</p>
+        <p>
+          This is a card component with decorative corner elbows. It features a dark background and
+          subtle border styling.
+        </p>
       </>
     ),
   },
@@ -62,8 +65,12 @@ export const WithHeaderAndFooter: Story = {
     ),
     footer: (
       <div style={{ display: 'flex', gap: '8px' }}>
-        <Button size="small" variant="primary">Action</Button>
-        <Button size="small" variant="ghost">Cancel</Button>
+        <Button size="small" variant="primary">
+          Action
+        </Button>
+        <Button size="small" variant="ghost">
+          Cancel
+        </Button>
       </div>
     ),
   },
@@ -121,7 +128,11 @@ export const ComplexContent: Story = {
         </div>
       </div>
     ),
-    footer: <Button variant="cyber" size="small" fullWidth>View Details</Button>,
+    footer: (
+      <Button variant="cyber" size="small" fullWidth>
+        View Details
+      </Button>
+    ),
   },
 };
 

@@ -167,9 +167,9 @@ export const RealWorldExamples: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', width: '400px' }}>
       <div>
         <p style={{ color: '#bdbdbd', marginBottom: '8px' }}>File Upload</p>
-        <Progress 
-          value={67} 
-          showLabel 
+        <Progress
+          value={67}
+          showLabel
           labelPosition="top"
           formatValue={(v) => `${v}% uploaded`}
           variant="primary"
@@ -177,9 +177,9 @@ export const RealWorldExamples: Story = {
       </div>
       <div>
         <p style={{ color: '#bdbdbd', marginBottom: '8px' }}>Disk Usage</p>
-        <Progress 
-          value={85} 
-          showLabel 
+        <Progress
+          value={85}
+          showLabel
           labelPosition="outside"
           variant="warning"
           formatValue={(v) => `${v}% used`}
@@ -187,8 +187,8 @@ export const RealWorldExamples: Story = {
       </div>
       <div>
         <p style={{ color: '#bdbdbd', marginBottom: '8px' }}>Task Progress</p>
-        <Progress 
-          value={4} 
+        <Progress
+          value={4}
           max={10}
           type="segmented"
           segments={10}

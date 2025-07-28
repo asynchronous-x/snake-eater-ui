@@ -135,9 +135,15 @@ export const FilterGroup: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
       <Filter active>All</Filter>
-      <Filter variant="success" count={15}>Active</Filter>
-      <Filter variant="warning" count={3}>Pending</Filter>
-      <Filter variant="danger" count={2}>Failed</Filter>
+      <Filter variant="success" count={15}>
+        Active
+      </Filter>
+      <Filter variant="warning" count={3}>
+        Pending
+      </Filter>
+      <Filter variant="danger" count={2}>
+        Failed
+      </Filter>
       <Filter disabled>Archived</Filter>
     </div>
   ),

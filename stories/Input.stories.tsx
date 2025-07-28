@@ -47,7 +47,7 @@ export const WithHelperText: Story = {
   args: {
     label: 'Email',
     placeholder: 'user@example.com',
-    helperText: 'We\'ll never share your email',
+    helperText: "We'll never share your email",
     type: 'email',
   },
 };
@@ -153,30 +153,10 @@ export const NumberInput: Story = {
 export const InputGroup: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
-      <Input
-        label="First Name"
-        placeholder="John"
-        fullWidth
-      />
-      <Input
-        label="Last Name"
-        placeholder="Doe"
-        fullWidth
-      />
-      <Input
-        label="Email"
-        type="email"
-        placeholder="john.doe@example.com"
-        leftIcon="@"
-        fullWidth
-      />
-      <Input
-        label="Phone"
-        type="tel"
-        placeholder="+1 (555) 000-0000"
-        leftIcon="📱"
-        fullWidth
-      />
+      <Input label="First Name" placeholder="John" fullWidth />
+      <Input label="Last Name" placeholder="Doe" fullWidth />
+      <Input label="Email" type="email" placeholder="john.doe@example.com" leftIcon="@" fullWidth />
+      <Input label="Phone" type="tel" placeholder="+1 (555) 000-0000" leftIcon="📱" fullWidth />
     </div>
   ),
 };

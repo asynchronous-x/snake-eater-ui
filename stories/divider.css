@@ -166,7 +166,10 @@
 }
 
 /* Colors */
-.snake-divider--default:not(.snake-divider--dashed):not(.snake-divider--dotted):not(.snake-divider--double):not(.snake-divider--accent) .snake-divider__line {
+.snake-divider--default:not(.snake-divider--dashed):not(.snake-divider--dotted):not(
+    .snake-divider--double
+  ):not(.snake-divider--accent)
+  .snake-divider__line {
   background-color: #3a3a3a;
 }
 
@@ -174,7 +177,10 @@
   border-color: #3a3a3a;
 }
 
-.snake-divider--muted:not(.snake-divider--dashed):not(.snake-divider--dotted):not(.snake-divider--double):not(.snake-divider--accent) .snake-divider__line {
+.snake-divider--muted:not(.snake-divider--dashed):not(.snake-divider--dotted):not(
+    .snake-divider--double
+  ):not(.snake-divider--accent)
+  .snake-divider__line {
   background-color: #2a2a2a;
   opacity: 0.5;
 }
@@ -184,7 +190,10 @@
   opacity: 0.5;
 }
 
-.snake-divider--primary:not(.snake-divider--dashed):not(.snake-divider--dotted):not(.snake-divider--double):not(.snake-divider--accent) .snake-divider__line {
+.snake-divider--primary:not(.snake-divider--dashed):not(.snake-divider--dotted):not(
+    .snake-divider--double
+  ):not(.snake-divider--accent)
+  .snake-divider__line {
   background-color: var(--color-text-primary);
   opacity: 0.3;
 }
@@ -194,7 +203,10 @@
   opacity: 0.3;
 }
 
-.snake-divider--secondary:not(.snake-divider--dashed):not(.snake-divider--dotted):not(.snake-divider--double):not(.snake-divider--accent) .snake-divider__line {
+.snake-divider--secondary:not(.snake-divider--dashed):not(.snake-divider--dotted):not(
+    .snake-divider--double
+  ):not(.snake-divider--accent)
+  .snake-divider__line {
   background-color: #8e8e90;
   opacity: 0.5;
 }

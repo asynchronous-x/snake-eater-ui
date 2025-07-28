@@ -58,24 +58,9 @@ export const WithLabel: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <Textarea
-        size="small"
-        label="Small"
-        placeholder="Small textarea"
-        rows={3}
-      />
-      <Textarea
-        size="medium"
-        label="Medium"
-        placeholder="Medium textarea"
-        rows={4}
-      />
-      <Textarea
-        size="large"
-        label="Large"
-        placeholder="Large textarea"
-        rows={5}
-      />
+      <Textarea size="small" label="Small" placeholder="Small textarea" rows={3} />
+      <Textarea size="medium" label="Medium" placeholder="Medium textarea" rows={4} />
+      <Textarea size="large" label="Large" placeholder="Large textarea" rows={5} />
     </div>
   ),
 };
@@ -83,24 +68,14 @@ export const Sizes: Story = {
 export const Variants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <Textarea
-        variant="default"
-        label="Default"
-        placeholder="Default variant"
-        rows={3}
-      />
+      <Textarea variant="default" label="Default" placeholder="Default variant" rows={3} />
       <Textarea
         variant="ghost"
         label="Ghost"
         placeholder="Ghost variant - click to focus"
         rows={3}
       />
-      <Textarea
-        variant="bordered"
-        label="Bordered"
-        placeholder="Bordered variant"
-        rows={3}
-      />
+      <Textarea variant="bordered" label="Bordered" placeholder="Bordered variant" rows={3} />
     </div>
   ),
 };
@@ -108,7 +83,7 @@ export const Variants: Story = {
 export const AutoResize: Story = {
   render: () => {
     const [value, setValue] = useState('');
-    
+
     return (
       <div>
         <Textarea
@@ -130,7 +105,7 @@ export const WithCharacterCount: Story = {
   render: () => {
     const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <Textarea
@@ -159,23 +134,14 @@ export const WithCharacterCount: Story = {
 export const States: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <Textarea
-        label="Normal"
-        placeholder="Normal state"
-        rows={3}
-      />
+      <Textarea label="Normal" placeholder="Normal state" rows={3} />
       <Textarea
         label="With Error"
         placeholder="Error state"
         error="This field is required"
         rows={3}
       />
-      <Textarea
-        label="Disabled"
-        placeholder="Disabled state"
-        disabled
-        rows={3}
-      />
+      <Textarea label="Disabled" placeholder="Disabled state" disabled rows={3} />
       <Textarea
         label="Read Only"
         value="This is read-only content that cannot be edited"
@@ -189,12 +155,7 @@ export const States: Story = {
 export const ResizeOptions: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-      <Textarea
-        label="No resize"
-        placeholder="Cannot be resized"
-        resize="none"
-        rows={3}
-      />
+      <Textarea label="No resize" placeholder="Cannot be resized" resize="none" rows={3} />
       <Textarea
         label="Vertical only (default)"
         placeholder="Can only resize vertically"
@@ -231,16 +192,17 @@ export const FormExample: Story = {
     };
 
     return (
-      <form onSubmit={handleSubmit} style={{
-        padding: '24px',
-        backgroundColor: '#1f1d20',
-        border: '1px solid #3a3a3a',
-        width: '500px',
-      }}>
-        <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '24px' }}>
-          Feedback Form
-        </h3>
-        
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          padding: '24px',
+          backgroundColor: '#1f1d20',
+          border: '1px solid #3a3a3a',
+          width: '500px',
+        }}
+      >
+        <h3 style={{ color: '#bdbdbd', marginTop: 0, marginBottom: '24px' }}>Feedback Form</h3>
+
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <Textarea
             label="General Feedback"
@@ -251,7 +213,7 @@ export const FormExample: Story = {
             fullWidth
             required
           />
-          
+
           <Textarea
             label="Additional Details"
             placeholder="Any specific issues or suggestions?"
@@ -265,7 +227,7 @@ export const FormExample: Story = {
             showCount
             maxLength={500}
           />
-          
+
           <Textarea
             label="Internal Notes (optional)"
             placeholder="For office use only"
@@ -276,7 +238,7 @@ export const FormExample: Story = {
             fullWidth
             helperText="These notes will not be shared"
           />
-          
+
           <button
             type="submit"
             style={{
@@ -298,11 +260,13 @@ export const FormExample: Story = {
 
 export const CodeEditor: Story = {
   render: () => (
-    <div style={{
-      padding: '16px',
-      backgroundColor: '#1f1d20',
-      border: '1px solid #3a3a3a',
-    }}>
+    <div
+      style={{
+        padding: '16px',
+        backgroundColor: '#1f1d20',
+        border: '1px solid #3a3a3a',
+      }}
+    >
       <Textarea
         label="Code Editor"
         placeholder="// Enter your code here..."

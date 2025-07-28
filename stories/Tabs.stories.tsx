@@ -126,7 +126,9 @@ export const WithBadges: Story = {
         label: (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             All
-            <Badge size="small" variant="ghost">24</Badge>
+            <Badge size="small" variant="ghost">
+              24
+            </Badge>
           </div>
         ),
         content: <p>All items are shown here.</p>,
@@ -136,7 +138,9 @@ export const WithBadges: Story = {
         label: (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             Active
-            <Badge size="small" variant="success">12</Badge>
+            <Badge size="small" variant="success">
+              12
+            </Badge>
           </div>
         ),
         content: <p>Active items only.</p>,
@@ -146,7 +150,9 @@ export const WithBadges: Story = {
         label: (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             Pending
-            <Badge size="small" variant="warning">5</Badge>
+            <Badge size="small" variant="warning">
+              5
+            </Badge>
           </div>
         ),
         content: <p>Items pending approval.</p>,
@@ -218,7 +224,7 @@ export const Large: Story = {
 export const ControlledTabs: Story = {
   render: () => {
     const [activeTab, setActiveTab] = useState('tab1');
-    
+
     const tabs = [
       {
         id: 'tab1',
@@ -241,9 +247,15 @@ export const ControlledTabs: Story = {
       <div>
         <Tabs tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
         <div style={{ marginTop: '20px', display: 'flex', gap: '8px' }}>
-          <Button size="small" onClick={() => setActiveTab('tab1')}>Go to Tab 1</Button>
-          <Button size="small" onClick={() => setActiveTab('tab2')}>Go to Tab 2</Button>
-          <Button size="small" onClick={() => setActiveTab('tab3')}>Go to Tab 3</Button>
+          <Button size="small" onClick={() => setActiveTab('tab1')}>
+            Go to Tab 1
+          </Button>
+          <Button size="small" onClick={() => setActiveTab('tab2')}>
+            Go to Tab 2
+          </Button>
+          <Button size="small" onClick={() => setActiveTab('tab3')}>
+            Go to Tab 3
+          </Button>
         </div>
       </div>
     );
@@ -258,15 +270,17 @@ export const CodeEditor: Story = {
         label: 'HTML',
         icon: '📄',
         content: (
-          <pre style={{ 
-            backgroundColor: 'rgba(0, 0, 0, 0.3)', 
-            padding: '16px', 
-            margin: 0,
-            fontFamily: 'monospace',
-            fontSize: '14px',
-            color: '#bdbdbd'
-          }}>
-{`<div class="snake-component">
+          <pre
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              padding: '16px',
+              margin: 0,
+              fontFamily: 'monospace',
+              fontSize: '14px',
+              color: '#bdbdbd',
+            }}
+          >
+            {`<div class="snake-component">
   <h1>Hello World</h1>
   <p>This is a code example.</p>
 </div>`}
@@ -278,15 +292,17 @@ export const CodeEditor: Story = {
         label: 'CSS',
         icon: '🎨',
         content: (
-          <pre style={{ 
-            backgroundColor: 'rgba(0, 0, 0, 0.3)', 
-            padding: '16px', 
-            margin: 0,
-            fontFamily: 'monospace',
-            fontSize: '14px',
-            color: '#bdbdbd'
-          }}>
-{`.snake-component {
+          <pre
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              padding: '16px',
+              margin: 0,
+              fontFamily: 'monospace',
+              fontSize: '14px',
+              color: '#bdbdbd',
+            }}
+          >
+            {`.snake-component {
   background-color: #101010;
   border: 1px solid #3a3a3a;
   padding: 16px;
@@ -299,15 +315,17 @@ export const CodeEditor: Story = {
         label: 'JavaScript',
         icon: '⚡',
         content: (
-          <pre style={{ 
-            backgroundColor: 'rgba(0, 0, 0, 0.3)', 
-            padding: '16px', 
-            margin: 0,
-            fontFamily: 'monospace',
-            fontSize: '14px',
-            color: '#bdbdbd'
-          }}>
-{`function initComponent() {
+          <pre
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.3)',
+              padding: '16px',
+              margin: 0,
+              fontFamily: 'monospace',
+              fontSize: '14px',
+              color: '#bdbdbd',
+            }}
+          >
+            {`function initComponent() {
   const element = document.querySelector('.snake-component');
   console.log('Component initialized');
 }`}
@@ -328,15 +346,21 @@ export const DashboardTabs: Story = {
         icon: '📊',
         content: (
           <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(3, 1fr)' }}>
-            <div style={{ backgroundColor: '#101010', border: '1px solid #3a3a3a', padding: '16px' }}>
+            <div
+              style={{ backgroundColor: '#101010', border: '1px solid #3a3a3a', padding: '16px' }}
+            >
               <h4 style={{ margin: '0 0 8px 0', color: '#8e8e90' }}>Users</h4>
               <p style={{ margin: 0, fontSize: '24px', color: '#50fa7b' }}>1,234</p>
             </div>
-            <div style={{ backgroundColor: '#101010', border: '1px solid #3a3a3a', padding: '16px' }}>
+            <div
+              style={{ backgroundColor: '#101010', border: '1px solid #3a3a3a', padding: '16px' }}
+            >
               <h4 style={{ margin: '0 0 8px 0', color: '#8e8e90' }}>Revenue</h4>
               <p style={{ margin: 0, fontSize: '24px', color: '#61dafb' }}>$45.2K</p>
             </div>
-            <div style={{ backgroundColor: '#101010', border: '1px solid #3a3a3a', padding: '16px' }}>
+            <div
+              style={{ backgroundColor: '#101010', border: '1px solid #3a3a3a', padding: '16px' }}
+            >
               <h4 style={{ margin: '0 0 8px 0', color: '#8e8e90' }}>Growth</h4>
               <p style={{ margin: 0, fontSize: '24px', color: '#f1fa8c' }}>+12%</p>
             </div>

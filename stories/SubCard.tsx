@@ -39,37 +39,49 @@ export const SubCard: React.FC<SubCardProps> = ({
     `snake-subcard--${size}`,
     `snake-subcard--${variant}`,
     interactive && 'snake-subcard--interactive',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const Component = interactive ? 'button' : 'div';
 
   return (
-    <Component 
+    <Component
       className={classes}
       onClick={interactive ? onClick : undefined}
       type={interactive ? 'button' : undefined}
     >
-      <div className="snake-subcard__corner snake-subcard__corner--top-left" style={cornerColor ? { color: cornerColor } : undefined}>＋</div>
-      <div className="snake-subcard__corner snake-subcard__corner--top-right" style={cornerColor ? { color: cornerColor } : undefined}>＋</div>
-      <div className="snake-subcard__corner snake-subcard__corner--bottom-left" style={cornerColor ? { color: cornerColor } : undefined}>＋</div>
-      <div className="snake-subcard__corner snake-subcard__corner--bottom-right" style={cornerColor ? { color: cornerColor } : undefined}>＋</div>
-      
-      {header && (
-        <div className="snake-subcard__header">
-          {header}
-        </div>
-      )}
-      
-      <div className="snake-subcard__content">
-        {children}
+      <div
+        className="snake-subcard__corner snake-subcard__corner--top-left"
+        style={cornerColor ? { color: cornerColor } : undefined}
+      >
+        ＋
       </div>
-      
-      {footer && (
-        <div className="snake-subcard__footer">
-          {footer}
-        </div>
-      )}
+      <div
+        className="snake-subcard__corner snake-subcard__corner--top-right"
+        style={cornerColor ? { color: cornerColor } : undefined}
+      >
+        ＋
+      </div>
+      <div
+        className="snake-subcard__corner snake-subcard__corner--bottom-left"
+        style={cornerColor ? { color: cornerColor } : undefined}
+      >
+        ＋
+      </div>
+      <div
+        className="snake-subcard__corner snake-subcard__corner--bottom-right"
+        style={cornerColor ? { color: cornerColor } : undefined}
+      >
+        ＋
+      </div>
+
+      {header && <div className="snake-subcard__header">{header}</div>}
+
+      <div className="snake-subcard__content">{children}</div>
+
+      {footer && <div className="snake-subcard__footer">{footer}</div>}
     </Component>
   );
 };

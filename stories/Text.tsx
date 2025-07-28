@@ -3,11 +3,32 @@ import './text.css';
 
 interface TextProps {
   /** HTML element to render */
-  as?: 'p' | 'span' | 'div' | 'blockquote' | 'figcaption' | 'small' | 'strong' | 'em' | 'mark' | 'del' | 'ins' | 'sub' | 'sup';
+  as?:
+    | 'p'
+    | 'span'
+    | 'div'
+    | 'blockquote'
+    | 'figcaption'
+    | 'small'
+    | 'strong'
+    | 'em'
+    | 'mark'
+    | 'del'
+    | 'ins'
+    | 'sub'
+    | 'sup';
   /** Text size */
   size?: '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
   /** Color variant */
-  variant?: 'default' | 'primary' | 'secondary' | 'muted' | 'success' | 'warning' | 'danger' | 'info';
+  variant?:
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'muted'
+    | 'success'
+    | 'warning'
+    | 'danger'
+    | 'info';
   /** Font weight */
   weight?: 'normal' | 'medium' | 'bold';
   /** Text alignment */
@@ -56,7 +77,7 @@ export const Text: React.FC<TextProps> = ({
   children,
 }) => {
   const Component = as;
-  
+
   const textClasses = [
     'snake-text',
     `snake-text--${size}`,
@@ -72,13 +93,17 @@ export const Text: React.FC<TextProps> = ({
     mono && 'snake-text--mono',
     truncate && 'snake-text--truncate',
     clamp && 'snake-text--clamp',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const style = clamp ? {
-    '--line-clamp': clamp,
-    WebkitLineClamp: clamp,
-  } as React.CSSProperties : undefined;
+  const style = clamp
+    ? ({
+        '--line-clamp': clamp,
+        WebkitLineClamp: clamp,
+      } as React.CSSProperties)
+    : undefined;
 
   return (
     <Component className={textClasses} style={style}>
