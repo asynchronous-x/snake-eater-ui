@@ -207,6 +207,10 @@ export function Table<T extends Record<string, any>>({
                       column.align && `snake-table__cell--${column.align}`
                     ].filter(Boolean).join(' ')}
                   >
+                    {/* Only add corner accent on bottom-right of each cell for bordered variant */}
+                    {variant === 'bordered' && rowIndex < data.length - 1 && colIndex < columns.length - 1 && (
+                      <span className="snake-table__corner">+</span>
+                    )}
                     {column.render
                       ? column.render(getValue(row, column.key as string), row, rowIndex)
                       : getValue(row, column.key as string)

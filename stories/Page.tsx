@@ -17,7 +17,6 @@ import { IconButton } from './IconButton';
 import { Loading } from './Loading';
 import { Checkbox } from './Checkbox';
 import { Table } from './Table';
-import { Code } from './Code';
 import { Link } from './Link';
 import { Breadcrumb } from './Breadcrumb';
 import { Stat } from './Stat';
@@ -445,15 +444,7 @@ export const Page: React.FC = () => {
         </Card>
 
         <Card header={<Heading as="h3" size="md">System Logs</Heading>} variant="grid">
-          <Code language="bash" showLineNumbers>
-{`[2024-01-15 10:23:45] INFO: System startup complete
-[2024-01-15 10:23:47] INFO: Connected to database
-[2024-01-15 10:23:48] WARN: High memory usage detected
-[2024-01-15 10:23:50] INFO: Cache cleared successfully
-[2024-01-15 10:23:52] ERROR: Failed to connect to service
-[2024-01-15 10:23:55] INFO: Retry attempt 1 of 3
-[2024-01-15 10:23:57] INFO: Connection established`}
-          </Code>
+          
         </Card>
       </div>
     </div>
