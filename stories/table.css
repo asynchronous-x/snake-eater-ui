@@ -3,6 +3,8 @@
 .snake-table-wrapper {
   width: 100%;
   overflow: auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
   border: 1px solid #3a3a3a;
   background-color: #101010;
   position: relative;
@@ -127,15 +129,15 @@
 
 .snake-table__corner {
   position: absolute;
-  bottom: -12px;
-  right: -7px;
-  font-size: 24px;
+  bottom: -10px;
+  right: -6px;
+  font-size: 18px;
   color: var(--color-text-primary);
   line-height: 1;
   font-family: var(--font-family-mono);
   z-index: 2;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 /* Header content */

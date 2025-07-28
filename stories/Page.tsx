@@ -24,776 +24,828 @@ import { Textarea } from './Textarea';
 import { Heading } from './Heading';
 import { Text } from './Text';
 import { Alert } from './Alert';
-import { Menu } from './Menu';
 import { Slider } from './Slider';
 import { ColorPicker } from './ColorPicker';
 import { Skeleton } from './Skeleton';
 import { Toast } from './Toast';
 import { Divider } from './Divider';
+import { List } from './List';
 import './page.css';
 
-type PageView = 'dashboard' | 'projects' | 'analytics' | 'settings' | 'terminal';
-
-interface Project {
-  id: number;
-  name: string;
-  status: 'active' | 'inactive' | 'completed';
-  progress: number;
-  lastUpdated: string;
-  team: string[];
-  priority: 'low' | 'medium' | 'high' | 'critical';
-}
-
-interface SystemMetric {
-  name: string;
-  value: number;
-  max: number;
-  unit: string;
-}
+type ExamplePage = 'analytics' | 'projects' | 'monitor';
 
 export const Page: React.FC = () => {
-  const [currentView, setCurrentView] = useState<PageView>('dashboard');
-  const [showProjectModal, setShowProjectModal] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [notifications, setNotifications] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [terminalInput, setTerminalInput] = useState('');
-  const [terminalHistory, setTerminalHistory] = useState<string[]>([
-    '> System initialized',
-    '> Connected to Snake Eater Network',
-    '> Ready for input...'
-  ]);
-  const [showToast, setShowToast] = useState(false);
-  const [systemLoad, setSystemLoad] = useState(65);
-  const [themeColor, setThemeColor] = useState('#bd93f9');
-  const [volumeLevel, setVolumeLevel] = useState(75);
+  const [currentExample, setCurrentExample] = useState<ExamplePage>('analytics');
+  
+  // Analytics Dashboard state
+  const [timeRange, setTimeRange] = useState('24h');
+  const [showDetails, setShowDetails] = useState(false);
+  const [alertsExpanded, setAlertsExpanded] = useState(true);
+  
+  // Project Management state
+  const [selectedView, setSelectedView] = useState('board');
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [showNewTaskModal, setShowNewTaskModal] = useState(false);
+  
+  // System Monitor state
+  const [autoRefresh, setAutoRefresh] = useState(true);
+  const [refreshInterval, setRefreshInterval] = useState('5');
+  const [selectedServer, setSelectedServer] = useState('server-1');
+  const [cpuUsage, setCpuUsage] = useState(72);
+  const [memoryUsage, setMemoryUsage] = useState(58);
+  const [networkUsage, setNetworkUsage] = useState(34);
+  const [showAlert, setShowAlert] = useState(false);
 
-  // Mock data
-  const projects: Project[] = [
-    { id: 1, name: 'Neural Interface v2.0', status: 'active', progress: 75, lastUpdated: '2 hours ago', team: ['Alice', 'Bob'], priority: 'high' },
-    { id: 2, name: 'Quantum Processor', status: 'active', progress: 45, lastUpdated: '1 day ago', team: ['Charlie'], priority: 'critical' },
-    { id: 3, name: 'Security Matrix', status: 'completed', progress: 100, lastUpdated: '3 days ago', team: ['David', 'Eve'], priority: 'medium' },
-    { id: 4, name: 'Data Pipeline Alpha', status: 'inactive', progress: 20, lastUpdated: '1 week ago', team: ['Frank'], priority: 'low' },
-  ];
-
-  const systemMetrics: SystemMetric[] = [
-    { name: 'CPU Usage', value: 72, max: 100, unit: '%' },
-    { name: 'Memory', value: 8.2, max: 16, unit: 'GB' },
-    { name: 'Network I/O', value: 145, max: 1000, unit: 'Mbps' },
-    { name: 'Disk Usage', value: 456, max: 1000, unit: 'GB' },
-  ];
-
-  // Simulate real-time updates
+  // System Monitor real-time updates effect
   useEffect(() => {
+    if (!autoRefresh || currentExample !== 'monitor') return;
+    
     const interval = setInterval(() => {
-      setSystemLoad(prev => {
-        const delta = (Math.random() - 0.5) * 10;
-        return Math.max(0, Math.min(100, prev + delta));
-      });
-    }, 2000);
+      setCpuUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 10)));
+      setMemoryUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 8)));
+      setNetworkUsage(prev => Math.max(0, Math.min(100, prev + (Math.random() - 0.5) * 15)));
+    }, parseInt(refreshInterval) * 1000);
+    
     return () => clearInterval(interval);
-  }, []);
+  }, [autoRefresh, refreshInterval, currentExample]);
 
-  const handleTerminalSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (terminalInput.trim()) {
-      setTerminalHistory([...terminalHistory, `> ${terminalInput}`, `Processing: ${terminalInput}...`]);
-      setTerminalInput('');
-    }
+  const renderAnalyticsDashboard = () => {
+    
+    const metrics = [
+      { label: 'Total Requests', value: '2.4M', change: '+12.5%', trend: 'up' },
+      { label: 'Avg Response Time', value: '124ms', change: '-8.2%', trend: 'down' },
+      { label: 'Error Rate', value: '0.12%', change: '-0.03%', trend: 'down' },
+      { label: 'Active Users', value: '8,421', change: '+234', trend: 'up' },
+    ];
+
+    const performanceData = [
+      { endpoint: '/api/users', calls: '542K', avgTime: '89ms', p99: '234ms', errors: '0.08%' },
+      { endpoint: '/api/data', calls: '1.2M', avgTime: '156ms', p99: '412ms', errors: '0.15%' },
+      { endpoint: '/api/auth', calls: '234K', avgTime: '45ms', p99: '123ms', errors: '0.02%' },
+      { endpoint: '/api/analytics', calls: '89K', avgTime: '234ms', p99: '567ms', errors: '0.45%' },
+    ];
+
+    return (
+      <div className="snake-page__example">
+        <div className="snake-page__header">
+          <div>
+            <Heading as="h1" size="xl">Analytics Dashboard</Heading>
+            <Text variant="muted">Real-time system performance metrics</Text>
+          </div>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <Select
+              value={timeRange}
+              onChange={(e) => setTimeRange(e.target.value)}
+              options={[
+                { value: '1h', label: 'Last Hour' },
+                { value: '24h', label: 'Last 24 Hours' },
+                { value: '7d', label: 'Last 7 Days' },
+                { value: '30d', label: 'Last 30 Days' },
+              ]}
+              size="small"
+            />
+            <Button variant="secondary" size="small">Export Report</Button>
+            <Button variant="primary" size="small" onClick={() => setShowDetails(!showDetails)}>
+              {showDetails ? 'Hide' : 'Show'} Details
+            </Button>
+          </div>
+        </div>
+
+        <Divider variant="accent" spacing="large" />
+
+        <div className="snake-page__metrics-grid">
+          {metrics.map((metric) => (
+            <Card key={metric.label} variant="bordered" hoverable>
+              <Stat
+                label={metric.label}
+                value={metric.value}
+                change={{ 
+                  value: metric.change, 
+                  type: metric.trend === 'up' ? 'increase' : 'decrease' 
+                }}
+                variant="stacked"
+                color={metric.trend === 'up' && metric.label !== 'Error Rate' ? 'success' : 
+                       metric.trend === 'down' && metric.label === 'Error Rate' ? 'success' : 'danger'}
+              />
+            </Card>
+          ))}
+        </div>
+
+        <div className="snake-page__content-grid">
+          <Card 
+            header={
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Heading as="h3" size="md">Performance Overview</Heading>
+                <Badge variant="success" style="dot">Live</Badge>
+              </div>
+            }
+            size="large"
+          >
+            <Tabs
+              tabs={[
+                { id: 'endpoints', label: 'By Endpoint' },
+                { id: 'regions', label: 'By Region' },
+                { id: 'services', label: 'By Service' },
+              ]}
+              variant="underline"
+              size="small"
+            />
+            
+            <div style={{ marginTop: '20px' }}>
+              <Table
+                data={performanceData}
+                columns={[
+                  { key: 'endpoint', header: 'Endpoint' },
+                  { key: 'calls', header: 'Total Calls', align: 'right' },
+                  { key: 'avgTime', header: 'Avg Time', align: 'right' },
+                  { key: 'p99', header: '99th Percentile', align: 'right' },
+                  { 
+                    key: 'errors', 
+                    header: 'Error Rate', 
+                    align: 'right',
+                    render: (value) => (
+                      <Badge 
+                        variant={parseFloat(value) > 0.2 ? 'danger' : 'success'}
+                        size="small"
+                      >
+                        {value}
+                      </Badge>
+                    )
+                  },
+                ]}
+                size="small"
+                variant="bordered"
+              />
+            </div>
+
+            {showDetails && (
+              <>
+                <Divider spacing="small" />
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+                  <div>
+                    <Text size="sm" variant="muted">Database Latency</Text>
+                    <Progress value={23} variant="success" size="small" showLabel />
+                  </div>
+                  <div>
+                    <Text size="sm" variant="muted">Cache Hit Rate</Text>
+                    <Progress value={87} variant="primary" size="small" showLabel />
+                  </div>
+                  <div>
+                    <Text size="sm" variant="muted">Queue Depth</Text>
+                    <Progress value={45} variant="warning" size="small" showLabel />
+                  </div>
+                </div>
+              </>
+            )}
+          </Card>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <Card 
+              header={
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Heading as="h3" size="md">System Alerts</Heading>
+                  <IconButton 
+                    icon={alertsExpanded ? '−' : '+'}
+                    size="small"
+                    variant="ghost"
+                    onClick={() => setAlertsExpanded(!alertsExpanded)}
+                  />
+                </div>
+              }
+            >
+              {alertsExpanded && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <Alert variant="danger" size="small">
+                    High memory usage detected on server cluster A
+                  </Alert>
+                  <Alert variant="warning" size="small">
+                    API rate limit approaching threshold (85%)
+                  </Alert>
+                  <Alert variant="info" size="small">
+                    Scheduled maintenance window in 2 hours
+                  </Alert>
+                  <Alert variant="success" size="small">
+                    All systems operational
+                  </Alert>
+                </div>
+              )}
+            </Card>
+
+            <Card header={<Heading as="h3" size="md">Quick Actions</Heading>}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <Button variant="secondary" size="small" fullWidth>
+                  Clear Cache
+                </Button>
+                <Button variant="secondary" size="small" fullWidth>
+                  Restart Services
+                </Button>
+                <Button variant="cyber" size="small" fullWidth>
+                  Run Diagnostics
+                </Button>
+              </div>
+            </Card>
+
+            <Card header={<Heading as="h3" size="md">Traffic Distribution</Heading>}>
+              <List
+                items={[
+                  { content: 'North America', meta: '45%' },
+                  { content: 'Europe', meta: '28%' },
+                  { content: 'Asia Pacific', meta: '18%' },
+                  { content: 'Other Regions', meta: '9%' },
+                ]}
+                variant="simple"
+                size="small"
+              />
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
   };
 
-  const renderSidebar = () => (
-    <aside className="snake-page__sidebar">
-      <div className="snake-page__logo">
-        <Heading as="h2" size="lg" variant="cyber" align="center">
-          SNAKE EATER
-        </Heading>
-        <Text size="sm" variant="muted" align="center">Control Panel</Text>
-      </div>
+  const renderProjectManagement = () => {
+    const projects = [
+      {
+        id: 1,
+        name: 'Authentication System Upgrade',
+        status: 'in-progress',
+        priority: 'high',
+        dueDate: '2024-02-15',
+        completion: 65,
+        assignees: ['John D.', 'Sarah M.'],
+        tasks: 12,
+        completedTasks: 8,
+      },
+      {
+        id: 2,
+        name: 'Database Migration',
+        status: 'planning',
+        priority: 'critical',
+        dueDate: '2024-02-28',
+        completion: 20,
+        assignees: ['Mike R.'],
+        tasks: 8,
+        completedTasks: 2,
+      },
+      {
+        id: 3,
+        name: 'API Documentation',
+        status: 'review',
+        priority: 'medium',
+        dueDate: '2024-02-10',
+        completion: 90,
+        assignees: ['Lisa K.', 'Tom H.'],
+        tasks: 15,
+        completedTasks: 14,
+      },
+      {
+        id: 4,
+        name: 'Performance Optimization',
+        status: 'completed',
+        priority: 'high',
+        dueDate: '2024-01-30',
+        completion: 100,
+        assignees: ['David L.'],
+        tasks: 10,
+        completedTasks: 10,
+      },
+    ];
 
-      <Divider spacing="md" />
+    const statusColors = {
+      'planning': 'info',
+      'in-progress': 'warning',
+      'review': 'primary',
+      'completed': 'success',
+    };
 
-      <nav className="snake-page__nav">
-        <Menu
-          items={[
-            { 
-              id: 'dashboard', 
-              label: 'Dashboard', 
-              icon: '📊',
-              onClick: () => setCurrentView('dashboard')
-            },
-            { 
-              id: 'projects', 
-              label: 'Projects', 
-              icon: '🚀',
-              onClick: () => setCurrentView('projects'),
-              badge: projects.filter(p => p.status === 'active').length
-            },
-            { 
-              id: 'analytics', 
-              label: 'Analytics', 
-              icon: '📈',
-              onClick: () => setCurrentView('analytics')
-            },
-            { 
-              id: 'terminal', 
-              label: 'Terminal', 
-              icon: '💻',
-              onClick: () => setCurrentView('terminal')
-            },
-            { type: 'divider' },
-            { 
-              id: 'settings', 
-              label: 'Settings', 
-              icon: '⚙️',
-              onClick: () => setCurrentView('settings')
-            },
-          ]}
-          variant="vertical"
-          activeItem={currentView}
-        />
-      </nav>
+    const priorityColors = {
+      'low': 'default',
+      'medium': 'info',
+      'high': 'warning',
+      'critical': 'danger',
+    };
 
-      <div className="snake-page__sidebar-footer">
-        <SubCard variant="info" size="small">
-          <Text size="sm" variant="info">System Status</Text>
-          <Progress 
-            value={systemLoad} 
-            variant={systemLoad > 80 ? 'danger' : systemLoad > 60 ? 'warning' : 'success'}
-            showLabel
-            size="small"
-          />
-        </SubCard>
-      </div>
-    </aside>
-  );
+    return (
+      <div className="snake-page__example">
+        <div className="snake-page__header">
+          <div>
+            <Heading as="h1" size="xl">Project Management</Heading>
+            <Text variant="muted">Track and manage all active projects</Text>
+          </div>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <Button variant="primary" onClick={() => setShowNewTaskModal(true)}>
+              New Project
+            </Button>
+          </div>
+        </div>
 
-  const renderHeader = () => (
-    <header className="snake-page__header">
-      <div className="snake-page__header-left">
-        <Breadcrumb
-          items={[
-            { label: 'Home', href: '/', icon: '🏠' },
-            { label: currentView.charAt(0).toUpperCase() + currentView.slice(1) }
-          ]}
-        />
-      </div>
+        <div style={{ display: 'flex', gap: '16px', marginTop: '24px', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <Filter 
+              active={filterStatus === 'all'} 
+              onClick={() => setFilterStatus('all')}
+              count={projects.length}
+            >
+              All Projects
+            </Filter>
+            <Filter 
+              active={filterStatus === 'planning'}
+              onClick={() => setFilterStatus('planning')}
+              variant="info"
+              count={projects.filter(p => p.status === 'planning').length}
+            >
+              Planning
+            </Filter>
+            <Filter 
+              active={filterStatus === 'in-progress'}
+              onClick={() => setFilterStatus('in-progress')}
+              variant="warning"
+              count={projects.filter(p => p.status === 'in-progress').length}
+            >
+              In Progress
+            </Filter>
+            <Filter 
+              active={filterStatus === 'review'}
+              onClick={() => setFilterStatus('review')}
+              variant="primary"
+              count={projects.filter(p => p.status === 'review').length}
+            >
+              Review
+            </Filter>
+            <Filter 
+              active={filterStatus === 'completed'}
+              onClick={() => setFilterStatus('completed')}
+              variant="success"
+              count={projects.filter(p => p.status === 'completed').length}
+            >
+              Completed
+            </Filter>
+          </div>
+          
+          <div style={{ marginLeft: 'auto' }}>
+            <RadioButton
+              name="view"
+              options={[
+                { value: 'board', label: 'Board' },
+                { value: 'list', label: 'List' },
+                { value: 'timeline', label: 'Timeline' },
+              ]}
+              value={selectedView}
+              onChange={(value) => setSelectedView(value)}
+              variant="pills"
+            />
+          </div>
+        </div>
 
-      <div className="snake-page__header-center">
-        <Input
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search commands..."
-          leftIcon="🔍"
-          size="small"
-          style={{ width: '300px' }}
-        />
-      </div>
-
-      <div className="snake-page__header-right">
-        <Tooltip content="Notifications">
-          <IconButton 
-            icon="🔔" 
-            variant={notifications ? 'primary' : 'ghost'}
-            onClick={() => setNotifications(!notifications)}
-          />
-        </Tooltip>
-        <Tooltip content="Messages">
-          <IconButton icon="💬" badge={3} />
-        </Tooltip>
-        <Tooltip content="Profile">
-          <IconButton icon="👤" />
-        </Tooltip>
-      </div>
-    </header>
-  );
-
-  const renderDashboard = () => (
-    <div className="snake-page__dashboard">
-      <div className="snake-page__stats-grid">
-        <Stat
-          label="Active Projects"
-          value={projects.filter(p => p.status === 'active').length}
-          icon="🚀"
-          variant="centered"
-          color="primary"
-          change={{ value: '+2', type: 'increase' }}
-        />
-        <Stat
-          label="Completion Rate"
-          value="87%"
-          icon="✓"
-          variant="centered"
-          color="success"
-          change={{ value: '+5%', type: 'increase' }}
-        />
-        <Stat
-          label="Team Members"
-          value="12"
-          icon="👥"
-          variant="centered"
-          color="info"
-        />
-        <Stat
-          label="Alerts"
-          value="3"
-          icon="⚠️"
-          variant="centered"
-          color="warning"
-          change={{ value: '-1', type: 'decrease' }}
-        />
-      </div>
-
-      <div className="snake-page__dashboard-grid">
-        <Card 
-          header={<Heading as="h3" size="md">System Metrics</Heading>}
-          size="large"
-        >
-          <div className="snake-page__metrics">
-            {systemMetrics.map((metric) => (
-              <div key={metric.name} className="snake-page__metric">
-                <div className="snake-page__metric-header">
-                  <Text size="sm" variant="muted">{metric.name}</Text>
-                  <Text size="sm" variant="primary">{metric.value}{metric.unit}</Text>
-                </div>
-                <Progress
-                  value={(metric.value / metric.max) * 100}
-                  variant={
-                    (metric.value / metric.max) > 0.8 ? 'danger' : 
-                    (metric.value / metric.max) > 0.6 ? 'warning' : 'success'
-                  }
-                  size="small"
-                />
+        {selectedView === 'board' && (
+          <div className="snake-page__kanban-board">
+            {['planning', 'in-progress', 'review', 'completed'].map((status) => (
+              <div key={status} className="snake-page__kanban-column">
+                <Card variant="bordered">
+                  <div className="snake-page__kanban-header">
+                    <Heading as="h4" size="sm" style={{ textTransform: 'capitalize' }}>
+                      {status.replace('-', ' ')}
+                    </Heading>
+                    <Badge variant={statusColors[status as keyof typeof statusColors]} size="small">
+                      {projects.filter(p => p.status === status).length}
+                    </Badge>
+                  </div>
+                  <Divider spacing="small" />
+                  <div className="snake-page__kanban-items">
+                    {projects
+                      .filter(p => filterStatus === 'all' || p.status === filterStatus)
+                      .filter(p => p.status === status)
+                      .map((project) => (
+                        <SubCard key={project.id} variant="default" hoverable>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                            <Text size="sm" weight="medium">{project.name}</Text>
+                            <Badge 
+                              variant={priorityColors[project.priority as keyof typeof priorityColors]}
+                              size="small"
+                            >
+                              {project.priority}
+                            </Badge>
+                          </div>
+                          <Progress 
+                            value={project.completion} 
+                            size="small" 
+                            variant={project.completion === 100 ? 'success' : 'primary'}
+                            showLabel
+                          />
+                          <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'space-between' }}>
+                            <Text size="xs" variant="muted">
+                              {project.completedTasks}/{project.tasks} tasks
+                            </Text>
+                            <Text size="xs" variant="muted">
+                              Due: {project.dueDate}
+                            </Text>
+                          </div>
+                          <div style={{ marginTop: '8px' }}>
+                            <Text size="xs" variant="secondary">
+                              {project.assignees.join(', ')}
+                            </Text>
+                          </div>
+                        </SubCard>
+                      ))}
+                  </div>
+                </Card>
               </div>
             ))}
           </div>
-        </Card>
+        )}
 
-        <Card 
-          header={<Heading as="h3" size="md">Recent Activity</Heading>}
+        {selectedView === 'list' && (
+          <Card>
+            <Table
+              data={projects.filter(p => filterStatus === 'all' || p.status === filterStatus)}
+              columns={[
+                { 
+                  key: 'name', 
+                  header: 'Project Name',
+                  render: (value) => <Link href="#" variant="primary">{value}</Link>
+                },
+                { 
+                  key: 'status', 
+                  header: 'Status',
+                  render: (value) => (
+                    <Badge variant={statusColors[value as keyof typeof statusColors]} style="dot">
+                      {value}
+                    </Badge>
+                  )
+                },
+                { 
+                  key: 'priority', 
+                  header: 'Priority',
+                  render: (value) => (
+                    <Badge variant={priorityColors[value as keyof typeof priorityColors]}>
+                      {value}
+                    </Badge>
+                  )
+                },
+                { 
+                  key: 'completion', 
+                  header: 'Progress',
+                  render: (value) => (
+                    <Progress value={value} size="small" showLabel />
+                  )
+                },
+                { key: 'assignees', header: 'Team', render: (value) => value.join(', ') },
+                { key: 'dueDate', header: 'Due Date' },
+                { 
+                  key: 'tasks', 
+                  header: 'Tasks',
+                  render: (_, row) => `${row.completedTasks}/${row.tasks}`
+                },
+              ]}
+              striped
+              hoverable
+            />
+          </Card>
+        )}
+
+        <Modal
+          isOpen={showNewTaskModal}
+          onClose={() => setShowNewTaskModal(false)}
+          title="Create New Project"
+          size="medium"
         >
-          <div className="snake-page__activity">
-            <Alert variant="success" size="small" closable>
-              Project "Neural Interface v2.0" reached 75% completion
-            </Alert>
-            <Alert variant="info" size="small" closable>
-              New team member joined "Quantum Processor"
-            </Alert>
-            <Alert variant="warning" size="small" closable>
-              Security scan scheduled for tomorrow
-            </Alert>
-          </div>
-        </Card>
-
-        <Card 
-          header={<Heading as="h3" size="md">Quick Actions</Heading>}
-        >
-          <div className="snake-page__quick-actions">
-            <Button variant="primary" fullWidth onClick={() => setShowProjectModal(true)}>
-              New Project
-            </Button>
-            <Button variant="secondary" fullWidth>
-              Generate Report
-            </Button>
-            <Button variant="cyber" fullWidth onClick={() => setShowToast(true)}>
-              Deploy Changes
-            </Button>
-          </div>
-        </Card>
-      </div>
-    </div>
-  );
-
-  const renderProjects = () => (
-    <div className="snake-page__projects">
-      <div className="snake-page__projects-header">
-        <Heading as="h2" size="lg">Projects</Heading>
-        <div className="snake-page__projects-filters">
-          <Filter active>All</Filter>
-          <Filter variant="success" count={projects.filter(p => p.status === 'active').length}>
-            Active
-          </Filter>
-          <Filter variant="danger" count={projects.filter(p => p.status === 'inactive').length}>
-            Inactive
-          </Filter>
-          <Filter variant="info" count={projects.filter(p => p.status === 'completed').length}>
-            Completed
-          </Filter>
-        </div>
-      </div>
-
-      <Table
-        data={projects}
-        columns={[
-          { 
-            key: 'name', 
-            header: 'Project Name',
-            render: (value, row) => (
-              <Link 
-                href="#" 
-                variant="primary"
-                onClick={() => setSelectedProject(row)}
-              >
-                {value}
-              </Link>
-            )
-          },
-          { 
-            key: 'status', 
-            header: 'Status',
-            render: (value) => (
-              <Badge 
-                variant={value === 'active' ? 'success' : value === 'completed' ? 'info' : 'danger'}
-                style="dot"
-              >
-                {value}
-              </Badge>
-            )
-          },
-          { 
-            key: 'progress', 
-            header: 'Progress',
-            render: (value) => (
-              <Progress 
-                value={value} 
-                size="small"
-                variant={value === 100 ? 'success' : value > 50 ? 'primary' : 'warning'}
-                showLabel
+          <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <Input label="Project Name" placeholder="Enter project name..." required />
+            <Textarea label="Description" placeholder="Project description..." rows={3} />
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <Select
+                label="Priority"
+                options={[
+                  { value: 'low', label: 'Low' },
+                  { value: 'medium', label: 'Medium' },
+                  { value: 'high', label: 'High' },
+                  { value: 'critical', label: 'Critical' },
+                ]}
+                placeholder="Select priority"
               />
-            )
-          },
-          { 
-            key: 'priority', 
-            header: 'Priority',
-            render: (value) => (
-              <Badge 
-                variant={
-                  value === 'critical' ? 'danger' : 
-                  value === 'high' ? 'warning' : 
-                  value === 'medium' ? 'info' : 'default'
-                }
-              >
-                {value}
-              </Badge>
-            )
-          },
-          { key: 'team', header: 'Team', render: (value) => value.join(', ') },
-          { key: 'lastUpdated', header: 'Last Updated' },
-          {
-            key: 'actions',
-            header: 'Actions',
-            render: (_, row) => (
-              <div style={{ display: 'flex', gap: '4px' }}>
-                <Tooltip content="Edit">
-                  <IconButton icon="✏️" size="small" variant="ghost" />
-                </Tooltip>
-                <Tooltip content="Archive">
-                  <IconButton icon="📦" size="small" variant="ghost" />
-                </Tooltip>
-                <Tooltip content="Delete">
-                  <IconButton icon="🗑️" size="small" variant="ghost" />
-                </Tooltip>
+              <Input label="Due Date" type="date" />
+            </div>
+            <div>
+              <Text size="sm" variant="muted" style={{ marginBottom: '8px' }}>Assign Team Members</Text>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Checkbox label="John D." />
+                <Checkbox label="Sarah M." />
+                <Checkbox label="Mike R." />
+                <Checkbox label="Lisa K." />
+                <Checkbox label="Tom H." />
+                <Checkbox label="David L." />
               </div>
-            )
-          }
-        ]}
-        striped
-        hoverable
-      />
-    </div>
-  );
-
-  const renderAnalytics = () => (
-    <div className="snake-page__analytics">
-      <Tabs
-        tabs={[
-          { id: 'overview', label: 'Overview' },
-          { id: 'performance', label: 'Performance' },
-          { id: 'resources', label: 'Resources' },
-          { id: 'logs', label: 'Logs' },
-        ]}
-        variant="pills"
-      />
-
-      <div className="snake-page__analytics-grid">
-        <Card header={<Heading as="h3" size="md">Performance Trends</Heading>} size="large">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div>
-              <Text size="sm" variant="muted">Response Time</Text>
-              <Progress value={85} variant="success" type="striped" showLabel />
             </div>
-            <div>
-              <Text size="sm" variant="muted">Throughput</Text>
-              <Progress value={72} variant="primary" type="animated" showLabel />
+            <Divider />
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+              <Button variant="secondary" onClick={() => setShowNewTaskModal(false)}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={() => setShowNewTaskModal(false)}>
+                Create Project
+              </Button>
             </div>
-            <div>
-              <Text size="sm" variant="muted">Error Rate</Text>
-              <Progress value={15} variant="danger" showLabel />
-            </div>
-          </div>
-        </Card>
-
-        <Card header={<Heading as="h3" size="md">Resource Allocation</Heading>}>
-          <div className="snake-page__pie-chart">
-            <Skeleton type="circle" size="large" />
-            <Text size="sm" variant="muted" align="center" style={{ marginTop: '16px' }}>
-              Chart visualization would go here
-            </Text>
-          </div>
-        </Card>
-
-        <Card header={<Heading as="h3" size="md">System Logs</Heading>} variant="grid">
-          
-        </Card>
+          </form>
+        </Modal>
       </div>
-    </div>
-  );
-
-  const renderTerminal = () => (
-    <div className="snake-page__terminal">
-      <Card 
-        variant="grid" 
-        size="large"
-        header={
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <Heading as="h3" size="md">Terminal</Heading>
-            <Badge variant="success" style="dot">Connected</Badge>
-          </div>
-        }
-      >
-        <div className="snake-page__terminal-output">
-          <Code language="bash" style={{ background: 'transparent', border: 'none' }}>
-            {terminalHistory.join('\n')}
-          </Code>
-        </div>
-        <form onSubmit={handleTerminalSubmit} style={{ marginTop: '16px' }}>
-          <Input
-            value={terminalInput}
-            onChange={(e) => setTerminalInput(e.target.value)}
-            placeholder="Enter command..."
-            leftIcon=">"
-            rightIcon={
-              <IconButton 
-                icon="⏎" 
-                size="small" 
-                variant="ghost"
-                type="submit"
-              />
-            }
-            mono
-          />
-        </form>
-      </Card>
-    </div>
-  );
-
-  const renderSettings = () => (
-    <div className="snake-page__settings">
-      <Heading as="h2" size="lg">Settings</Heading>
-      
-      <Accordion
-        items={[
-          {
-            id: 'appearance',
-            title: 'Appearance',
-            content: (
-              <div className="snake-page__settings-section">
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Dark Mode</Text>
-                    <Text size="sm" variant="muted">Use dark theme across the interface</Text>
-                  </div>
-                  <Toggle checked={darkMode} onChange={setDarkMode} />
-                </div>
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Theme Color</Text>
-                    <Text size="sm" variant="muted">Customize accent color</Text>
-                  </div>
-                  <ColorPicker value={themeColor} onChange={setThemeColor} />
-                </div>
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>UI Density</Text>
-                    <Text size="sm" variant="muted">Adjust interface spacing</Text>
-                  </div>
-                  <RadioButton
-                    name="density"
-                    options={[
-                      { value: 'compact', label: 'Compact' },
-                      { value: 'normal', label: 'Normal' },
-                      { value: 'spacious', label: 'Spacious' },
-                    ]}
-                    defaultValue="normal"
-                  />
-                </div>
-              </div>
-            )
-          },
-          {
-            id: 'notifications',
-            title: 'Notifications',
-            content: (
-              <div className="snake-page__settings-section">
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Push Notifications</Text>
-                    <Text size="sm" variant="muted">Receive alerts and updates</Text>
-                  </div>
-                  <Toggle checked={notifications} onChange={setNotifications} />
-                </div>
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Email Digest</Text>
-                    <Text size="sm" variant="muted">Weekly summary of activities</Text>
-                  </div>
-                  <Checkbox defaultChecked />
-                </div>
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Sound Effects</Text>
-                    <Text size="sm" variant="muted">Play sounds for actions</Text>
-                  </div>
-                  <Checkbox />
-                </div>
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Volume Level</Text>
-                    <Text size="sm" variant="muted">Adjust notification volume</Text>
-                  </div>
-                  <Slider 
-                    value={volumeLevel} 
-                    onChange={setVolumeLevel}
-                    showValue
-                    valueLabelPosition="outside"
-                  />
-                </div>
-              </div>
-            )
-          },
-          {
-            id: 'security',
-            title: 'Security',
-            content: (
-              <div className="snake-page__settings-section">
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Two-Factor Authentication</Text>
-                    <Text size="sm" variant="muted">Add an extra layer of security</Text>
-                  </div>
-                  <Button variant="secondary" size="small">Enable</Button>
-                </div>
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Session Timeout</Text>
-                    <Text size="sm" variant="muted">Auto-logout after inactivity</Text>
-                  </div>
-                  <Select
-                    options={[
-                      { value: '15', label: '15 minutes' },
-                      { value: '30', label: '30 minutes' },
-                      { value: '60', label: '1 hour' },
-                      { value: 'never', label: 'Never' },
-                    ]}
-                    defaultValue="30"
-                    size="small"
-                  />
-                </div>
-              </div>
-            )
-          },
-          {
-            id: 'advanced',
-            title: 'Advanced',
-            content: (
-              <div className="snake-page__settings-section">
-                <Alert variant="warning" size="small">
-                  These settings are for advanced users. Proceed with caution.
-                </Alert>
-                <div className="snake-page__setting-item" style={{ marginTop: '16px' }}>
-                  <div>
-                    <Text>Developer Mode</Text>
-                    <Text size="sm" variant="muted">Enable developer tools and options</Text>
-                  </div>
-                  <Toggle />
-                </div>
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>API Key</Text>
-                    <Text size="sm" variant="muted">Your personal API access token</Text>
-                  </div>
-                  <Input 
-                    type="password" 
-                    value="sk-1234567890abcdef"
-                    size="small"
-                    rightIcon={
-                      <IconButton icon="📋" size="small" variant="ghost" />
-                    }
-                  />
-                </div>
-                <div className="snake-page__setting-item">
-                  <div>
-                    <Text>Export Data</Text>
-                    <Text size="sm" variant="muted">Download all your data</Text>
-                  </div>
-                  <Button variant="secondary" size="small">Export</Button>
-                </div>
-              </div>
-            )
-          }
-        ]}
-        defaultOpenItems={['appearance']}
-        variant="separated"
-      />
-    </div>
-  );
-
-  const renderContent = () => {
-    switch (currentView) {
-      case 'dashboard':
-        return renderDashboard();
-      case 'projects':
-        return renderProjects();
-      case 'analytics':
-        return renderAnalytics();
-      case 'terminal':
-        return renderTerminal();
-      case 'settings':
-        return renderSettings();
-      default:
-        return renderDashboard();
-    }
+    );
   };
 
-  return (
-    <div className="snake-page">
-      {renderSidebar()}
-      <div className="snake-page__main">
-        {renderHeader()}
-        <main className="snake-page__content">
-          {renderContent()}
-        </main>
-      </div>
+  const renderSystemMonitor = () => {
+    const servers = [
+      { id: 'server-1', name: 'Production Server 1', status: 'online', uptime: '45 days', location: 'US-East' },
+      { id: 'server-2', name: 'Production Server 2', status: 'online', uptime: '23 days', location: 'US-West' },
+      { id: 'server-3', name: 'Database Server', status: 'online', uptime: '67 days', location: 'EU-Central' },
+      { id: 'server-4', name: 'Backup Server', status: 'maintenance', uptime: '12 days', location: 'Asia-Pacific' },
+    ];
 
-      <Modal
-        isOpen={showProjectModal}
-        onClose={() => setShowProjectModal(false)}
-        title="Create New Project"
-        size="medium"
-      >
-        <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <Input label="Project Name" placeholder="Enter project name..." required />
-          <Textarea label="Description" placeholder="Describe your project..." rows={3} />
-          <Select
-            label="Priority"
-            options={[
-              { value: 'low', label: 'Low' },
-              { value: 'medium', label: 'Medium' },
-              { value: 'high', label: 'High' },
-              { value: 'critical', label: 'Critical' },
-            ]}
-            placeholder="Select priority"
-          />
+    const systemLogs = [
+      { time: '10:45:23', level: 'info', message: 'System backup completed successfully' },
+      { time: '10:42:15', level: 'warning', message: 'High memory usage detected (85%)' },
+      { time: '10:38:47', level: 'error', message: 'Failed to connect to external API' },
+      { time: '10:35:12', level: 'info', message: 'User authentication service restarted' },
+      { time: '10:32:08', level: 'info', message: 'Database optimization completed' },
+    ];
+
+    const processes = [
+      { name: 'nginx', cpu: '2.3%', memory: '124MB', threads: 4, status: 'running' },
+      { name: 'postgres', cpu: '8.7%', memory: '2.1GB', threads: 12, status: 'running' },
+      { name: 'node', cpu: '15.2%', memory: '512MB', threads: 8, status: 'running' },
+      { name: 'redis', cpu: '0.8%', memory: '64MB', threads: 2, status: 'running' },
+    ];
+
+    return (
+      <div className="snake-page__example">
+        <div className="snake-page__header">
           <div>
-            <Text size="sm" variant="muted" style={{ marginBottom: '8px' }}>Team Members</Text>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <Checkbox label="Alice" />
-              <Checkbox label="Bob" />
-              <Checkbox label="Charlie" />
-              <Checkbox label="David" />
+            <Heading as="h1" size="xl">System Monitor</Heading>
+            <Text variant="muted">Real-time infrastructure monitoring</Text>
+          </div>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Text size="sm">Auto-refresh</Text>
+              <Toggle checked={autoRefresh} onChange={setAutoRefresh} />
             </div>
-          </div>
-          <Divider />
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-            <Button variant="secondary" onClick={() => setShowProjectModal(false)}>
-              Cancel
+            {autoRefresh && (
+              <Select
+                value={refreshInterval}
+                onChange={(e) => setRefreshInterval(e.target.value)}
+                options={[
+                  { value: '1', label: '1s' },
+                  { value: '5', label: '5s' },
+                  { value: '10', label: '10s' },
+                  { value: '30', label: '30s' },
+                ]}
+                size="small"
+              />
+            )}
+            <Button 
+              variant="danger" 
+              size="small"
+              onClick={() => setShowAlert(true)}
+            >
+              Emergency Stop
             </Button>
-            <Button variant="primary" onClick={() => setShowProjectModal(false)}>
-              Create Project
-            </Button>
           </div>
-        </form>
-      </Modal>
+        </div>
 
-      <Modal
-        isOpen={selectedProject !== null}
-        onClose={() => setSelectedProject(null)}
-        title={selectedProject?.name || ''}
-        size="large"
-      >
-        {selectedProject && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div className="snake-page__project-details">
-              <SubCard>
+        <Divider variant="accent" spacing="large" />
+
+        {showAlert && (
+          <Alert variant="danger" closable onClose={() => setShowAlert(false)}>
+            Emergency stop initiated. All non-critical processes have been paused.
+          </Alert>
+        )}
+
+        <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <Card header={<Heading as="h3" size="md">Server List</Heading>}>
+              <List
+                items={servers.map(server => ({
+                  id: server.id,
+                  content: (
+                    <div>
+                      <Text size="sm">{server.name}</Text>
+                      <Text size="xs" variant="muted">{server.location}</Text>
+                    </div>
+                  ),
+                  meta: (
+                    <Badge 
+                      variant={server.status === 'online' ? 'success' : 'warning'} 
+                      style="dot"
+                      size="small"
+                    >
+                      {server.status}
+                    </Badge>
+                  ),
+                  onClick: () => setSelectedServer(server.id),
+                }))}
+                variant="interactive"
+                activeItem={selectedServer}
+              />
+            </Card>
+
+            <Card header={<Heading as="h3" size="md">Quick Stats</Heading>}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <Stat
-                  label="Status"
-                  value={selectedProject.status}
+                  label="Total Servers"
+                  value="4"
                   variant="horizontal"
-                  color={selectedProject.status === 'active' ? 'success' : 'danger'}
+                  size="small"
                 />
-              </SubCard>
-              <SubCard>
                 <Stat
-                  label="Progress"
-                  value={`${selectedProject.progress}%`}
+                  label="Active Connections"
+                  value="1,247"
                   variant="horizontal"
+                  size="small"
                   color="info"
                 />
-              </SubCard>
-              <SubCard>
                 <Stat
-                  label="Team Size"
-                  value={selectedProject.team.length}
+                  label="Avg Response Time"
+                  value="87ms"
                   variant="horizontal"
+                  size="small"
+                  color="success"
                 />
-              </SubCard>
-              <SubCard>
                 <Stat
-                  label="Priority"
-                  value={selectedProject.priority}
+                  label="Error Rate"
+                  value="0.02%"
                   variant="horizontal"
-                  color="warning"
+                  size="small"
+                  color="success"
                 />
-              </SubCard>
-            </div>
+              </div>
+            </Card>
+          </div>
 
-            <Card>
-              <Heading as="h4" size="sm">Team Members</Heading>
-              <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
-                {selectedProject.team.map(member => (
-                  <Badge key={member} variant="info">{member}</Badge>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <Card 
+              header={
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Heading as="h3" size="md">Resource Usage</Heading>
+                  <Badge variant="success" style="dot">Live</Badge>
+                </div>
+              }
+            >
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px' }}>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <Text size="sm">CPU Usage</Text>
+                    <Text size="sm" variant={cpuUsage > 80 ? 'danger' : 'primary'}>{cpuUsage}%</Text>
+                  </div>
+                  <Progress 
+                    value={cpuUsage} 
+                    variant={cpuUsage > 80 ? 'danger' : cpuUsage > 60 ? 'warning' : 'success'}
+                    type="striped"
+                    animated={cpuUsage > 80}
+                  />
+                </div>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <Text size="sm">Memory Usage</Text>
+                    <Text size="sm" variant={memoryUsage > 80 ? 'danger' : 'primary'}>{memoryUsage}%</Text>
+                  </div>
+                  <Progress 
+                    value={memoryUsage} 
+                    variant={memoryUsage > 80 ? 'danger' : memoryUsage > 60 ? 'warning' : 'success'}
+                    type="striped"
+                    animated={memoryUsage > 80}
+                  />
+                </div>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                    <Text size="sm">Network I/O</Text>
+                    <Text size="sm" variant="primary">{networkUsage}%</Text>
+                  </div>
+                  <Progress 
+                    value={networkUsage} 
+                    variant="primary"
+                  />
+                </div>
+              </div>
+
+              <Divider spacing="md" />
+
+              <div>
+                <Heading as="h4" size="sm" style={{ marginBottom: '12px' }}>Running Processes</Heading>
+                <Table
+                  data={processes}
+                  columns={[
+                    { key: 'name', header: 'Process' },
+                    { key: 'cpu', header: 'CPU', align: 'right' },
+                    { key: 'memory', header: 'Memory', align: 'right' },
+                    { key: 'threads', header: 'Threads', align: 'right' },
+                    { 
+                      key: 'status', 
+                      header: 'Status',
+                      render: (value) => (
+                        <Badge variant="success" size="small" style="dot">
+                          {value}
+                        </Badge>
+                      )
+                    },
+                  ]}
+                  size="small"
+                />
+              </div>
+            </Card>
+
+            <Card header={<Heading as="h3" size="md">System Logs</Heading>}>
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                <Filter variant="default" active>All</Filter>
+                <Filter variant="danger">Errors</Filter>
+                <Filter variant="warning">Warnings</Filter>
+                <Filter variant="info">Info</Filter>
+              </div>
+              
+              <div style={{ 
+                backgroundColor: '#0a0a0c', 
+                padding: '12px', 
+                borderRadius: '4px',
+                fontFamily: 'monospace',
+                fontSize: '12px',
+                maxHeight: '200px',
+                overflowY: 'auto'
+              }}>
+                {systemLogs.map((log, index) => (
+                  <div key={index} style={{ marginBottom: '8px' }}>
+                    <span style={{ color: '#5a5a5a' }}>{log.time}</span>
+                    <span style={{ 
+                      marginLeft: '12px',
+                      color: log.level === 'error' ? '#ff5555' : 
+                             log.level === 'warning' ? '#f1fa8c' : '#50fa7b'
+                    }}>
+                      [{log.level.toUpperCase()}]
+                    </span>
+                    <span style={{ marginLeft: '12px', color: '#bdbdbd' }}>{log.message}</span>
+                  </div>
                 ))}
               </div>
             </Card>
 
-            <Card>
-              <Heading as="h4" size="sm">Recent Activity</Heading>
-              <div style={{ marginTop: '12px' }}>
-                <Loading type="pulse" size="small" text="Loading activity..." />
+            <Card header={<Heading as="h3" size="md">Server Actions</Heading>}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+                <Button variant="secondary" size="small">Restart Service</Button>
+                <Button variant="secondary" size="small">Clear Cache</Button>
+                <Button variant="secondary" size="small">View Logs</Button>
+                <Button variant="cyber" size="small">Run Diagnostics</Button>
+                <Button variant="primary" size="small">Deploy Update</Button>
+                <Button variant="danger" size="small">Force Stop</Button>
               </div>
             </Card>
-
-            <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-              <Button variant="secondary" onClick={() => setSelectedProject(null)}>
-                Close
-              </Button>
-              <Button variant="primary">
-                View Details
-              </Button>
-            </div>
           </div>
-        )}
-      </Modal>
+        </div>
 
-      <Toast
-        isOpen={showToast}
-        onClose={() => setShowToast(false)}
-        message="Deployment initiated successfully!"
-        variant="success"
-        position="bottom-right"
-        duration={5000}
-      />
+        <Toast
+          isOpen={showAlert}
+          onClose={() => setShowAlert(false)}
+          message="Emergency stop executed successfully"
+          variant="danger"
+          position="top-center"
+          duration={5000}
+        />
+      </div>
+    );
+  };
+
+  return (
+    <div className="snake-page">
+      <div className="snake-page__nav-header">
+        <Heading as="h2" size="lg" variant="cyber" align="center">
+          Snake Eater UI Examples
+        </Heading>
+        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', gap: '8px' }}>
+          <Button 
+            variant={currentExample === 'analytics' ? 'primary' : 'ghost'}
+            onClick={() => setCurrentExample('analytics')}
+            size="small"
+          >
+            Analytics Dashboard
+          </Button>
+          <Button 
+            variant={currentExample === 'projects' ? 'primary' : 'ghost'}
+            onClick={() => setCurrentExample('projects')}
+            size="small"
+          >
+            Project Management
+          </Button>
+          <Button 
+            variant={currentExample === 'monitor' ? 'primary' : 'ghost'}
+            onClick={() => setCurrentExample('monitor')}
+            size="small"
+          >
+            System Monitor
+          </Button>
+        </div>
+      </div>
+      
+      <Divider variant="dashed" spacing="large" />
+      
+      <div className="snake-page__example-container">
+        {currentExample === 'analytics' && renderAnalyticsDashboard()}
+        {currentExample === 'projects' && renderProjectManagement()}
+        {currentExample === 'monitor' && renderSystemMonitor()}
+      </div>
     </div>
   );
 };
