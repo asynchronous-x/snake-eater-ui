@@ -3,7 +3,7 @@ import './button.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual style variant */
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'cyber';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'cyber' | 'clipped';
   /** How large should the button be? */
   size?: 'small' | 'medium' | 'large';
   /** Is the button in a loading state? */

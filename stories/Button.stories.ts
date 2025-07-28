@@ -20,7 +20,7 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'ghost', 'danger', 'cyber'],
+      options: ['primary', 'secondary', 'ghost', 'danger', 'cyber', 'clipped'],
     },
     size: {
       control: { type: 'select' },
@@ -67,6 +67,13 @@ export const Danger: Story = {
 export const Cyber: Story = {
   args: {
     variant: 'cyber',
+  },
+};
+
+export const Clipped: Story = {
+  args: {
+    variant: 'clipped',
+    children: 'Clipped Button',
   },
 };
 

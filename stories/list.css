@@ -1,0 +1,206 @@
+@import './theme.css';
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+.snake-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'Share Tech Mono', var(--font-family-mono);
+}
+
+.snake-list__item {
+  margin-bottom: var(--spacing-md);
+}
+
+.snake-list__content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.snake-list__number {
+  color: var(--color-text-muted);
+  font-size: inherit;
+  white-space: nowrap;
+  min-width: 3ch;
+  flex-shrink: 0;
+}
+
+.snake-list__bullet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+  flex-shrink: 0;
+  position: relative;
+  top: 0.1em;
+}
+
+.snake-list__square {
+  display: block;
+  width: 0.6em;
+  height: 0.6em;
+  background-color: var(--color-text-primary);
+  border: none;
+}
+
+.snake-list__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  flex-shrink: 0;
+  font-weight: bold;
+  font-size: 0.6em;
+  padding-top: 0.4em;
+}
+
+.snake-list__text {
+  flex: 1;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* Uppercase variant */
+.snake-list--uppercase .snake-list__text {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Subitems */
+.snake-list__subitems {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-xs) 0 0 0;
+  padding-left: calc(var(--spacing-lg) + 1.2em);
+}
+
+.snake-list__subitem {
+  margin-bottom: var(--spacing-xs);
+}
+
+.snake-list__subitem--nested {
+  opacity: 0.9;
+}
+
+/* Size variants */
+.snake-list--small {
+  font-size: var(--font-size-small);
+}
+
+.snake-list--small .snake-list__item {
+  margin-bottom: var(--spacing-sm);
+}
+
+.snake-list--small .snake-list__subitems {
+  padding-left: calc(var(--spacing-md) + 1em);
+}
+
+.snake-list--medium {
+  font-size: var(--font-size-body);
+}
+
+.snake-list--large {
+  font-size: var(--font-size-large);
+}
+
+.snake-list--large .snake-list__item {
+  margin-bottom: var(--spacing-lg);
+}
+
+.snake-list--large .snake-list__subitems {
+  padding-left: calc(var(--spacing-xl) + 1.4em);
+}
+
+/* Unordered list variant */
+.snake-list--unordered .snake-list__number {
+  display: none;
+}
+
+/* No numbers variant */
+.snake-list--no-numbers .snake-list__number {
+  display: none;
+}
+
+.snake-list--no-numbers .snake-list__subitems {
+  padding-left: var(--spacing-lg);
+}
+
+/* Hover effects */
+.snake-list__item:hover > .snake-list__content .snake-list__square {
+  background-color: var(--color-primary);
+  transition: background-color var(--transition-fast);
+}
+
+.snake-list__subitem:hover > .snake-list__content .snake-list__arrow {
+  transform: translateX(2px);
+  transition: transform var(--transition-fast);
+}
+
+/* Interactive state */
+.snake-list__item--interactive .snake-list__content {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.snake-list__item--interactive .snake-list__content .snake-list__square,
+.snake-list__item--interactive .snake-list__content .snake-list__text,
+.snake-list__item--interactive .snake-list__content .snake-list__number {
+  transition: all var(--transition-fast);
+}
+
+.snake-list__item--interactive .snake-list__content:hover .snake-list__square {
+  background-color: #bd93f9;
+  box-shadow: 0 0 8px rgba(189, 147, 249, 0.5);
+}
+
+.snake-list__item--interactive .snake-list__content:hover .snake-list__text {
+  color: #bd93f9;
+}
+
+.snake-list__item--interactive .snake-list__content:hover .snake-list__number {
+  color: var(--color-text-primary);
+  opacity: 1;
+}
+
+.snake-list__item--interactive .snake-list__content:active .snake-list__square {
+  background-color: #ff79c6;
+  box-shadow: 0 0 12px rgba(255, 121, 198, 0.6);
+}
+
+.snake-list__item--interactive .snake-list__content:active .snake-list__text {
+  color: #ff79c6;
+  transform: translateX(1px);
+}
+
+.snake-list__item--interactive .snake-list__content:focus {
+  outline: none;
+}
+
+.snake-list__item--interactive .snake-list__content:focus .snake-list__square {
+  background-color: #8be9fd;
+  box-shadow: 0 0 0 2px rgba(139, 233, 253, 0.3);
+}
+
+.snake-list__item--interactive .snake-list__content:focus .snake-list__text {
+  color: #8be9fd;
+}
+
+/* Dark theme optimizations */
+@media (prefers-color-scheme: dark) {
+  .snake-list__number {
+    color: var(--color-text-secondary);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .snake-list__number {
+    font-size: 0.9em;
+  }
+  
+  .snake-list__subitems {
+    padding-left: var(--spacing-md);
+  }
+}
