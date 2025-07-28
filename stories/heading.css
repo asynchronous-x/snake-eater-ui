@@ -1,0 +1,270 @@
+@import './theme.css';
+
+.snake-heading {
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  margin: 0;
+  position: relative;
+  display: block;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Semantic sizes (default) */
+.snake-heading--h1 {
+  font-size: 3rem;
+}
+
+.snake-heading--h2 {
+  font-size: 2.25rem;
+}
+
+.snake-heading--h3 {
+  font-size: 1.875rem;
+}
+
+.snake-heading--h4 {
+  font-size: 1.5rem;
+}
+
+.snake-heading--h5 {
+  font-size: 1.25rem;
+}
+
+.snake-heading--h6 {
+  font-size: 1rem;
+}
+
+/* Visual sizes (overrides) */
+.snake-heading--2xl {
+  font-size: 4rem;
+  letter-spacing: -0.03em;
+}
+
+.snake-heading--xl {
+  font-size: 3rem;
+  letter-spacing: -0.025em;
+}
+
+.snake-heading--lg {
+  font-size: 2.25rem;
+}
+
+.snake-heading--md {
+  font-size: 1.5rem;
+}
+
+.snake-heading--sm {
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+}
+
+.snake-heading--xs {
+  font-size: 0.875rem;
+  letter-spacing: 0;
+}
+
+/* Alignment */
+.snake-heading--left {
+  text-align: left;
+}
+
+.snake-heading--center {
+  text-align: center;
+}
+
+.snake-heading--right {
+  text-align: right;
+}
+
+/* Variants */
+.snake-heading--default {
+  color: var(--color-text-primary);
+}
+
+.snake-heading--primary {
+  color: #61dafb;
+  text-shadow: 0 0 20px rgba(97, 218, 251, 0.3);
+}
+
+.snake-heading--secondary {
+  color: #50fa7b;
+  text-shadow: 0 0 20px rgba(80, 250, 123, 0.3);
+}
+
+.snake-heading--muted {
+  color: #8e8e90;
+}
+
+/* Font weights */
+.snake-heading--weight-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.snake-heading--weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.snake-heading--weight-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Text transform */
+.snake-heading--uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.snake-heading--lowercase {
+  text-transform: lowercase;
+}
+
+.snake-heading--capitalize {
+  text-transform: capitalize;
+}
+
+/* Truncate */
+.snake-heading--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Decorated styles */
+.snake-heading--decorated {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.snake-heading--decorated-bottom {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.snake-heading--decorated-bottom.snake-heading--center {
+  align-items: center;
+}
+
+.snake-heading--decorated-bottom.snake-heading--right {
+  align-items: flex-end;
+}
+
+.snake-heading--decorated-both {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.snake-heading__text {
+  position: relative;
+}
+
+/* Decoration */
+.snake-heading__decoration {
+  display: block;
+  background-color: var(--color-text-primary);
+  position: relative;
+}
+
+.snake-heading__decoration--left {
+  width: 4px;
+  height: 100%;
+  min-height: 1.2em;
+  background: linear-gradient(
+    to bottom,
+    var(--color-text-primary) 0%,
+    var(--color-text-primary) 70%,
+    transparent 100%
+  );
+}
+
+.snake-heading__decoration--bottom {
+  height: 2px;
+  width: 60px;
+  background: linear-gradient(
+    to right,
+    var(--color-text-primary) 0%,
+    var(--color-text-primary) 70%,
+    transparent 100%
+  );
+}
+
+/* Variant-specific decorations */
+.snake-heading--primary .snake-heading__decoration {
+  background: linear-gradient(
+    to right,
+    #61dafb 0%,
+    #61dafb 70%,
+    transparent 100%
+  );
+}
+
+.snake-heading--secondary .snake-heading__decoration {
+  background: linear-gradient(
+    to right,
+    #50fa7b 0%,
+    #50fa7b 70%,
+    transparent 100%
+  );
+}
+
+.snake-heading--muted .snake-heading__decoration {
+  background: linear-gradient(
+    to right,
+    #8e8e90 0%,
+    #8e8e90 70%,
+    transparent 100%
+  );
+}
+
+/* Animated underline effect */
+.snake-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.3;
+  transition: width var(--transition-normal);
+}
+
+.snake-heading:hover::after {
+  width: 100%;
+}
+
+/* Corner accent for large headings */
+.snake-heading--2xl::before,
+.snake-heading--xl::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+  opacity: 0.2;
+}
+
+/* Responsive sizes */
+@media (max-width: 768px) {
+  .snake-heading--2xl {
+    font-size: 3rem;
+  }
+  
+  .snake-heading--xl {
+    font-size: 2.25rem;
+  }
+  
+  .snake-heading--h1 {
+    font-size: 2.25rem;
+  }
+  
+  .snake-heading--h2 {
+    font-size: 1.875rem;
+  }
+}

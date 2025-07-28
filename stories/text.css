@@ -1,0 +1,270 @@
+@import './theme.css';
+
+.snake-text {
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Sizes */
+.snake-text--2xl {
+  font-size: 1.875rem;
+}
+
+.snake-text--xl {
+  font-size: 1.5rem;
+}
+
+.snake-text--lg {
+  font-size: 1.125rem;
+}
+
+.snake-text--md {
+  font-size: 1rem;
+}
+
+.snake-text--sm {
+  font-size: 0.875rem;
+}
+
+.snake-text--xs {
+  font-size: 0.75rem;
+}
+
+/* Variants */
+.snake-text--default {
+  color: var(--color-text-primary);
+}
+
+.snake-text--primary {
+  color: #61dafb;
+}
+
+.snake-text--secondary {
+  color: #50fa7b;
+}
+
+.snake-text--muted {
+  color: #8e8e90;
+}
+
+.snake-text--success {
+  color: var(--color-success);
+}
+
+.snake-text--warning {
+  color: var(--color-warning);
+}
+
+.snake-text--danger {
+  color: var(--color-danger);
+}
+
+.snake-text--info {
+  color: #61dafb;
+}
+
+/* Font weights */
+.snake-text--weight-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.snake-text--weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.snake-text--weight-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Alignment */
+.snake-text--align-left {
+  text-align: left;
+}
+
+.snake-text--align-center {
+  text-align: center;
+}
+
+.snake-text--align-right {
+  text-align: right;
+}
+
+.snake-text--align-justify {
+  text-align: justify;
+}
+
+/* Line height (leading) */
+.snake-text--leading-tight {
+  line-height: 1.25;
+}
+
+.snake-text--leading-normal {
+  line-height: 1.5;
+}
+
+.snake-text--leading-relaxed {
+  line-height: 1.625;
+}
+
+.snake-text--leading-loose {
+  line-height: 2;
+}
+
+/* Letter spacing (tracking) */
+.snake-text--tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+.snake-text--tracking-normal {
+  letter-spacing: 0;
+}
+
+.snake-text--tracking-wide {
+  letter-spacing: 0.025em;
+}
+
+/* Text transform */
+.snake-text--uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.snake-text--lowercase {
+  text-transform: lowercase;
+}
+
+.snake-text--capitalize {
+  text-transform: capitalize;
+}
+
+/* Decorations */
+.snake-text--italic {
+  font-style: italic;
+}
+
+.snake-text--underline {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.snake-text--strike {
+  text-decoration: line-through;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 1px;
+}
+
+.snake-text--mono {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* Truncation */
+.snake-text--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.snake-text--clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--line-clamp, 2);
+  overflow: hidden;
+}
+
+/* Special elements styling */
+blockquote.snake-text {
+  position: relative;
+  padding-left: 20px;
+  border-left: 3px solid #3a3a3a;
+  font-style: italic;
+}
+
+blockquote.snake-text::before {
+  content: '"';
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  font-size: 3em;
+  color: #3a3a3a;
+  line-height: 1;
+}
+
+mark.snake-text {
+  background-color: rgba(255, 184, 108, 0.2);
+  color: #ffb86c;
+  padding: 0 4px;
+  border: 1px solid rgba(255, 184, 108, 0.3);
+}
+
+small.snake-text {
+  font-size: 0.875em;
+}
+
+strong.snake-text {
+  font-weight: var(--font-weight-bold);
+}
+
+em.snake-text {
+  font-style: italic;
+}
+
+del.snake-text {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+ins.snake-text {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--color-success);
+}
+
+sub.snake-text,
+sup.snake-text {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub.snake-text {
+  bottom: -0.25em;
+}
+
+sup.snake-text {
+  top: -0.5em;
+}
+
+/* Hover effects for interactive text */
+.snake-text--primary:hover {
+  text-shadow: 0 0 8px rgba(97, 218, 251, 0.5);
+}
+
+.snake-text--secondary:hover {
+  text-shadow: 0 0 8px rgba(80, 250, 123, 0.5);
+}
+
+/* Selection styling */
+.snake-text::selection {
+  background-color: rgba(189, 189, 189, 0.3);
+  color: var(--color-text-primary);
+}
+
+/* Links within text */
+.snake-text a {
+  color: #61dafb;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: all var(--transition-fast);
+}
+
+.snake-text a:hover {
+  color: #8ae5ff;
+  text-shadow: 0 0 8px rgba(97, 218, 251, 0.5);
+}
