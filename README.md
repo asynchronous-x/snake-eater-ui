@@ -1,6 +1,6 @@
 # Snake Eater UI
 
-A dark-themed React component library built with TypeScript and Storybook, featuring a minimalist future aesthetic.
+A dark-themed React component library built with TypeScript and Storybook, featuring a minimalist cyberpunk aesthetic with sharp corners and thin borders.
 **Based entirely off of [Steve Lauda](https://x.com/stevelauda_) design work.**
 
 ![npm version](https://img.shields.io/npm/v/snake-eater-ui)
@@ -10,11 +10,12 @@ A dark-themed React component library built with TypeScript and Storybook, featu
 ## Features
 
 - 🌑 **Dark Theme** - Optimized for dark mode applications
-- 📦 **40+ Components** - Comprehensive UI component collection
+- 📦 **45+ Components** - Comprehensive UI component collection organized by category
 - 🎨 **Edgy Design** - Sharp corners and thin borders for a distinctive look
 - 🚀 **Zero Runtime Dependencies** - Lightweight and performant
 - 📝 **TypeScript Support** - Full type definitions included
 - 📚 **Storybook Documentation** - Interactive component playground
+- 🎯 **Organized Structure** - Components grouped into logical categories
 
 ## Installation
 
@@ -70,20 +71,22 @@ function App() {
 
 ### Layout
 - **Accordion** - Collapsible content panels
-- **Card** - Content containers
-- **Divider** - Visual separation
-- **Filter** - Filter controls
-- **SubCard** - Nested content containers
+- **Card** - Content containers with decorative corners
+- **Divider** - Visual separation with multiple styles
+- **Filter** - Filter controls with count badges
+- **Grid** - CSS Grid layout system
+- **SubCard** - Nested content containers with accent corners
 
 ### Navigation
 - **Breadcrumb** - Navigation hierarchy
-- **Link** - Text links
-- **Menu** - Navigation menus
+- **Link** - Text links with hover effects
+- **Menu** - Dropdown navigation menus
 - **Tabs** - Tabbed navigation
 
 ### Typography
-- **Heading** - Section headers
+- **Heading** - Section headers (h1-h6)
 - **Text** - Body text with variants
+- **List** - Styled lists with custom markers
 
 ## Design System
 
