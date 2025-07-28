@@ -1,5 +1,4 @@
 import React from 'react';
-import { Header } from './Header';
 import { Button } from './Button';
 import { Card } from './Card';
 import { Filter } from './Filter';
@@ -48,12 +47,6 @@ export const Page: React.FC = () => {
 
   return (
     <div className="snake-page">
-      <Header
-        user={user}
-        onLogin={() => setUser({ name: 'Jane Doe' })}
-        onLogout={() => setUser(undefined)}
-        onCreateAccount={() => setUser({ name: 'Jane Doe' })}
-      />
 
       <main className="snake-page__content">
         <section className="snake-page__hero">
