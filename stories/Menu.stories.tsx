@@ -5,7 +5,7 @@ import { Button } from './Button';
 import { IconButton } from './IconButton';
 
 const meta = {
-  title: 'Components/Menu',
+  title: 'Navigation/Menu',
   component: Menu,
   parameters: {
     layout: 'padded',

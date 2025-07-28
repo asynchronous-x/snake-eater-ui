@@ -3,7 +3,7 @@ import React from 'react';
 import { Heading } from './Heading';
 
 const meta = {
-  title: 'Components/Heading',
+  title: 'Typography/Heading',
   component: Heading,
   parameters: {
     layout: 'padded',

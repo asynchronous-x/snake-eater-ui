@@ -3,7 +3,7 @@ import React from 'react';
 import { IconButton } from './IconButton';
 
 const meta = {
-  title: 'Components/IconButton',
+  title: 'Buttons/IconButton',
   component: IconButton,
   parameters: {
     layout: 'centered',

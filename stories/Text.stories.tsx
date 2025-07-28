@@ -3,7 +3,7 @@ import React from 'react';
 import { Text } from './Text';
 
 const meta = {
-  title: 'Components/Text',
+  title: 'Typography/Text',
   component: Text,
   parameters: {
     layout: 'padded',

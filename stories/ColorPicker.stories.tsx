@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ColorPicker } from './ColorPicker';
 
 const meta = {
-  title: 'Components/ColorPicker',
+  title: 'Forms/ColorPicker',
   component: ColorPicker,
   parameters: {
     layout: 'padded',

@@ -20,7 +20,7 @@ const sampleData: User[] = [
 ];
 
 const meta = {
-  title: 'Components/Table',
+  title: 'Data Display/Table',
   component: Table,
   parameters: {
     layout: 'padded',

@@ -6,7 +6,7 @@ import { Input } from './Input';
 import { Toggle } from './Toggle';
 
 const meta = {
-  title: 'Components/Modal',
+  title: 'Feedback/Modal',
   component: Modal,
   parameters: {
     layout: 'centered',

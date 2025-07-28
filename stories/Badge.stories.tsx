@@ -3,7 +3,7 @@ import React from 'react';
 import { Badge } from './Badge';
 
 const meta = {
-  title: 'Components/Badge',
+  title: 'Data Display/Badge',
   component: Badge,
   parameters: {
     layout: 'centered',

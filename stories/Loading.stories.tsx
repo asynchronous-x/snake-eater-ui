@@ -3,7 +3,7 @@ import React from 'react';
 import { Loading } from './Loading';
 
 const meta = {
-  title: 'Components/Loading',
+  title: 'Feedback/Loading',
   component: Loading,
   parameters: {
     layout: 'centered',

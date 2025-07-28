@@ -14,12 +14,13 @@ import { Text } from './Text';
 import { Divider } from './Divider';
 import { List } from './List';
 import './page.css';
+import { SubCard } from './SubCard';
 
 export const PageAnalytics: React.FC = () => {
   const [timeRange, setTimeRange] = useState('24h');
   const [showDetails, setShowDetails] = useState(false);
   const [alertsExpanded, setAlertsExpanded] = useState(true);
-  
+
   const metrics = [
     { label: 'Total Requests', value: '2.4M', change: '+12.5%', trend: 'up' },
     { label: 'Avg Response Time', value: '124ms', change: '-8.2%', trend: 'down' },
@@ -63,26 +64,31 @@ export const PageAnalytics: React.FC = () => {
 
         <Divider variant="accent" spacing="large" />
 
-        <div className="snake-page__metrics-grid">
-          {metrics.map((metric) => (
-            <Card key={metric.label} variant="bordered" hoverable>
-              <Stat
-                label={metric.label}
-                value={metric.value}
-                change={{ 
-                  value: metric.change, 
-                  type: metric.trend === 'up' ? 'increase' : 'decrease' 
-                }}
-                variant="stacked"
-                color={metric.trend === 'up' && metric.label !== 'Error Rate' ? 'success' : 
-                       metric.trend === 'down' && metric.label === 'Error Rate' ? 'success' : 'danger'}
-              />
-            </Card>
-          ))}
-        </div>
+        <Card>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '0' }}>
+            {metrics.map((metric) => (
+              <SubCard key={metric.label} variant="bordered" hoverable>
+                <Stat
+                  label={metric.label}
+                  value={metric.value}
+                  change={{
+                    value: metric.change,
+                    type: metric.trend === 'up' ? 'increase' : 'decrease'
+                  }}
+                  variant="stacked"
+                  color={metric.trend === 'up' && metric.label !== 'Error Rate' ? 'success' :
+                    metric.trend === 'down' && metric.label === 'Error Rate' ? 'success' : 'danger'}
+                />
+              </SubCard>
+            ))}
+          </div>
+        </Card>
+
+        <Divider variant="dashed" />
+
 
         <div className="snake-page__content-grid">
-          <Card 
+          <Card
             header={
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Heading as="h3" size="md">Performance Overview</Heading>
@@ -100,7 +106,7 @@ export const PageAnalytics: React.FC = () => {
               variant="underline"
               size="small"
             />
-            
+
             <div style={{ marginTop: '20px' }}>
               <Table
                 data={performanceData}
@@ -109,12 +115,12 @@ export const PageAnalytics: React.FC = () => {
                   { key: 'calls', header: 'Total Calls', align: 'right' },
                   { key: 'avgTime', header: 'Avg Time', align: 'right' },
                   { key: 'p99', header: '99th Percentile', align: 'right' },
-                  { 
-                    key: 'errors', 
-                    header: 'Error Rate', 
+                  {
+                    key: 'errors',
+                    header: 'Error Rate',
                     align: 'right',
                     render: (value) => (
-                      <Badge 
+                      <Badge
                         variant={parseFloat(value) > 0.2 ? 'danger' : 'success'}
                         size="small"
                       >
@@ -150,11 +156,11 @@ export const PageAnalytics: React.FC = () => {
           </Card>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <Card 
+            <Card
               header={
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Heading as="h3" size="md">System Alerts</Heading>
-                  <IconButton 
+                  <IconButton
                     icon={alertsExpanded ? '−' : '+'}
                     size="small"
                     variant="ghost"

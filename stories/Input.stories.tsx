@@ -3,7 +3,7 @@ import React from 'react';
 import { Input } from './Input';
 
 const meta = {
-  title: 'Components/Input',
+  title: 'Forms/Input',
   component: Input,
   parameters: {
     layout: 'centered',

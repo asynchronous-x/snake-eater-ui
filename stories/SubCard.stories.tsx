@@ -4,7 +4,7 @@ import { SubCard } from './SubCard';
 import { Button } from './Button';
 
 const meta = {
-  title: 'Components/SubCard',
+  title: 'Layout/SubCard',
   component: SubCard,
   parameters: {
     layout: 'padded',

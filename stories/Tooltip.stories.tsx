@@ -5,7 +5,7 @@ import { Button } from './Button';
 import { Badge } from './Badge';
 
 const meta = {
-  title: 'Components/Tooltip',
+  title: 'Feedback/Tooltip',
   component: Tooltip,
   parameters: {
     layout: 'centered',

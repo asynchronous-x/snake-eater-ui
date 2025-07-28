@@ -5,7 +5,7 @@ import { Badge } from './Badge';
 import { Button } from './Button';
 
 const meta = {
-  title: 'Components/Tabs',
+  title: 'Navigation/Tabs',
   component: Tabs,
   parameters: {
     layout: 'padded',

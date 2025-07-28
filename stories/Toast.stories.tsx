@@ -4,7 +4,7 @@ import { Toast, ToastContainer } from './Toast';
 import { Button } from './Button';
 
 const meta = {
-  title: 'Components/Toast',
+  title: 'Feedback/Toast',
   component: Toast,
   parameters: {
     layout: 'padded',

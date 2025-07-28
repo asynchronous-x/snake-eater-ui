@@ -46,7 +46,6 @@ function App() {
 
 ### Data Display
 - **Badge** - Status indicators and labels
-- **Code** - Syntax-highlighted code blocks
 - **Stat** - Statistical data presentation
 - **Table** - Data tables with sorting and selection
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from './Link';
 
 const meta = {
-  title: 'Components/Link',
+  title: 'Navigation/Link',
   component: Link,
   parameters: {
     layout: 'centered',

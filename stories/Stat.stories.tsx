@@ -3,7 +3,7 @@ import React from 'react';
 import { Stat } from './Stat';
 
 const meta = {
-  title: 'Components/Stat',
+  title: 'Data Display/Stat',
   component: Stat,
   parameters: {
     layout: 'centered',

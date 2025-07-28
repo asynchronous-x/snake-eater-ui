@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { RadioButton } from './RadioButton';
 
 const meta = {
-  title: 'Components/RadioButton',
+  title: 'Forms/RadioButton',
   component: RadioButton,
   parameters: {
     layout: 'centered',

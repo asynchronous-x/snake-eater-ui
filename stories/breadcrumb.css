@@ -145,28 +145,6 @@ a.snake-breadcrumb__item:hover::after {
   opacity: 0.5;
 }
 
-/* Container decoration */
-.snake-breadcrumb::before {
-  content: '[';
-  position: absolute;
-  left: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #3a3a3a;
-  font-size: 1.2em;
-  font-weight: 300;
-}
-
-.snake-breadcrumb::after {
-  content: ']';
-  position: absolute;
-  right: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #3a3a3a;
-  font-size: 1.2em;
-  font-weight: 300;
-}
 
 /* Alternative separator styles */
 .snake-breadcrumb__separator--chevron {

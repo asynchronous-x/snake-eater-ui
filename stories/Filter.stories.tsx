@@ -3,7 +3,7 @@ import React from 'react';
 import { Filter } from './Filter';
 
 const meta = {
-  title: 'Components/Filter',
+  title: 'Layout/Filter',
   component: Filter,
   parameters: {
     layout: 'centered',

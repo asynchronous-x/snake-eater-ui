@@ -3,7 +3,7 @@ import React from 'react';
 import { Breadcrumb } from './Breadcrumb';
 
 const meta = {
-  title: 'Components/Breadcrumb',
+  title: 'Navigation/Breadcrumb',
   component: Breadcrumb,
   parameters: {
     layout: 'padded',
