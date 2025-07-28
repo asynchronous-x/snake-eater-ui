@@ -4,6 +4,7 @@
   "description": "Snake Eater Component Library",
   "main": "index.js",
   "scripts": {
+    "start": "storybook dev -p 6006",
     "test": "vitest",
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
