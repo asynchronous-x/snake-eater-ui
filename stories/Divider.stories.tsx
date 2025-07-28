@@ -23,7 +23,7 @@ const meta = {
     },
     variant: {
       control: { type: 'select' },
-      options: ['solid', 'dashed', 'dotted', 'double'],
+      options: ['solid', 'dashed', 'dotted', 'double', 'accent'],
     },
     thickness: {
       control: { type: 'select' },
@@ -70,6 +70,10 @@ export const Variants: Story = {
       <div>
         <p style={{ color: '#bdbdbd', marginBottom: '16px' }}>Double</p>
         <Divider variant="double" />
+      </div>
+      <div>
+        <p style={{ color: '#bdbdbd', marginBottom: '16px' }}>Accent (Waveform)</p>
+        <Divider variant="accent" />
       </div>
     </div>
   ),
@@ -184,7 +188,8 @@ export const VerticalVariants: Story = {
       <Divider orientation="vertical" variant="double" />
       <div style={{ color: '#bdbdbd' }}>Thick</div>
       <Divider orientation="vertical" thickness="thick" />
-      <div style={{ color: '#bdbdbd' }}>End</div>
+      <div style={{ color: '#bdbdbd' }}>Accent</div>
+      <Divider orientation="vertical" variant="accent" />
     </div>
   ),
 };

@@ -84,28 +84,31 @@
 
 /* Variants */
 .snake-divider--dashed .snake-divider__line {
+  background-color: transparent;
   background-image: repeating-linear-gradient(
     to right,
     #3a3a3a,
-    #3a3a3a 6px,
-    transparent 6px,
-    transparent 12px
+    #3a3a3a 20px,
+    transparent 20px,
+    transparent 40px
   );
-  background-size: 12px 100%;
+  background-size: 40px 100%;
 }
 
 .snake-divider--vertical.snake-divider--dashed .snake-divider__line {
+  background-color: transparent;
   background-image: repeating-linear-gradient(
     to bottom,
     #3a3a3a,
-    #3a3a3a 6px,
-    transparent 6px,
-    transparent 12px
+    #3a3a3a 20px,
+    transparent 20px,
+    transparent 40px
   );
-  background-size: 100% 12px;
+  background-size: 100% 40px;
 }
 
 .snake-divider--dotted .snake-divider__line {
+  background-color: transparent;
   background-image: repeating-linear-gradient(
     to right,
     #3a3a3a,
@@ -117,6 +120,7 @@
 }
 
 .snake-divider--vertical.snake-divider--dotted .snake-divider__line {
+  background-color: transparent;
   background-image: repeating-linear-gradient(
     to bottom,
     #3a3a3a,
@@ -144,8 +148,25 @@
   height: 100%;
 }
 
+.snake-divider--accent.snake-divider--horizontal .snake-divider__line {
+  background-color: transparent;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='8' y='4' width='3' height='12' fill='%233a3a3a'/%3E%3Crect x='24' y='0' width='3' height='20' fill='%233a3a3a'/%3E%3Crect x='40' y='6' width='3' height='8' fill='%233a3a3a'/%3E%3Crect x='56' y='2' width='3' height='16' fill='%233a3a3a'/%3E%3Crect x='72' y='7' width='3' height='6' fill='%233a3a3a'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+.snake-divider--vertical.snake-divider--accent .snake-divider__line {
+  background-color: transparent;
+  width: 20px;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='4' y='8' width='12' height='3' fill='%233a3a3a'/%3E%3Crect x='0' y='24' width='20' height='3' fill='%233a3a3a'/%3E%3Crect x='6' y='40' width='8' height='3' fill='%233a3a3a'/%3E%3Crect x='2' y='56' width='16' height='3' fill='%233a3a3a'/%3E%3Crect x='7' y='72' width='6' height='3' fill='%233a3a3a'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-position: center;
+}
+
 /* Colors */
-.snake-divider--default .snake-divider__line {
+.snake-divider--default:not(.snake-divider--dashed):not(.snake-divider--dotted):not(.snake-divider--double):not(.snake-divider--accent) .snake-divider__line {
   background-color: #3a3a3a;
 }
 
@@ -153,7 +174,7 @@
   border-color: #3a3a3a;
 }
 
-.snake-divider--muted .snake-divider__line {
+.snake-divider--muted:not(.snake-divider--dashed):not(.snake-divider--dotted):not(.snake-divider--double):not(.snake-divider--accent) .snake-divider__line {
   background-color: #2a2a2a;
   opacity: 0.5;
 }
@@ -163,7 +184,7 @@
   opacity: 0.5;
 }
 
-.snake-divider--primary .snake-divider__line {
+.snake-divider--primary:not(.snake-divider--dashed):not(.snake-divider--dotted):not(.snake-divider--double):not(.snake-divider--accent) .snake-divider__line {
   background-color: var(--color-text-primary);
   opacity: 0.3;
 }
@@ -173,7 +194,7 @@
   opacity: 0.3;
 }
 
-.snake-divider--secondary .snake-divider__line {
+.snake-divider--secondary:not(.snake-divider--dashed):not(.snake-divider--dotted):not(.snake-divider--double):not(.snake-divider--accent) .snake-divider__line {
   background-color: #8e8e90;
   opacity: 0.5;
 }

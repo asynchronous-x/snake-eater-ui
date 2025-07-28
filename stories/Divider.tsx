@@ -5,7 +5,7 @@ interface DividerProps {
   /** Orientation of the divider */
   orientation?: 'horizontal' | 'vertical';
   /** Style variant */
-  variant?: 'solid' | 'dashed' | 'dotted' | 'double';
+  variant?: 'solid' | 'dashed' | 'dotted' | 'double' | 'accent';
   /** Thickness of the divider */
   thickness?: 'thin' | 'medium' | 'thick';
   /** Color variant */
