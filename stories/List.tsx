@@ -75,11 +75,11 @@ export const List: React.FC<ListProps> = ({
           onKeyDown={
             isInteractive
               ? (e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    item.onClick?.();
-                  }
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  item.onClick?.();
                 }
+              }
               : undefined
           }
         >

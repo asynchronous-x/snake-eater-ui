@@ -100,9 +100,9 @@ export const Text: React.FC<TextProps> = ({
 
   const style = clamp
     ? ({
-        '--line-clamp': clamp,
-        WebkitLineClamp: clamp,
-      } as React.CSSProperties)
+      '--line-clamp': clamp,
+      WebkitLineClamp: clamp,
+    } as React.CSSProperties)
     : undefined;
 
   return (
