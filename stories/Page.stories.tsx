@@ -4,6 +4,7 @@ import React from 'react';
 import { PageAnalytics } from './PageAnalytics';
 import { PageProjects } from './PageProjects';
 import { PageMonitor } from './PageMonitor';
+import { PageMobile } from './PageMobile';
 
 const meta = {
   title: 'Pages/Examples',
@@ -34,4 +35,14 @@ export const ProjectManagement: StoryObj = {
 export const SystemMonitor: StoryObj = {
   render: () => <PageMonitor />,
   name: 'System Monitor',
+};
+
+export const MobileApp: StoryObj = {
+  render: () => <PageMobile />,
+  name: 'Mobile App',
+  parameters: {
+    viewport: {
+      defaultViewport: 'iphone12',
+    },
+  },
 };
