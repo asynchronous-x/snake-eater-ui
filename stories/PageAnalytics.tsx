@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { Button } from './Button';
-import { Card } from './Card';
-import { Select } from './Select';
-import { Badge } from './Badge';
-import { Progress } from './Progress';
-import { Tabs } from './Tabs';
-import { Table } from './Table';
-import { IconButton } from './IconButton';
-import { Alert } from './Alert';
-import { Stat } from './Stat';
-import { Heading } from './Heading';
-import { Text } from './Text';
-import { Divider } from './Divider';
-import { List } from './List';
+import { Button } from './Button/Button';
+import { Card } from './Card/Card';
+import { Select } from './Select/Select';
+import { Badge } from './Badge/Badge';
+import { Progress } from './Progress/Progress';
+import { Tabs } from './Tabs/Tabs';
+import { Table } from './Table/Table';
+import { IconButton } from './IconButton/IconButton';
+import { Alert } from './Alert/Alert';
+import { Stat } from './Stat/Stat';
+import { Heading } from './Heading/Heading';
+import { Text } from './Text/Text';
+import { Divider } from './Divider/Divider';
+import { List } from './List/List';
 import './page.css';
-import { SubCard } from './SubCard';
+import { SubCard } from './SubCard/SubCard';
 
 export const PageAnalytics: React.FC = () => {
   const [timeRange, setTimeRange] = useState('24h');

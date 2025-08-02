@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { Button } from './Button';
-import { Card } from './Card';
-import { Filter } from './Filter';
-import { SubCard } from './SubCard';
-import { Input } from './Input';
-import { Select } from './Select';
-import { Badge } from './Badge';
-import { Modal } from './Modal';
-import { Progress } from './Progress';
-import { RadioButton } from './RadioButton';
-import { Checkbox } from './Checkbox';
-import { Table } from './Table';
-import { Link } from './Link';
-import { Textarea } from './Textarea';
-import { Heading } from './Heading';
-import { Text } from './Text';
-import { Divider } from './Divider';
+import { Button } from './Button/Button';
+import { Card } from './Card/Card';
+import { Filter } from './Filter/Filter';
+import { SubCard } from './SubCard/SubCard';
+import { Input } from './Input/Input';
+import { Select } from './Select/Select';
+import { Badge } from './Badge/Badge';
+import { Modal } from './Modal/Modal';
+import { Progress } from './Progress/Progress';
+import { RadioButton } from './RadioButton/RadioButton';
+import { Checkbox } from './Checkbox/Checkbox';
+import { Table } from './Table/Table';
+import { Link } from './Link/Link';
+import { Textarea } from './Textarea/Textarea';
+import { Heading } from './Heading/Heading';
+import { Text } from './Text/Text';
+import { Divider } from './Divider/Divider';
 import './page.css';
 
 export const PageProjects: React.FC = () => {

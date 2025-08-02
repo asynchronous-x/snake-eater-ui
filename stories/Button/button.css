@@ -1,0 +1,223 @@
+@import '../theme.css';
+
+.snake-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  text-decoration: none;
+  border: var(--border-width) solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Sizes */
+.snake-button--small {
+  padding: 2px var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  min-height: 24px;
+}
+
+.snake-button--medium {
+  padding: 4px var(--spacing-md);
+  font-size: var(--font-size-base);
+  min-height: 32px;
+}
+
+.snake-button--large {
+  padding: 6px var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  min-height: 40px;
+}
+
+/* Variants */
+.snake-button--primary {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+.snake-button--primary:hover:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+  border-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
+}
+
+.snake-button--primary:active:not(:disabled) {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-primary-active);
+  color: var(--color-primary-active);
+}
+
+.snake-button--secondary {
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-base);
+  border-color: var(--color-text-primary);
+}
+
+.snake-button--secondary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: var(--color-bg-base);
+}
+
+.snake-button--secondary:active:not(:disabled) {
+  background-color: var(--color-text-secondary);
+  border-color: var(--color-text-secondary);
+  color: var(--color-bg-base);
+}
+
+.snake-button--ghost {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border-color: transparent;
+}
+
+.snake-button--ghost:hover:not(:disabled) {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+.snake-button--ghost:active:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+}
+
+.snake-button--danger {
+  background-color: transparent;
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.snake-button--danger:hover:not(:disabled) {
+  background-color: var(--color-danger);
+  color: var(--color-bg-base);
+}
+
+.snake-button--danger:active:not(:disabled) {
+  background-color: var(--color-danger-active);
+  border-color: var(--color-danger-active);
+}
+
+.snake-button--cyber {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border: none;
+  position: relative;
+  overflow: visible;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+  transition: all var(--transition-fast);
+}
+
+.snake-button--cyber:hover:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+  color: #bd93f9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(189, 147, 249, 0.3);
+}
+
+.snake-button--cyber:active:not(:disabled) {
+  background-color: var(--color-bg-base);
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(189, 147, 249, 0.2);
+}
+
+/* Size adjustments for cyber variant */
+.snake-button--cyber.snake-button--small {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+}
+
+.snake-button--cyber.snake-button--large {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+}
+
+/* Clipped variant - bottom-left and top-right corners cut */
+.snake-button--clipped {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border: none;
+  position: relative;
+  overflow: visible;
+  clip-path: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+  transition: all var(--transition-fast);
+}
+
+.snake-button--clipped:hover:not(:disabled) {
+  background-color: var(--color-bg-elevated);
+  color: #8be9fd;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 233, 253, 0.3);
+}
+
+.snake-button--clipped:active:not(:disabled) {
+  background-color: var(--color-bg-base);
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(139, 233, 253, 0.2);
+}
+
+/* Size adjustments for clipped variant */
+.snake-button--clipped.snake-button--small {
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.snake-button--clipped.snake-button--large {
+  clip-path: polygon(
+    14px 0,
+    100% 0,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    0 100%,
+    0 14px
+  );
+}
+
+/* States */
+.snake-button:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px var(--color-primary);
+}
+
+.snake-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.snake-button--full-width {
+  width: 100%;
+}
+
+.snake-button--loading {
+  cursor: wait;
+}
+
+.snake-button__loader {
+  display: inline-block;
+  animation: snake-button-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes snake-button-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

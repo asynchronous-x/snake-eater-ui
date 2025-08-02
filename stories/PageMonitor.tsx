@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
-import { Card } from './Card';
-import { Filter } from './Filter';
-import { Select } from './Select';
-import { Toggle } from './Toggle';
-import { Badge } from './Badge';
-import { Progress } from './Progress';
-import { Table } from './Table';
-import { Alert } from './Alert';
-import { Stat } from './Stat';
-import { Heading } from './Heading';
-import { Text } from './Text';
-import { Divider } from './Divider';
-import { List } from './List';
-import { Toast } from './Toast';
+import { Button } from './Button/Button';
+import { Card } from './Card/Card';
+import { Filter } from './Filter/Filter';
+import { Select } from './Select/Select';
+import { Toggle } from './Toggle/Toggle';
+import { Badge } from './Badge/Badge';
+import { Progress } from './Progress/Progress';
+import { Table } from './Table/Table';
+import { Alert } from './Alert/Alert';
+import { Stat } from './Stat/Stat';
+import { Heading } from './Heading/Heading';
+import { Text } from './Text/Text';
+import { Divider } from './Divider/Divider';
+import { List } from './List/List';
+import { Toast } from './Toast/Toast';
 import './page.css';
 
 export const PageMonitor: React.FC = () => {

@@ -1,0 +1,191 @@
+@import '../theme.css';
+
+.snake-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.snake-radio-group__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.snake-radio-group__options {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.snake-radio-group--vertical .snake-radio-group__options {
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.snake-radio-group--horizontal .snake-radio-group__options {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* Radio button */
+.snake-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: opacity var(--transition-fast);
+}
+
+.snake-radio__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.snake-radio__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(16, 16, 16, 0.8);
+  border: 2px solid #3a3a3a;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+/* Sizes */
+.snake-radio-group--small .snake-radio__control {
+  width: 16px;
+  height: 16px;
+}
+
+.snake-radio-group--medium .snake-radio__control {
+  width: 20px;
+  height: 20px;
+}
+
+.snake-radio-group--large .snake-radio__control {
+  width: 24px;
+  height: 24px;
+}
+
+/* Dot */
+.snake-radio__dot {
+  width: 0;
+  height: 0;
+  background-color: var(--color-text-primary);
+  transition: all var(--transition-fast);
+}
+
+.snake-radio--checked .snake-radio__dot {
+  width: 8px;
+  height: 8px;
+}
+
+.snake-radio-group--small .snake-radio--checked .snake-radio__dot {
+  width: 6px;
+  height: 6px;
+}
+
+.snake-radio-group--large .snake-radio--checked .snake-radio__dot {
+  width: 10px;
+  height: 10px;
+}
+
+/* Label */
+.snake-radio__label-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.snake-radio__label {
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+}
+
+.snake-radio-group--small .snake-radio__label {
+  font-size: var(--font-size-sm);
+}
+
+.snake-radio-group--large .snake-radio__label {
+  font-size: var(--font-size-lg);
+}
+
+.snake-radio__helper-text {
+  font-size: var(--font-size-sm);
+  color: #8e8e90;
+}
+
+/* States */
+.snake-radio:hover:not(.snake-radio--disabled) .snake-radio__control {
+  border-color: #4a4a4a;
+  background-color: rgba(16, 16, 16, 1);
+}
+
+.snake-radio--checked .snake-radio__control {
+  border-color: var(--color-text-primary);
+  background-color: rgba(16, 16, 16, 1);
+}
+
+.snake-radio__input:focus-visible + .snake-radio__control {
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px rgba(189, 189, 189, 0.3);
+}
+
+/* Disabled state */
+.snake-radio--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Error state */
+.snake-radio-group--error .snake-radio__control {
+  border-color: var(--color-danger);
+}
+
+.snake-radio-group__error {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+  margin-top: var(--spacing-xs);
+}
+
+/* Variant: Success */
+.snake-radio--success.snake-radio--checked .snake-radio__control {
+  border-color: var(--color-success);
+}
+
+.snake-radio--success.snake-radio--checked .snake-radio__dot {
+  background-color: var(--color-success);
+}
+
+/* Variant: Warning */
+.snake-radio--warning.snake-radio--checked .snake-radio__control {
+  border-color: var(--color-warning);
+}
+
+.snake-radio--warning.snake-radio--checked .snake-radio__dot {
+  background-color: var(--color-warning);
+}
+
+/* Variant: Danger */
+.snake-radio--danger.snake-radio--checked .snake-radio__control {
+  border-color: var(--color-danger);
+}
+
+.snake-radio--danger.snake-radio--checked .snake-radio__dot {
+  background-color: var(--color-danger);
+}
+
+/* Variant: Info */
+.snake-radio--info.snake-radio--checked .snake-radio__control {
+  border-color: #61dafb;
+}
+
+.snake-radio--info.snake-radio--checked .snake-radio__dot {
+  background-color: #61dafb;
+}

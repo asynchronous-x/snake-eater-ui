@@ -1,0 +1,208 @@
+@import '../global.css';
+
+.snake-grid {
+  display: grid;
+  grid-template-columns: var(--grid-columns);
+  grid-template-rows: var(--grid-rows);
+  grid-template-areas: var(--grid-areas);
+}
+
+/* Gap variations */
+.snake-grid--gap-xs {
+  gap: var(--spacing-xs);
+}
+.snake-grid--gap-sm {
+  gap: var(--spacing-sm);
+}
+.snake-grid--gap-md {
+  gap: var(--spacing-md);
+}
+.snake-grid--gap-lg {
+  gap: var(--spacing-lg);
+}
+.snake-grid--gap-xl {
+  gap: var(--spacing-xl);
+}
+.snake-grid--gap-2xl {
+  gap: var(--spacing-2xl);
+}
+
+/* Column gap variations */
+.snake-grid--column-gap-xs {
+  column-gap: var(--spacing-xs);
+}
+.snake-grid--column-gap-sm {
+  column-gap: var(--spacing-sm);
+}
+.snake-grid--column-gap-md {
+  column-gap: var(--spacing-md);
+}
+.snake-grid--column-gap-lg {
+  column-gap: var(--spacing-lg);
+}
+.snake-grid--column-gap-xl {
+  column-gap: var(--spacing-xl);
+}
+.snake-grid--column-gap-2xl {
+  column-gap: var(--spacing-2xl);
+}
+
+/* Row gap variations */
+.snake-grid--row-gap-xs {
+  row-gap: var(--spacing-xs);
+}
+.snake-grid--row-gap-sm {
+  row-gap: var(--spacing-sm);
+}
+.snake-grid--row-gap-md {
+  row-gap: var(--spacing-md);
+}
+.snake-grid--row-gap-lg {
+  row-gap: var(--spacing-lg);
+}
+.snake-grid--row-gap-xl {
+  row-gap: var(--spacing-xl);
+}
+.snake-grid--row-gap-2xl {
+  row-gap: var(--spacing-2xl);
+}
+
+/* Align items */
+.snake-grid--align-items-start {
+  align-items: start;
+}
+.snake-grid--align-items-center {
+  align-items: center;
+}
+.snake-grid--align-items-end {
+  align-items: end;
+}
+.snake-grid--align-items-stretch {
+  align-items: stretch;
+}
+
+/* Justify items */
+.snake-grid--justify-items-start {
+  justify-items: start;
+}
+.snake-grid--justify-items-center {
+  justify-items: center;
+}
+.snake-grid--justify-items-end {
+  justify-items: end;
+}
+.snake-grid--justify-items-stretch {
+  justify-items: stretch;
+}
+
+/* Align content */
+.snake-grid--align-content-start {
+  align-content: start;
+}
+.snake-grid--align-content-center {
+  align-content: center;
+}
+.snake-grid--align-content-end {
+  align-content: end;
+}
+.snake-grid--align-content-stretch {
+  align-content: stretch;
+}
+.snake-grid--align-content-space-between {
+  align-content: space-between;
+}
+.snake-grid--align-content-space-around {
+  align-content: space-around;
+}
+.snake-grid--align-content-space-evenly {
+  align-content: space-evenly;
+}
+
+/* Justify content */
+.snake-grid--justify-content-start {
+  justify-content: start;
+}
+.snake-grid--justify-content-center {
+  justify-content: center;
+}
+.snake-grid--justify-content-end {
+  justify-content: end;
+}
+.snake-grid--justify-content-stretch {
+  justify-content: stretch;
+}
+.snake-grid--justify-content-space-between {
+  justify-content: space-between;
+}
+.snake-grid--justify-content-space-around {
+  justify-content: space-around;
+}
+.snake-grid--justify-content-space-evenly {
+  justify-content: space-evenly;
+}
+
+/* Auto flow */
+.snake-grid--auto-flow-column {
+  grid-auto-flow: column;
+}
+.snake-grid--auto-flow-row-dense {
+  grid-auto-flow: row dense;
+}
+.snake-grid--auto-flow-column-dense {
+  grid-auto-flow: column dense;
+}
+
+/* Size modifiers */
+.snake-grid--full-width {
+  width: 100%;
+}
+.snake-grid--full-height {
+  height: 100%;
+}
+
+/* Grid item */
+.snake-grid-item {
+  grid-column: span var(--grid-column-span, 1) / var(--grid-column-end);
+  grid-row: span var(--grid-row-span, 1) / var(--grid-row-end);
+  grid-column-start: var(--grid-column-start);
+  grid-row-start: var(--grid-row-start);
+  grid-area: var(--grid-area);
+}
+
+/* Grid item self alignment */
+.snake-grid-item--align-self-start {
+  align-self: start;
+}
+.snake-grid-item--align-self-center {
+  align-self: center;
+}
+.snake-grid-item--align-self-end {
+  align-self: end;
+}
+.snake-grid-item--align-self-stretch {
+  align-self: stretch;
+}
+
+/* Grid item self justification */
+.snake-grid-item--justify-self-start {
+  justify-self: start;
+}
+.snake-grid-item--justify-self-center {
+  justify-self: center;
+}
+.snake-grid-item--justify-self-end {
+  justify-self: end;
+}
+.snake-grid-item--justify-self-stretch {
+  justify-self: stretch;
+}
+
+/* Debug mode for development */
+.snake-grid--debug {
+  border: 1px solid var(--color-danger);
+}
+
+.snake-grid--debug > * {
+  border: 1px solid var(--color-text-muted);
+  background-color: rgba(255, 255, 255, 0.02);
+}

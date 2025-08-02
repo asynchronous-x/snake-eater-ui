@@ -1,0 +1,315 @@
+@import '../theme.css';
+
+.snake-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Orientation */
+.snake-divider--vertical {
+  flex-direction: column;
+  height: 100%;
+  width: auto;
+}
+
+/* Spacing */
+.snake-divider--spacing-small {
+  margin: var(--spacing-sm) 0;
+}
+
+.snake-divider--spacing-medium {
+  margin: var(--spacing-md) 0;
+}
+
+.snake-divider--spacing-large {
+  margin: var(--spacing-lg) 0;
+}
+
+.snake-divider--vertical.snake-divider--spacing-small {
+  margin: 0 var(--spacing-sm);
+}
+
+.snake-divider--vertical.snake-divider--spacing-medium {
+  margin: 0 var(--spacing-md);
+}
+
+.snake-divider--vertical.snake-divider--spacing-large {
+  margin: 0 var(--spacing-lg);
+}
+
+/* Line styles */
+.snake-divider__line {
+  flex: 1;
+  border: none;
+  background-color: #3a3a3a;
+}
+
+.snake-divider--horizontal .snake-divider__line {
+  height: 1px;
+  width: 100%;
+}
+
+.snake-divider--vertical .snake-divider__line {
+  width: 1px;
+  height: 100%;
+  min-height: 20px;
+}
+
+/* Thickness */
+.snake-divider--thin.snake-divider--horizontal .snake-divider__line {
+  height: 1px;
+}
+
+.snake-divider--medium.snake-divider--horizontal .snake-divider__line {
+  height: 2px;
+}
+
+.snake-divider--thick.snake-divider--horizontal .snake-divider__line {
+  height: 3px;
+}
+
+.snake-divider--thin.snake-divider--vertical .snake-divider__line {
+  width: 1px;
+}
+
+.snake-divider--medium.snake-divider--vertical .snake-divider__line {
+  width: 2px;
+}
+
+.snake-divider--thick.snake-divider--vertical .snake-divider__line {
+  width: 3px;
+}
+
+/* Variants */
+.snake-divider--dashed .snake-divider__line {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    to right,
+    #3a3a3a,
+    #3a3a3a 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  background-size: 40px 100%;
+}
+
+.snake-divider--vertical.snake-divider--dashed .snake-divider__line {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #3a3a3a,
+    #3a3a3a 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  background-size: 100% 40px;
+}
+
+.snake-divider--dotted .snake-divider__line {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    to right,
+    #3a3a3a,
+    #3a3a3a 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  background-size: 6px 100%;
+}
+
+.snake-divider--vertical.snake-divider--dotted .snake-divider__line {
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #3a3a3a,
+    #3a3a3a 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  background-size: 100% 6px;
+}
+
+.snake-divider--double .snake-divider__line {
+  position: relative;
+  background: transparent;
+  border-top: 1px solid #3a3a3a;
+  border-bottom: 1px solid #3a3a3a;
+  height: 3px;
+}
+
+.snake-divider--vertical.snake-divider--double .snake-divider__line {
+  border-top: none;
+  border-bottom: none;
+  border-left: 1px solid #3a3a3a;
+  border-right: 1px solid #3a3a3a;
+  width: 3px;
+  height: 100%;
+}
+
+.snake-divider--accent.snake-divider--horizontal .snake-divider__line {
+  background-color: transparent;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='8' y='4' width='3' height='12' fill='%233a3a3a'/%3E%3Crect x='24' y='0' width='3' height='20' fill='%233a3a3a'/%3E%3Crect x='40' y='6' width='3' height='8' fill='%233a3a3a'/%3E%3Crect x='56' y='2' width='3' height='16' fill='%233a3a3a'/%3E%3Crect x='72' y='7' width='3' height='6' fill='%233a3a3a'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+.snake-divider--vertical.snake-divider--accent .snake-divider__line {
+  background-color: transparent;
+  width: 20px;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='4' y='8' width='12' height='3' fill='%233a3a3a'/%3E%3Crect x='0' y='24' width='20' height='3' fill='%233a3a3a'/%3E%3Crect x='6' y='40' width='8' height='3' fill='%233a3a3a'/%3E%3Crect x='2' y='56' width='16' height='3' fill='%233a3a3a'/%3E%3Crect x='7' y='72' width='6' height='3' fill='%233a3a3a'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-position: center;
+}
+
+/* Colors */
+.snake-divider--default:not(.snake-divider--dashed):not(.snake-divider--dotted):not(
+    .snake-divider--double
+  ):not(.snake-divider--accent)
+  .snake-divider__line {
+  background-color: #3a3a3a;
+}
+
+.snake-divider--default.snake-divider--double .snake-divider__line {
+  border-color: #3a3a3a;
+}
+
+.snake-divider--muted:not(.snake-divider--dashed):not(.snake-divider--dotted):not(
+    .snake-divider--double
+  ):not(.snake-divider--accent)
+  .snake-divider__line {
+  background-color: #2a2a2a;
+  opacity: 0.5;
+}
+
+.snake-divider--muted.snake-divider--double .snake-divider__line {
+  border-color: #2a2a2a;
+  opacity: 0.5;
+}
+
+.snake-divider--primary:not(.snake-divider--dashed):not(.snake-divider--dotted):not(
+    .snake-divider--double
+  ):not(.snake-divider--accent)
+  .snake-divider__line {
+  background-color: var(--color-text-primary);
+  opacity: 0.3;
+}
+
+.snake-divider--primary.snake-divider--double .snake-divider__line {
+  border-color: var(--color-text-primary);
+  opacity: 0.3;
+}
+
+.snake-divider--secondary:not(.snake-divider--dashed):not(.snake-divider--dotted):not(
+    .snake-divider--double
+  ):not(.snake-divider--accent)
+  .snake-divider__line {
+  background-color: #8e8e90;
+  opacity: 0.5;
+}
+
+.snake-divider--secondary.snake-divider--double .snake-divider__line {
+  border-color: #8e8e90;
+  opacity: 0.5;
+}
+
+/* With content */
+.snake-divider--with-content {
+  gap: var(--spacing-md);
+}
+
+.snake-divider__content {
+  flex-shrink: 0;
+  padding: 0 var(--spacing-sm);
+  color: #8e8e90;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background-color: var(--color-bg-base);
+  position: relative;
+  z-index: 1;
+}
+
+.snake-divider--vertical .snake-divider__content {
+  padding: var(--spacing-sm) 0;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+}
+
+/* Decorations */
+.snake-divider--decorated .snake-divider__line::before,
+.snake-divider--decorated .snake-divider__line::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-bg-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #8e8e90;
+}
+
+.snake-divider--horizontal.snake-divider--decorated .snake-divider__line::before {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.snake-divider--horizontal.snake-divider--decorated .snake-divider__line::after {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.snake-divider--vertical.snake-divider--decorated .snake-divider__line::before {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.snake-divider--vertical.snake-divider--decorated .snake-divider__line::after {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Decoration styles */
+.snake-divider--decoration-dots .snake-divider__line::before,
+.snake-divider--decoration-dots .snake-divider__line::after {
+  content: '•••';
+  letter-spacing: -2px;
+}
+
+.snake-divider--decoration-diamond .snake-divider__line::before,
+.snake-divider--decoration-diamond .snake-divider__line::after {
+  content: '◆';
+}
+
+.snake-divider--decoration-plus .snake-divider__line::before,
+.snake-divider--decoration-plus .snake-divider__line::after {
+  content: '+';
+  font-size: 12px;
+}
+
+.snake-divider--decoration-arrows.snake-divider--horizontal .snake-divider__line::before {
+  content: '«';
+}
+
+.snake-divider--decoration-arrows.snake-divider--horizontal .snake-divider__line::after {
+  content: '»';
+}
+
+.snake-divider--decoration-arrows.snake-divider--vertical .snake-divider__line::before {
+  content: '⌃';
+}
+
+.snake-divider--decoration-arrows.snake-divider--vertical .snake-divider__line::after {
+  content: '⌄';
+}

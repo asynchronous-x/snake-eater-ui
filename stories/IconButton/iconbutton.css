@@ -1,0 +1,282 @@
+@import '../theme.css';
+
+.snake-icon-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+/* Sizes */
+.snake-icon-button--small {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+}
+
+.snake-icon-button--medium {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.snake-icon-button--large {
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+}
+
+/* Shape: Circle */
+.snake-icon-button--circle {
+  border-radius: 50%;
+}
+
+/* Content */
+.snake-icon-button__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Default variant */
+.snake-icon-button--default {
+  background-color: #3a3a3a;
+  border-color: #4a4a4a;
+  color: var(--color-text-primary);
+}
+
+.snake-icon-button--default:hover:not(:disabled) {
+  background-color: #4a4a4a;
+  border-color: #5a5a5a;
+  transform: translateY(-1px);
+}
+
+.snake-icon-button--default:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Primary variant */
+.snake-icon-button--primary {
+  background-color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-bg-base);
+}
+
+.snake-icon-button--primary:hover:not(:disabled) {
+  background-color: #e0e0e0;
+  border-color: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+/* Secondary variant */
+.snake-icon-button--secondary {
+  background-color: transparent;
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.snake-icon-button--secondary:hover:not(:disabled) {
+  background-color: rgba(189, 189, 189, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Ghost variant */
+.snake-icon-button--ghost {
+  background-color: transparent;
+  border-color: transparent;
+  color: #8e8e90;
+}
+
+.snake-icon-button--ghost:hover:not(:disabled) {
+  background-color: rgba(31, 29, 32, 0.8);
+  color: var(--color-text-primary);
+}
+
+/* Danger variant */
+.snake-icon-button--danger {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+  color: var(--color-text-primary);
+}
+
+.snake-icon-button--danger:hover:not(:disabled) {
+  background-color: #ff6666;
+  border-color: #ff6666;
+  transform: translateY(-1px);
+}
+
+/* Loading state */
+.snake-icon-button--loading {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.snake-icon-button__loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+.snake-icon-button--small .snake-icon-button__loader {
+  width: 12px;
+  height: 12px;
+}
+
+.snake-icon-button--large .snake-icon-button__loader {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Disabled state */
+.snake-icon-button--disabled,
+.snake-icon-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Focus state */
+.snake-icon-button:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-bg-base),
+    0 0 0 4px rgba(189, 189, 189, 0.3);
+}
+
+/* Badge */
+.snake-icon-button__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  border: 1px solid var(--color-bg-base);
+  z-index: 2;
+}
+
+.snake-icon-button--small .snake-icon-button__badge {
+  top: -2px;
+  right: -2px;
+  min-width: 14px;
+  height: 14px;
+  font-size: 9px;
+}
+
+.snake-icon-button--large .snake-icon-button__badge {
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  font-size: 11px;
+}
+
+/* Badge variants */
+.snake-icon-button__badge--default {
+  background-color: #8e8e90;
+  color: var(--color-text-primary);
+}
+
+.snake-icon-button__badge--success {
+  background-color: var(--color-success);
+  color: var(--color-bg-base);
+}
+
+.snake-icon-button__badge--warning {
+  background-color: var(--color-warning);
+  color: var(--color-bg-base);
+}
+
+.snake-icon-button__badge--danger {
+  background-color: var(--color-danger);
+  color: var(--color-text-primary);
+}
+
+.snake-icon-button__badge--info {
+  background-color: #61dafb;
+  color: var(--color-bg-base);
+}
+
+/* Corner decorations (square shape only) */
+.snake-icon-button__corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #8e8e90;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.snake-icon-button:hover .snake-icon-button__corner {
+  opacity: 1;
+}
+
+.snake-icon-button__corner--top-left {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-icon-button__corner--top-right {
+  top: -1px;
+  right: -1px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.snake-icon-button__corner--bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-right: none;
+  border-top: none;
+}
+
+.snake-icon-button__corner--bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Ripple effect for circle shape */
+.snake-icon-button--circle:active:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background-color: rgba(255, 255, 255, 0.2);
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  to {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}

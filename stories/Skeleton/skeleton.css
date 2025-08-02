@@ -1,0 +1,191 @@
+@import '../theme.css';
+
+.snake-skeleton {
+  display: block;
+  background-color: #2a2a2c;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Variants */
+.snake-skeleton--text {
+  height: 1em;
+  margin: 0.25em 0;
+  width: 100%;
+}
+
+.snake-skeleton--rectangular {
+  width: 100%;
+  height: 100px;
+}
+
+.snake-skeleton--circular {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.snake-skeleton--button {
+  height: 36px;
+  width: 100px;
+}
+
+/* Text group */
+.snake-skeleton__text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animation base */
+.snake-skeleton--pulse {
+  animation: snake-skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.snake-skeleton--wave {
+  background: linear-gradient(
+    90deg,
+    #2a2a2c 0%,
+    #2a2a2c 40%,
+    #3a3a3c 50%,
+    #2a2a2c 60%,
+    #2a2a2c 100%
+  );
+  background-size: 200% 100%;
+  animation: snake-skeleton-wave 1.5s linear infinite;
+}
+
+/* Animation intensity */
+.snake-skeleton--intensity-subtle.snake-skeleton--pulse {
+  animation-duration: 2s;
+}
+
+.snake-skeleton--intensity-subtle.snake-skeleton--wave {
+  animation-duration: 2s;
+  background: linear-gradient(
+    90deg,
+    #2a2a2c 0%,
+    #2a2a2c 45%,
+    #323234 50%,
+    #2a2a2c 55%,
+    #2a2a2c 100%
+  );
+  background-size: 200% 100%;
+}
+
+.snake-skeleton--intensity-strong.snake-skeleton--pulse {
+  animation-duration: 1s;
+}
+
+.snake-skeleton--intensity-strong.snake-skeleton--wave {
+  animation-duration: 1s;
+  background: linear-gradient(
+    90deg,
+    #2a2a2c 0%,
+    #2a2a2c 35%,
+    #4a4a4c 50%,
+    #2a2a2c 65%,
+    #2a2a2c 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* Animations */
+@keyframes snake-skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes snake-skeleton-wave {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Decorated corners */
+.snake-skeleton--decorated .snake-skeleton__corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid #4a4a4c;
+}
+
+.snake-skeleton__corner--top-left {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-skeleton__corner--top-right {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.snake-skeleton__corner--bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.snake-skeleton__corner--bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Loading shimmer effect for decorated */
+.snake-skeleton--decorated::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: snake-skeleton-shimmer 2s infinite;
+}
+
+@keyframes snake-skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Specific variant styles */
+.snake-skeleton--button {
+  border: 1px solid #3a3a3a;
+}
+
+.snake-skeleton--text:first-child {
+  margin-top: 0;
+}
+
+.snake-skeleton--text:last-child {
+  margin-bottom: 0;
+}
+
+/* Dark theme adjustments */
+.snake-skeleton--none {
+  animation: none;
+  background-color: #2a2a2c;
+}
