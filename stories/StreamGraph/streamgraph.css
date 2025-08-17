@@ -1,0 +1,302 @@
+@import '../theme.css';
+
+.snake-stream-graph {
+  position: relative;
+  display: inline-block;
+  padding: 20px;
+  padding-bottom: 60px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+}
+
+/* Corner accents */
+.snake-stream-graph__corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-text-muted);
+}
+
+.snake-stream-graph__corner--top-left {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-stream-graph__corner--top-right {
+  top: -1px;
+  right: -1px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.snake-stream-graph__corner--bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-right: none;
+  border-top: none;
+}
+
+.snake-stream-graph__corner--bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Container */
+.snake-stream-graph__container {
+  position: relative;
+}
+
+/* SVG */
+.snake-stream-graph__svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Grid */
+.snake-stream-graph__grid-line {
+  stroke-dasharray: 2 4;
+}
+
+/* Streams */
+.snake-stream-graph__stream {
+  transition: fill-opacity var(--transition-base), stroke-opacity var(--transition-base);
+  cursor: pointer;
+  mix-blend-mode: normal;
+}
+
+.snake-stream-graph__stream:hover {
+  fill-opacity: 0.7;
+  stroke-opacity: 0.9;
+  stroke-width: 2;
+}
+
+/* Animated streams */
+.snake-stream-graph--animated .snake-stream-graph__stream {
+  animation: snake-stream-graph-slide-up 0.8s ease-out forwards;
+  animation-fill-mode: both;
+}
+
+@keyframes snake-stream-graph-slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Interactive variant styles */
+.snake-stream-graph--interactive .snake-stream-graph__stream {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.snake-stream-graph__stream--active {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+.snake-stream-graph--interactive .snake-stream-graph__legend-item {
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.snake-stream-graph__legend-item--active {
+  background: #1f1d20;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border-left: 2px solid #8e8e90;
+}
+
+/* Labels */
+.snake-stream-graph__labels {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.snake-stream-graph__label {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-family: var(--font-family-mono);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* Legend */
+.snake-stream-graph__legend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #101010;
+  border: 1px solid #3a3a3a;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  z-index: 10;
+  transform-origin: center;
+}
+
+/* Legend animation */
+.snake-stream-graph__legend--animated {
+  animation: snake-stream-graph-legend-expand 0.5s ease-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+@keyframes snake-stream-graph-legend-expand {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Legend corner elbows */
+.snake-stream-graph__legend::before,
+.snake-stream-graph__legend::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #8e8e90;
+}
+
+.snake-stream-graph__legend::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-stream-graph__legend::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.snake-stream-graph__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+
+.snake-stream-graph__legend-item:hover {
+  opacity: 0.7;
+}
+
+.snake-stream-graph__legend-color {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #3a3a3a;
+}
+
+.snake-stream-graph__legend-label {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+}
+
+/* Variants */
+
+/* Minimal variant */
+.snake-stream-graph--minimal {
+  background: transparent;
+  border: none;
+  padding: 10px;
+  padding-bottom: 40px;
+}
+
+.snake-stream-graph--minimal .snake-stream-graph__corner {
+  display: none;
+}
+
+.snake-stream-graph--minimal .snake-stream-graph__stream {
+  stroke-width: 0;
+}
+
+/* Detailed variant */
+.snake-stream-graph--detailed {
+  padding: 30px;
+  padding-bottom: 70px;
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-elevated) 100%);
+}
+
+.snake-stream-graph--detailed .snake-stream-graph__stream {
+  stroke-width: 2;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.snake-stream-graph--detailed .snake-stream-graph__legend {
+  background-color: #1f1d20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  border-width: 1px;
+}
+
+.snake-stream-graph--detailed .snake-stream-graph__grid-line {
+  stroke-dasharray: none;
+  stroke-opacity: 0.5;
+}
+
+/* Tooltip on hover (optional enhancement) */
+.snake-stream-graph__tooltip {
+  position: absolute;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  padding: 6px 10px;
+  font-size: 11px;
+  font-family: var(--font-family-mono);
+  color: var(--color-text-primary);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  z-index: 20;
+  white-space: nowrap;
+}
+
+.snake-stream-graph__tooltip--visible {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .snake-stream-graph {
+    padding: 15px;
+    padding-bottom: 50px;
+  }
+
+  .snake-stream-graph__legend {
+    position: static;
+    margin-top: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .snake-stream-graph__label {
+    font-size: 10px;
+  }
+}

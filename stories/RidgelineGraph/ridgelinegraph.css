@@ -1,0 +1,376 @@
+@import '../theme.css';
+
+.snake-ridgeline-graph {
+  position: relative;
+  display: inline-block;
+  padding: 20px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+}
+
+/* Corner accents */
+.snake-ridgeline-graph__corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-text-muted);
+}
+
+.snake-ridgeline-graph__corner--top-left {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-ridgeline-graph__corner--top-right {
+  top: -1px;
+  right: -1px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.snake-ridgeline-graph__corner--bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-right: none;
+  border-top: none;
+}
+
+.snake-ridgeline-graph__corner--bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Container */
+.snake-ridgeline-graph__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Title */
+.snake-ridgeline-graph__title {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: var(--font-family-mono);
+}
+
+/* SVG */
+.snake-ridgeline-graph__svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Ridges */
+.snake-ridgeline-graph__ridge {
+  transition: opacity var(--transition-base);
+}
+
+.snake-ridgeline-graph__ridge-fill {
+  transition: fill-opacity var(--transition-base);
+}
+
+.snake-ridgeline-graph__ridge-line {
+  transition: stroke-width var(--transition-base), stroke-opacity var(--transition-base);
+}
+
+.snake-ridgeline-graph__ridge:hover .snake-ridgeline-graph__ridge-fill {
+  fill-opacity: 0.9;
+}
+
+.snake-ridgeline-graph__ridge:hover .snake-ridgeline-graph__ridge-line {
+  filter: brightness(1.2);
+}
+
+.snake-ridgeline-graph__ridge--active .snake-ridgeline-graph__ridge-line {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+}
+
+/* Animated ridges */
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge {
+  animation: snake-ridgeline-graph-slide-up 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes snake-ridgeline-graph-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation for ridges */
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(1) {
+  animation-delay: 0s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.snake-ridgeline-graph--animated .snake-ridgeline-graph__ridge:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+/* Labels */
+.snake-ridgeline-graph__label {
+  user-select: none;
+  transition: opacity var(--transition-fast);
+}
+
+.snake-ridgeline-graph__ridge:hover .snake-ridgeline-graph__label {
+  font-weight: bold;
+}
+
+/* Grid */
+.snake-ridgeline-graph__grid {
+  pointer-events: none;
+}
+
+/* Axes */
+.snake-ridgeline-graph__x-axis {
+  stroke: var(--color-text-muted);
+}
+
+.snake-ridgeline-graph__y-label {
+  user-select: none;
+}
+
+/* Tooltip */
+.snake-ridgeline-graph__tooltip {
+  pointer-events: none;
+  animation: snake-ridgeline-graph-tooltip-fade 0.2s ease-out;
+}
+
+@keyframes snake-ridgeline-graph-tooltip-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scrolling variant */
+.snake-ridgeline-graph--scrolling .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) {
+  animation: snake-ridgeline-graph-scroll-in 0.3s ease-out;
+}
+
+.snake-ridgeline-graph--scrolling .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) .snake-ridgeline-graph__ridge-line {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  animation: snake-ridgeline-graph-draw 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.snake-ridgeline-graph--scrolling .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) .snake-ridgeline-graph__ridge-fill {
+  opacity: 0;
+  animation: snake-ridgeline-graph-fill-fade 0.8s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.snake-ridgeline-graph--scrolling .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) .snake-ridgeline-graph__label {
+  opacity: 0;
+  animation: snake-ridgeline-graph-label-fade 0.5s ease-out forwards;
+  animation-delay: 1s;
+}
+
+@keyframes snake-ridgeline-graph-scroll-in {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes snake-ridgeline-graph-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes snake-ridgeline-graph-fill-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes snake-ridgeline-graph-label-fade {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Placeholder ridges */
+.snake-ridgeline-graph__ridge--placeholder {
+  opacity: 0.3;
+}
+
+.snake-ridgeline-graph__ridge--placeholder path {
+  stroke-dasharray: 4 4;
+  animation: snake-ridgeline-graph-dash 10s linear infinite;
+}
+
+@keyframes snake-ridgeline-graph-dash {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 8;
+  }
+}
+
+/* Scroll indicator */
+.snake-ridgeline-graph__scroll-indicator {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: #101010;
+  border: 1px solid #3a3a3a;
+  font-size: 11px;
+  font-family: var(--font-family-mono);
+  color: var(--color-text-secondary);
+  z-index: 10;
+}
+
+.snake-ridgeline-graph__scroll-indicator::before,
+.snake-ridgeline-graph__scroll-indicator::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #8e8e90;
+}
+
+.snake-ridgeline-graph__scroll-indicator::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-ridgeline-graph__scroll-indicator::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.snake-ridgeline-graph__scroll-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #8b2c2c;
+  border-radius: 0;
+  animation: snake-ridgeline-graph-pulse 2s ease-in-out infinite;
+}
+
+@keyframes snake-ridgeline-graph-pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Interactive variant */
+.snake-ridgeline-graph--interactive .snake-ridgeline-graph__ridge-fill,
+.snake-ridgeline-graph--interactive .snake-ridgeline-graph__ridge-line {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Variants */
+
+/* Minimal variant */
+.snake-ridgeline-graph--minimal {
+  background: transparent;
+  border: none;
+  padding: 10px;
+}
+
+.snake-ridgeline-graph--minimal .snake-ridgeline-graph__corner {
+  display: none;
+}
+
+.snake-ridgeline-graph--minimal .snake-ridgeline-graph__ridge-line {
+  stroke-width: 1;
+}
+
+/* Detailed variant */
+.snake-ridgeline-graph--detailed {
+  padding: 30px;
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-elevated) 100%);
+}
+
+.snake-ridgeline-graph--detailed .snake-ridgeline-graph__ridge-line {
+  stroke-width: 2;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.snake-ridgeline-graph--detailed .snake-ridgeline-graph__ridge-fill {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .snake-ridgeline-graph {
+    padding: 15px;
+  }
+
+  .snake-ridgeline-graph__title {
+    font-size: 14px;
+  }
+
+  .snake-ridgeline-graph__scroll-indicator {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}

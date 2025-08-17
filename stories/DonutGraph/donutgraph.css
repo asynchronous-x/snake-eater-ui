@@ -1,0 +1,287 @@
+@import '../theme.css';
+
+.snake-donut-graph {
+  position: relative;
+  display: inline-block;
+  padding: 20px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+}
+
+/* Corner accents */
+.snake-donut-graph__corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-text-muted);
+}
+
+.snake-donut-graph__corner--top-left {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-donut-graph__corner--top-right {
+  top: -1px;
+  right: -1px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.snake-donut-graph__corner--bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-right: none;
+  border-top: none;
+}
+
+.snake-donut-graph__corner--bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Container */
+.snake-donut-graph__container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+/* Semi-circle adjustments */
+.snake-donut-graph--semi .snake-donut-graph__container {
+  align-items: center;
+}
+
+/* SVG */
+.snake-donut-graph__svg {
+  display: block;
+}
+
+/* Segments */
+.snake-donut-graph__segment {
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.snake-donut-graph__segment:hover {
+  filter: brightness(1.2);
+}
+
+.snake-donut-graph__segment--active {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+/* Animated segments */
+.snake-donut-graph--animated .snake-donut-graph__segment {
+  animation: snake-donut-graph-draw 1s ease-out forwards;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+@keyframes snake-donut-graph-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.snake-donut-graph--animated .snake-donut-graph__segment:nth-child(1) {
+  animation-delay: 0s;
+}
+.snake-donut-graph--animated .snake-donut-graph__segment:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.snake-donut-graph--animated .snake-donut-graph__segment:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.snake-donut-graph--animated .snake-donut-graph__segment:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.snake-donut-graph--animated .snake-donut-graph__segment:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.snake-donut-graph--animated .snake-donut-graph__segment:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+/* Labels on segments */
+.snake-donut-graph__label {
+  pointer-events: none;
+  text-shadow: 0 0 4px var(--color-bg-base);
+}
+
+/* Center text */
+.snake-donut-graph__center-value {
+  text-shadow: 0 0 4px var(--color-bg-base);
+}
+
+.snake-donut-graph__center-label {
+  text-shadow: 0 0 4px var(--color-bg-base);
+}
+
+/* Legend */
+.snake-donut-graph__legend {
+  background-color: #101010;
+  border: 1px solid #3a3a3a;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  min-width: 150px;
+  position: relative;
+  transform-origin: center;
+}
+
+/* Legend animation */
+.snake-donut-graph__legend--animated {
+  animation: snake-donut-graph-legend-expand 0.5s ease-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+@keyframes snake-donut-graph-legend-expand {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Legend corner elbows */
+.snake-donut-graph__legend::before,
+.snake-donut-graph__legend::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #8e8e90;
+}
+
+.snake-donut-graph__legend::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.snake-donut-graph__legend::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+.snake-donut-graph__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.snake-donut-graph__legend-item:hover {
+  opacity: 0.7;
+}
+
+.snake-donut-graph__legend-color {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #3a3a3a;
+  flex-shrink: 0;
+}
+
+.snake-donut-graph__legend-label {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  flex: 1;
+}
+
+.snake-donut-graph__legend-value {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* Interactive variant */
+.snake-donut-graph--interactive .snake-donut-graph__segment {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.snake-donut-graph--interactive .snake-donut-graph__legend-item {
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.snake-donut-graph__legend-item--active {
+  background: #1f1d20;
+  padding: 4px 6px;
+  margin: -4px -6px;
+  border-left: 2px solid #8e8e90;
+}
+
+/* Variants */
+
+/* Minimal variant */
+.snake-donut-graph--minimal {
+  background: transparent;
+  border: none;
+  padding: 10px;
+}
+
+.snake-donut-graph--minimal .snake-donut-graph__corner {
+  display: none;
+}
+
+.snake-donut-graph--minimal .snake-donut-graph__segment {
+  stroke-width: 0;
+}
+
+/* Detailed variant */
+.snake-donut-graph--detailed {
+  padding: 30px;
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-elevated) 100%);
+}
+
+.snake-donut-graph--detailed .snake-donut-graph__segment {
+  stroke-width: 2;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.snake-donut-graph--detailed .snake-donut-graph__legend {
+  background-color: #1f1d20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  border-width: 1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .snake-donut-graph__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .snake-donut-graph__legend {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .snake-donut-graph__label {
+    font-size: 10px;
+  }
+}
