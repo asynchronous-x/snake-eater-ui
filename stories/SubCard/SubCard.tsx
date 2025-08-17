@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './subcard.css';
 
 interface SubCardProps {
@@ -20,6 +20,16 @@ interface SubCardProps {
   variant?: 'default' | 'success' | 'warning' | 'danger' | 'info' | 'inactive';
   /** Custom color for corner plus symbols */
   cornerColor?: string;
+  /** Enable transition animation */
+  transitionIn?: boolean;
+  /** Type of transition animation */
+  transitionType?: 'expand' | 'fade' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right';
+  /** Transition speed in milliseconds */
+  transitionSpeed?: number;
+  /** Delay before transition starts in milliseconds */
+  transitionDelay?: number;
+  /** Callback when transition completes */
+  onTransitionComplete?: () => void;
 }
 
 /** SubCard component with plus symbols in corners */
@@ -33,12 +43,42 @@ export const SubCard: React.FC<SubCardProps> = ({
   onClick,
   variant = 'default',
   cornerColor,
+  transitionIn = false,
+  transitionType = 'expand',
+  transitionSpeed = 300,
+  transitionDelay = 0,
+  onTransitionComplete,
 }) => {
+  const [isVisible, setIsVisible] = useState(!transitionIn);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    if (transitionIn) {
+      const delayTimer = setTimeout(() => {
+        setIsVisible(true);
+        setIsAnimating(true);
+        
+        const completeTimer = setTimeout(() => {
+          setIsAnimating(false);
+          onTransitionComplete?.();
+        }, transitionSpeed);
+
+        return () => clearTimeout(completeTimer);
+      }, transitionDelay);
+
+      return () => clearTimeout(delayTimer);
+    }
+  }, [transitionIn, transitionDelay, transitionSpeed, onTransitionComplete]);
+
   const classes = [
     'snake-subcard',
     `snake-subcard--${size}`,
     `snake-subcard--${variant}`,
     interactive && 'snake-subcard--interactive',
+    transitionIn && 'snake-subcard--transition',
+    transitionIn && `snake-subcard--transition-${transitionType}`,
+    isVisible && 'snake-subcard--visible',
+    isAnimating && 'snake-subcard--animating',
     className,
   ]
     .filter(Boolean)
@@ -46,11 +86,16 @@ export const SubCard: React.FC<SubCardProps> = ({
 
   const Component = interactive ? 'button' : 'div';
 
+  const transitionStyle = transitionIn ? {
+    '--transition-speed': `${transitionSpeed}ms`,
+  } as React.CSSProperties : undefined;
+
   return (
     <Component
       className={classes}
       onClick={interactive ? onClick : undefined}
       type={interactive ? 'button' : undefined}
+      style={transitionStyle}
     >
       <div
         className="snake-subcard__corner snake-subcard__corner--top-left"

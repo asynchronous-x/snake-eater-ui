@@ -1,6 +1,25 @@
 import React from 'react';
 import './stat.css';
 
+// Icon components from pixel-icon-library
+const AngleUpIcon = ({ className = '' }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+    <polygon points="19 17 17 17 17 16 16 16 16 15 15 15 15 14 14 14 14 13 13 13 13 12 11 12 11 13 10 13 10 14 9 14 9 15 8 15 8 16 7 16 7 17 5 17 5 16 4 16 4 14 5 14 5 13 6 13 6 12 7 12 7 11 8 11 8 10 9 10 9 9 10 9 10 8 11 8 11 7 13 7 13 8 14 8 14 9 15 9 15 10 16 10 16 11 17 11 17 12 18 12 18 13 19 13 19 14 20 14 20 16 19 16 19 17"/>
+  </svg>
+);
+
+const AngleDownIcon = ({ className = '' }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+    <polygon points="5 7 7 7 7 8 8 8 8 9 9 9 9 10 10 10 10 11 11 11 11 12 13 12 13 11 14 11 14 10 15 10 15 9 16 9 16 8 17 8 17 7 19 7 19 8 20 8 20 10 19 10 19 11 18 11 18 12 17 12 17 13 16 13 16 14 15 14 15 15 14 15 14 16 13 16 13 17 11 17 11 16 10 16 10 15 9 15 9 14 8 14 8 13 7 13 7 12 6 12 6 11 5 11 5 10 4 10 4 8 5 8 5 7"/>
+  </svg>
+);
+
+const AngleRightIcon = ({ className = '' }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+    <polygon points="7 19 7 17 8 17 8 16 9 16 9 15 10 15 10 14 11 14 11 13 12 13 12 11 11 11 11 10 10 10 10 9 9 9 9 8 8 8 8 7 7 7 7 5 8 5 8 4 10 4 10 5 11 5 11 6 12 6 12 7 13 7 13 8 14 8 14 9 15 9 15 10 16 10 16 11 17 11 17 13 16 13 16 14 15 14 15 15 14 15 14 16 13 16 13 17 12 17 12 18 11 18 11 19 10 19 10 20 8 20 8 19 7 19"/>
+  </svg>
+);
+
 interface StatProps {
   /** Label for the stat */
   label: string;
@@ -59,11 +78,11 @@ export const Stat: React.FC<StatProps> = ({
     if (!change) return null;
     switch (change.type) {
       case 'increase':
-        return '↑';
+        return <AngleUpIcon />;
       case 'decrease':
-        return '↓';
+        return <AngleDownIcon />;
       default:
-        return '→';
+        return <AngleRightIcon />;
     }
   };
 

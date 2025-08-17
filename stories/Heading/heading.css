@@ -204,22 +204,7 @@
   background: linear-gradient(to right, #8e8e90 0%, #8e8e90 70%, transparent 100%);
 }
 
-/* Animated underline effect */
-.snake-heading::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: currentColor;
-  opacity: 0.3;
-  transition: width var(--transition-normal);
-}
-
-.snake-heading:hover::after {
-  width: 100%;
-}
+/* Animated underline effect - removed */
 
 /* Corner accent for large headings */
 .snake-heading--2xl::before,

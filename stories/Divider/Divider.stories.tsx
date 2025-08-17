@@ -33,11 +33,6 @@ const meta = {
       control: { type: 'select' },
       options: ['default', 'muted', 'primary', 'secondary'],
     },
-    decorated: { control: 'boolean' },
-    decorationStyle: {
-      control: { type: 'select' },
-      options: ['dots', 'diamond', 'plus', 'arrows'],
-    },
     spacing: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
@@ -134,16 +129,6 @@ export const WithContent: Story = {
   ),
 };
 
-export const Decorated: Story = {
-  render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-      <Divider decorated decorationStyle="dots" />
-      <Divider decorated decorationStyle="diamond" color="primary" />
-      <Divider decorated decorationStyle="plus" variant="dashed" />
-      <Divider decorated decorationStyle="arrows" thickness="medium" />
-    </div>
-  ),
-};
 
 export const Spacing: Story = {
   render: () => (

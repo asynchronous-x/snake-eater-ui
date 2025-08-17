@@ -1,0 +1,213 @@
+@import '../theme.css';
+
+.snake-keyboard-key {
+  --key-width: 1;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-mono);
+  font-weight: 600;
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  color: var(--color-text-primary);
+  border: 1px solid #4a4a4a;
+  border-bottom: 3px solid #3a3a3a;
+  user-select: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  text-align: center;
+  min-width: calc(var(--key-width) * 36px);
+}
+
+/* Remove button defaults when clickable */
+button.snake-keyboard-key {
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
+}
+
+kbd.snake-keyboard-key {
+  cursor: default;
+}
+
+/* Size variants */
+.snake-keyboard-key--small {
+  padding: 2px 6px;
+  font-size: var(--font-size-xs);
+  min-height: 24px;
+  border-bottom-width: 2px;
+}
+
+.snake-keyboard-key--medium {
+  padding: 4px 10px;
+  font-size: var(--font-size-sm);
+  min-height: 32px;
+  border-bottom-width: 3px;
+}
+
+.snake-keyboard-key--large {
+  padding: 6px 14px;
+  font-size: var(--font-size-base);
+  min-height: 40px;
+  border-bottom-width: 4px;
+}
+
+/* Variant styles */
+.snake-keyboard-key--default {
+  background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+  border-color: #4a4a4a;
+  border-bottom-color: #3a3a3a;
+}
+
+.snake-keyboard-key--modifier {
+  background: linear-gradient(180deg, #1f1f1f 0%, #0f0f0f 100%);
+  border-color: #3a3a3a;
+  border-bottom-color: #2a2a2a;
+  color: var(--color-text-secondary);
+}
+
+.snake-keyboard-key--action {
+  background: linear-gradient(180deg, #2a3a2a 0%, #1a2a1a 100%);
+  border-color: #4a5a4a;
+  border-bottom-color: #3a4a3a;
+  color: #50fa7b;
+}
+
+.snake-keyboard-key--danger {
+  background: linear-gradient(180deg, #3a2a2a 0%, #2a1a1a 100%);
+  border-color: #5a4a4a;
+  border-bottom-color: #4a3a3a;
+  color: var(--color-danger);
+}
+
+.snake-keyboard-key--space {
+  min-width: calc(var(--key-width) * 120px);
+  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+  border-color: #3a3a3a;
+  border-bottom-color: #2a2a2a;
+}
+
+/* Pressed state */
+.snake-keyboard-key--pressed,
+.snake-keyboard-key--clickable:active {
+  transform: translateY(2px);
+  border-bottom-width: 1px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.snake-keyboard-key--pressed.snake-keyboard-key--action,
+.snake-keyboard-key--clickable.snake-keyboard-key--action:active {
+  background: linear-gradient(180deg, #1a2a1a 0%, #0a1a0a 100%);
+  box-shadow: 
+    inset 0 1px 3px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(80, 250, 123, 0.2);
+}
+
+/* Hover state for clickable keys */
+.snake-keyboard-key--clickable:hover:not(.snake-keyboard-key--disabled):not(.snake-keyboard-key--pressed) {
+  background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
+  border-color: #5a5a5a;
+  border-bottom-color: #4a4a4a;
+  transform: translateY(-1px);
+}
+
+.snake-keyboard-key--clickable.snake-keyboard-key--action:hover:not(.snake-keyboard-key--disabled):not(.snake-keyboard-key--pressed) {
+  background: linear-gradient(180deg, #3a4a3a 0%, #2a3a2a 100%);
+  box-shadow: 0 0 15px rgba(80, 250, 123, 0.15);
+}
+
+.snake-keyboard-key--clickable.snake-keyboard-key--danger:hover:not(.snake-keyboard-key--disabled):not(.snake-keyboard-key--pressed) {
+  background: linear-gradient(180deg, #4a3a3a 0%, #3a2a2a 100%);
+  box-shadow: 0 0 15px rgba(255, 85, 85, 0.15);
+}
+
+/* Focus state */
+.snake-keyboard-key--clickable:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+/* Disabled state */
+.snake-keyboard-key--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-color: #2a2a2a;
+  border-bottom-color: #1a1a1a;
+}
+
+.snake-keyboard-key--disabled:hover {
+  transform: none;
+}
+
+/* Icon styles */
+.snake-keyboard-key--with-icon {
+  gap: var(--spacing-xs);
+}
+
+.snake-keyboard-key__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.snake-keyboard-key__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Icon positions */
+.snake-keyboard-key--icon-top,
+.snake-keyboard-key--icon-bottom {
+  flex-direction: column;
+}
+
+.snake-keyboard-key--icon-right {
+  flex-direction: row-reverse;
+}
+
+/* Shadow and depth effect */
+.snake-keyboard-key::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+}
+
+/* Keycap shine effect */
+.snake-keyboard-key::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Special key indicators */
+.snake-keyboard-key--modifier::before {
+  border-color: rgba(255, 255, 255, 0.03);
+}
+
+.snake-keyboard-key--action::before {
+  border-color: rgba(80, 250, 123, 0.1);
+}
+
+.snake-keyboard-key--danger::before {
+  border-color: rgba(255, 85, 85, 0.1);
+}

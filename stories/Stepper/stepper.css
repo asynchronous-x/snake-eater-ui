@@ -1,0 +1,274 @@
+@import '../theme.css';
+
+.snake-stepper {
+  display: flex;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+/* Orientation */
+.snake-stepper--horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.snake-stepper--vertical {
+  flex-direction: column;
+}
+
+/* Step */
+.snake-stepper__step {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+  position: relative;
+}
+
+.snake-stepper--horizontal .snake-stepper__step {
+  flex-direction: column;
+  text-align: center;
+}
+
+.snake-stepper--vertical .snake-stepper__step {
+  flex-direction: row;
+  text-align: left;
+  min-height: 80px;
+}
+
+/* Clickable steps */
+.snake-stepper__step--clickable {
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.snake-stepper__step--clickable:hover {
+  opacity: 0.8;
+}
+
+.snake-stepper__step--clickable:focus {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 4px;
+}
+
+/* Step indicator */
+.snake-stepper__step-indicator {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-text-muted);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-bold);
+  z-index: 2;
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+/* Size variants */
+.snake-stepper--small .snake-stepper__step-indicator {
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-xs);
+}
+
+.snake-stepper--medium .snake-stepper__step-indicator {
+  width: 32px;
+  height: 32px;
+  font-size: var(--font-size-sm);
+}
+
+.snake-stepper--large .snake-stepper__step-indicator {
+  width: 40px;
+  height: 40px;
+  font-size: var(--font-size-base);
+}
+
+/* Step states */
+.snake-stepper__step--active .snake-stepper__step-indicator {
+  background: var(--color-bg-elevated);
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+  box-shadow: 0 0 0 4px rgba(189, 189, 189, 0.1);
+}
+
+.snake-stepper__step--completed .snake-stepper__step-indicator {
+  background: #50fa7b;
+  border-color: #50fa7b;
+  color: var(--color-bg-base);
+}
+
+.snake-stepper__step--error .snake-stepper__step-indicator {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: white;
+}
+
+.snake-stepper__step--pending .snake-stepper__step-indicator {
+  opacity: 0.6;
+}
+
+/* Step content */
+.snake-stepper__step-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  flex: 1;
+}
+
+.snake-stepper__step-label {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.snake-stepper__step-description {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Size adjustments for labels */
+.snake-stepper--small .snake-stepper__step-label {
+  font-size: var(--font-size-sm);
+}
+
+.snake-stepper--large .snake-stepper__step-label {
+  font-size: var(--font-size-base);
+}
+
+/* State-specific label colors */
+.snake-stepper__step--active .snake-stepper__step-label {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.snake-stepper__step--completed .snake-stepper__step-label {
+  color: #50fa7b;
+}
+
+.snake-stepper__step--error .snake-stepper__step-label {
+  color: var(--color-danger);
+}
+
+.snake-stepper__step--pending .snake-stepper__step-label {
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}
+
+/* Indicator wrapper for positioning connectors */
+.snake-stepper__indicator-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snake-stepper--vertical .snake-stepper__indicator-wrapper {
+  flex-direction: column;
+}
+
+/* Connectors */
+.snake-stepper__connector {
+  background: var(--color-text-muted);
+  transition: background-color var(--transition-base);
+  position: absolute;
+}
+
+.snake-stepper--horizontal .snake-stepper__connector {
+  height: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 100%;
+}
+
+.snake-stepper--vertical .snake-stepper__connector {
+  width: 2px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+}
+
+.snake-stepper--vertical .snake-stepper__step {
+  margin-bottom: 0;
+}
+
+.snake-stepper__connector--completed {
+  background: #50fa7b;
+}
+
+/* Variant: Compact */
+.snake-stepper--compact .snake-stepper__step {
+  gap: var(--spacing-sm);
+}
+
+.snake-stepper--compact.snake-stepper--horizontal .snake-stepper__step {
+  flex-direction: row;
+}
+
+.snake-stepper--compact .snake-stepper__step-indicator {
+  width: 16px;
+  height: 16px;
+  border-width: 1px;
+}
+
+.snake-stepper--compact .snake-stepper__step-number,
+.snake-stepper--compact .snake-stepper__step-icon {
+  display: none;
+}
+
+.snake-stepper--compact .snake-stepper__step-dot {
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  border-radius: 0;
+}
+
+/* Variant: Pills */
+.snake-stepper--pills .snake-stepper__step {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-text-muted);
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin: 0 var(--spacing-xs);
+  transition: all var(--transition-base);
+}
+
+.snake-stepper--pills.snake-stepper--horizontal .snake-stepper__step {
+  flex-direction: row;
+}
+
+.snake-stepper--pills .snake-stepper__connector {
+  display: none;
+}
+
+.snake-stepper--pills .snake-stepper__step--active {
+  background: var(--color-bg-elevated);
+  border-color: var(--color-text-primary);
+}
+
+.snake-stepper--pills .snake-stepper__step--completed {
+  background: rgba(80, 250, 123, 0.1);
+  border-color: #50fa7b;
+}
+
+.snake-stepper--pills .snake-stepper__step--error {
+  background: rgba(255, 85, 85, 0.1);
+  border-color: var(--color-danger);
+}
+
+/* Icon styles */
+.snake-stepper__step-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Dot for compact variant */
+.snake-stepper__step-dot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+}

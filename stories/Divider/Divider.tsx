@@ -10,10 +10,6 @@ interface DividerProps {
   thickness?: 'thin' | 'medium' | 'thick';
   /** Color variant */
   color?: 'default' | 'muted' | 'primary' | 'secondary';
-  /** Add decorative elements */
-  decorated?: boolean;
-  /** Decoration style */
-  decorationStyle?: 'dots' | 'diamond' | 'plus' | 'arrows';
   /** Text or element to display in the center */
   children?: React.ReactNode;
   /** Spacing around the divider */
@@ -30,8 +26,6 @@ export const Divider: React.FC<DividerProps> = ({
   variant = 'solid',
   thickness = 'thin',
   color = 'default',
-  decorated = false,
-  decorationStyle = 'dots',
   children,
   spacing = 'medium',
   className = '',
@@ -44,8 +38,6 @@ export const Divider: React.FC<DividerProps> = ({
     `snake-divider--${thickness}`,
     `snake-divider--${color}`,
     `snake-divider--spacing-${spacing}`,
-    decorated && 'snake-divider--decorated',
-    decorated && `snake-divider--decoration-${decorationStyle}`,
     children && 'snake-divider--with-content',
     className,
   ]

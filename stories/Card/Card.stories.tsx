@@ -24,7 +24,7 @@ const meta = {
     },
     variant: {
       control: { type: 'select' },
-      options: ['default', 'grid'],
+      options: ['default', 'grid', 'transparent'],
     },
     interactive: { control: 'boolean' },
   },
@@ -149,6 +149,19 @@ export const GridVariant: Story = {
   },
 };
 
+export const TransparentVariant: Story = {
+  args: {
+    variant: 'transparent',
+    children: (
+      <>
+        <h3>Transparent Card</h3>
+        <p>This card has a transparent background with only corner accents visible.</p>
+        <p>Perfect for overlaying content on textured or gradient backgrounds.</p>
+      </>
+    ),
+  },
+};
+
 export const GridInteractive: Story = {
   args: {
     variant: 'grid',
@@ -162,5 +175,205 @@ export const GridInteractive: Story = {
         <p>Click to trigger an action.</p>
       </>
     ),
+  },
+};
+
+export const TransitionExpand: Story = {
+  args: {
+    transitionIn: true,
+    transitionType: 'expand',
+    transitionSpeed: 500,
+    children: (
+      <>
+        <h3>Horizontal Expanding Card</h3>
+        <p>This card expands horizontally from the center, like the sides are stretching outward.</p>
+        <p>The corner decorations slide in from the sides with a subtle glow effect.</p>
+      </>
+    ),
+  },
+};
+
+export const TransitionFade: Story = {
+  args: {
+    transitionIn: true,
+    transitionType: 'fade',
+    transitionSpeed: 400,
+    children: (
+      <>
+        <h3>Fading Card</h3>
+        <p>Simple fade-in animation for a subtle appearance.</p>
+      </>
+    ),
+  },
+};
+
+export const TransitionSlides: Story = {
+  render: () => {
+    const [key, setKey] = React.useState(0);
+    
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+          <Button onClick={() => setKey(k => k + 1)}>Replay Animations</Button>
+        </div>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+          <Card
+            key={`slide-up-${key}`}
+            transitionIn
+            transitionType="slide-up"
+            transitionSpeed={400}
+            transitionDelay={0}
+          >
+            <h4>Slide Up</h4>
+            <p>Slides up from below</p>
+          </Card>
+          
+          <Card
+            key={`slide-down-${key}`}
+            transitionIn
+            transitionType="slide-down"
+            transitionSpeed={400}
+            transitionDelay={100}
+          >
+            <h4>Slide Down</h4>
+            <p>Slides down from above</p>
+          </Card>
+          
+          <Card
+            key={`slide-left-${key}`}
+            transitionIn
+            transitionType="slide-left"
+            transitionSpeed={400}
+            transitionDelay={200}
+          >
+            <h4>Slide Left</h4>
+            <p>Slides in from the right</p>
+          </Card>
+          
+          <Card
+            key={`slide-right-${key}`}
+            transitionIn
+            transitionType="slide-right"
+            transitionSpeed={400}
+            transitionDelay={300}
+          >
+            <h4>Slide Right</h4>
+            <p>Slides in from the left</p>
+          </Card>
+        </div>
+      </div>
+    );
+  },
+};
+
+export const StaggeredCards: Story = {
+  render: () => {
+    const [show, setShow] = React.useState(false);
+    
+    React.useEffect(() => {
+      setShow(true);
+    }, []);
+    
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <Button onClick={() => {
+          setShow(false);
+          setTimeout(() => setShow(true), 100);
+        }}>
+          Replay Animation
+        </Button>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+          {[0, 1, 2, 3, 4, 5].map((index) => (
+            <Card
+              key={`card-${index}-${show}`}
+              transitionIn={show}
+              transitionType="expand"
+              transitionSpeed={300}
+              transitionDelay={index * 100}
+              size="small"
+            >
+              <h4>Card {index + 1}</h4>
+              <p>Staggered animation with {index * 100}ms delay</p>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  },
+};
+
+export const CustomSpeed: Story = {
+  render: () => {
+    const [speed, setSpeed] = React.useState(300);
+    const [key, setKey] = React.useState(0);
+    
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <label style={{ color: '#bdbdbd' }}>
+            Animation Speed: {speed}ms
+          </label>
+          <input
+            type="range"
+            min="100"
+            max="2000"
+            value={speed}
+            onChange={(e) => setSpeed(Number(e.target.value))}
+            style={{ width: '200px' }}
+          />
+          <Button size="small" onClick={() => setKey(k => k + 1)}>
+            Replay
+          </Button>
+        </div>
+        
+        <Card
+          key={key}
+          transitionIn
+          transitionType="expand"
+          transitionSpeed={speed}
+          variant="grid"
+          size="large"
+        >
+          <h3>Variable Speed Card</h3>
+          <p>Adjust the slider to change the animation speed.</p>
+          <p>Current speed: {speed}ms</p>
+        </Card>
+      </div>
+    );
+  },
+};
+
+export const TransitionCallback: Story = {
+  render: () => {
+    const [status, setStatus] = React.useState('Waiting...');
+    const [key, setKey] = React.useState(0);
+    
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <Button onClick={() => {
+            setStatus('Animating...');
+            setKey(k => k + 1);
+          }}>
+            Trigger Animation
+          </Button>
+          <span style={{ color: '#8a8a8a' }}>Status: {status}</span>
+        </div>
+        
+        <Card
+          key={key}
+          transitionIn
+          transitionType="expand"
+          transitionSpeed={1000}
+          onTransitionComplete={() => setStatus('Animation Complete!')}
+        >
+          <h3>Callback Example</h3>
+          <p>This card triggers a callback when the transition completes.</p>
+          <p>Watch the status text above change when animation finishes.</p>
+        </Card>
+      </div>
+    );
   },
 };

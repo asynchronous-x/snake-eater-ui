@@ -1,0 +1,205 @@
+@import '../theme.css';
+
+.snake-pin-input {
+  display: inline-flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.snake-pin-input__field {
+  width: 48px;
+  height: 48px;
+  background: var(--color-bg-base);
+  border: 2px solid var(--color-text-muted);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-mono);
+  text-align: center;
+  transition: all var(--transition-fast);
+  outline: none;
+  caret-color: var(--color-text-primary);
+}
+
+/* Remove spinner for number inputs */
+.snake-pin-input__field::-webkit-inner-spin-button,
+.snake-pin-input__field::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.snake-pin-input__field[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Placeholder styling */
+.snake-pin-input__field::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.3;
+  font-weight: var(--font-weight-normal);
+}
+
+/* Size variants */
+.snake-pin-input--small .snake-pin-input__field {
+  width: 36px;
+  height: 36px;
+  font-size: var(--font-size-base);
+  border-width: 1px;
+}
+
+.snake-pin-input--medium .snake-pin-input__field {
+  width: 48px;
+  height: 48px;
+  font-size: var(--font-size-xl);
+  border-width: 2px;
+}
+
+.snake-pin-input--large .snake-pin-input__field {
+  width: 60px;
+  height: 60px;
+  font-size: var(--font-size-2xl);
+  border-width: 2px;
+}
+
+/* Gap adjustments */
+.snake-pin-input--small {
+  gap: var(--spacing-sm);
+}
+
+.snake-pin-input--large {
+  gap: var(--spacing-lg);
+}
+
+/* States */
+.snake-pin-input__field:hover:not(:disabled) {
+  border-color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.snake-pin-input__field:focus {
+  border-color: var(--color-text-primary);
+  background: var(--color-bg-card);
+  box-shadow: 
+    0 0 0 3px rgba(189, 189, 189, 0.1),
+    inset 0 0 0 1px rgba(189, 189, 189, 0.05);
+  transform: scale(1.05);
+}
+
+.snake-pin-input__field--filled {
+  background: var(--color-bg-card);
+  border-color: var(--color-text-secondary);
+}
+
+.snake-pin-input__field--filled:focus {
+  border-color: var(--color-text-primary);
+}
+
+/* Error state */
+.snake-pin-input--error .snake-pin-input__field {
+  border-color: var(--color-danger);
+  background: rgba(255, 85, 85, 0.05);
+}
+
+.snake-pin-input--error .snake-pin-input__field:focus {
+  border-color: var(--color-danger);
+  box-shadow: 
+    0 0 0 3px rgba(255, 85, 85, 0.15),
+    inset 0 0 0 1px rgba(255, 85, 85, 0.1);
+}
+
+.snake-pin-input--error .snake-pin-input__field--filled {
+  background: rgba(255, 85, 85, 0.08);
+  color: var(--color-danger);
+}
+
+/* Success state */
+.snake-pin-input--success .snake-pin-input__field {
+  border-color: var(--color-success);
+  background: rgba(80, 250, 123, 0.05);
+}
+
+.snake-pin-input--success .snake-pin-input__field:focus {
+  border-color: var(--color-success);
+  box-shadow: 
+    0 0 0 3px rgba(80, 250, 123, 0.15),
+    inset 0 0 0 1px rgba(80, 250, 123, 0.1);
+}
+
+.snake-pin-input--success .snake-pin-input__field--filled {
+  background: rgba(80, 250, 123, 0.08);
+  color: var(--color-success);
+}
+
+/* Disabled state */
+.snake-pin-input--disabled .snake-pin-input__field {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--color-text-muted);
+}
+
+.snake-pin-input--disabled .snake-pin-input__field:hover {
+  border-color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.02);
+  transform: none;
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+  20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.snake-pin-input--error {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Pulse animation for success */
+@keyframes pulse-success {
+  0% {
+    box-shadow: 0 0 0 0 rgba(80, 250, 123, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(80, 250, 123, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(80, 250, 123, 0);
+  }
+}
+
+.snake-pin-input--success .snake-pin-input__field--filled {
+  animation: pulse-success 0.5s ease-out;
+}
+
+/* Password dots */
+input[type="password"].snake-pin-input__field {
+  font-size: var(--font-size-2xl);
+  letter-spacing: 0.1em;
+}
+
+/* Focus progression indicator */
+.snake-pin-input__field:focus ~ .snake-pin-input__field {
+  opacity: 0.7;
+}
+
+/* Smooth transitions between fields */
+.snake-pin-input__field {
+  position: relative;
+}
+
+.snake-pin-input__field::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--color-text-primary);
+  transition: width var(--transition-fast);
+}
+
+.snake-pin-input__field:focus::after {
+  width: 100%;
+}

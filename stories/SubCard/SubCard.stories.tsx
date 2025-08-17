@@ -28,6 +28,13 @@ const meta = {
     },
     interactive: { control: 'boolean' },
     cornerColor: { control: 'color' },
+    transitionIn: { control: 'boolean' },
+    transitionType: {
+      control: { type: 'select' },
+      options: ['expand', 'fade', 'slide-up', 'slide-down', 'slide-left', 'slide-right'],
+    },
+    transitionSpeed: { control: { type: 'number', min: 100, max: 2000, step: 100 } },
+    transitionDelay: { control: { type: 'number', min: 0, max: 1000, step: 50 } },
   },
 } satisfies Meta<typeof SubCard>;
 
@@ -269,4 +276,334 @@ export const MixedStyles: Story = {
       </SubCard>
     </div>
   ),
+};
+
+export const AlignedRow: Story = {
+  render: () => (
+    <>
+      <h3 style={{ marginBottom: '20px', color: '#bdbdbd' }}>Perfect Corner Alignment</h3>
+      <p style={{ marginBottom: '20px', color: '#8a8a8a' }}>
+        When SubCards are placed directly adjacent (no gap), the corner accents align perfectly:
+      </p>
+      <div className="snake-subcard-row">
+        <SubCard>
+          <h4>Card One</h4>
+          <p>The corners align perfectly when cards touch.</p>
+        </SubCard>
+        <SubCard variant="success">
+          <h4>Card Two</h4>
+          <p>Notice how the + symbols stack at the borders.</p>
+        </SubCard>
+        <SubCard variant="info">
+          <h4>Card Three</h4>
+          <p>Creates a continuous visual line.</p>
+        </SubCard>
+      </div>
+      
+      <h3 style={{ marginTop: '40px', marginBottom: '20px', color: '#bdbdbd' }}>Grid Layout</h3>
+      <div className="snake-subcard-grid snake-subcard-grid--3" style={{ marginBottom: '20px' }}>
+        <SubCard size="small">
+          <h5>Grid Item 1</h5>
+          <p>Small size</p>
+        </SubCard>
+        <SubCard size="small" variant="warning">
+          <h5>Grid Item 2</h5>
+          <p>Small size</p>
+        </SubCard>
+        <SubCard size="small" variant="danger">
+          <h5>Grid Item 3</h5>
+          <p>Small size</p>
+        </SubCard>
+        <SubCard size="small" variant="info">
+          <h5>Grid Item 4</h5>
+          <p>Small size</p>
+        </SubCard>
+        <SubCard size="small" variant="success">
+          <h5>Grid Item 5</h5>
+          <p>Small size</p>
+        </SubCard>
+        <SubCard size="small">
+          <h5>Grid Item 6</h5>
+          <p>Small size</p>
+        </SubCard>
+      </div>
+    </>
+  ),
+};
+
+export const TransitionExpand: Story = {
+  args: {
+    transitionIn: true,
+    transitionType: 'expand',
+    transitionSpeed: 500,
+    variant: 'success',
+    children: (
+      <>
+        <h3>Horizontal Expand Animation</h3>
+        <p>The card expands horizontally from the center with rotating plus corners.</p>
+        <p>This creates a dramatic reveal effect with staggered corner animations.</p>
+      </>
+    ),
+  },
+};
+
+export const TransitionFade: Story = {
+  args: {
+    transitionIn: true,
+    transitionType: 'fade',
+    transitionSpeed: 300,
+    variant: 'info',
+    children: (
+      <>
+        <h3>Fade In Effect</h3>
+        <p>Simple opacity transition for a subtle entrance.</p>
+      </>
+    ),
+  },
+};
+
+export const TransitionSlideUp: Story = {
+  args: {
+    transitionIn: true,
+    transitionType: 'slide-up',
+    transitionSpeed: 400,
+    children: (
+      <>
+        <h3>Slide Up Animation</h3>
+        <p>The card slides up from below while fading in.</p>
+      </>
+    ),
+  },
+};
+
+export const TransitionShowcase: Story = {
+  render: () => {
+    const [show, setShow] = React.useState(false);
+    
+    React.useEffect(() => {
+      setShow(true);
+    }, []);
+
+    return (
+      <div>
+        <div style={{ marginBottom: '32px' }}>
+          <Button onClick={() => {
+            setShow(false);
+            setTimeout(() => setShow(true), 100);
+          }}>
+            Replay Animations
+          </Button>
+        </div>
+        <div
+          style={{
+            display: 'grid',
+            gap: '16px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          }}
+        >
+          <SubCard
+            key={`expand-${show}`}
+            transitionIn={show}
+            transitionType="expand"
+            transitionSpeed={500}
+            transitionDelay={0}
+            variant="success"
+          >
+            <h4>Expand (0ms delay)</h4>
+            <p>Horizontal expansion with rotating corners</p>
+          </SubCard>
+          <SubCard
+            key={`fade-${show}`}
+            transitionIn={show}
+            transitionType="fade"
+            transitionSpeed={400}
+            transitionDelay={100}
+            variant="info"
+          >
+            <h4>Fade (100ms delay)</h4>
+            <p>Simple opacity transition</p>
+          </SubCard>
+          <SubCard
+            key={`slide-up-${show}`}
+            transitionIn={show}
+            transitionType="slide-up"
+            transitionSpeed={400}
+            transitionDelay={200}
+            variant="warning"
+          >
+            <h4>Slide Up (200ms delay)</h4>
+            <p>Slides from below</p>
+          </SubCard>
+          <SubCard
+            key={`slide-down-${show}`}
+            transitionIn={show}
+            transitionType="slide-down"
+            transitionSpeed={400}
+            transitionDelay={300}
+          >
+            <h4>Slide Down (300ms delay)</h4>
+            <p>Slides from above</p>
+          </SubCard>
+          <SubCard
+            key={`slide-left-${show}`}
+            transitionIn={show}
+            transitionType="slide-left"
+            transitionSpeed={400}
+            transitionDelay={400}
+            variant="danger"
+          >
+            <h4>Slide Left (400ms delay)</h4>
+            <p>Slides from right</p>
+          </SubCard>
+          <SubCard
+            key={`slide-right-${show}`}
+            transitionIn={show}
+            transitionType="slide-right"
+            transitionSpeed={400}
+            transitionDelay={500}
+            cornerColor="#f1fa8c"
+          >
+            <h4>Slide Right (500ms delay)</h4>
+            <p>Slides from left with custom corners</p>
+          </SubCard>
+        </div>
+      </div>
+    );
+  },
+};
+
+export const StaggeredTransitions: Story = {
+  render: () => {
+    const [show, setShow] = React.useState(false);
+    
+    React.useEffect(() => {
+      setShow(true);
+    }, []);
+
+    return (
+      <div>
+        <div style={{ marginBottom: '32px' }}>
+          <Button onClick={() => {
+            setShow(false);
+            setTimeout(() => setShow(true), 100);
+          }}>
+            Replay Animation
+          </Button>
+        </div>
+        <div className="snake-subcard-row">
+          <SubCard
+            key={`first-${show}`}
+            transitionIn={show}
+            transitionType="expand"
+            transitionSpeed={600}
+            transitionDelay={0}
+            variant="success"
+          >
+            <h4>First Card</h4>
+            <p>Appears immediately</p>
+          </SubCard>
+          <SubCard
+            key={`second-${show}`}
+            transitionIn={show}
+            transitionType="expand"
+            transitionSpeed={600}
+            transitionDelay={150}
+            variant="info"
+          >
+            <h4>Second Card</h4>
+            <p>150ms delay</p>
+          </SubCard>
+          <SubCard
+            key={`third-${show}`}
+            transitionIn={show}
+            transitionType="expand"
+            transitionSpeed={600}
+            transitionDelay={300}
+            variant="warning"
+          >
+            <h4>Third Card</h4>
+            <p>300ms delay</p>
+          </SubCard>
+        </div>
+      </div>
+    );
+  },
+};
+
+export const TransitionWithCallback: Story = {
+  render: () => {
+    const [status, setStatus] = React.useState('Waiting...');
+    const [key, setKey] = React.useState(0);
+
+    return (
+      <div>
+        <div style={{ marginBottom: '32px', display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <Button onClick={() => {
+            setStatus('Animating...');
+            setKey(k => k + 1);
+          }}>
+            Trigger Animation
+          </Button>
+          <span style={{ color: '#8a8a8a' }}>Status: {status}</span>
+        </div>
+        <SubCard
+          key={key}
+          transitionIn
+          transitionType="expand"
+          transitionSpeed={800}
+          variant="success"
+          onTransitionComplete={() => setStatus('Animation Complete!')}
+        >
+          <h3>Callback Example</h3>
+          <p>Watch for the completion message above when the animation finishes.</p>
+          <p>The expand animation has special effects on the corner plus symbols.</p>
+        </SubCard>
+      </div>
+    );
+  },
+};
+
+export const FastTransitions: Story = {
+  render: () => {
+    const [show, setShow] = React.useState(false);
+    
+    React.useEffect(() => {
+      setShow(true);
+    }, []);
+
+    return (
+      <div>
+        <div style={{ marginBottom: '32px' }}>
+          <Button onClick={() => {
+            setShow(false);
+            setTimeout(() => setShow(true), 100);
+          }}>
+            Replay Fast Cards
+          </Button>
+        </div>
+        <div
+          style={{
+            display: 'grid',
+            gap: '16px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          }}
+        >
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <SubCard
+              key={`card-${i}-${show}`}
+              transitionIn={show}
+              transitionType="expand"
+              transitionSpeed={200}
+              transitionDelay={i * 30}
+              variant={['success', 'info', 'warning', 'danger', 'default', 'inactive'][i]}
+              size="small"
+            >
+              <h5>Card {i + 1}</h5>
+              <p>Fast {i * 30}ms delay</p>
+            </SubCard>
+          ))}
+        </div>
+      </div>
+    );
+  },
 };

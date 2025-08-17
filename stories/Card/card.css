@@ -164,3 +164,179 @@
 .snake-card-component--grid .snake-card-component__elbow {
   z-index: 1;
 }
+
+/* Transparent variant - only corner accents visible */
+.snake-card-component--transparent {
+  background-color: transparent;
+  border: none;
+}
+
+.snake-card-component--transparent .snake-card-component__elbow {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+  border-color: var(--color-text-primary);
+}
+
+/* Adjust corner positioning for transparent variant */
+.snake-card-component--transparent .snake-card-component__elbow--top-left {
+  top: 0;
+  left: 0;
+}
+
+.snake-card-component--transparent .snake-card-component__elbow--top-right {
+  top: 0;
+  right: 0;
+}
+
+.snake-card-component--transparent .snake-card-component__elbow--bottom-left {
+  bottom: 0;
+  left: 0;
+}
+
+.snake-card-component--transparent .snake-card-component__elbow--bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+/* Remove borders from header/footer in transparent variant */
+.snake-card-component--transparent .snake-card-component__header {
+  border-bottom: none;
+}
+
+.snake-card-component--transparent .snake-card-component__footer {
+  border-top: none;
+}
+
+/* Transparent variant hover state */
+.snake-card-component--transparent.snake-card-component--interactive:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.snake-card-component--transparent.snake-card-component--interactive:hover .snake-card-component__elbow {
+  border-color: var(--color-text-primary);
+  box-shadow: 0 0 10px rgba(189, 189, 189, 0.2);
+}
+
+/* Size adjustments for transparent variant */
+.snake-card-component--transparent.snake-card-component--small .snake-card-component__elbow {
+  width: 14px;
+  height: 14px;
+}
+
+.snake-card-component--transparent.snake-card-component--large .snake-card-component__elbow {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+/* Transition animations */
+.snake-card-component--transition {
+  --transition-speed: 300ms;
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Initial states for different transition types */
+.snake-card-component--transition-expand:not(.snake-card-component--visible) {
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+.snake-card-component--transition-fade:not(.snake-card-component--visible) {
+  opacity: 0;
+}
+
+.snake-card-component--transition-slide-up:not(.snake-card-component--visible) {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.snake-card-component--transition-slide-down:not(.snake-card-component--visible) {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.snake-card-component--transition-slide-left:not(.snake-card-component--visible) {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.snake-card-component--transition-slide-right:not(.snake-card-component--visible) {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+/* Visible state - all transitions end here */
+.snake-card-component--transition.snake-card-component--visible {
+  transform: scale(1) translate(0, 0);
+  opacity: 1;
+}
+
+/* Special horizontal expand animation */
+.snake-card-component--transition-expand {
+  transform-origin: center center;
+}
+
+.snake-card-component--transition-expand .snake-card-component__elbow {
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Corners slide in from the sides */
+.snake-card-component--transition-expand:not(.snake-card-component--visible) .snake-card-component__elbow--top-left,
+.snake-card-component--transition-expand:not(.snake-card-component--visible) .snake-card-component__elbow--bottom-left {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.snake-card-component--transition-expand:not(.snake-card-component--visible) .snake-card-component__elbow--top-right,
+.snake-card-component--transition-expand:not(.snake-card-component--visible) .snake-card-component__elbow--bottom-right {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+/* Content fades in slightly delayed */
+.snake-card-component--transition-expand .snake-card-component__content,
+.snake-card-component--transition-expand .snake-card-component__header,
+.snake-card-component--transition-expand .snake-card-component__footer {
+  transition: opacity calc(var(--transition-speed) * 0.8) cubic-bezier(0.4, 0.0, 0.2, 1) calc(var(--transition-speed) * 0.2);
+}
+
+.snake-card-component--transition-expand:not(.snake-card-component--visible) .snake-card-component__content,
+.snake-card-component--transition-expand:not(.snake-card-component--visible) .snake-card-component__header,
+.snake-card-component--transition-expand:not(.snake-card-component--visible) .snake-card-component__footer {
+  opacity: 0;
+}
+
+/* Animating state for additional effects */
+.snake-card-component--animating.snake-card-component--transition-expand {
+  animation: horizontal-glow var(--transition-speed) ease-out;
+}
+
+/* Horizontal glow effect emphasizing the expansion */
+@keyframes horizontal-glow {
+  0% {
+    box-shadow: 
+      inset 0 0 0 1px rgba(142, 142, 144, 0.6),
+      0 0 20px -10px rgba(142, 142, 144, 0);
+  }
+  50% {
+    box-shadow: 
+      inset 0 0 0 1px rgba(142, 142, 144, 0.3),
+      -10px 0 20px -10px rgba(142, 142, 144, 0.4),
+      10px 0 20px -10px rgba(142, 142, 144, 0.4);
+  }
+  100% {
+    box-shadow: 
+      inset 0 0 0 0 rgba(142, 142, 144, 0),
+      0 0 0 0 rgba(142, 142, 144, 0);
+  }
+}
+
+/* Add a subtle vertical scale to maintain aspect during horizontal expansion */
+.snake-card-component--transition-expand:not(.snake-card-component--visible) {
+  transform: scaleX(0) scaleY(0.95);
+}
+
+.snake-card-component--transition-expand.snake-card-component--visible {
+  transform: scaleX(1) scaleY(1);
+}

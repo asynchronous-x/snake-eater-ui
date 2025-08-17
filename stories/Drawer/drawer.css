@@ -1,0 +1,206 @@
+@import '../theme.css';
+
+/* Overlay */
+.snake-drawer__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+}
+
+.snake-drawer__overlay--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Drawer container */
+.snake-drawer {
+  position: fixed;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-text-muted);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base) cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Position variants */
+.snake-drawer--left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  transform: translateX(-100%);
+  border-right: 1px solid var(--color-text-muted);
+  border-left: none;
+}
+
+.snake-drawer--right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(100%);
+  border-left: 1px solid var(--color-text-muted);
+  border-right: none;
+}
+
+.snake-drawer--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+  border-bottom: 1px solid var(--color-text-muted);
+  border-top: none;
+}
+
+.snake-drawer--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+  border-top: 1px solid var(--color-text-muted);
+  border-bottom: none;
+}
+
+/* Open state */
+.snake-drawer--open.snake-drawer--left,
+.snake-drawer--open.snake-drawer--right {
+  transform: translateX(0);
+}
+
+.snake-drawer--open.snake-drawer--top,
+.snake-drawer--open.snake-drawer--bottom {
+  transform: translateY(0);
+}
+
+/* Size variants for horizontal drawers */
+.snake-drawer--left.snake-drawer--small,
+.snake-drawer--right.snake-drawer--small {
+  width: 250px;
+}
+
+.snake-drawer--left.snake-drawer--medium,
+.snake-drawer--right.snake-drawer--medium {
+  width: 400px;
+}
+
+.snake-drawer--left.snake-drawer--large,
+.snake-drawer--right.snake-drawer--large {
+  width: 600px;
+}
+
+.snake-drawer--left.snake-drawer--full,
+.snake-drawer--right.snake-drawer--full {
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Size variants for vertical drawers */
+.snake-drawer--top.snake-drawer--small,
+.snake-drawer--bottom.snake-drawer--small {
+  height: 200px;
+}
+
+.snake-drawer--top.snake-drawer--medium,
+.snake-drawer--bottom.snake-drawer--medium {
+  height: 400px;
+}
+
+.snake-drawer--top.snake-drawer--large,
+.snake-drawer--bottom.snake-drawer--large {
+  height: 600px;
+}
+
+.snake-drawer--top.snake-drawer--full,
+.snake-drawer--bottom.snake-drawer--full {
+  height: 100%;
+  max-height: 100vh;
+}
+
+/* Close button */
+.snake-drawer__close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--color-text-muted);
+  color: var(--color-text-secondary);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: all var(--transition-fast);
+}
+
+.snake-drawer__close:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+.snake-drawer__close:active {
+  transform: scale(0.95);
+}
+
+/* Header */
+.snake-drawer__header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* Content */
+.snake-drawer__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-lg);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+}
+
+/* Footer */
+.snake-drawer__footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* Scrollbar styling */
+.snake-drawer__content::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.snake-drawer__content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.snake-drawer__content::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border: none;
+}
+
+.snake-drawer__content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Animation enhancement */
+@media (prefers-reduced-motion: reduce) {
+  .snake-drawer {
+    transition: none;
+  }
+  
+  .snake-drawer__overlay {
+    transition: none;
+  }
+}

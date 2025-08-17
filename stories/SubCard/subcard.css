@@ -11,6 +11,48 @@
   color: var(--color-text-primary);
 }
 
+/* Container for multiple subcards - ensures perfect corner alignment */
+.snake-subcard-row {
+  display: flex;
+  gap: 0; /* No gap - cards touch for corner alignment */
+  align-items: stretch;
+}
+
+.snake-subcard-row > .snake-subcard {
+  flex: 1;
+  margin: 0;
+}
+
+/* When cards are adjacent, hide overlapping corners */
+.snake-subcard-row > .snake-subcard:not(:first-child) .snake-subcard__corner--top-left,
+.snake-subcard-row > .snake-subcard:not(:first-child) .snake-subcard__corner--bottom-left {
+  display: none;
+}
+
+.snake-subcard-row > .snake-subcard:not(:last-child) .snake-subcard__corner--top-right,
+.snake-subcard-row > .snake-subcard:not(:last-child) .snake-subcard__corner--bottom-right {
+  display: none;
+}
+
+/* Grid layout option for perfect alignment */
+.snake-subcard-grid {
+  display: grid;
+  gap: 0;
+  grid-auto-rows: 1fr;
+}
+
+.snake-subcard-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.snake-subcard-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.snake-subcard-grid--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 /* Sizes */
 .snake-subcard--small {
   padding: var(--spacing-md);
@@ -24,7 +66,7 @@
   padding: var(--spacing-xl);
 }
 
-/* Corner plus symbols */
+/* Corner plus symbols - aligned for perfect stacking */
 .snake-subcard__corner {
   position: absolute;
   display: flex;
@@ -36,26 +78,30 @@
   font-weight: var(--font-weight-bold);
   color: #8e8e90;
   z-index: 1;
+  /* Center the plus symbol perfectly */
+  line-height: 1;
 }
 
+/* Precise positioning for perfect alignment when stacked
+   Accounts for 1px border: positions adjusted by 1px for perfect overlap */
 .snake-subcard__corner--top-left {
-  top: -12px;
-  left: -10px;
+  top: -11px;  /* Half height (10px) + 1px border */
+  left: -11px; /* Half width (10px) + 1px border */
 }
 
 .snake-subcard__corner--top-right {
-  top: -12px;
-  right: -10px;
+  top: -11px;
+  right: -11px;
 }
 
 .snake-subcard__corner--bottom-left {
-  bottom: -9px;
-  left: -10px;
+  bottom: -11px;
+  left: -11px;
 }
 
 .snake-subcard__corner--bottom-right {
-  bottom: -9px;
-  right: -10px;
+  bottom: -11px;
+  right: -11px;
 }
 
 /* Header and Footer */
@@ -104,42 +150,43 @@
 }
 
 .snake-subcard--interactive:active {
-  background-color: #181818;
+  background-color: #202020;
+  border-color: #5a5a5a;
   transform: translateY(1px);
 }
 
 .snake-subcard--interactive:focus {
   outline: none;
-  box-shadow:
-    0 0 0 2px var(--color-bg-base),
-    0 0 0 4px #8e8e90;
+  background-color: #181818;
+  border-color: #4a4a4a;
 }
 
-/* Size adjustments */
+/* Size adjustments - maintaining perfect alignment */
 .snake-subcard--small .snake-subcard__corner {
   width: 16px;
   height: 16px;
   font-size: 14px;
 }
 
+/* Small size: 16px corners, positioned at half (8px) + 1px border */
 .snake-subcard--small .snake-subcard__corner--top-left,
 .snake-subcard--small .snake-subcard__corner--top-right {
-  top: -10px;
+  top: -9px;
 }
 
 .snake-subcard--small .snake-subcard__corner--bottom-left,
 .snake-subcard--small .snake-subcard__corner--bottom-right {
-  bottom: -7px;
+  bottom: -9px;
 }
 
 .snake-subcard--small .snake-subcard__corner--top-left,
 .snake-subcard--small .snake-subcard__corner--bottom-left {
-  left: -8px;
+  left: -9px;
 }
 
 .snake-subcard--small .snake-subcard__corner--top-right,
 .snake-subcard--small .snake-subcard__corner--bottom-right {
-  right: -8px;
+  right: -9px;
 }
 
 .snake-subcard--large .snake-subcard__corner {
@@ -148,24 +195,25 @@
   font-size: 22px;
 }
 
+/* Large size: 24px corners, positioned at half (12px) + 1px border */
 .snake-subcard--large .snake-subcard__corner--top-left,
 .snake-subcard--large .snake-subcard__corner--top-right {
-  top: -14px;
+  top: -13px;
 }
 
 .snake-subcard--large .snake-subcard__corner--bottom-left,
 .snake-subcard--large .snake-subcard__corner--bottom-right {
-  bottom: -12px;
+  bottom: -13px;
 }
 
 .snake-subcard--large .snake-subcard__corner--top-left,
 .snake-subcard--large .snake-subcard__corner--bottom-left {
-  left: -12px;
+  left: -13px;
 }
 
 .snake-subcard--large .snake-subcard__corner--top-right,
 .snake-subcard--large .snake-subcard__corner--bottom-right {
-  right: -12px;
+  right: -13px;
 }
 
 /* Variant: Success */
@@ -251,4 +299,121 @@
 
 .snake-subcard--inactive.snake-subcard--interactive:hover .snake-subcard__corner {
   color: #5a5a5a;
+}
+
+/* Transition animations */
+.snake-subcard--transition {
+  --transition-speed: 300ms;
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Initial states for different transition types */
+.snake-subcard--transition-expand:not(.snake-subcard--visible) {
+  transform: scaleX(0) scaleY(0.95);
+  opacity: 0;
+}
+
+.snake-subcard--transition-fade:not(.snake-subcard--visible) {
+  opacity: 0;
+}
+
+.snake-subcard--transition-slide-up:not(.snake-subcard--visible) {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.snake-subcard--transition-slide-down:not(.snake-subcard--visible) {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.snake-subcard--transition-slide-left:not(.snake-subcard--visible) {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.snake-subcard--transition-slide-right:not(.snake-subcard--visible) {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+/* Visible state - all transitions end here */
+.snake-subcard--transition.snake-subcard--visible {
+  transform: scale(1) translate(0, 0);
+  opacity: 1;
+}
+
+/* Special horizontal expand animation with plus corners */
+.snake-subcard--transition-expand {
+  transform-origin: center center;
+}
+
+.snake-subcard--transition-expand .snake-subcard__corner {
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Plus corners rotate and scale in */
+.snake-subcard--transition-expand:not(.snake-subcard--visible) .snake-subcard__corner {
+  transform: scale(0) rotate(90deg);
+  opacity: 0;
+}
+
+/* Stagger the corner animations */
+.snake-subcard--transition-expand .snake-subcard__corner--top-left {
+  transition-delay: calc(var(--transition-speed) * 0.1);
+}
+
+.snake-subcard--transition-expand .snake-subcard__corner--top-right {
+  transition-delay: calc(var(--transition-speed) * 0.2);
+}
+
+.snake-subcard--transition-expand .snake-subcard__corner--bottom-right {
+  transition-delay: calc(var(--transition-speed) * 0.3);
+}
+
+.snake-subcard--transition-expand .snake-subcard__corner--bottom-left {
+  transition-delay: calc(var(--transition-speed) * 0.4);
+}
+
+/* Content fades in slightly delayed */
+.snake-subcard--transition-expand .snake-subcard__content,
+.snake-subcard--transition-expand .snake-subcard__header,
+.snake-subcard--transition-expand .snake-subcard__footer {
+  transition: opacity calc(var(--transition-speed) * 0.8) cubic-bezier(0.4, 0.0, 0.2, 1) calc(var(--transition-speed) * 0.2);
+}
+
+.snake-subcard--transition-expand:not(.snake-subcard--visible) .snake-subcard__content,
+.snake-subcard--transition-expand:not(.snake-subcard--visible) .snake-subcard__header,
+.snake-subcard--transition-expand:not(.snake-subcard--visible) .snake-subcard__footer {
+  opacity: 0;
+}
+
+/* Animating state for additional effects */
+.snake-subcard--animating.snake-subcard--transition-expand {
+  animation: plus-pulse var(--transition-speed) ease-out;
+}
+
+/* Pulse effect with plus symbol theme */
+@keyframes plus-pulse {
+  0% {
+    box-shadow: 
+      inset 0 0 0 1px rgba(142, 142, 144, 0.6),
+      0 0 20px -10px rgba(142, 142, 144, 0);
+  }
+  50% {
+    box-shadow: 
+      inset 0 0 0 1px rgba(142, 142, 144, 0.3),
+      -10px 0 20px -10px rgba(142, 142, 144, 0.4),
+      10px 0 20px -10px rgba(142, 142, 144, 0.4);
+  }
+  100% {
+    box-shadow: 
+      inset 0 0 0 0 rgba(142, 142, 144, 0),
+      0 0 0 0 rgba(142, 142, 144, 0);
+  }
+}
+
+/* Add a subtle vertical scale to maintain aspect during horizontal expansion */
+.snake-subcard--transition-expand.snake-subcard--visible {
+  transform: scaleX(1) scaleY(1);
 }
