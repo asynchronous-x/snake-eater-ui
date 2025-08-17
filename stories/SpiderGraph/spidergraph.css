@@ -1,0 +1,253 @@
+@import '../theme.css';
+
+.snake-spider-graph {
+  display: inline-block;
+  position: relative;
+  font-family: var(--font-family);
+}
+
+.snake-spider-graph__svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Grid styling */
+.snake-spider-graph__grid-level {
+  stroke-dasharray: 2, 4;
+}
+
+.snake-spider-graph--cyber .snake-spider-graph__grid-level {
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 3px currentColor);
+}
+
+/* Axes */
+.snake-spider-graph__axis {
+  stroke-dasharray: 4, 4;
+}
+
+/* Data polygon */
+.snake-spider-graph__polygon {
+  transition: all var(--transition-fast);
+}
+
+.snake-spider-graph--animated .snake-spider-graph__polygon {
+  animation: spider-graph-expand 0.6s ease-out;
+  transform-origin: center;
+}
+
+.snake-spider-graph:hover .snake-spider-graph__polygon {
+  fill-opacity: 0.2;
+  filter: drop-shadow(0 0 15px currentColor);
+}
+
+/* Data dots */
+.snake-spider-graph__dot {
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.snake-spider-graph__dot:hover {
+  r: 6;
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.snake-spider-graph--animated .snake-spider-graph__dot {
+  animation: spider-graph-dot-fade 0.3s ease-out;
+  animation-delay: 0.3s;
+  animation-fill-mode: backwards;
+}
+
+/* Values */
+.snake-spider-graph__value {
+  font-weight: var(--font-weight-bold);
+  pointer-events: none;
+  user-select: none;
+  text-shadow: 
+    0 0 10px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Labels */
+.snake-spider-graph__label {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  cursor: default;
+}
+
+.snake-spider-graph__label:hover {
+  fill: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Corner accents */
+.snake-spider-graph__corners path {
+  stroke: #8e8e90;
+  transition: all var(--transition-fast);
+}
+
+.snake-spider-graph:hover .snake-spider-graph__corners path {
+  stroke: var(--color-text-primary);
+}
+
+/* Variant: Minimal */
+.snake-spider-graph--minimal .snake-spider-graph__polygon {
+  /* Already has no filter by default */
+}
+
+.snake-spider-graph--minimal .snake-spider-graph__label {
+  font-size: 10px;
+  fill: var(--color-text-muted);
+}
+
+/* Variant: Detailed */
+.snake-spider-graph--detailed .snake-spider-graph__polygon {
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.snake-spider-graph--detailed .snake-spider-graph__dot {
+  r: 5;
+  stroke-width: 3;
+}
+
+.snake-spider-graph--detailed .snake-spider-graph__grid-level {
+  stroke-width: 1.5;
+}
+
+/* Variant: Cyber */
+.snake-spider-graph--cyber .snake-spider-graph__polygon {
+  filter: 
+    drop-shadow(0 0 10px #61dafb)
+    drop-shadow(0 0 20px #61dafb)
+    drop-shadow(0 0 30px #61dafb);
+  stroke-linejoin: miter;
+  animation: cyber-pulse 2s ease-in-out infinite;
+}
+
+.snake-spider-graph--cyber .snake-spider-graph__dot {
+  fill: #61dafb;
+  stroke: #0b0b0d;
+  filter: drop-shadow(0 0 5px #61dafb);
+}
+
+.snake-spider-graph--cyber .snake-spider-graph__axis {
+  stroke: #61dafb;
+  stroke-opacity: 0.2;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 2px #61dafb);
+}
+
+.snake-spider-graph--cyber .snake-spider-graph__label {
+  fill: #61dafb;
+  font-family: var(--font-family-mono);
+  letter-spacing: 0.1em;
+}
+
+.snake-spider-graph--cyber .snake-spider-graph__corners path {
+  stroke: #61dafb;
+  filter: drop-shadow(0 0 5px #61dafb);
+}
+
+/* Animations */
+@keyframes spider-graph-expand {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spider-graph-dot-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes cyber-pulse {
+  0%, 100% {
+    fill-opacity: 0.1;
+    stroke-opacity: 0.8;
+  }
+  50% {
+    fill-opacity: 0.2;
+    stroke-opacity: 1;
+  }
+}
+
+/* Interactive states */
+.snake-spider-graph__polygon {
+  cursor: pointer;
+}
+
+.snake-spider-graph__polygon:active {
+  fill-opacity: 0.4;
+  transform: scale(0.98);
+}
+
+/* Grid hover effect */
+.snake-spider-graph:hover .snake-spider-graph__grid-level {
+  stroke-opacity: 0.6;
+}
+
+.snake-spider-graph:hover .snake-spider-graph__axis {
+  stroke-opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .snake-spider-graph__label {
+    font-size: 10px;
+  }
+  
+  .snake-spider-graph__value {
+    font-size: 10px;
+  }
+}
+
+/* Loading state */
+.snake-spider-graph--loading .snake-spider-graph__polygon {
+  animation: spider-graph-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes spider-graph-loading {
+  0%, 100% {
+    fill-opacity: 0.1;
+    transform: scale(0.95);
+  }
+  50% {
+    fill-opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+/* Multiple datasets support */
+.snake-spider-graph__polygon--secondary {
+  fill: var(--color-danger);
+  stroke: var(--color-danger);
+  fill-opacity: 0.2;
+  stroke-width: 2;
+  stroke-dasharray: 4, 2;
+}
+
+.snake-spider-graph__polygon--tertiary {
+  fill: var(--color-warning);
+  stroke: var(--color-warning);
+  fill-opacity: 0.15;
+  stroke-width: 2;
+  stroke-dasharray: 2, 2;
+}
