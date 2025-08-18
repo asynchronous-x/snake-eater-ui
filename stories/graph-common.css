@@ -1,0 +1,58 @@
+/* Common styles for all graph components to be responsive */
+
+.snake-line-graph,
+.snake-bar-graph,
+.snake-donut-graph,
+.snake-stream-graph,
+.snake-hexagonal-binning-graph,
+.snake-ridgeline-graph,
+.snake-spider-graph {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.snake-line-graph__svg,
+.snake-bar-graph__svg,
+.snake-donut-graph__svg,
+.snake-stream-graph__svg,
+.snake-hexagonal-binning-graph__svg,
+.snake-ridgeline-graph__svg,
+.snake-spider-graph__svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure containers are responsive */
+.snake-line-graph__container,
+.snake-bar-graph__content,
+.snake-donut-graph__container,
+.snake-stream-graph__container,
+.snake-hexagonal-binning-graph__container,
+.snake-ridgeline-graph__container,
+.snake-spider-graph__container {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Make legends responsive */
+.snake-line-graph__legend,
+.snake-stream-graph__legend,
+.snake-hexagonal-binning-graph__legend,
+.snake-spider-graph__legend {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  max-width: calc(100% - 40px);
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .snake-line-graph__legend,
+  .snake-stream-graph__legend,
+  .snake-hexagonal-binning-graph__legend,
+  .snake-spider-graph__legend {
+    position: static;
+    margin-top: 20px;
+    max-width: 100%;
+  }
+}

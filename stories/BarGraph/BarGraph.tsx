@@ -65,12 +65,13 @@ export const BarGraph: React.FC<BarGraphProps> = ({
   barColor = '#3a3a3a',
   gridColor = '#3a3a3a',
   variant = 'default',
-  formatValue = (value) => value.toString(),
+  formatValue = (value) => value?.toString() || '0',
   className = '',
 }) => {
   const calculatedMaxValue = useMemo(() => {
     if (maxValue) return maxValue;
-    return Math.max(...data.map((d) => d.value)) * 1.1; // Add 10% padding
+    const values = data.map((d) => d.value || 0);
+    return Math.max(...values, 0) * 1.1; // Add 10% padding
   }, [data, maxValue]);
 
   const scaleValues = useMemo(() => {
@@ -162,7 +163,7 @@ export const BarGraph: React.FC<BarGraphProps> = ({
       {/* Bars */}
       <div className="snake-bar-graph__bars">
         {data.map((point, index) => {
-          const barHeight = (point.value / calculatedMaxValue) * 100;
+          const barHeight = ((point.value || 0) / calculatedMaxValue) * 100;
           return (
             <div
               key={`bar-${index}`}
@@ -242,7 +243,7 @@ export const BarGraph: React.FC<BarGraphProps> = ({
       {/* Bars */}
       <div className="snake-bar-graph__bars">
         {data.map((point, index) => {
-          const barWidthPercent = (point.value / calculatedMaxValue) * 100;
+          const barWidthPercent = ((point.value || 0) / calculatedMaxValue) * 100;
           return (
             <div
               key={`bar-${index}`}
@@ -289,8 +290,9 @@ export const BarGraph: React.FC<BarGraphProps> = ({
       <div
         className="snake-bar-graph__content"
         style={{
-          width: orientation === 'vertical' ? `${graphWidth}px` : `${graphWidth}px`,
+          width: orientation === 'vertical' ? `${graphWidth}px` : '100%',
           height: `${graphHeight}px`,
+          maxWidth: '100%',
         }}
       >
         {orientation === 'vertical' ? renderVerticalBars() : renderHorizontalBars()}

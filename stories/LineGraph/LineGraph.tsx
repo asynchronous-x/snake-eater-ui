@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import './linegraph.css';
 
 interface DataPoint {
@@ -73,7 +73,7 @@ interface LineGraphProps {
 /** LineGraph component for time series and continuous data visualization */
 export const LineGraph: React.FC<LineGraphProps> = ({
   data,
-  width = 600,
+  width,
   height = 400,
   showAxes = true,
   showGrid = false,
@@ -103,6 +103,26 @@ export const LineGraph: React.FC<LineGraphProps> = ({
   // Normalize data to array
   const series = Array.isArray(data) ? data : [data];
   
+  // Use container dimensions if width not specified
+  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+  const [containerWidth, setContainerWidth] = useState(width || 600);
+  
+  useEffect(() => {
+    if (!width && containerRef) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const { width: w } = entry.contentRect;
+          setContainerWidth(w - 40); // Account for padding
+        }
+      });
+      
+      resizeObserver.observe(containerRef);
+      return () => resizeObserver.disconnect();
+    }
+  }, [width, containerRef]);
+  
+  const effectiveWidth = width || containerWidth;
+  
   // State for interactive variant
   const [activeSeries, setActiveSeries] = useState<string | null>(null);
   const [hoveredPoint, setHoveredPoint] = useState<{
@@ -131,7 +151,7 @@ export const LineGraph: React.FC<LineGraphProps> = ({
 
   // Margins for axes and labels
   const margin = { top: 40, right: 40, bottom: 80, left: 80 };
-  const plotWidth = width - margin.left - margin.right;
+  const plotWidth = effectiveWidth - margin.left - margin.right;
   const plotHeight = height - margin.top - margin.bottom;
 
   // Scale functions
@@ -246,7 +266,7 @@ export const LineGraph: React.FC<LineGraphProps> = ({
   }, [yMin, yMax]);
 
   return (
-    <div className={classes}>
+    <div className={classes} ref={setContainerRef} style={{ width: width ? `${width}px` : '100%' }}>
       <div className="snake-line-graph__corner snake-line-graph__corner--top-left" />
       <div className="snake-line-graph__corner snake-line-graph__corner--top-right" />
       
@@ -256,9 +276,9 @@ export const LineGraph: React.FC<LineGraphProps> = ({
         )}
         
         <svg
-          width={width}
+          width={effectiveWidth}
           height={height}
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${effectiveWidth} ${height}`}
           className="snake-line-graph__svg"
         >
           <defs>

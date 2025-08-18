@@ -1,3 +1,4 @@
+@import '../graph-common.css';
 @import '../theme.css';
 
 .snake-stream-graph {
@@ -5,7 +6,7 @@
   display: inline-block;
   padding: 20px;
   padding-bottom: 60px;
-  background: var(--color-bg-card);
+  background: transparent;
   border: 1px solid var(--color-border);
   font-family: var(--font-family);
   color: var(--color-text-primary);
@@ -241,7 +242,7 @@
 .snake-stream-graph--detailed {
   padding: 30px;
   padding-bottom: 70px;
-  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-elevated) 100%);
+  background: rgba(31, 29, 32, 0.3);
 }
 
 .snake-stream-graph--detailed .snake-stream-graph__stream {

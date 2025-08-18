@@ -13,6 +13,9 @@ import { Heading } from './Heading/Heading';
 import { Text } from './Text/Text';
 import { Divider } from './Divider/Divider';
 import { List } from './List/List';
+import { LineGraph } from './LineGraph/LineGraph';
+import { BarGraph } from './BarGraph/BarGraph';
+import { DonutGraph } from './DonutGraph/DonutGraph';
 import './page.css';
 import { SubCard } from './SubCard/SubCard';
 
@@ -26,6 +29,32 @@ export const PageAnalytics: React.FC = () => {
     { label: 'Avg Response Time', value: '124ms', change: '-8.2%', trend: 'down' },
     { label: 'Error Rate', value: '0.12%', change: '-0.03%', trend: 'down' },
     { label: 'Active Users', value: '8,421', change: '+234', trend: 'up' },
+  ];
+
+  // Graph data
+  const requestTrend = {
+    name: 'Requests',
+    data: Array.from({ length: 24 }, (_, i) => ({
+      x: i,
+      y: 80000 + Math.random() * 40000 + Math.sin(i / 3) * 20000,
+    })),
+  };
+
+  const errorRates = [
+    { label: '2xx Success', value: 87, color: '#50fa7b' },
+    { label: '3xx Redirect', value: 8, color: '#f1fa8c' },
+    { label: '4xx Client', value: 4, color: '#ffb86c' },
+    { label: '5xx Server', value: 1, color: '#ff5555' },
+  ];
+
+  const dailyMetrics = [
+    { label: 'Mon', requests: 2100, errors: 12, latency: 120 },
+    { label: 'Tue', requests: 2400, errors: 8, latency: 110 },
+    { label: 'Wed', requests: 2300, errors: 15, latency: 125 },
+    { label: 'Thu', requests: 2600, errors: 6, latency: 105 },
+    { label: 'Fri', requests: 2800, errors: 10, latency: 115 },
+    { label: 'Sat', requests: 1800, errors: 4, latency: 95 },
+    { label: 'Sun', requests: 1600, errors: 3, latency: 90 },
   ];
 
   const performanceData = [
@@ -94,6 +123,44 @@ export const PageAnalytics: React.FC = () => {
         </Card>
 
         <Divider variant="dashed" />
+
+        {/* Graph Section */}
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px', marginBottom: '20px' }}>
+          <Card header={<Heading as="h3" size="md">Request Volume</Heading>}>
+            <LineGraph
+              data={requestTrend}
+              height={250}
+              showGrid={true}
+              curve="smooth"
+              fill={true}
+              fillOpacity={0.2}
+              animate={true}
+              formatY={(v) => `${(v / 1000).toFixed(0)}k`}
+            />
+          </Card>
+          
+          <Card header={<Heading as="h3" size="md">Response Codes</Heading>}>
+            <DonutGraph
+              data={errorRates}
+              height={250}
+              showLegend={true}
+              showValues={true}
+              animate={true}
+              variant="interactive"
+            />
+          </Card>
+        </div>
+
+        {/* Bar Chart Section */}
+        <Card header={<Heading as="h3" size="md">Weekly Metrics</Heading>} style={{ marginBottom: '20px' }}>
+          <BarGraph
+            data={dailyMetrics}
+            height={200}
+            orientation="vertical"
+            showGrid={true}
+            animate={true}
+          />
+        </Card>
 
         <div className="snake-page__content-grid">
           <Card

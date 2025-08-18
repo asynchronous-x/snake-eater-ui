@@ -5,6 +5,8 @@ import { PageAnalytics } from './PageAnalytics';
 import { PageProjects } from './PageProjects';
 import { PageMonitor } from './PageMonitor';
 import { PageMobile } from './PageMobile';
+import { PageDataViz } from './PageDataViz';
+import { PageRealtime } from './PageRealtime';
 
 const meta = {
   title: 'Pages/Examples',
@@ -25,6 +27,16 @@ export default meta;
 export const AnalyticsDashboard: StoryObj = {
   render: () => <PageAnalytics />,
   name: 'Analytics Dashboard',
+};
+
+export const DataVisualization: StoryObj = {
+  render: () => <PageDataViz />,
+  name: 'Data Visualization Suite',
+};
+
+export const RealtimeMonitoring: StoryObj = {
+  render: () => <PageRealtime />,
+  name: 'Real-time Monitoring',
 };
 
 export const ProjectManagement: StoryObj = {

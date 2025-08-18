@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import './streamgraph.css';
 
 interface DataPoint {
@@ -69,9 +69,33 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
   // State for interactive variant
   const [activeLayer, setActiveLayer] = useState<string | null>(null);
   const [hoveredLayer, setHoveredLayer] = useState<string | null>(null);
+  
+  // Use container dimensions if width not specified
+  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+  const [containerWidth, setContainerWidth] = useState(width || 600);
+  
+  useEffect(() => {
+    if (!width && containerRef) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const { width: w } = entry.contentRect;
+          setContainerWidth(w - 40); // Account for padding
+        }
+      });
+      
+      resizeObserver.observe(containerRef);
+      return () => resizeObserver.disconnect();
+    }
+  }, [width, containerRef]);
+  
+  const effectiveWidth = width || containerWidth;
   // Calculate stacked data
   const stackedData = useMemo(() => {
     const layers: any[] = [];
+    
+    if (!keys || keys.length === 0 || !data || data.length === 0) {
+      return layers;
+    }
     
     keys.forEach((key, keyIndex) => {
       const layer = data.map((d, i) => {
@@ -149,7 +173,7 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
   const generatePath = (layer: any[]) => {
     if (layer.length === 0) return '';
     
-    const xScale = (i: number) => (i / (data.length - 1)) * width;
+    const xScale = (i: number) => (i / (data.length - 1)) * (effectiveWidth || width || 600);
     const yScale = (v: number) => height - (v / maxValue) * height;
     
     let pathTop = '';
@@ -229,20 +253,20 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
     const step = Math.ceil(data.length / 8); // Show max 8 labels
     return data.filter((_, i) => i % step === 0).map((d, i) => ({
       value: d.x,
-      position: (i * step) / (data.length - 1) * width,
+      position: (i * step) / (data.length - 1) * effectiveWidth,
     }));
-  }, [data, width]);
+  }, [data, effectiveWidth]);
 
   return (
-    <div className={classes}>
+    <div className={classes} ref={setContainerRef} style={{ width: width ? `${width}px` : '100%' }}>
       <div className="snake-stream-graph__corner snake-stream-graph__corner--top-left" />
       <div className="snake-stream-graph__corner snake-stream-graph__corner--top-right" />
       
       <div className="snake-stream-graph__container">
         <svg
-          width={width}
+          width={effectiveWidth}
           height={height}
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${effectiveWidth} ${height}`}
           className="snake-stream-graph__svg"
         >
           {/* Grid */}
