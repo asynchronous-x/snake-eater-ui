@@ -1,7 +1,7 @@
 {
-  "name": "snake-eater-ui",
+  "name": "@asynchronousx/snake-eater-ui",
   "version": "1.0.0",
-  "description": "Snake Eater Component Library",
+  "description": "Snake Eater UI Component Library",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -17,7 +17,7 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "author": "asynchronousx",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
     "@storybook/addon-a11y": "^9.0.18",

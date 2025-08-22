@@ -2,14 +2,20 @@
 @import '../theme.css';
 
 .snake-spider-graph {
-  display: inline-block;
+  display: block;
   position: relative;
+  width: 100%;
+  height: 100%;
   font-family: var(--font-family);
+  box-sizing: border-box;
 }
 
 .snake-spider-graph__svg {
   display: block;
+  width: 100%;
+  height: 100%;
   overflow: visible;
+  box-sizing: border-box;
 }
 
 /* Grid styling */

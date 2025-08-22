@@ -17,10 +17,10 @@ interface HexBin {
 interface HexagonalBinningGraphProps {
   /** Array of data points */
   data: DataPoint[];
-  /** Width of the graph in pixels */
-  width?: number;
-  /** Height of the graph in pixels */
-  height?: number;
+  /** Width of the graph (defaults to 100% to fill parent) */
+  width?: number | string;
+  /** Height of the graph (defaults to 100% to fill parent) */
+  height?: number | string;
   /** Hexagon radius in pixels */
   hexRadius?: number;
   /** X-axis range [min, max] */
@@ -64,8 +64,8 @@ interface HexagonalBinningGraphProps {
 /** HexagonalBinningGraph component for 2D density visualization */
 export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
   data,
-  width = 600,
-  height = 400,
+  width = '100%',
+  height = '100%',
   hexRadius = 12,
   xDomain,
   yDomain,
@@ -108,10 +108,14 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
   const vertDist = hexHeight;
   const horizDist = hexWidth * 0.75;
 
+  // SVG dimensions - use a default viewBox size
+  const svgWidth = 600;
+  const svgHeight = 400;
+  
   // Margins for axes and labels
   const margin = { top: 40, right: 40, bottom: 60, left: 60 };
-  const plotWidth = width - margin.left - margin.right;
-  const plotHeight = height - margin.top - margin.bottom;
+  const plotWidth = svgWidth - margin.left - margin.right;
+  const plotHeight = svgHeight - margin.top - margin.bottom;
 
   // Create hexagonal bins
   const hexBins = useMemo(() => {
@@ -249,10 +253,11 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
         )}
         
         <svg
-          width={width}
-          height={height}
-          viewBox={`0 0 ${width} ${height}`}
+          width={typeof width === 'number' ? width : '100%'}
+          height={typeof height === 'number' ? height : '100%'}
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
           className="snake-hexagonal-binning-graph__svg"
+          preserveAspectRatio="xMidYMid meet"
         >
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {/* Grid */}

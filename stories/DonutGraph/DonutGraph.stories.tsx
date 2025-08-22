@@ -65,11 +65,6 @@ const meta = {
       control: { type: 'range', min: 0, max: 20, step: 2 },
       description: 'Gap between segments in pixels',
     },
-    type: {
-      control: 'radio',
-      options: ['full', 'semi'],
-      description: 'Graph type',
-    },
     variant: {
       control: 'radio',
       options: ['default', 'minimal', 'detailed', 'interactive'],
@@ -108,20 +103,6 @@ export const Default: Story = {
   },
 };
 
-export const SemiCircle: Story = {
-  args: {
-    data: sampleData,
-    type: 'semi',
-    size: 350,
-    thickness: 70,
-    innerRadius: 35,
-    showCenterValue: true,
-    centerValue: '100%',
-    centerLabel: 'Coverage',
-    showLegend: true,
-    animate: true,
-  },
-};
 
 export const Interactive: Story = {
   args: {
@@ -140,24 +121,6 @@ export const Interactive: Story = {
   },
 };
 
-export const InteractiveSemi: Story = {
-  args: {
-    data: sampleData,
-    variant: 'interactive',
-    type: 'semi',
-    size: 400,
-    thickness: 80,
-    innerRadius: 40,
-    showCenterValue: true,
-    centerValue: '100%',
-    centerLabel: 'Usage',
-    showLegend: true,
-    animate: true,
-    onSegmentClick: (segment, index) => {
-      console.log(`Selected: ${segment.label}`);
-    },
-  },
-};
 
 export const Minimal: Story = {
   args: {
@@ -340,24 +303,3 @@ export const ManySegments: Story = {
   },
 };
 
-export const SemiCircleDetailed: Story = {
-  args: {
-    data: [
-      { label: 'CPU', value: 45 },
-      { label: 'Memory', value: 78 },
-      { label: 'Disk', value: 62 },
-      { label: 'Network', value: 34 },
-    ],
-    variant: 'detailed',
-    type: 'semi',
-    size: 400,
-    thickness: 90,
-    innerRadius: 30,
-    showCenterValue: true,
-    centerValue: '54.75',
-    centerLabel: 'Avg Usage %',
-    showLegend: true,
-    showValues: true,
-    animate: true,
-  },
-};

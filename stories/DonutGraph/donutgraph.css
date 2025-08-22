@@ -55,14 +55,12 @@
   gap: 30px;
 }
 
-/* Semi-circle adjustments */
-.snake-donut-graph--semi .snake-donut-graph__container {
-  align-items: center;
-}
 
 /* SVG */
 .snake-donut-graph__svg {
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Segments */

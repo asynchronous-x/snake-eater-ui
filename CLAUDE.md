@@ -57,6 +57,22 @@ npm test
 npm test Button
 ```
 
+### Code Quality
+
+```bash
+# Run ESLint with auto-fix
+npm run lint
+
+# Check linting without fixing
+npm run lint:check
+
+# Format code with Prettier
+npm run format
+
+# Check formatting without fixing
+npm run format:check
+```
+
 ## Architecture
 
 ### Component Structure
@@ -147,15 +163,16 @@ Strict mode enabled with the following key settings:
 
 ## Component Library Contents
 
-### Current Components (40+ components)
+### Current Components (45+ components)
 
 **Buttons**: Button, IconButton
-**Data Display**: Badge, Code, Stat, Table
+**Data Display**: Badge, Stat, Table
 **Feedback**: Alert, Loading, Modal, Progress, Skeleton, Toast, Tooltip
-**Forms**: Checkbox, ColorPicker, Input, RadioButton, Select, Slider, Textarea, Toggle
-**Layout**: Accordion, Card, Divider, Filter, SubCard
-**Navigation**: Breadcrumb, Link, Menu, Tabs
-**Typography**: Heading, Text
+**Forms**: Checkbox, ColorPicker, Input, PinInput, RadioButton, Select, Slider, Textarea, Toggle
+**Layout**: Accordion, Card, Divider, Drawer, Filter, Grid, SubCard
+**Navigation**: Breadcrumb, Link, Menu, Stepper, Tabs
+**Typography**: Heading, KeyboardKey, List, Text
+**Graphs**: BarGraph, DonutGraph, HexagonalBinningGraph, LineGraph, RidgelineGraph, SpiderGraph, StreamGraph
 
 ### Common Props Patterns
 
@@ -167,10 +184,10 @@ Strict mode enabled with the following key settings:
 
 ## Development Notes
 
-1. **No dependencies**: This is a zero-dependency component library (dev dependencies only)
+1. **One dependency**: @hackernoon/pixel-icon-library (all others are dev dependencies)
 2. **TypeScript First**: All components use TypeScript interfaces, no PropTypes
 3. **CSS Modules**: Component styles are scoped using separate CSS files
-4. **No Linting**: Currently no ESLint configuration - be extra careful with code quality
+4. **Linting**: ESLint with TypeScript, React, and Prettier configured
 5. **Storybook Stories**: Every component must have comprehensive stories showcasing all variants
 6. **Accessibility**: Use semantic HTML, ARIA attributes, and keyboard navigation support
 7. **Dark Theme Only**: All components are designed specifically for dark theme

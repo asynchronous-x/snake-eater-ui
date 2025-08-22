@@ -60,8 +60,16 @@ const meta = {
     },
     variant: {
       control: 'radio',
-      options: ['default', 'minimal', 'detailed'],
+      options: ['default', 'minimal', 'detailed', 'interactive'],
       description: 'Visual variant',
+    },
+    onBarClick: {
+      action: 'bar-clicked',
+      description: 'Callback when a bar is clicked (interactive variant)',
+    },
+    onBarHover: {
+      action: 'bar-hovered',
+      description: 'Callback when a bar is hovered (interactive variant)',
     },
     barColor: {
       control: 'color',
@@ -235,6 +243,79 @@ export const HorizontalMinimal: Story = {
     height: 200,
     barWidth: 30,
     maxValue: 100,
+  },
+};
+
+export const Interactive: Story = {
+  args: {
+    data: [
+      { label: 'Jan', value: 65, subLabel: 'Q1' },
+      { label: 'Feb', value: 85, subLabel: 'Q1' },
+      { label: 'Mar', value: 45, subLabel: 'Q1' },
+      { label: 'Apr', value: 90, subLabel: 'Q2' },
+      { label: 'May', value: 70, subLabel: 'Q2' },
+      { label: 'Jun', value: 55, subLabel: 'Q2' },
+      { label: 'Jul', value: 88, subLabel: 'Q3' },
+      { label: 'Aug', value: 76, subLabel: 'Q3' },
+    ],
+    variant: 'interactive',
+    height: 350,
+    barWidth: 45,
+    barColor: '#8b2c2c',
+    formatValue: (value) => `${value} units`,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Interactive variant with hover effects, tooltips, and click selection. Click on bars to select them and hover to see detailed information.',
+      },
+    },
+  },
+};
+
+export const InteractiveHorizontal: Story = {
+  args: {
+    data: [
+      { label: 'Product A', value: 450, subLabel: 'Electronics' },
+      { label: 'Product B', value: 320, subLabel: 'Clothing' },
+      { label: 'Product C', value: 280, subLabel: 'Food' },
+      { label: 'Product D', value: 390, subLabel: 'Books' },
+      { label: 'Product E', value: 510, subLabel: 'Electronics' },
+    ],
+    variant: 'interactive',
+    orientation: 'horizontal',
+    height: 300,
+    maxValue: 600,
+    formatValue: (value) => `$${value}`,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Interactive horizontal bar graph with product sales data.',
+      },
+    },
+  },
+};
+
+export const InteractiveWithColors: Story = {
+  args: {
+    data: [
+      { label: 'Critical', value: 12, color: '#ff5555' },
+      { label: 'High', value: 28, color: '#ffb86c' },
+      { label: 'Medium', value: 45, color: '#f1fa8c' },
+      { label: 'Low', value: 67, color: '#50fa7b' },
+      { label: 'Info', value: 23, color: '#8be9fd' },
+    ],
+    variant: 'interactive',
+    height: 300,
+    formatValue: (value) => `${value} issues`,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Interactive variant with custom colors for each bar representing issue severity levels.',
+      },
+    },
   },
 };
 

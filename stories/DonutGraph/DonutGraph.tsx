@@ -10,8 +10,8 @@ interface DataSegment {
 interface DonutGraphProps {
   /** Array of data segments */
   data: DataSegment[];
-  /** Size of the graph in pixels */
-  size?: number;
+  /** Size of the graph (defaults to 100% to fill parent, maintains aspect ratio) */
+  size?: number | string;
   /** Thickness of the donut ring */
   thickness?: number;
   /** Inner radius percentage (0-80) */
@@ -36,8 +36,6 @@ interface DonutGraphProps {
   animateLegend?: boolean;
   /** Gap between segments in pixels (at middle radius) */
   segmentGap?: number;
-  /** Graph type */
-  type?: 'full' | 'semi';
   /** Size variant */
   variant?: 'default' | 'minimal' | 'detailed' | 'interactive';
   /** Format value function */
@@ -51,7 +49,7 @@ interface DonutGraphProps {
 /** DonutGraph component for circular data visualization */
 export const DonutGraph: React.FC<DonutGraphProps> = ({
   data,
-  size = 300,
+  size = '100%',
   thickness = 60,
   innerRadius = 40,
   colors = ['#8b2c2c', '#4a4a4a', '#d4d4d4', '#6b3030', '#7a7a7a'],
@@ -64,7 +62,6 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
   animate = true,
   animateLegend = true,
   segmentGap = 6,
-  type = 'full',
   variant = 'default',
   formatValue = (value, total) => `${Math.round((value / total) * 100)}%`,
   onSegmentClick,
@@ -77,9 +74,9 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
   // Calculate total and angles
   const { segments, total } = useMemo(() => {
     const sum = data.reduce((acc, d) => acc + d.value, 0);
-    const angleMultiplier = type === 'semi' ? 180 : 360;
+    const angleMultiplier = 360;
     
-    let currentAngle = type === 'semi' ? -90 : 0;
+    let currentAngle = 0;
     
     const segs = data.map((segment, i) => {
       const percentage = segment.value / sum;
@@ -99,15 +96,14 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
     });
     
     return { segments: segs, total: sum };
-  }, [data, colors, type]);
+  }, [data, colors]);
 
-  // SVG dimensions
-  const viewBox = type === 'semi' 
-    ? `0 0 ${size} ${size / 2 + 20}`
-    : `0 0 ${size} ${size}`;
+  // SVG dimensions - use a default viewBox size
+  const svgSize = 300; // Base size for calculations
+  const viewBox = `0 0 ${svgSize} ${svgSize}`;
   
-  const center = { x: size / 2, y: type === 'semi' ? size / 2 : size / 2 };
-  const outerR = size / 2 - 10;
+  const center = { x: svgSize / 2, y: svgSize / 2 };
+  const outerR = svgSize / 2 - 10;
   const innerR = (outerR * innerRadius) / 100;
 
   // Generate path for each segment with uniform gaps
@@ -188,7 +184,6 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
 
   const classes = [
     'snake-donut-graph',
-    `snake-donut-graph--${type}`,
     `snake-donut-graph--${variant}`,
     animate && 'snake-donut-graph--animated',
     className,
@@ -232,10 +227,11 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
       
       <div className="snake-donut-graph__container">
         <svg
-          width={size}
-          height={type === 'semi' ? size / 2 + 20 : size}
+          width={typeof size === 'number' ? size : '100%'}
+          height={typeof size === 'number' ? size : '100%'}
           viewBox={viewBox}
           className="snake-donut-graph__svg"
+          preserveAspectRatio="xMidYMid meet"
         >
           {/* Segments */}
           <g className="snake-donut-graph__segments">

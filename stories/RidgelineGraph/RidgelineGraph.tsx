@@ -10,10 +10,10 @@ interface DataSeries {
 interface RidgelineGraphProps {
   /** Array of data series */
   data: DataSeries[];
-  /** Width of the graph in pixels */
-  width?: number;
-  /** Height of the graph in pixels */
-  height?: number;
+  /** Width of the graph (defaults to 100% to fill parent) */
+  width?: number | string;
+  /** Height of the graph (defaults to 100% to fill parent) */
+  height?: number | string;
   /** Height of each ridge */
   ridgeHeight?: number;
   /** Overlap between ridges (0-1) */
@@ -65,8 +65,8 @@ interface RidgelineGraphProps {
 /** RidgelineGraph component for overlapping distribution visualization */
 export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
   data: initialData,
-  width = 600,
-  height = 400,
+  width = '100%',
+  height = '100%',
   ridgeHeight = 60,
   overlap = 0.6,
   curve = 'smooth',
@@ -156,10 +156,14 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
 
   const data = variant === 'scrolling' ? scrollingData : initialData;
 
+  // Fixed SVG dimensions for consistent viewBox
+  const svgWidth = 600;
+  const svgHeight = 400;
+  
   // Margins for axes and labels
   const margin = { top: 40, right: 40, bottom: 80, left: 100 };
-  const plotWidth = width - margin.left - margin.right;
-  const plotHeight = height - margin.top - margin.bottom;
+  const plotWidth = svgWidth - margin.left - margin.right;
+  const plotHeight = svgHeight - margin.top - margin.bottom;
 
   // Calculate dimensions
   const effectiveRidgeHeight = ridgeHeight * (1 - overlap);
@@ -322,8 +326,9 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
         <svg
           width={width}
           height={height}
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
           className="snake-ridgeline-graph__svg"
+          preserveAspectRatio="xMidYMid meet"
         >
           <defs>
             {/* Gradient definitions for fill */}

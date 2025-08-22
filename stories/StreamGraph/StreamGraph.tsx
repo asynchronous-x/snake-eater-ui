@@ -13,10 +13,10 @@ interface StreamGraphProps {
   keys: string[];
   /** Colors for each series */
   colors?: string[];
-  /** Width of the graph in pixels */
-  width?: number;
-  /** Height of the graph in pixels */
-  height?: number;
+  /** Width of the graph (defaults to 100% to fill parent) */
+  width?: number | string;
+  /** Height of the graph (defaults to 100% to fill parent) */
+  height?: number | string;
   /** Show grid lines */
   showGrid?: boolean;
   /** Number of grid lines */
@@ -50,8 +50,8 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
   data,
   keys,
   colors = ['#8b2c2c', '#4a4a4a', '#d4d4d4', '#6b3030', '#7a7a7a'],
-  width = 600,
-  height = 400,
+  width = '100%',
+  height = '100%',
   showGrid = true,
   gridLines = 5,
   showLabels = true,
@@ -66,29 +66,13 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
   onLayerClick,
   className = '',
 }) => {
+  // Fixed SVG dimensions for consistent viewBox
+  const svgWidth = 600;
+  const svgHeight = 400;
+  
   // State for interactive variant
   const [activeLayer, setActiveLayer] = useState<string | null>(null);
   const [hoveredLayer, setHoveredLayer] = useState<string | null>(null);
-  
-  // Use container dimensions if width not specified
-  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
-  const [containerWidth, setContainerWidth] = useState(width || 600);
-  
-  useEffect(() => {
-    if (!width && containerRef) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          const { width: w } = entry.contentRect;
-          setContainerWidth(w - 40); // Account for padding
-        }
-      });
-      
-      resizeObserver.observe(containerRef);
-      return () => resizeObserver.disconnect();
-    }
-  }, [width, containerRef]);
-  
-  const effectiveWidth = width || containerWidth;
   // Calculate stacked data
   const stackedData = useMemo(() => {
     const layers: any[] = [];
@@ -173,8 +157,8 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
   const generatePath = (layer: any[]) => {
     if (layer.length === 0) return '';
     
-    const xScale = (i: number) => (i / (data.length - 1)) * (effectiveWidth || width || 600);
-    const yScale = (v: number) => height - (v / maxValue) * height;
+    const xScale = (i: number) => (i / (data.length - 1)) * svgWidth;
+    const yScale = (v: number) => svgHeight - (v / maxValue) * svgHeight;
     
     let pathTop = '';
     let pathBottom = '';
@@ -244,30 +228,31 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
   // Generate grid positions
   const gridPositions = useMemo(() => {
     return Array.from({ length: finalGridLines + 1 }, (_, i) => 
-      (i / finalGridLines) * height
+      (i / finalGridLines) * svgHeight
     );
-  }, [finalGridLines, height]);
+  }, [finalGridLines, svgHeight]);
 
   // Generate x-axis labels
   const xLabels = useMemo(() => {
     const step = Math.ceil(data.length / 8); // Show max 8 labels
     return data.filter((_, i) => i % step === 0).map((d, i) => ({
       value: d.x,
-      position: (i * step) / (data.length - 1) * effectiveWidth,
+      position: (i * step) / (data.length - 1) * svgWidth,
     }));
-  }, [data, effectiveWidth]);
+  }, [data, svgWidth]);
 
   return (
-    <div className={classes} ref={setContainerRef} style={{ width: width ? `${width}px` : '100%' }}>
+    <div className={classes}>
       <div className="snake-stream-graph__corner snake-stream-graph__corner--top-left" />
       <div className="snake-stream-graph__corner snake-stream-graph__corner--top-right" />
       
       <div className="snake-stream-graph__container">
         <svg
-          width={effectiveWidth}
-          height={height}
-          viewBox={`0 0 ${effectiveWidth} ${height}`}
+          width={typeof width === 'number' ? width : width}
+          height={typeof height === 'number' ? height : height}
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
           className="snake-stream-graph__svg"
+          preserveAspectRatio="xMidYMid meet"
         >
           {/* Grid */}
           {finalShowGrid && (
@@ -277,7 +262,7 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
                   key={`grid-${i}`}
                   x1={0}
                   y1={y}
-                  x2={width}
+                  x2={svgWidth}
                   y2={y}
                   stroke={gridColor}
                   strokeWidth="1"

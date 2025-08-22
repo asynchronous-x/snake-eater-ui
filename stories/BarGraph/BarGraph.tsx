@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import './bargraph.css';
 
 interface DataPoint {
@@ -13,10 +13,10 @@ interface BarGraphProps {
   data: DataPoint[];
   /** Maximum value for the scale (auto-calculated if not provided) */
   maxValue?: number;
-  /** Height of the graph in pixels */
-  height?: number;
-  /** Width of the graph in pixels (for horizontal orientation) */
-  width?: number;
+  /** Height of the graph (defaults to 100% to fill parent) */
+  height?: number | string;
+  /** Width of the graph (defaults to 100% to fill parent) */
+  width?: number | string;
   /** Width of each bar */
   barWidth?: number;
   /** Gap between bars */
@@ -51,8 +51,8 @@ interface BarGraphProps {
 export const BarGraph: React.FC<BarGraphProps> = ({
   data,
   maxValue,
-  height = 300,
-  width = 400,
+  height = '100%',
+  width = '100%',
   barWidth = 40,
   gap = 8,
   showValues = true,
@@ -66,8 +66,15 @@ export const BarGraph: React.FC<BarGraphProps> = ({
   gridColor = '#3a3a3a',
   variant = 'default',
   formatValue = (value) => value?.toString() || '0',
+  onBarClick,
+  onBarHover,
   className = '',
 }) => {
+  // State for interactive variant
+  const [hoveredBar, setHoveredBar] = useState<number | null>(null);
+  const [selectedBar, setSelectedBar] = useState<number | null>(null);
+  const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number } | null>(null);
+
   const calculatedMaxValue = useMemo(() => {
     if (maxValue) return maxValue;
     const values = data.map((d) => d.value || 0);
@@ -82,13 +89,23 @@ export const BarGraph: React.FC<BarGraphProps> = ({
 
   const graphWidth = useMemo(() => {
     if (orientation === 'vertical') {
-      return data.length * (barWidth + gap) + gap;
+      // Use 100% width to fill parent for vertical orientation
+      return '100%';
     }
     // For horizontal, use provided width
     return width;
-  }, [data.length, barWidth, gap, orientation, width]);
+  }, [orientation, width]);
 
-  const graphHeight = orientation === 'vertical' ? height : data.length * (barWidth + gap) + gap;
+  const graphHeight = useMemo(() => {
+    if (orientation === 'vertical') {
+      return height;
+    }
+    // For horizontal orientation, calculate based on data
+    if (typeof height === 'number') {
+      return height;
+    }
+    return data.length * (barWidth + gap) + gap;
+  }, [orientation, height, data.length, barWidth, gap]);
 
   const classes = [
     'snake-bar-graph',
@@ -111,6 +128,12 @@ export const BarGraph: React.FC<BarGraphProps> = ({
       showScale: true,
       showValues: true,
       gridLines: 10,
+    },
+    interactive: {
+      showGrid: true,
+      showScale: true,
+      showValues: false,
+      animate: true,
     },
   };
 
@@ -167,7 +190,35 @@ export const BarGraph: React.FC<BarGraphProps> = ({
           return (
             <div
               key={`bar-${index}`}
-              className="snake-bar-graph__bar-container"
+              className={`snake-bar-graph__bar-container ${
+                variant === 'interactive' && hoveredBar === index ? 'snake-bar-graph__bar-container--hovered' : ''
+              } ${
+                variant === 'interactive' && selectedBar === index ? 'snake-bar-graph__bar-container--selected' : ''
+              }`}
+              onMouseEnter={(e) => {
+                if (variant === 'interactive') {
+                  setHoveredBar(index);
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setTooltipPosition({
+                    x: rect.left + rect.width / 2,
+                    y: rect.top - 10
+                  });
+                  onBarHover?.(point, index);
+                }
+              }}
+              onMouseLeave={() => {
+                if (variant === 'interactive') {
+                  setHoveredBar(null);
+                  setTooltipPosition(null);
+                  onBarHover?.(null, null);
+                }
+              }}
+              onClick={() => {
+                if (variant === 'interactive') {
+                  setSelectedBar(selectedBar === index ? null : index);
+                  onBarClick?.(point, index);
+                }
+              }}
               style={{
                 width: `${barWidth}px`,
                 marginLeft: index === 0 ? `${gap}px` : 0,
@@ -175,7 +226,11 @@ export const BarGraph: React.FC<BarGraphProps> = ({
               }}
             >
               <div
-                className="snake-bar-graph__bar"
+                className={`snake-bar-graph__bar ${
+                  variant === 'interactive' && hoveredBar === index ? 'snake-bar-graph__bar--hovered' : ''
+                } ${
+                  variant === 'interactive' && selectedBar === index ? 'snake-bar-graph__bar--selected' : ''
+                }`}
                 style={{
                   height: `${barHeight}%`,
                   backgroundColor: point.color || finalBarColor,
@@ -247,7 +302,35 @@ export const BarGraph: React.FC<BarGraphProps> = ({
           return (
             <div
               key={`bar-${index}`}
-              className="snake-bar-graph__bar-container"
+              className={`snake-bar-graph__bar-container ${
+                variant === 'interactive' && hoveredBar === index ? 'snake-bar-graph__bar-container--hovered' : ''
+              } ${
+                variant === 'interactive' && selectedBar === index ? 'snake-bar-graph__bar-container--selected' : ''
+              }`}
+              onMouseEnter={(e) => {
+                if (variant === 'interactive') {
+                  setHoveredBar(index);
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setTooltipPosition({
+                    x: rect.left + rect.width / 2,
+                    y: rect.top - 10
+                  });
+                  onBarHover?.(point, index);
+                }
+              }}
+              onMouseLeave={() => {
+                if (variant === 'interactive') {
+                  setHoveredBar(null);
+                  setTooltipPosition(null);
+                  onBarHover?.(null, null);
+                }
+              }}
+              onClick={() => {
+                if (variant === 'interactive') {
+                  setSelectedBar(selectedBar === index ? null : index);
+                  onBarClick?.(point, index);
+                }
+              }}
               style={{
                 height: `${barWidth}px`,
                 marginTop: index === 0 ? `${gap}px` : 0,
@@ -263,7 +346,11 @@ export const BarGraph: React.FC<BarGraphProps> = ({
                 </div>
               )}
               <div
-                className="snake-bar-graph__bar"
+                className={`snake-bar-graph__bar ${
+                  variant === 'interactive' && hoveredBar === index ? 'snake-bar-graph__bar--hovered' : ''
+                } ${
+                  variant === 'interactive' && selectedBar === index ? 'snake-bar-graph__bar--selected' : ''
+                }`}
                 style={{
                   width: `${barWidthPercent}%`,
                   backgroundColor: point.color || finalBarColor,
@@ -290,8 +377,8 @@ export const BarGraph: React.FC<BarGraphProps> = ({
       <div
         className="snake-bar-graph__content"
         style={{
-          width: orientation === 'vertical' ? `${graphWidth}px` : '100%',
-          height: `${graphHeight}px`,
+          width: graphWidth,
+          height: typeof graphHeight === 'number' ? `${graphHeight}px` : graphHeight,
           maxWidth: '100%',
         }}
       >
@@ -300,6 +387,27 @@ export const BarGraph: React.FC<BarGraphProps> = ({
 
       <div className="snake-bar-graph__corner snake-bar-graph__corner--bottom-left" />
       <div className="snake-bar-graph__corner snake-bar-graph__corner--bottom-right" />
+      
+      {/* Tooltip for interactive variant */}
+      {variant === 'interactive' && hoveredBar !== null && tooltipPosition && (
+        <div 
+          className="snake-bar-graph__tooltip"
+          style={{
+            position: 'fixed',
+            left: `${tooltipPosition.x}px`,
+            top: `${tooltipPosition.y}px`,
+            transform: 'translate(-50%, -100%)',
+          }}
+        >
+          <div className="snake-bar-graph__tooltip-content">
+            <div className="snake-bar-graph__tooltip-label">{data[hoveredBar].label}</div>
+            <div className="snake-bar-graph__tooltip-value">{formatValue(data[hoveredBar].value)}</div>
+            {data[hoveredBar].subLabel && (
+              <div className="snake-bar-graph__tooltip-sublabel">{data[hoveredBar].subLabel}</div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

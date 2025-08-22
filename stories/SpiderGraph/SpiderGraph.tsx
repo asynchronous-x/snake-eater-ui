@@ -10,8 +10,10 @@ interface DataPoint {
 interface SpiderGraphProps {
   /** Array of data points */
   data: DataPoint[];
-  /** Size of the graph in pixels */
-  size?: number;
+  /** Width of the graph (defaults to 100% to fill parent) */
+  width?: number | string;
+  /** Height of the graph (defaults to 100% to fill parent) */
+  height?: number | string;
   /** Number of grid levels */
   levels?: number;
   /** Whether to show values on points */
@@ -45,7 +47,8 @@ interface SpiderGraphProps {
 /** SpiderGraph component for multi-dimensional data visualization */
 export const SpiderGraph: React.FC<SpiderGraphProps> = ({
   data,
-  size = 300,
+  width = '100%',
+  height = '100%',
   levels = 5,
   showValues = false,
   showLabels = true,
@@ -61,8 +64,11 @@ export const SpiderGraph: React.FC<SpiderGraphProps> = ({
   variant = 'default',
   className = '',
 }) => {
-  const center = size / 2;
-  const radius = (size * 0.8) / 2; // 80% of size for padding
+  // Fixed SVG dimensions for consistent viewBox
+  const svgWidth = 300;
+  const svgHeight = 300;
+  const center = svgWidth / 2;
+  const radius = (svgWidth * 0.8) / 2; // 80% of size for padding
 
   // Calculate points for the polygon
   const points = useMemo(() => {
@@ -141,10 +147,11 @@ export const SpiderGraph: React.FC<SpiderGraphProps> = ({
   return (
     <div className={classes}>
       <svg 
-        width={size} 
-        height={size} 
-        viewBox={`0 0 ${size} ${size}`}
+        width={typeof width === 'number' ? width : width} 
+        height={typeof height === 'number' ? height : height} 
+        viewBox={`0 0 ${svgWidth} ${svgHeight}`}
         className="snake-spider-graph__svg"
+        preserveAspectRatio="xMidYMid meet"
       >
         {/* Grid */}
         {(showGrid || finalProps.showGrid) && (
@@ -271,21 +278,21 @@ export const SpiderGraph: React.FC<SpiderGraphProps> = ({
           />
           {/* Top right */}
           <path
-            d={`M ${size - 10} 0 L ${size} 0 L ${size} 10`}
+            d={`M ${svgWidth - 10} 0 L ${svgWidth} 0 L ${svgWidth} 10`}
             fill="none"
             stroke="#8e8e90"
             strokeWidth="2"
           />
           {/* Bottom left */}
           <path
-            d={`M 0 ${size - 10} L 0 ${size} L 10 ${size}`}
+            d={`M 0 ${svgHeight - 10} L 0 ${svgHeight} L 10 ${svgHeight}`}
             fill="none"
             stroke="#8e8e90"
             strokeWidth="2"
           />
           {/* Bottom right */}
           <path
-            d={`M ${size - 10} ${size} L ${size} ${size} L ${size} ${size - 10}`}
+            d={`M ${svgWidth - 10} ${svgHeight} L ${svgWidth} ${svgHeight} L ${svgWidth} ${svgHeight - 10}`}
             fill="none"
             stroke="#8e8e90"
             strokeWidth="2"
