@@ -9,6 +9,10 @@ A dark-themed React component library built with TypeScript and Storybook, featu
 ![license](https://img.shields.io/badge/license-GPL--3.0-blue)
 ![typescript](https://img.shields.io/badge/TypeScript-Ready-blue)
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/asynchronous-x/snake-eater-ui/refs/heads/main/patch.webp" alt="Snake Eater UI Banner" width="100%" />
+</div>
+
 ## Features
 
 - 🌑 **Dark Theme** - Optimized for dark mode applications

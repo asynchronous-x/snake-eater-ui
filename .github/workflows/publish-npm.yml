@@ -9,6 +9,10 @@ on:
       - 'rollup.config.js'
       - 'tsconfig.lib.json'
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
