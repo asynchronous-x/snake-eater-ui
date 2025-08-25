@@ -7,6 +7,7 @@ import terser from '@rollup/plugin-terser';
 import { readFileSync } from 'fs';
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'));
+const production = !process.env.ROLLUP_WATCH;
 
 export default [
   {
@@ -15,13 +16,13 @@ export default [
       {
         file: packageJson.main,
         format: 'cjs',
-        sourcemap: true,
+        sourcemap: false,
         exports: 'named',
       },
       {
         file: packageJson.module,
         format: 'esm',
-        sourcemap: true,
+        sourcemap: false,
         exports: 'named',
       },
     ],
@@ -29,6 +30,7 @@ export default [
       peerDepsExternal(),
       resolve({
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        preferBuiltins: false,
       }),
       commonjs(),
       typescript({
@@ -36,47 +38,34 @@ export default [
         declaration: true,
         declarationDir: './dist',
         exclude: ['**/*.stories.tsx', '**/*.stories.ts', '**/Page*.tsx'],
+        outputToFilesystem: true,
+        compilerOptions: {
+          declarationMap: false
+        }
       }),
       postcss({
         extract: 'snake-eater-ui.css',
         minimize: true,
         modules: false,
-        use: ['sass'],
       }),
-      terser(),
+      terser({
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.trace'],
+          passes: 2,
+          dead_code: true,
+          unused: true,
+        },
+        mangle: {
+          safari10: true,
+          properties: false,
+        },
+        format: {
+          comments: false,
+        },
+      }),
     ],
-    external: ['react', 'react-dom'],
-  },
-  {
-    input: 'stories/index.ts',
-    output: {
-      file: 'dist/snake-eater-ui.umd.js',
-      format: 'umd',
-      name: 'SnakeEaterUI',
-      globals: {
-        react: 'React',
-        'react-dom': 'ReactDOM',
-      },
-      sourcemap: true,
-    },
-    plugins: [
-      peerDepsExternal(),
-      resolve({
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      }),
-      commonjs(),
-      typescript({
-        tsconfig: './tsconfig.lib.json',
-        declaration: false,
-        exclude: ['**/*.stories.tsx', '**/*.stories.ts', '**/Page*.tsx'],
-      }),
-      postcss({
-        minimize: true,
-        modules: false,
-        inject: true,
-      }),
-      terser(),
-    ],
-    external: ['react', 'react-dom'],
+    external: ['react', 'react-dom', 'react/jsx-runtime'],
   },
 ];

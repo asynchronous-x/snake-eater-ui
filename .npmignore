@@ -51,4 +51,55 @@ yarn-error.log*
 # Project docs
 CLAUDE.md
 
-# Keep only dist/, README.md, LICENSE, and package.json
+# Source maps - EXCLUDE ALL
+**/*.map
+dist/**/*.map
+dist/**/*.d.ts.map
+
+# Individual component type directories - EXCLUDE
+dist/Accordion/
+dist/Alert/
+dist/Badge/
+dist/BarGraph/
+dist/Breadcrumb/
+dist/Button/
+dist/Card/
+dist/Checkbox/
+dist/ColorPicker/
+dist/Divider/
+dist/DonutGraph/
+dist/Drawer/
+dist/Filter/
+dist/Grid/
+dist/Heading/
+dist/HexagonalBinningGraph/
+dist/IconButton/
+dist/Input/
+dist/KeyboardKey/
+dist/LineGraph/
+dist/Link/
+dist/List/
+dist/Loading/
+dist/Menu/
+dist/Modal/
+dist/PinInput/
+dist/Progress/
+dist/RadioButton/
+dist/RidgelineGraph/
+dist/Select/
+dist/Skeleton/
+dist/Slider/
+dist/SpiderGraph/
+dist/Stat/
+dist/Stepper/
+dist/StreamGraph/
+dist/SubCard/
+dist/Table/
+dist/Tabs/
+dist/Text/
+dist/Textarea/
+dist/Toast/
+dist/Toggle/
+
+# Tarball
+*.tgz

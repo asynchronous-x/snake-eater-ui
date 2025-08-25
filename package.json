@@ -1,6 +1,6 @@
 {
   "name": "snake-eater-ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Snake Eater UI Component Library",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -11,7 +11,10 @@
     "dist/*.css"
   ],
   "files": [
-    "dist",
+    "dist/index.cjs.js",
+    "dist/index.esm.js",
+    "dist/index.d.ts",
+    "dist/snake-eater-ui.css",
     "README.md",
     "LICENSE"
   ],
