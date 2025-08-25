@@ -1,5 +1,6 @@
 node_modules
 storybook-static
+dist
 .vscode
 .env
 .env.local
@@ -7,3 +8,4 @@ storybook-static
 .env.test.local
 .env.production.local
 .claude
+*.tgz
