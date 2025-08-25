@@ -16,7 +16,7 @@ interface AccordionItem {
   icon?: React.ReactNode;
 }
 
-interface AccordionProps {
+export interface AccordionProps {
   /** Accordion items */
   items: AccordionItem[];
   /** Allow multiple items open */

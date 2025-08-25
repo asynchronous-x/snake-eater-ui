@@ -1,7 +1,7 @@
 import React from 'react';
 import './text.css';
 
-interface TextProps {
+export interface TextProps {
   /** HTML element to render */
   as?:
     | 'p'

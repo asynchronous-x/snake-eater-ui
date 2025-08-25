@@ -7,7 +7,7 @@ interface BreadcrumbItem {
   icon?: React.ReactNode;
 }
 
-interface BreadcrumbProps {
+export interface BreadcrumbProps {
   /** Breadcrumb items */
   items: BreadcrumbItem[];
   /** Separator character */

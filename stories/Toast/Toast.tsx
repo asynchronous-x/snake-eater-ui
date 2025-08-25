@@ -32,7 +32,7 @@ const InfoCircleIcon = ({ className = '' }: { className?: string }) => (
   </svg>
 );
 
-interface ToastProps {
+export interface ToastProps {
   /** Toast content */
   message: string;
   /** Toast variant */

@@ -32,7 +32,7 @@ const InfoCircleIcon = ({ className = '' }: { className?: string }) => (
   </svg>
 );
 
-interface AlertProps {
+export interface AlertProps {
   /** Alert title */
   title?: string;
   /** Alert description */

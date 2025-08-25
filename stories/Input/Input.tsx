@@ -1,7 +1,7 @@
 import React from 'react';
 import './input.css';
 
-interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /** Input label */
   label?: string;
   /** Helper text below input */

@@ -1,7 +1,7 @@
 import React from 'react';
 import './skeleton.css';
 
-interface SkeletonProps {
+export interface SkeletonProps {
   /** Skeleton variant */
   variant?: 'text' | 'rectangular' | 'circular' | 'button';
   /** Width of the skeleton */

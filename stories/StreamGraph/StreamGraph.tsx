@@ -6,7 +6,7 @@ interface DataPoint {
   [key: string]: number | string;
 }
 
-interface StreamGraphProps {
+export interface StreamGraphProps {
   /** Array of data points */
   data: DataPoint[];
   /** Keys for the data series to display */

@@ -7,7 +7,7 @@ interface DataSegment {
   color?: string;
 }
 
-interface DonutGraphProps {
+export interface DonutGraphProps {
   /** Array of data segments */
   data: DataSegment[];
   /** Size of the graph (defaults to 100% to fill parent, maintains aspect ratio) */

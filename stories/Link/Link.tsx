@@ -1,7 +1,7 @@
 import React from 'react';
 import './link.css';
 
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /** Link variant */
   variant?: 'default' | 'primary' | 'subtle' | 'underline';
   /** Size variant */

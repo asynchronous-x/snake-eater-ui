@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './subcard.css';
 
-interface SubCardProps {
+export interface SubCardProps {
   /** Card content */
   children: React.ReactNode;
   /** Optional header content */

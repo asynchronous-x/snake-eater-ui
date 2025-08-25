@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist",
+    "rootDir": "./stories",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": false,
+    "noEmit": false,
+    "isolatedModules": true
+  },
+  "include": ["stories/**/*.ts", "stories/**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    "**/*.stories.tsx",
+    "**/*.stories.ts",
+    "**/Page*.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

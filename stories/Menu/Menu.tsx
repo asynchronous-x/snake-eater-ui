@@ -12,7 +12,7 @@ interface MenuItem {
   submenu?: MenuItem[];
 }
 
-interface MenuProps {
+export interface MenuProps {
   /** Menu items */
   items: MenuItem[];
   /** Trigger element */

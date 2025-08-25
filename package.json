@@ -1,9 +1,28 @@
 {
-  "name": "@asynchronousx/snake-eater-ui",
-  "version": "1.0.0",
+  "name": "snake-eater-ui",
+  "version": "0.0.1",
   "description": "Snake Eater UI Component Library",
-  "main": "index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "type": "module",
+  "sideEffects": [
+    "*.css",
+    "dist/*.css"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/snake-eater-ui.css"
+  },
   "scripts": {
     "start": "storybook dev -p 6006",
     "test": "vitest",
@@ -14,12 +33,42 @@
     "lint": "eslint . --fix",
     "lint:check": "eslint .",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "build:lib": "rollup -c",
+    "prepublishOnly": "npm run build:lib"
   },
   "author": "asynchronousx",
   "license": "GPL-3.0",
+  "keywords": [
+    "react",
+    "component-library",
+    "ui-components",
+    "typescript",
+    "dark-theme",
+    "snake-eater",
+    "design-system"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asynchronousx/snake-eater-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/asynchronousx/snake-eater-ui/issues"
+  },
+  "homepage": "https://github.com/asynchronousx/snake-eater-ui#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.4",
     "@storybook/addon-a11y": "^9.0.18",
     "@storybook/addon-docs": "^9.0.18",
     "@storybook/addon-vitest": "^9.0.18",
@@ -37,7 +86,11 @@
     "eslint-plugin-storybook": "^9.0.18",
     "playwright": "^1.54.1",
     "prettier": "^3.6.2",
+    "rollup": "^4.48.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
     "storybook": "^9.0.18",
+    "tslib": "^2.8.1",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   },

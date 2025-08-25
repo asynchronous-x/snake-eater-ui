@@ -8,7 +8,7 @@ const ChevronDownIcon = ({ className = '' }: { className?: string }) => (
   </svg>
 );
 
-interface ColorPickerProps {
+export interface ColorPickerProps {
   /** Current color value */
   value?: string;
   /** Change handler */

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import './textarea.css';
 
-interface TextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
+export interface TextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
   /** Label for the textarea */
   label?: string;
   /** Helper text */

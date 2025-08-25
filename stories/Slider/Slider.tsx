@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './slider.css';
 
-interface SliderProps {
+export interface SliderProps {
   /** Current value */
   value?: number;
   /** Value change handler */

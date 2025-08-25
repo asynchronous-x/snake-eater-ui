@@ -1,7 +1,7 @@
 import React from 'react';
 import './divider.css';
 
-interface DividerProps {
+export interface DividerProps {
   /** Orientation of the divider */
   orientation?: 'horizontal' | 'vertical';
   /** Style variant */

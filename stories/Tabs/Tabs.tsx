@@ -9,7 +9,7 @@ interface Tab {
   icon?: React.ReactNode;
 }
 
-interface TabsProps {
+export interface TabsProps {
   /** Tab items */
   tabs: Tab[];
   /** Active tab ID */

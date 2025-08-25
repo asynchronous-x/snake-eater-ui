@@ -14,7 +14,7 @@ interface HexBin {
   points: DataPoint[];
 }
 
-interface HexagonalBinningGraphProps {
+export interface HexagonalBinningGraphProps {
   /** Array of data points */
   data: DataPoint[];
   /** Width of the graph (defaults to 100% to fill parent) */

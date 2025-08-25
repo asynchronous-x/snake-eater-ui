@@ -3,8 +3,8 @@
 A dark-themed React component library built with TypeScript and Storybook, featuring a minimalist cyberpunk aesthetic with sharp corners and thin borders.
 **Based entirely off of [Steve Lauda](https://x.com/stevelauda_) design work.**
 
-![npm version](https://img.shields.io/npm/v/snake-eater-ui)
-![license](https://img.shields.io/npm/l/snake-eater-ui)
+![npm version](https://img.shields.io/npm/v/@asynchronousx/snake-eater-ui)
+![license](https://img.shields.io/badge/license-GPL--3.0-blue)
 ![typescript](https://img.shields.io/badge/TypeScript-Ready-blue)
 
 ## Features
@@ -20,14 +20,20 @@ A dark-themed React component library built with TypeScript and Storybook, featu
 ## Installation
 
 ```bash
-npm install snake-eater-ui
+npm install @asynchronousx/snake-eater-ui
+```
+
+or
+
+```bash
+yarn add @asynchronousx/snake-eater-ui
 ```
 
 ## Usage
 
 ```tsx
-import { Button, Card, Alert } from 'snake-eater-ui';
-import 'snake-eater-ui/dist/styles.css';
+import { Button, Card, Alert } from '@asynchronousx/snake-eater-ui';
+import '@asynchronousx/snake-eater-ui/styles'; // Import CSS styles
 
 function App() {
   return (
@@ -40,6 +46,18 @@ function App() {
 ```
 
 ## Components
+
+### Data Visualization
+
+- **BarGraph** - Bar chart with interactive features
+- **DonutGraph** - Donut/pie chart visualization
+- **HexagonalBinningGraph** - Hexagonal binning for density visualization
+- **LineGraph** - Line chart with multiple series support
+- **RidgelineGraph** - Ridge plot for distribution visualization
+- **SpiderGraph** - Radar/spider chart for multidimensional data
+- **StreamGraph** - Stream graph for temporal data
+
+## UI Components
 
 ### Buttons
 
@@ -60,13 +78,13 @@ function App() {
 - **Progress** - Progress indicators
 - **Skeleton** - Loading placeholders
 - **Toast** - Temporary notifications
-- **Tooltip** - Contextual hints
 
 ### Forms
 
 - **Checkbox** - Multi-selection control
 - **ColorPicker** - Color selection tool
 - **Input** - Text input fields
+- **PinInput** - PIN/OTP input control
 - **RadioButton** - Single selection control
 - **Select** - Dropdown selection
 - **Slider** - Range selection
@@ -78,6 +96,7 @@ function App() {
 - **Accordion** - Collapsible content panels
 - **Card** - Content containers with decorative corners
 - **Divider** - Visual separation with multiple styles
+- **Drawer** - Sliding panel overlays
 - **Filter** - Filter controls with count badges
 - **Grid** - CSS Grid layout system
 - **SubCard** - Nested content containers with accent corners
@@ -87,13 +106,15 @@ function App() {
 - **Breadcrumb** - Navigation hierarchy
 - **Link** - Text links with hover effects
 - **Menu** - Dropdown navigation menus
+- **Stepper** - Multi-step navigation
 - **Tabs** - Tabbed navigation
 
 ### Typography
 
 - **Heading** - Section headers (h1-h6)
-- **Text** - Body text with variants
+- **KeyboardKey** - Keyboard key representation
 - **List** - Styled lists with custom markers
+- **Text** - Body text with variants
 
 ## Design System
 
@@ -116,6 +137,31 @@ function App() {
 --color-warning: #f1fa8c; /* Warning states */
 ```
 
+### npm Package
+
+### Publishing
+
+The library is published to npm as `@asynchronousx/snake-eater-ui`. To publish a new version:
+
+```bash
+# Build the library
+npm run build:lib
+
+# Update version
+npm version patch|minor|major
+
+# Publish to npm
+npm publish
+```
+
+### Package Contents
+
+The published package includes:
+- Bundled JavaScript (ESM, CJS, and UMD formats)
+- TypeScript declarations
+- Bundled CSS styles
+- Source maps for debugging
+
 ## Development
 
 ### Prerequisites
@@ -127,7 +173,7 @@ function App() {
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/snake-eater-ui.git
+git clone https://github.com/asynchronousx/snake-eater-ui.git
 cd snake-eater-ui
 
 # Install dependencies
@@ -147,10 +193,17 @@ npm run dev          # Alias for storybook
 # Building
 npm run build        # Build static Storybook
 npm run build-storybook # Alias for build
+npm run build:lib    # Build the npm package
 
 # Testing
 npm test             # Run all tests
 npm test Button      # Run specific component tests
+
+# Code Quality
+npm run lint         # Run ESLint with auto-fix
+npm run lint:check   # Check linting without fixing
+npm run format       # Format code with Prettier
+npm run format:check # Check formatting without fixing
 ```
 
 ## Project Structure
@@ -176,7 +229,7 @@ Contributions are welcome! Please follow these guidelines:
 
 ## License
 
-Unlicensed (for now)
+GPL-3.0
 
 ## Acknowledgments
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './progress.css';
 
-interface ProgressProps {
+export interface ProgressProps {
   /** Current progress value (0-100) */
   value?: number;
   /** Maximum value */

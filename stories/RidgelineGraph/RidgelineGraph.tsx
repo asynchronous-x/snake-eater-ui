@@ -7,7 +7,7 @@ interface DataSeries {
   color?: string;
 }
 
-interface RidgelineGraphProps {
+export interface RidgelineGraphProps {
   /** Array of data series */
   data: DataSeries[];
   /** Width of the graph (defaults to 100% to fill parent) */

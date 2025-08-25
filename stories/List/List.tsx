@@ -10,7 +10,7 @@ interface ListItem {
   onClick?: () => void;
 }
 
-interface ListProps {
+export interface ListProps {
   /** Array of list items */
   items: ListItem[];
   /** Starting number for the list */

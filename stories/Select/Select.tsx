@@ -14,7 +14,7 @@ interface SelectOption {
   disabled?: boolean;
 }
 
-interface SelectProps {
+export interface SelectProps {
   /** Select options */
   options: SelectOption[];
   /** Selected value */

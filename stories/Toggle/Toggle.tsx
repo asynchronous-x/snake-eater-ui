@@ -1,7 +1,7 @@
 import React from 'react';
 import './toggle.css';
 
-interface ToggleProps {
+export interface ToggleProps {
   /** Toggle state */
   checked?: boolean;
   /** Change handler */

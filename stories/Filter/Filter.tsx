@@ -1,7 +1,7 @@
 import React from 'react';
 import './filter.css';
 
-interface FilterProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface FilterProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Filter label */
   children: React.ReactNode;
   /** Visual state variant */

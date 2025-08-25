@@ -17,7 +17,7 @@ interface TableColumn<T> {
   sortable?: boolean;
 }
 
-interface TableProps<T> {
+export interface TableProps<T> {
   /** Table data */
   data: T[];
   /** Column definitions */

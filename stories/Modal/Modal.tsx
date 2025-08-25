@@ -8,7 +8,7 @@ const TimesIcon = ({ className = '' }: { className?: string }) => (
   </svg>
 );
 
-interface ModalProps {
+export interface ModalProps {
   /** Modal visibility */
   isOpen: boolean;
   /** Close handler */

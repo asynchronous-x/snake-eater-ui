@@ -1,7 +1,7 @@
 import React from 'react';
 import './keyboardkey.css';
 
-interface KeyboardKeyProps {
+export interface KeyboardKeyProps {
   /** The key label to display */
   children: React.ReactNode;
   /** Size variant */

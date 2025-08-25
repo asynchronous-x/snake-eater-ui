@@ -8,7 +8,7 @@ interface DataPoint {
   subLabel?: string;
 }
 
-interface BarGraphProps {
+export interface BarGraphProps {
   /** Array of data points */
   data: DataPoint[];
   /** Maximum value for the scale (auto-calculated if not provided) */
@@ -40,9 +40,13 @@ interface BarGraphProps {
   /** Grid color */
   gridColor?: string;
   /** Size variant */
-  variant?: 'default' | 'minimal' | 'detailed';
+  variant?: 'default' | 'minimal' | 'detailed' | 'interactive';
   /** Value formatter function */
   formatValue?: (value: number) => string;
+  /** Bar click handler for interactive variant */
+  onBarClick?: (dataPoint: DataPoint | null, index: number | null) => void;
+  /** Bar hover handler for interactive variant */
+  onBarHover?: (dataPoint: DataPoint | null, index: number | null) => void;
   /** Additional CSS classes */
   className?: string;
 }

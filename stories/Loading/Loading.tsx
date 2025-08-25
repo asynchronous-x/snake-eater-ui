@@ -1,7 +1,7 @@
 import React from 'react';
 import './loading.css';
 
-interface LoadingProps {
+export interface LoadingProps {
   /** Loading type */
   type?: 'dots' | 'bars' | 'pulse' | 'grid';
   /** Size variant */

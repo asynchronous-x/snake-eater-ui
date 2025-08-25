@@ -7,7 +7,7 @@ interface DataPoint {
   color?: string;
 }
 
-interface SpiderGraphProps {
+export interface SpiderGraphProps {
   /** Array of data points */
   data: DataPoint[];
   /** Width of the graph (defaults to 100% to fill parent) */

@@ -1,7 +1,7 @@
 import React from 'react';
 import './badge.css';
 
-interface BadgeProps {
+export interface BadgeProps {
   /** Badge content */
   children: React.ReactNode;
   /** Visual variant */

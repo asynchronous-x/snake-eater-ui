@@ -1,0 +1,79 @@
+name: Publish to npm
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'package.json'
+      - 'stories/**'
+      - 'rollup.config.js'
+      - 'tsconfig.lib.json'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    # Only run if commit message contains [release] or version bump
+    if: contains(github.event.head_commit.message, '[release]') || contains(github.event.head_commit.message, 'bump version')
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build library
+        run: npm run build:lib
+        
+      - name: Run tests
+        run: npm test
+        continue-on-error: true
+        
+      - name: Check if version changed
+        id: version
+        run: |
+          PUBLISHED_VERSION=$(npm view snake-eater-ui version 2>/dev/null || echo "0.0.0")
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo "published=$PUBLISHED_VERSION" >> $GITHUB_OUTPUT
+          echo "package=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+          if [ "$PUBLISHED_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Publish to npm
+        if: steps.version.outputs.changed == 'true'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
+      - name: Create GitHub Release
+        if: steps.version.outputs.changed == 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version.outputs.package }}
+          release_name: Release v${{ steps.version.outputs.package }}
+          body: |
+            ## Snake Eater UI v${{ steps.version.outputs.package }}
+            
+            Published to npm: https://www.npmjs.com/package/snake-eater-ui
+            
+            ### Installation
+            ```bash
+            npm install snake-eater-ui@${{ steps.version.outputs.package }}
+            ```
+          draft: false
+          prerelease: false

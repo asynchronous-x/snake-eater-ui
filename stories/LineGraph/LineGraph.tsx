@@ -13,7 +13,7 @@ interface DataSeries {
   color?: string;
 }
 
-interface LineGraphProps {
+export interface LineGraphProps {
   /** Data series to display */
   data: DataSeries | DataSeries[];
   /** Width of the graph (defaults to 100% to fill parent) */

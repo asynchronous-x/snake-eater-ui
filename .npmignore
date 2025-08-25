@@ -1,0 +1,54 @@
+# Source files
+stories/
+.storybook/
+src/
+
+# Development files
+*.stories.tsx
+*.stories.ts
+*.test.tsx
+*.test.ts
+*.spec.tsx
+*.spec.ts
+
+# Page components (examples, not part of library)
+stories/Page*.tsx
+stories/Configure.mdx
+
+# Config files
+rollup.config.js
+tsconfig.json
+tsconfig.lib.json
+vitest.config.js
+eslint.config.js
+.prettierrc.json
+.prettierignore
+
+# Git and CI
+.git/
+.github/
+.gitignore
+
+# Development dependencies
+node_modules/
+coverage/
+storybook-static/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Project docs
+CLAUDE.md
+
+# Keep only dist/, README.md, LICENSE, and package.json

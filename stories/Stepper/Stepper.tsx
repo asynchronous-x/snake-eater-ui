@@ -8,7 +8,7 @@ interface StepperStep {
   error?: boolean;
 }
 
-interface StepperProps {
+export interface StepperProps {
   /** Array of steps */
   steps: StepperStep[];
   /** Current active step index */

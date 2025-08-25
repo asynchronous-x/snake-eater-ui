@@ -8,7 +8,7 @@ interface RadioOption {
   helperText?: string;
 }
 
-interface RadioButtonProps {
+export interface RadioButtonProps {
   /** Radio options */
   options: RadioOption[];
   /** Selected value */

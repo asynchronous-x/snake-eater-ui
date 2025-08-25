@@ -1,7 +1,7 @@
 import React from 'react';
 import './grid.css';
 
-interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Number of columns in the grid */
   columns?: number | string;
   /** Number of rows in the grid */

@@ -20,7 +20,7 @@ const AngleRightIcon = ({ className = '' }: { className?: string }) => (
   </svg>
 );
 
-interface StatProps {
+export interface StatProps {
   /** Label for the stat */
   label: string;
   /** Value to display */

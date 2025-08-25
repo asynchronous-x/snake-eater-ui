@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './pininput.css';
 
-interface PinInputProps {
+export interface PinInputProps {
   /** Number of input fields */
   length?: number;
   /** Callback when all fields are filled */

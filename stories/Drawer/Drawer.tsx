@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './drawer.css';
 
-interface DrawerProps {
+export interface DrawerProps {
   /** Whether the drawer is open */
   open: boolean;
   /** Callback when the drawer should close */
