@@ -50,12 +50,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/asynchronousx/snake-eater-ui"
+    "url": "https://github.com/asynchronous-x/snake-eater-ui"
   },
   "bugs": {
-    "url": "https://github.com/asynchronousx/snake-eater-ui/issues"
+    "url": "https://github.com/asynchronous-x/snake-eater-ui/issues"
   },
-  "homepage": "https://github.com/asynchronousx/snake-eater-ui#readme",
+  "homepage": "https://asynchronous-x.github.io/snake-eater-ui/",
   "publishConfig": {
     "access": "public"
   },

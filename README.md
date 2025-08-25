@@ -1,9 +1,11 @@
 # Snake Eater UI
 
 A dark-themed React component library built with TypeScript and Storybook, featuring a minimalist cyberpunk aesthetic with sharp corners and thin borders.
-**Based entirely off of [Steve Lauda](https://x.com/stevelauda_) design work.**
+**Based off of [Steve Lauda](https://x.com/stevelauda_) design work.**
 
-![npm version](https://img.shields.io/npm/v/@asynchronousx/snake-eater-ui)
+![npm version](https://img.shields.io/npm/v/snake-eater-ui)
+![NPM Last Update](https://img.shields.io/npm/last-update/snake-eater-ui)
+![NPM Downloads](https://img.shields.io/npm/dy/snake-eater-ui)
 ![license](https://img.shields.io/badge/license-GPL--3.0-blue)
 ![typescript](https://img.shields.io/badge/TypeScript-Ready-blue)
 
@@ -20,20 +22,20 @@ A dark-themed React component library built with TypeScript and Storybook, featu
 ## Installation
 
 ```bash
-npm install @asynchronousx/snake-eater-ui
+npm install snake-eater-ui
 ```
 
 or
 
 ```bash
-yarn add @asynchronousx/snake-eater-ui
+yarn add snake-eater-ui
 ```
 
 ## Usage
 
 ```tsx
-import { Button, Card, Alert } from '@asynchronousx/snake-eater-ui';
-import '@asynchronousx/snake-eater-ui/styles'; // Import CSS styles
+import { Button, Card, Alert } from 'snake-eater-ui';
+import 'snake-eater-ui/styles'; // Import CSS styles
 
 function App() {
   return (
@@ -135,23 +137,6 @@ function App() {
 --color-danger: #ff5555; /* Error states */
 --color-success: #50fa7b; /* Success states */
 --color-warning: #f1fa8c; /* Warning states */
-```
-
-### npm Package
-
-### Publishing
-
-The library is published to npm as `@asynchronousx/snake-eater-ui`. To publish a new version:
-
-```bash
-# Build the library
-npm run build:lib
-
-# Update version
-npm version patch|minor|major
-
-# Publish to npm
-npm publish
 ```
 
 ### Package Contents
