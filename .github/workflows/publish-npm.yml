@@ -12,9 +12,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
-    # Only run if commit message contains [release] or version bump
-    if: contains(github.event.head_commit.message, '[release]') || contains(github.event.head_commit.message, 'bump version')
+    environment: npm-publish
     
     steps:
       - name: Checkout
@@ -46,9 +44,13 @@ jobs:
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           echo "published=$PUBLISHED_VERSION" >> $GITHUB_OUTPUT
           echo "package=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+          echo "Published version: $PUBLISHED_VERSION"
+          echo "Package version: $PACKAGE_VERSION"
           if [ "$PUBLISHED_VERSION" != "$PACKAGE_VERSION" ]; then
+            echo "Version has changed, will publish"
             echo "changed=true" >> $GITHUB_OUTPUT
           else
+            echo "Version unchanged, skipping publish"
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
           

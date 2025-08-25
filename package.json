@@ -1,6 +1,6 @@
 {
   "name": "snake-eater-ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Snake Eater UI Component Library",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
