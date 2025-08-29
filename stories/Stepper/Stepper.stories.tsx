@@ -101,7 +101,9 @@ export const Vertical: Story = {
             onStepClick={setActiveStep}
           />
         </div>
-        <div style={{ flex: 1, padding: '20px', border: '1px solid #3a3a3a', background: '#1f1d20' }}>
+        <div
+          style={{ flex: 1, padding: '20px', border: '1px solid #3a3a3a', background: '#1f1d20' }}
+        >
           <h2 style={{ color: '#bdbdbd', marginBottom: '16px' }}>
             Step {activeStep + 1}: {defaultSteps[activeStep].label}
           </h2>
@@ -177,9 +179,7 @@ export const WithIcons: Story = {
 };
 
 export const NoConnectors: Story = {
-  render: () => (
-    <Stepper steps={defaultSteps} activeStep={1} showConnectors={false} />
-  ),
+  render: () => <Stepper steps={defaultSteps} activeStep={1} showConnectors={false} />,
 };
 
 export const CompleteProcess: Story = {
@@ -208,7 +208,7 @@ export const CompleteProcess: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
         <Stepper steps={processSteps} activeStep={activeStep} />
-        
+
         <div style={{ textAlign: 'center' }}>
           {activeStep < processSteps.length ? (
             <>
@@ -224,9 +224,7 @@ export const CompleteProcess: Story = {
             </>
           ) : (
             <>
-              <h3 style={{ color: '#50fa7b', marginBottom: '24px' }}>
-                ✓ Process Complete!
-              </h3>
+              <h3 style={{ color: '#50fa7b', marginBottom: '24px' }}>✓ Process Complete!</h3>
               <Button onClick={handleReset}>Start Over</Button>
             </>
           )}

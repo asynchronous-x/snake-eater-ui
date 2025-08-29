@@ -85,7 +85,7 @@
 /* Precise positioning for perfect alignment when stacked
    Accounts for 1px border: positions adjusted by 1px for perfect overlap */
 .snake-subcard__corner--top-left {
-  top: -11px;  /* Half height (10px) + 1px border */
+  top: -11px; /* Half height (10px) + 1px border */
   left: -11px; /* Half width (10px) + 1px border */
 }
 
@@ -304,7 +304,7 @@
 /* Transition animations */
 .snake-subcard--transition {
   --transition-speed: 300ms;
-  transition: all var(--transition-speed) cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Initial states for different transition types */
@@ -349,7 +349,7 @@
 }
 
 .snake-subcard--transition-expand .snake-subcard__corner {
-  transition: all var(--transition-speed) cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Plus corners rotate and scale in */
@@ -379,7 +379,8 @@
 .snake-subcard--transition-expand .snake-subcard__content,
 .snake-subcard--transition-expand .snake-subcard__header,
 .snake-subcard--transition-expand .snake-subcard__footer {
-  transition: opacity calc(var(--transition-speed) * 0.8) cubic-bezier(0.4, 0.0, 0.2, 1) calc(var(--transition-speed) * 0.2);
+  transition: opacity calc(var(--transition-speed) * 0.8) cubic-bezier(0.4, 0, 0.2, 1)
+    calc(var(--transition-speed) * 0.2);
 }
 
 .snake-subcard--transition-expand:not(.snake-subcard--visible) .snake-subcard__content,
@@ -396,18 +397,18 @@
 /* Pulse effect with plus symbol theme */
 @keyframes plus-pulse {
   0% {
-    box-shadow: 
+    box-shadow:
       inset 0 0 0 1px rgba(142, 142, 144, 0.6),
       0 0 20px -10px rgba(142, 142, 144, 0);
   }
   50% {
-    box-shadow: 
+    box-shadow:
       inset 0 0 0 1px rgba(142, 142, 144, 0.3),
       -10px 0 20px -10px rgba(142, 142, 144, 0.4),
       10px 0 20px -10px rgba(142, 142, 144, 0.4);
   }
   100% {
-    box-shadow: 
+    box-shadow:
       inset 0 0 0 0 rgba(142, 142, 144, 0),
       0 0 0 0 rgba(142, 142, 144, 0);
   }

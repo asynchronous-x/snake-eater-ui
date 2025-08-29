@@ -93,7 +93,7 @@ type Story = StoryObj<typeof meta>;
 const generateTimeSeries = (points: number, startValue: number = 50, volatility: number = 10) => {
   const data = [];
   let value = startValue;
-  
+
   for (let i = 0; i < points; i++) {
     value += (Math.random() - 0.5) * volatility;
     value = Math.max(0, value);
@@ -102,19 +102,24 @@ const generateTimeSeries = (points: number, startValue: number = 50, volatility:
       y: value,
     });
   }
-  
+
   return data;
 };
 
-const generateSinWave = (points: number, amplitude: number = 30, frequency: number = 1, phase: number = 0) => {
+const generateSinWave = (
+  points: number,
+  amplitude: number = 30,
+  frequency: number = 1,
+  phase: number = 0,
+) => {
   const data = [];
-  
+
   for (let i = 0; i < points; i++) {
     const x = i;
     const y = amplitude * Math.sin((i / points) * Math.PI * 2 * frequency + phase) + amplitude;
     data.push({ x, y });
   }
-  
+
   return data;
 };
 
@@ -235,7 +240,7 @@ export const FilledArea: Story = {
   args: {
     data: {
       name: 'Temperature',
-      data: generateSinWave(30, 15, 1, 0).map(p => ({ ...p, y: p.y + 10 })),
+      data: generateSinWave(30, 15, 1, 0).map((p) => ({ ...p, y: p.y + 10 })),
     },
     width: 600,
     height: 400,
@@ -460,7 +465,20 @@ export const Seasonal: Story = {
     xLabel: 'Month',
     yLabel: 'Activity Level',
     formatX: (v) => {
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
       return months[Math.floor(v) % 12];
     },
   },

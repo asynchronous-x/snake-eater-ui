@@ -28,7 +28,7 @@
   margin: 0;
 }
 
-.snake-pin-input__field[type=number] {
+.snake-pin-input__field[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -79,7 +79,7 @@
 .snake-pin-input__field:focus {
   border-color: var(--color-text-primary);
   background: var(--color-bg-card);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(189, 189, 189, 0.1),
     inset 0 0 0 1px rgba(189, 189, 189, 0.05);
   transform: scale(1.05);
@@ -102,7 +102,7 @@
 
 .snake-pin-input--error .snake-pin-input__field:focus {
   border-color: var(--color-danger);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(255, 85, 85, 0.15),
     inset 0 0 0 1px rgba(255, 85, 85, 0.1);
 }
@@ -120,7 +120,7 @@
 
 .snake-pin-input--success .snake-pin-input__field:focus {
   border-color: var(--color-success);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(80, 250, 123, 0.15),
     inset 0 0 0 1px rgba(80, 250, 123, 0.1);
 }
@@ -146,9 +146,23 @@
 
 /* Shake animation for errors */
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
-  20%, 40%, 60%, 80% { transform: translateX(2px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
 }
 
 .snake-pin-input--error {
@@ -173,7 +187,7 @@
 }
 
 /* Password dots */
-input[type="password"].snake-pin-input__field {
+input[type='password'].snake-pin-input__field {
   font-size: var(--font-size-2xl);
   letter-spacing: 0.1em;
 }

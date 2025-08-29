@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import './stepper.css';
 
 interface StepperStep {
@@ -57,7 +57,7 @@ export const Stepper: React.FC<StepperProps> = ({
           const second = stepElements[1] as HTMLElement;
           const firstRect = first.getBoundingClientRect();
           const secondRect = second.getBoundingClientRect();
-          
+
           if (orientation === 'horizontal') {
             const gap = secondRect.left - firstRect.right;
             setConnectorWidth(gap);
@@ -140,7 +140,7 @@ export const Stepper: React.FC<StepperProps> = ({
                   <span className="snake-stepper__step-dot" />
                 )}
               </div>
-              
+
               {showConnectors && index < steps.length - 1 && (
                 <div
                   className={[
@@ -150,8 +150,8 @@ export const Stepper: React.FC<StepperProps> = ({
                     .filter(Boolean)
                     .join(' ')}
                   style={
-                    orientation === 'horizontal' 
-                      ? { width: `${connectorWidth}px` } 
+                    orientation === 'horizontal'
+                      ? { width: `${connectorWidth}px` }
                       : { height: `${connectorHeight}px` }
                   }
                 />

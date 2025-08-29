@@ -106,14 +106,22 @@ const generateDistribution = (label: string, count: number, mean: number, stdDev
   const values = [];
   for (let i = 0; i < count; i++) {
     const x = (i / count) * 10 - 5;
-    const value = Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2))) / (stdDev * Math.sqrt(2 * Math.PI));
+    const value =
+      Math.exp(-Math.pow(x - mean, 2) / (2 * Math.pow(stdDev, 2))) /
+      (stdDev * Math.sqrt(2 * Math.PI));
     values.push(value * 10); // Scale for visibility
   }
   return { label, values };
 };
 
 // Generate time series data
-const generateTimeSeries = (label: string, count: number, amplitude: number, frequency: number, noise: number) => {
+const generateTimeSeries = (
+  label: string,
+  count: number,
+  amplitude: number,
+  frequency: number,
+  noise: number,
+) => {
   const values = [];
   for (let i = 0; i < count; i++) {
     const base = amplitude * Math.sin((i / count) * Math.PI * 2 * frequency);
@@ -379,8 +387,8 @@ export const CustomColors: Story = {
 
 export const LargeDataset: Story = {
   args: {
-    data: Array.from({ length: 10 }, (_, i) => 
-      generateDistribution(`Ridge ${i + 1}`, 100, (i - 5) * 0.5, 0.8 + Math.random() * 0.4)
+    data: Array.from({ length: 10 }, (_, i) =>
+      generateDistribution(`Ridge ${i + 1}`, 100, (i - 5) * 0.5, 0.8 + Math.random() * 0.4),
     ),
     width: 700,
     height: 600,
@@ -448,13 +456,34 @@ export const PeakComparison: Story = {
 export const ActivityPattern: Story = {
   args: {
     data: [
-      { label: 'Monday', values: [1, 2, 2, 3, 5, 7, 8, 9, 8, 7, 8, 9, 10, 9, 8, 7, 6, 7, 8, 6, 5, 4, 3, 2] },
-      { label: 'Tuesday', values: [1, 2, 2, 3, 5, 7, 9, 10, 9, 8, 9, 10, 11, 10, 9, 8, 7, 8, 9, 7, 5, 4, 3, 2] },
-      { label: 'Wednesday', values: [1, 2, 2, 3, 5, 7, 8, 9, 8, 7, 8, 9, 10, 9, 8, 7, 6, 7, 8, 6, 5, 4, 3, 2] },
-      { label: 'Thursday', values: [1, 2, 2, 3, 5, 7, 9, 10, 9, 8, 9, 10, 11, 10, 9, 8, 7, 8, 9, 7, 5, 4, 3, 2] },
-      { label: 'Friday', values: [1, 2, 2, 3, 5, 7, 8, 9, 8, 7, 8, 9, 10, 9, 8, 7, 6, 8, 10, 11, 10, 8, 5, 3] },
-      { label: 'Saturday', values: [2, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 11, 10, 9, 8, 7, 8, 9, 8, 7, 6, 5, 3] },
-      { label: 'Sunday', values: [3, 4, 4, 5, 5, 6, 6, 7, 8, 9, 10, 10, 10, 9, 8, 7, 6, 6, 5, 4, 3, 3, 2, 2] },
+      {
+        label: 'Monday',
+        values: [1, 2, 2, 3, 5, 7, 8, 9, 8, 7, 8, 9, 10, 9, 8, 7, 6, 7, 8, 6, 5, 4, 3, 2],
+      },
+      {
+        label: 'Tuesday',
+        values: [1, 2, 2, 3, 5, 7, 9, 10, 9, 8, 9, 10, 11, 10, 9, 8, 7, 8, 9, 7, 5, 4, 3, 2],
+      },
+      {
+        label: 'Wednesday',
+        values: [1, 2, 2, 3, 5, 7, 8, 9, 8, 7, 8, 9, 10, 9, 8, 7, 6, 7, 8, 6, 5, 4, 3, 2],
+      },
+      {
+        label: 'Thursday',
+        values: [1, 2, 2, 3, 5, 7, 9, 10, 9, 8, 9, 10, 11, 10, 9, 8, 7, 8, 9, 7, 5, 4, 3, 2],
+      },
+      {
+        label: 'Friday',
+        values: [1, 2, 2, 3, 5, 7, 8, 9, 8, 7, 8, 9, 10, 9, 8, 7, 6, 8, 10, 11, 10, 8, 5, 3],
+      },
+      {
+        label: 'Saturday',
+        values: [2, 3, 3, 4, 4, 5, 6, 7, 8, 9, 10, 11, 11, 10, 9, 8, 7, 8, 9, 8, 7, 6, 5, 3],
+      },
+      {
+        label: 'Sunday',
+        values: [3, 4, 4, 5, 5, 6, 6, 7, 8, 9, 10, 10, 10, 9, 8, 7, 6, 6, 5, 4, 3, 3, 2, 2],
+      },
     ],
     width: 700,
     height: 500,

@@ -40,8 +40,8 @@ export default [
         exclude: ['**/*.stories.tsx', '**/*.stories.ts', '**/Page*.tsx'],
         outputToFilesystem: true,
         compilerOptions: {
-          declarationMap: false
-        }
+          declarationMap: false,
+        },
       }),
       postcss({
         extract: 'snake-eater-ui.css',

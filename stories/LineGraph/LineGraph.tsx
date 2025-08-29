@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import './linegraph.css';
 
 interface DataPoint {
@@ -102,11 +102,11 @@ export const LineGraph: React.FC<LineGraphProps> = ({
 }) => {
   // Normalize data to array
   const series = Array.isArray(data) ? data : [data];
-  
+
   // SVG dimensions - use a default viewBox size
   const svgWidth = 600;
   const svgHeight = 400;
-  
+
   // State for interactive variant
   const [activeSeries, setActiveSeries] = useState<string | null>(null);
   const [hoveredPoint, setHoveredPoint] = useState<{
@@ -121,10 +121,10 @@ export const LineGraph: React.FC<LineGraphProps> = ({
 
   // Calculate domains
   const { xMin, xMax, yMin, yMax } = useMemo(() => {
-    const allPoints = series.flatMap(s => s.data);
-    const xValues = allPoints.map(p => p.x);
-    const yValues = allPoints.map(p => p.y);
-    
+    const allPoints = series.flatMap((s) => s.data);
+    const xValues = allPoints.map((p) => p.x);
+    const yValues = allPoints.map((p) => p.y);
+
     return {
       xMin: xDomain ? xDomain[0] : Math.min(...xValues),
       xMax: xDomain ? xDomain[1] : Math.max(...xValues),
@@ -145,51 +145,55 @@ export const LineGraph: React.FC<LineGraphProps> = ({
   // Generate path for line
   const generatePath = (points: DataPoint[]) => {
     if (points.length === 0) return '';
-    
-    const scaledPoints = points.map(p => ({
+
+    const scaledPoints = points.map((p) => ({
       x: xScale(p.x),
       y: yScale(p.y),
     }));
-    
+
     let path = '';
-    
+
     if (curve === 'smooth') {
       // Cubic bezier curve
-      path = scaledPoints.map((point, i) => {
-        if (i === 0) return `M ${point.x} ${point.y}`;
-        
-        const prev = scaledPoints[i - 1];
-        const cpx1 = prev.x + (point.x - prev.x) / 3;
-        const cpy1 = prev.y;
-        const cpx2 = prev.x + 2 * (point.x - prev.x) / 3;
-        const cpy2 = point.y;
-        
-        return `C ${cpx1} ${cpy1}, ${cpx2} ${cpy2}, ${point.x} ${point.y}`;
-      }).join(' ');
+      path = scaledPoints
+        .map((point, i) => {
+          if (i === 0) return `M ${point.x} ${point.y}`;
+
+          const prev = scaledPoints[i - 1];
+          const cpx1 = prev.x + (point.x - prev.x) / 3;
+          const cpy1 = prev.y;
+          const cpx2 = prev.x + (2 * (point.x - prev.x)) / 3;
+          const cpy2 = point.y;
+
+          return `C ${cpx1} ${cpy1}, ${cpx2} ${cpy2}, ${point.x} ${point.y}`;
+        })
+        .join(' ');
     } else if (curve === 'step') {
-      path = scaledPoints.map((point, i) => {
-        if (i === 0) return `M ${point.x} ${point.y}`;
-        const prev = scaledPoints[i - 1];
-        return `L ${point.x} ${prev.y} L ${point.x} ${point.y}`;
-      }).join(' ');
+      path = scaledPoints
+        .map((point, i) => {
+          if (i === 0) return `M ${point.x} ${point.y}`;
+          const prev = scaledPoints[i - 1];
+          return `L ${point.x} ${prev.y} L ${point.x} ${point.y}`;
+        })
+        .join(' ');
     } else {
       // Linear
-      path = scaledPoints.map((point, i) => 
-        `${i === 0 ? 'M' : 'L'} ${point.x} ${point.y}`
-      ).join(' ');
+      path = scaledPoints
+        .map((point, i) => `${i === 0 ? 'M' : 'L'} ${point.x} ${point.y}`)
+        .join(' ');
     }
-    
+
     return path;
   };
 
   // Generate fill path
   const generateFillPath = (points: DataPoint[]) => {
     if (points.length === 0) return '';
-    
+
     const linePath = generatePath(points);
     const lastPoint = points[points.length - 1];
     const firstPoint = points[0];
-    
+
     return `${linePath} L ${xScale(lastPoint.x)} ${yScale(0)} L ${xScale(firstPoint.x)} ${yScale(0)} Z`;
   };
 
@@ -253,12 +257,10 @@ export const LineGraph: React.FC<LineGraphProps> = ({
     <div className={classes}>
       <div className="snake-line-graph__corner snake-line-graph__corner--top-left" />
       <div className="snake-line-graph__corner snake-line-graph__corner--top-right" />
-      
+
       <div className="snake-line-graph__container">
-        {title && (
-          <div className="snake-line-graph__title">{title}</div>
-        )}
-        
+        {title && <div className="snake-line-graph__title">{title}</div>}
+
         <svg
           width={typeof width === 'number' ? width : '100%'}
           height={typeof height === 'number' ? height : '100%'}
@@ -271,14 +273,21 @@ export const LineGraph: React.FC<LineGraphProps> = ({
             {series.map((s, i) => {
               const color = s.color || defaultColors[i % defaultColors.length];
               return (
-                <linearGradient key={`gradient-${i}`} id={`line-gradient-${i}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient
+                  key={`gradient-${i}`}
+                  id={`line-gradient-${i}`}
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
                   <stop offset="0%" stopColor={color} stopOpacity={fillOpacity} />
                   <stop offset="100%" stopColor={color} stopOpacity={0} />
                 </linearGradient>
               );
             })}
           </defs>
-          
+
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {/* Grid */}
             {finalShowGrid && (
@@ -318,9 +327,9 @@ export const LineGraph: React.FC<LineGraphProps> = ({
                 const color = s.color || defaultColors[i % defaultColors.length];
                 const isActive = activeSeries === s.name;
                 const isDimmed = isInteractive && activeSeries && !isActive;
-                
+
                 return (
-                  <g 
+                  <g
                     key={`series-${i}`}
                     className={`snake-line-graph__series ${isActive ? 'snake-line-graph__series--active' : ''}`}
                     style={{
@@ -335,7 +344,7 @@ export const LineGraph: React.FC<LineGraphProps> = ({
                         className="snake-line-graph__area"
                       />
                     )}
-                    
+
                     {/* Line */}
                     <path
                       d={generatePath(s.data)}
@@ -354,39 +363,40 @@ export const LineGraph: React.FC<LineGraphProps> = ({
                         cursor: isInteractive ? 'pointer' : 'default',
                       }}
                     />
-                    
+
                     {/* Points */}
-                    {finalShowPoints && s.data.map((point, j) => (
-                      <circle
-                        key={`point-${j}`}
-                        cx={xScale(point.x)}
-                        cy={yScale(point.y)}
-                        r={isActive ? pointRadius + 1 : pointRadius}
-                        fill={color}
-                        stroke="#0b0b0d"
-                        strokeWidth="1"
-                        className="snake-line-graph__point"
-                        onClick={() => {
-                          if (isInteractive) {
-                            onPointClick?.(point, s.name);
-                          }
-                        }}
-                        onMouseEnter={() => {
-                          if (finalShowValues) {
-                            setHoveredPoint({
-                              x: xScale(point.x),
-                              y: yScale(point.y),
-                              value: point,
-                              series: s.name,
-                            });
-                          }
-                        }}
-                        onMouseLeave={() => setHoveredPoint(null)}
-                        style={{
-                          cursor: isInteractive ? 'pointer' : 'default',
-                        }}
-                      />
-                    ))}
+                    {finalShowPoints &&
+                      s.data.map((point, j) => (
+                        <circle
+                          key={`point-${j}`}
+                          cx={xScale(point.x)}
+                          cy={yScale(point.y)}
+                          r={isActive ? pointRadius + 1 : pointRadius}
+                          fill={color}
+                          stroke="#0b0b0d"
+                          strokeWidth="1"
+                          className="snake-line-graph__point"
+                          onClick={() => {
+                            if (isInteractive) {
+                              onPointClick?.(point, s.name);
+                            }
+                          }}
+                          onMouseEnter={() => {
+                            if (finalShowValues) {
+                              setHoveredPoint({
+                                x: xScale(point.x),
+                                y: yScale(point.y),
+                                value: point,
+                                series: s.name,
+                              });
+                            }
+                          }}
+                          onMouseLeave={() => setHoveredPoint(null)}
+                          style={{
+                            cursor: isInteractive ? 'pointer' : 'default',
+                          }}
+                        />
+                      ))}
                   </g>
                 );
               })}
@@ -452,16 +462,9 @@ export const LineGraph: React.FC<LineGraphProps> = ({
                     </text>
                   </g>
                 ))}
-                
+
                 {/* Y-axis */}
-                <line
-                  x1={0}
-                  y1={0}
-                  x2={0}
-                  y2={plotHeight}
-                  stroke={axisColor}
-                  strokeWidth="2"
-                />
+                <line x1={0} y1={0} x2={0} y2={plotHeight} stroke={axisColor} strokeWidth="2" />
                 {yTicks.map((tick, i) => (
                   <g key={`y-tick-${i}`}>
                     <line
@@ -525,11 +528,13 @@ export const LineGraph: React.FC<LineGraphProps> = ({
 
         {/* Legend */}
         {finalShowLegend && series.length > 1 && (
-          <div className={`snake-line-graph__legend ${animateLegend ? 'snake-line-graph__legend--animated' : ''}`}>
+          <div
+            className={`snake-line-graph__legend ${animateLegend ? 'snake-line-graph__legend--animated' : ''}`}
+          >
             {series.map((s, i) => {
               const color = s.color || defaultColors[i % defaultColors.length];
               const isActive = activeSeries === s.name;
-              
+
               return (
                 <div
                   key={`legend-${i}`}

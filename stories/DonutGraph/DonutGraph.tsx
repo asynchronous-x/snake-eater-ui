@@ -50,7 +50,6 @@ export interface DonutGraphProps {
 export const DonutGraph: React.FC<DonutGraphProps> = ({
   data,
   size = '100%',
-  thickness = 60,
   innerRadius = 40,
   colors = ['#8b2c2c', '#4a4a4a', '#d4d4d4', '#6b3030', '#7a7a7a'],
   showCenterValue = true,
@@ -75,16 +74,16 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
   const { segments, total } = useMemo(() => {
     const sum = data.reduce((acc, d) => acc + d.value, 0);
     const angleMultiplier = 360;
-    
+
     let currentAngle = 0;
-    
+
     const segs = data.map((segment, i) => {
       const percentage = segment.value / sum;
       const angle = percentage * angleMultiplier;
       const startAngle = currentAngle;
       const endAngle = currentAngle + angle;
       currentAngle = endAngle;
-      
+
       return {
         ...segment,
         percentage,
@@ -94,14 +93,14 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
         color: segment.color || colors[i % colors.length],
       };
     });
-    
+
     return { segments: segs, total: sum };
   }, [data, colors]);
 
   // SVG dimensions - use a default viewBox size
   const svgSize = 300; // Base size for calculations
   const viewBox = `0 0 ${svgSize} ${svgSize}`;
-  
+
   const center = { x: svgSize / 2, y: svgSize / 2 };
   const outerR = svgSize / 2 - 10;
   const innerR = (outerR * innerRadius) / 100;
@@ -112,19 +111,19 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
       // No gaps - use simple arc paths
       const startAngleRad = (segment.startAngle * Math.PI) / 180;
       const endAngleRad = (segment.endAngle * Math.PI) / 180;
-      
+
       const x1 = center.x + outerR * Math.cos(startAngleRad);
       const y1 = center.y + outerR * Math.sin(startAngleRad);
       const x2 = center.x + outerR * Math.cos(endAngleRad);
       const y2 = center.y + outerR * Math.sin(endAngleRad);
-      
+
       const x3 = center.x + innerR * Math.cos(endAngleRad);
       const y3 = center.y + innerR * Math.sin(endAngleRad);
       const x4 = center.x + innerR * Math.cos(startAngleRad);
       const y4 = center.y + innerR * Math.sin(startAngleRad);
-      
+
       const largeArc = segment.angle > 180 ? 1 : 0;
-      
+
       return `
         M ${x1} ${y1}
         A ${outerR} ${outerR} 0 ${largeArc} 1 ${x2} ${y2}
@@ -133,34 +132,34 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
         Z
       `;
     }
-    
+
     // With gaps - offset the endpoints perpendicular to create uniform gaps
     const halfGap = (finalSegmentGap || segmentGap) / 2;
-    
+
     // Calculate the angle offset needed for uniform gap at both radii
     const outerGapAngle = (halfGap / outerR) * (180 / Math.PI);
     const innerGapAngle = (halfGap / innerR) * (180 / Math.PI);
-    
+
     // Adjust angles for uniform gaps
     const startAngleOuterRad = ((segment.startAngle + outerGapAngle) * Math.PI) / 180;
     const endAngleOuterRad = ((segment.endAngle - outerGapAngle) * Math.PI) / 180;
     const startAngleInnerRad = ((segment.startAngle + innerGapAngle) * Math.PI) / 180;
     const endAngleInnerRad = ((segment.endAngle - innerGapAngle) * Math.PI) / 180;
-    
+
     // Outer arc points
     const x1 = center.x + outerR * Math.cos(startAngleOuterRad);
     const y1 = center.y + outerR * Math.sin(startAngleOuterRad);
     const x2 = center.x + outerR * Math.cos(endAngleOuterRad);
     const y2 = center.y + outerR * Math.sin(endAngleOuterRad);
-    
+
     // Inner arc points
     const x3 = center.x + innerR * Math.cos(endAngleInnerRad);
     const y3 = center.y + innerR * Math.sin(endAngleInnerRad);
     const x4 = center.x + innerR * Math.cos(startAngleInnerRad);
     const y4 = center.y + innerR * Math.sin(startAngleInnerRad);
-    
-    const largeArc = (segment.angle - outerGapAngle * 2) > 180 ? 1 : 0;
-    
+
+    const largeArc = segment.angle - outerGapAngle * 2 > 180 ? 1 : 0;
+
     return `
       M ${x1} ${y1}
       A ${outerR} ${outerR} 0 ${largeArc} 1 ${x2} ${y2}
@@ -175,7 +174,7 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
     const midAngle = (segment.startAngle + segment.endAngle) / 2;
     const midAngleRad = (midAngle * Math.PI) / 180;
     const labelR = (outerR + innerR) / 2;
-    
+
     return {
       x: center.x + labelR * Math.cos(midAngleRad),
       y: center.y + labelR * Math.sin(midAngleRad),
@@ -224,7 +223,7 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
     <div className={classes}>
       <div className="snake-donut-graph__corner snake-donut-graph__corner--top-left" />
       <div className="snake-donut-graph__corner snake-donut-graph__corner--top-right" />
-      
+
       <div className="snake-donut-graph__container">
         <svg
           width={typeof size === 'number' ? size : '100%'}
@@ -239,26 +238,16 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
               const isActive = activeSegment === segment.label;
               const isHovered = hoveredSegment === segment.label;
               const isDimmed = isInteractive && activeSegment && !isActive;
-              
+
               return (
                 <path
                   key={`segment-${i}`}
                   d={generateSegmentPath(segment)}
                   fill={segment.color}
-                  fillOpacity={
-                    isDimmed ? 0.2 : 
-                    isActive ? 1 : 
-                    isHovered ? 0.9 : 
-                    0.8
-                  }
+                  fillOpacity={isDimmed ? 0.2 : isActive ? 1 : isHovered ? 0.9 : 0.8}
                   stroke={segment.color}
                   strokeWidth={isActive || isHovered ? 2 : 1}
-                  strokeOpacity={
-                    isDimmed ? 0.3 : 
-                    isActive ? 1 : 
-                    isHovered ? 1 : 
-                    0.9
-                  }
+                  strokeOpacity={isDimmed ? 0.3 : isActive ? 1 : isHovered ? 1 : 0.9}
                   className={`snake-donut-graph__segment ${isActive ? 'snake-donut-graph__segment--active' : ''}`}
                   style={{
                     cursor: isInteractive ? 'pointer' : 'default',
@@ -315,8 +304,12 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
                     {finalShowValues && !showLabels && formatValue(segment.value, total)}
                     {showLabels && finalShowValues && (
                       <>
-                        <tspan x={pos.x} dy="-0.3em">{segment.label}</tspan>
-                        <tspan x={pos.x} dy="1em">{formatValue(segment.value, total)}</tspan>
+                        <tspan x={pos.x} dy="-0.3em">
+                          {segment.label}
+                        </tspan>
+                        <tspan x={pos.x} dy="1em">
+                          {formatValue(segment.value, total)}
+                        </tspan>
                       </>
                     )}
                   </text>
@@ -383,11 +376,13 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
 
         {/* Legend */}
         {finalShowLegend && (
-          <div className={`snake-donut-graph__legend ${animateLegend ? 'snake-donut-graph__legend--animated' : ''}`}>
+          <div
+            className={`snake-donut-graph__legend ${animateLegend ? 'snake-donut-graph__legend--animated' : ''}`}
+          >
             {segments.map((segment, i) => {
               const isActive = activeSegment === segment.label;
               const isDimmed = isInteractive && activeSegment && !isActive;
-              
+
               return (
                 <div
                   key={`legend-${i}`}
@@ -414,9 +409,7 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
                       borderColor: isActive ? '#bdbdbd' : '#3a3a3a',
                     }}
                   />
-                  <span className="snake-donut-graph__legend-label">
-                    {segment.label}
-                  </span>
+                  <span className="snake-donut-graph__legend-label">{segment.label}</span>
                   <span className="snake-donut-graph__legend-value">
                     {formatValue(segment.value, total)}
                   </span>

@@ -79,7 +79,9 @@
 
 /* Lines */
 .snake-line-graph__line {
-  transition: stroke-width var(--transition-base), opacity var(--transition-base);
+  transition:
+    stroke-width var(--transition-base),
+    opacity var(--transition-base);
   fill: none;
 }
 
@@ -140,7 +142,9 @@
 
 /* Points */
 .snake-line-graph__point {
-  transition: r var(--transition-fast), fill var(--transition-fast);
+  transition:
+    r var(--transition-fast),
+    fill var(--transition-fast);
 }
 
 .snake-line-graph__point:hover {

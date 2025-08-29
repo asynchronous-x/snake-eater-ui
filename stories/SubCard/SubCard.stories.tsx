@@ -299,7 +299,7 @@ export const AlignedRow: Story = {
           <p>Creates a continuous visual line.</p>
         </SubCard>
       </div>
-      
+
       <h3 style={{ marginTop: '40px', marginBottom: '20px', color: '#bdbdbd' }}>Grid Layout</h3>
       <div className="snake-subcard-grid snake-subcard-grid--3" style={{ marginBottom: '20px' }}>
         <SubCard size="small">
@@ -379,7 +379,7 @@ export const TransitionSlideUp: Story = {
 export const TransitionShowcase: Story = {
   render: () => {
     const [show, setShow] = React.useState(false);
-    
+
     React.useEffect(() => {
       setShow(true);
     }, []);
@@ -387,10 +387,12 @@ export const TransitionShowcase: Story = {
     return (
       <div>
         <div style={{ marginBottom: '32px' }}>
-          <Button onClick={() => {
-            setShow(false);
-            setTimeout(() => setShow(true), 100);
-          }}>
+          <Button
+            onClick={() => {
+              setShow(false);
+              setTimeout(() => setShow(true), 100);
+            }}
+          >
             Replay Animations
           </Button>
         </div>
@@ -475,7 +477,7 @@ export const TransitionShowcase: Story = {
 export const StaggeredTransitions: Story = {
   render: () => {
     const [show, setShow] = React.useState(false);
-    
+
     React.useEffect(() => {
       setShow(true);
     }, []);
@@ -483,10 +485,12 @@ export const StaggeredTransitions: Story = {
     return (
       <div>
         <div style={{ marginBottom: '32px' }}>
-          <Button onClick={() => {
-            setShow(false);
-            setTimeout(() => setShow(true), 100);
-          }}>
+          <Button
+            onClick={() => {
+              setShow(false);
+              setTimeout(() => setShow(true), 100);
+            }}
+          >
             Replay Animation
           </Button>
         </div>
@@ -538,10 +542,12 @@ export const TransitionWithCallback: Story = {
     return (
       <div>
         <div style={{ marginBottom: '32px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-          <Button onClick={() => {
-            setStatus('Animating...');
-            setKey(k => k + 1);
-          }}>
+          <Button
+            onClick={() => {
+              setStatus('Animating...');
+              setKey((k) => k + 1);
+            }}
+          >
             Trigger Animation
           </Button>
           <span style={{ color: '#8a8a8a' }}>Status: {status}</span>
@@ -566,7 +572,7 @@ export const TransitionWithCallback: Story = {
 export const FastTransitions: Story = {
   render: () => {
     const [show, setShow] = React.useState(false);
-    
+
     React.useEffect(() => {
       setShow(true);
     }, []);
@@ -574,10 +580,12 @@ export const FastTransitions: Story = {
     return (
       <div>
         <div style={{ marginBottom: '32px' }}>
-          <Button onClick={() => {
-            setShow(false);
-            setTimeout(() => setShow(true), 100);
-          }}>
+          <Button
+            onClick={() => {
+              setShow(false);
+              setTimeout(() => setShow(true), 100);
+            }}
+          >
             Replay Fast Cards
           </Button>
         </div>

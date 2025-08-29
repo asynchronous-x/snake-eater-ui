@@ -121,7 +121,7 @@ const generateNormalData = (count: number, meanX: number, meanY: number, stdDev:
     const u2 = Math.random();
     const z0 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
     const z1 = Math.sqrt(-2 * Math.log(u1)) * Math.sin(2 * Math.PI * u2);
-    
+
     data.push({
       x: meanX + z0 * stdDev,
       y: meanY + z1 * stdDev,
@@ -191,8 +191,10 @@ export const Interactive: Story = {
     showAxes: true,
     showLegend: true,
     animate: true,
-    onHexClick: (bin, index) => {
-      console.log(`Clicked hexagon with ${bin.count} points at (${bin.x.toFixed(1)}, ${bin.y.toFixed(1)})`);
+    onHexClick: (bin) => {
+      console.log(
+        `Clicked hexagon with ${bin.count} points at (${bin.x.toFixed(1)}, ${bin.y.toFixed(1)})`,
+      );
     },
   },
 };

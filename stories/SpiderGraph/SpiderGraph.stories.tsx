@@ -68,7 +68,14 @@ export const CharacterStats: Story = {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
         <h3 style={{ color: '#bdbdbd', margin: 0 }}>Character Attributes</h3>
         <SpiderGraph data={stats} size={350} fillColor="#50fa7b" strokeColor="#50fa7b" />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', fontSize: '12px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '16px',
+            fontSize: '12px',
+          }}
+        >
           {stats.map((stat) => (
             <div key={stat.label} style={{ display: 'flex', gap: '8px', color: '#8a8a8a' }}>
               <span>{stat.label}:</span>
@@ -153,14 +160,16 @@ export const Interactive: Story = {
     ]);
 
     const randomize = () => {
-      setData(data.map(d => ({
-        ...d,
-        value: Math.floor(Math.random() * 70) + 30,
-      })));
+      setData(
+        data.map((d) => ({
+          ...d,
+          value: Math.floor(Math.random() * 70) + 30,
+        })),
+      );
     };
 
     const maximize = () => {
-      setData(data.map(d => ({ ...d, value: 100 })));
+      setData(data.map((d) => ({ ...d, value: 100 })));
     };
 
     const reset = () => {
@@ -177,9 +186,15 @@ export const Interactive: Story = {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
         <SpiderGraph data={data} size={350} animate />
         <div style={{ display: 'flex', gap: '8px' }}>
-          <Button size="small" onClick={randomize}>Randomize</Button>
-          <Button size="small" onClick={maximize}>Max Stats</Button>
-          <Button size="small" variant="ghost" onClick={reset}>Reset</Button>
+          <Button size="small" onClick={randomize}>
+            Randomize
+          </Button>
+          <Button size="small" onClick={maximize}>
+            Max Stats
+          </Button>
+          <Button size="small" variant="ghost" onClick={reset}>
+            Reset
+          </Button>
         </div>
       </div>
     );
@@ -198,33 +213,47 @@ export const PerformanceMetrics: Story = {
     ];
 
     return (
-      <div style={{ 
-        padding: '24px',
-        background: '#1f1d20',
-        border: '1px solid #3a3a3a',
-        display: 'inline-block'
-      }}>
+      <div
+        style={{
+          padding: '24px',
+          background: '#1f1d20',
+          border: '1px solid #3a3a3a',
+          display: 'inline-block',
+        }}
+      >
         <h3 style={{ color: '#bdbdbd', margin: '0 0 24px 0', textAlign: 'center' }}>
           System Performance
         </h3>
-        <SpiderGraph 
-          data={metrics} 
-          size={400} 
+        <SpiderGraph
+          data={metrics}
+          size={400}
           levels={4}
           fillColor="#61dafb"
           strokeColor="#61dafb"
           fillOpacity={0.15}
           showValues
         />
-        <div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
+        <div
+          style={{
+            marginTop: '24px',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '12px',
+          }}
+        >
           {metrics.map((metric) => (
-            <div key={metric.label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
+            <div
+              key={metric.label}
+              style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}
+            >
               <span style={{ color: '#8a8a8a' }}>{metric.label}:</span>
-              <span style={{ 
-                color: metric.value > 75 ? '#ff5555' : metric.value > 50 ? '#f1fa8c' : '#50fa7b',
-                fontWeight: 'bold',
-                fontFamily: 'var(--font-family-mono)'
-              }}>
+              <span
+                style={{
+                  color: metric.value > 75 ? '#ff5555' : metric.value > 50 ? '#f1fa8c' : '#50fa7b',
+                  fontWeight: 'bold',
+                  fontFamily: 'var(--font-family-mono)',
+                }}
+              >
                 {metric.value}%
               </span>
             </div>
@@ -250,9 +279,9 @@ export const SkillComparison: Story = {
 
     return (
       <div style={{ display: 'flex', gap: '48px', alignItems: 'center' }}>
-        <SpiderGraph 
-          data={skills} 
-          size={450} 
+        <SpiderGraph
+          data={skills}
+          size={450}
           variant="detailed"
           fillColor="#50fa7b"
           strokeColor="#50fa7b"
@@ -262,28 +291,36 @@ export const SkillComparison: Story = {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {skills.map((skill) => (
               <div key={skill.label} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ color: '#8a8a8a', width: '100px', fontSize: '12px' }}>{skill.label}</span>
-                <div style={{ 
-                  flex: 1, 
-                  height: '4px', 
-                  background: '#3a3a3a',
-                  position: 'relative'
-                }}>
-                  <div style={{
-                    position: 'absolute',
-                    height: '100%',
-                    width: `${skill.value}%`,
-                    background: '#50fa7b',
-                    transition: 'width 0.5s ease'
-                  }} />
+                <span style={{ color: '#8a8a8a', width: '100px', fontSize: '12px' }}>
+                  {skill.label}
+                </span>
+                <div
+                  style={{
+                    flex: 1,
+                    height: '4px',
+                    background: '#3a3a3a',
+                    position: 'relative',
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      height: '100%',
+                      width: `${skill.value}%`,
+                      background: '#50fa7b',
+                      transition: 'width 0.5s ease',
+                    }}
+                  />
                 </div>
-                <span style={{ 
-                  color: '#50fa7b', 
-                  fontSize: '12px',
-                  fontFamily: 'var(--font-family-mono)',
-                  width: '35px',
-                  textAlign: 'right'
-                }}>
+                <span
+                  style={{
+                    color: '#50fa7b',
+                    fontSize: '12px',
+                    fontFamily: 'var(--font-family-mono)',
+                    width: '35px',
+                    textAlign: 'right',
+                  }}
+                >
                   {skill.value}%
                 </span>
               </div>
@@ -321,34 +358,35 @@ export const CyberSecurity: Story = {
     ];
 
     return (
-      <div style={{
-        background: 'linear-gradient(135deg, #0b0b0d 0%, #1a1a2e 100%)',
-        padding: '32px',
-        border: '2px solid #61dafb',
-        boxShadow: '0 0 30px rgba(97, 218, 251, 0.3)',
-      }}>
-        <h2 style={{ 
-          color: '#61dafb', 
-          textAlign: 'center', 
-          margin: '0 0 32px 0',
-          textTransform: 'uppercase',
-          letterSpacing: '2px',
-          fontFamily: 'var(--font-family-mono)'
-        }}>
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #0b0b0d 0%, #1a1a2e 100%)',
+          padding: '32px',
+          border: '2px solid #61dafb',
+          boxShadow: '0 0 30px rgba(97, 218, 251, 0.3)',
+        }}
+      >
+        <h2
+          style={{
+            color: '#61dafb',
+            textAlign: 'center',
+            margin: '0 0 32px 0',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            fontFamily: 'var(--font-family-mono)',
+          }}
+        >
           Threat Analysis
         </h2>
-        <SpiderGraph 
-          data={threats} 
-          size={400} 
-          variant="cyber"
-          animate
-        />
-        <div style={{ 
-          marginTop: '24px', 
-          padding: '16px',
-          background: 'rgba(97, 218, 251, 0.05)',
-          border: '1px solid rgba(97, 218, 251, 0.3)'
-        }}>
+        <SpiderGraph data={threats} size={400} variant="cyber" animate />
+        <div
+          style={{
+            marginTop: '24px',
+            padding: '16px',
+            background: 'rgba(97, 218, 251, 0.05)',
+            border: '1px solid rgba(97, 218, 251, 0.3)',
+          }}
+        >
           <p style={{ color: '#61dafb', margin: 0, fontSize: '12px', textAlign: 'center' }}>
             THREAT LEVEL: <span style={{ color: '#ff5555', fontWeight: 'bold' }}>HIGH</span>
           </p>

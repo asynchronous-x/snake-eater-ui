@@ -11,7 +11,9 @@
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-base), visibility var(--transition-base);
+  transition:
+    opacity var(--transition-base),
+    visibility var(--transition-base);
 }
 
 .snake-drawer__overlay--visible {
@@ -27,7 +29,7 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  transition: transform var(--transition-base) cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: transform var(--transition-base) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Position variants */
@@ -199,7 +201,7 @@
   .snake-drawer {
     transition: none;
   }
-  
+
   .snake-drawer__overlay {
     transition: none;
   }

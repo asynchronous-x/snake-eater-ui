@@ -44,14 +44,14 @@ export const KeyboardKey: React.FC<KeyboardKeyProps> = ({
     pressed && 'snake-keyboard-key--pressed',
     disabled && 'snake-keyboard-key--disabled',
     onClick && 'snake-keyboard-key--clickable',
-    icon && `snake-keyboard-key--with-icon`,
+    icon && 'snake-keyboard-key--with-icon',
     icon && `snake-keyboard-key--icon-${iconPosition}`,
     className,
   ]
     .filter(Boolean)
     .join(' ');
 
-  const style = width !== 1 ? { '--key-width': width } as React.CSSProperties : undefined;
+  const style = width !== 1 ? ({ '--key-width': width } as React.CSSProperties) : undefined;
 
   const Component = onClick ? 'button' : 'kbd';
 

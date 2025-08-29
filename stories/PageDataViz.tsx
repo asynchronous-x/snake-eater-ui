@@ -54,7 +54,7 @@ export const PageDataViz: React.FC = () => {
     Cache: 3 + i * 2 + Math.random() * 2,
     CDN: 2 + i * 1.8 + Math.random() * 2,
   }));
-  
+
   const streamKeys = ['Frontend', 'Backend', 'Database', 'Cache', 'CDN'];
 
   // Hexbin data for density
@@ -67,7 +67,7 @@ export const PageDataViz: React.FC = () => {
       { x: 3, y: 7, spread: 1 },
       { x: 7, y: 3, spread: 1 },
     ];
-    
+
     for (let i = 0; i < count; i++) {
       const cluster = clusters[Math.floor(Math.random() * clusters.length)];
       data.push({
@@ -80,14 +80,34 @@ export const PageDataViz: React.FC = () => {
 
   // Ridgeline data
   const ridgelineData = [
-    { label: 'Morning', values: Array.from({ length: 50 }, (_, i) => 
-      Math.exp(-Math.pow(i - 15, 2) / 50) * 10 + Math.random() * 2) },
-    { label: 'Afternoon', values: Array.from({ length: 50 }, (_, i) => 
-      Math.exp(-Math.pow(i - 25, 2) / 60) * 12 + Math.random() * 2) },
-    { label: 'Evening', values: Array.from({ length: 50 }, (_, i) => 
-      Math.exp(-Math.pow(i - 35, 2) / 70) * 15 + Math.random() * 2) },
-    { label: 'Night', values: Array.from({ length: 50 }, (_, i) => 
-      Math.exp(-Math.pow(i - 10, 2) / 40) * 8 + Math.random() * 2) },
+    {
+      label: 'Morning',
+      values: Array.from(
+        { length: 50 },
+        (_, i) => Math.exp(-Math.pow(i - 15, 2) / 50) * 10 + Math.random() * 2,
+      ),
+    },
+    {
+      label: 'Afternoon',
+      values: Array.from(
+        { length: 50 },
+        (_, i) => Math.exp(-Math.pow(i - 25, 2) / 60) * 12 + Math.random() * 2,
+      ),
+    },
+    {
+      label: 'Evening',
+      values: Array.from(
+        { length: 50 },
+        (_, i) => Math.exp(-Math.pow(i - 35, 2) / 70) * 15 + Math.random() * 2,
+      ),
+    },
+    {
+      label: 'Night',
+      values: Array.from(
+        { length: 50 },
+        (_, i) => Math.exp(-Math.pow(i - 10, 2) / 40) * 8 + Math.random() * 2,
+      ),
+    },
   ];
 
   // Spider/Radar data
@@ -152,12 +172,18 @@ export const PageDataViz: React.FC = () => {
       <div className="snake-page__example">
         <div className="snake-page__header">
           <div>
-            <Heading as="h1" size="xl">Data Visualization Suite</Heading>
+            <Heading as="h1" size="xl">
+              Data Visualization Suite
+            </Heading>
             <Text variant="muted">Advanced analytics and insights</Text>
           </div>
           <div style={{ display: 'flex', gap: '12px' }}>
-            <Button variant="ghost" size="small">Export All</Button>
-            <Button variant="primary" size="small">Configure</Button>
+            <Button variant="ghost" size="small">
+              Export All
+            </Button>
+            <Button variant="primary" size="small">
+              Configure
+            </Button>
           </div>
         </div>
 
@@ -175,14 +201,27 @@ export const PageDataViz: React.FC = () => {
         />
 
         {/* Main Grid Layout */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
           {/* Line Graph - Comparison */}
-          <Card header={
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Heading as="h3" size="md">Performance Comparison</Heading>
-              <Badge variant="ghost">Live</Badge>
-            </div>
-          }>
+          <Card
+            header={
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
+                <Heading as="h3" size="md">
+                  Performance Comparison
+                </Heading>
+                <Badge variant="ghost">Live</Badge>
+              </div>
+            }
+          >
             <LineGraph
               data={comparisonData}
               width={450}
@@ -196,7 +235,13 @@ export const PageDataViz: React.FC = () => {
           </Card>
 
           {/* Stream Graph */}
-          <Card header={<Heading as="h3" size="md">Service Flow</Heading>}>
+          <Card
+            header={
+              <Heading as="h3" size="md">
+                Service Flow
+              </Heading>
+            }
+          >
             <StreamGraph
               data={streamData}
               keys={streamKeys}
@@ -210,7 +255,13 @@ export const PageDataViz: React.FC = () => {
           </Card>
 
           {/* Hexagonal Binning */}
-          <Card header={<Heading as="h3" size="md">Usage Density</Heading>}>
+          <Card
+            header={
+              <Heading as="h3" size="md">
+                Usage Density
+              </Heading>
+            }
+          >
             <HexagonalBinningGraph
               data={generateScatterData(500)}
               width={450}
@@ -225,7 +276,13 @@ export const PageDataViz: React.FC = () => {
           </Card>
 
           {/* Spider Graph */}
-          <Card header={<Heading as="h3" size="md">System Metrics</Heading>}>
+          <Card
+            header={
+              <Heading as="h3" size="md">
+                System Metrics
+              </Heading>
+            }
+          >
             <SpiderGraph
               data={spiderData}
               width={450}
@@ -240,12 +297,18 @@ export const PageDataViz: React.FC = () => {
         {/* Full Width Sections */}
         <div style={{ marginTop: '20px' }}>
           {/* Ridgeline Graph */}
-          <Card header={
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Heading as="h3" size="md">Activity Distribution</Heading>
-              <Badge variant="success">Updated</Badge>
-            </div>
-          }>
+          <Card
+            header={
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
+                <Heading as="h3" size="md">
+                  Activity Distribution
+                </Heading>
+                <Badge variant="success">Updated</Badge>
+              </div>
+            }
+          >
             <RidgelineGraph
               data={ridgelineData}
               width={920}
@@ -264,9 +327,22 @@ export const PageDataViz: React.FC = () => {
         </div>
 
         {/* Bottom Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px', marginTop: '20px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '2fr 1fr',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
           {/* Bar Graph */}
-          <Card header={<Heading as="h3" size="md">Quarterly Performance</Heading>}>
+          <Card
+            header={
+              <Heading as="h3" size="md">
+                Quarterly Performance
+              </Heading>
+            }
+          >
             <BarGraph
               data={timeSeriesData}
               width={600}
@@ -279,7 +355,13 @@ export const PageDataViz: React.FC = () => {
           </Card>
 
           {/* Donut Graph */}
-          <Card header={<Heading as="h3" size="md">Resource Allocation</Heading>}>
+          <Card
+            header={
+              <Heading as="h3" size="md">
+                Resource Allocation
+              </Heading>
+            }
+          >
             <DonutGraph
               data={categoryData}
               width={280}
@@ -294,33 +376,64 @@ export const PageDataViz: React.FC = () => {
         </div>
 
         {/* Summary Stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginTop: '20px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
           <Card>
             <div style={{ textAlign: 'center', padding: '20px' }}>
-              <Text variant="muted" size="small">Total Data Points</Text>
-              <Heading as="h2" size="lg" style={{ marginTop: '8px' }}>2.4M</Heading>
-              <Badge variant="success" size="small" style={{ marginTop: '8px' }}>+12%</Badge>
+              <Text variant="muted" size="small">
+                Total Data Points
+              </Text>
+              <Heading as="h2" size="lg" style={{ marginTop: '8px' }}>
+                2.4M
+              </Heading>
+              <Badge variant="success" size="small" style={{ marginTop: '8px' }}>
+                +12%
+              </Badge>
             </div>
           </Card>
           <Card>
             <div style={{ textAlign: 'center', padding: '20px' }}>
-              <Text variant="muted" size="small">Avg. Processing</Text>
-              <Heading as="h2" size="lg" style={{ marginTop: '8px' }}>124ms</Heading>
-              <Badge variant="ghost" size="small" style={{ marginTop: '8px' }}>Stable</Badge>
+              <Text variant="muted" size="small">
+                Avg. Processing
+              </Text>
+              <Heading as="h2" size="lg" style={{ marginTop: '8px' }}>
+                124ms
+              </Heading>
+              <Badge variant="ghost" size="small" style={{ marginTop: '8px' }}>
+                Stable
+              </Badge>
             </div>
           </Card>
           <Card>
             <div style={{ textAlign: 'center', padding: '20px' }}>
-              <Text variant="muted" size="small">Accuracy Rate</Text>
-              <Heading as="h2" size="lg" style={{ marginTop: '8px' }}>98.7%</Heading>
-              <Badge variant="success" size="small" style={{ marginTop: '8px' }}>+2.1%</Badge>
+              <Text variant="muted" size="small">
+                Accuracy Rate
+              </Text>
+              <Heading as="h2" size="lg" style={{ marginTop: '8px' }}>
+                98.7%
+              </Heading>
+              <Badge variant="success" size="small" style={{ marginTop: '8px' }}>
+                +2.1%
+              </Badge>
             </div>
           </Card>
           <Card>
             <div style={{ textAlign: 'center', padding: '20px' }}>
-              <Text variant="muted" size="small">Active Models</Text>
-              <Heading as="h2" size="lg" style={{ marginTop: '8px' }}>16</Heading>
-              <Badge variant="primary" size="small" style={{ marginTop: '8px' }}>All Active</Badge>
+              <Text variant="muted" size="small">
+                Active Models
+              </Text>
+              <Heading as="h2" size="lg" style={{ marginTop: '8px' }}>
+                16
+              </Heading>
+              <Badge variant="primary" size="small" style={{ marginTop: '8px' }}>
+                All Active
+              </Badge>
             </div>
           </Card>
         </div>

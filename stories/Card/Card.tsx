@@ -54,7 +54,7 @@ export const Card: React.FC<CardProps> = ({
       const delayTimer = setTimeout(() => {
         setIsVisible(true);
         setIsAnimating(true);
-        
+
         const completeTimer = setTimeout(() => {
           setIsAnimating(false);
           onTransitionComplete?.();
@@ -83,9 +83,11 @@ export const Card: React.FC<CardProps> = ({
 
   const Component = interactive ? 'button' : 'div';
 
-  const transitionStyle = transitionIn ? {
-    '--transition-speed': `${transitionSpeed}ms`,
-  } as React.CSSProperties : undefined;
+  const transitionStyle = transitionIn
+    ? ({
+        '--transition-speed': `${transitionSpeed}ms`,
+      } as React.CSSProperties)
+    : undefined;
 
   return (
     <Component

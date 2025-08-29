@@ -94,8 +94,10 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
   // State for interactive variant
   const [activeRidge, setActiveRidge] = useState<string | null>(null);
   const [hoveredRidge, setHoveredRidge] = useState<string | null>(null);
-  const [hoveredPoint, setHoveredPoint] = useState<{ x: number; y: number; value: number } | null>(null);
-  
+  const [hoveredPoint, setHoveredPoint] = useState<{ x: number; y: number; value: number } | null>(
+    null,
+  );
+
   // State for scrolling variant
   // Initialize with placeholders if scrolling variant
   const initializeScrollingData = () => {
@@ -111,7 +113,7 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
     }
     return initialData;
   };
-  
+
   const [scrollingData, setScrollingData] = useState<DataSeries[]>(initializeScrollingData());
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const dataCountRef = useRef(0);
@@ -121,28 +123,28 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
     if (variant === 'scrolling' && generateNewData) {
       // Start adding real data immediately
       const addNewData = () => {
-        setScrollingData(prevData => {
+        setScrollingData((prevData) => {
           const newData = [...prevData];
           const newItem = generateNewData();
-          
+
           // Add real data at the top
           newData.unshift(newItem);
-          
+
           // Always maintain exactly maxRidges items
           if (newData.length > maxRidges) {
             newData.pop();
           }
-          
+
           dataCountRef.current++;
           return newData;
         });
       };
-      
+
       // Add first real data item immediately
       if (dataCountRef.current === 0) {
         addNewData();
       }
-      
+
       // Then continue adding at intervals
       scrollIntervalRef.current = setInterval(addNewData, scrollInterval);
 
@@ -159,7 +161,7 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
   // Fixed SVG dimensions for consistent viewBox
   const svgWidth = 600;
   const svgHeight = 400;
-  
+
   // Margins for axes and labels
   const margin = { top: 40, right: 40, bottom: 80, left: 100 };
   const plotWidth = svgWidth - margin.left - margin.right;
@@ -169,46 +171,45 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
   const effectiveRidgeHeight = ridgeHeight * (1 - overlap);
   const displayRidges = variant === 'scrolling' ? maxRidges : data.length;
   // For scrolling variant, use full plot height; otherwise calculate based on data
-  const totalHeight = variant === 'scrolling' 
-    ? plotHeight - 40 // Leave some space for axis
-    : displayRidges * effectiveRidgeHeight + ridgeHeight;
+  const totalHeight =
+    variant === 'scrolling'
+      ? plotHeight - 40 // Leave some space for axis
+      : displayRidges * effectiveRidgeHeight + ridgeHeight;
 
   // Process data for rendering
   const processedData = useMemo(() => {
     // For scrolling variant, always process exactly maxRidges items
     const dataToProcess = variant === 'scrolling' ? data : data;
-    
+
     // For scrolling, calculate ridge height based on available space
-    const scrollingRidgeHeight = variant === 'scrolling' 
-      ? totalHeight / maxRidges * (1 - overlap * 0.5)
-      : ridgeHeight;
-    const scrollingEffectiveHeight = variant === 'scrolling'
-      ? totalHeight / maxRidges
-      : effectiveRidgeHeight;
-    
+    const scrollingRidgeHeight =
+      variant === 'scrolling' ? (totalHeight / maxRidges) * (1 - overlap * 0.5) : ridgeHeight;
+    const scrollingEffectiveHeight =
+      variant === 'scrolling' ? totalHeight / maxRidges : effectiveRidgeHeight;
+
     return dataToProcess.map((series, seriesIndex) => {
       const maxValue = Math.max(...series.values);
       const minValue = Math.min(...series.values);
       const range = maxValue - minValue || 1;
-      
+
       // Check if this is a placeholder (all zeros)
-      const isPlaceholder = series.values.every(v => v === 0);
-      
+      const isPlaceholder = series.values.every((v) => v === 0);
+
       // Normalize values to ridge height
-      const normalizedValues = series.values.map(value => 
-        isPlaceholder ? 0 : ((value - minValue) / range) * scrollingRidgeHeight
+      const normalizedValues = series.values.map((value) =>
+        isPlaceholder ? 0 : ((value - minValue) / range) * scrollingRidgeHeight,
       );
-      
+
       // Calculate y offset for this ridge
       const yOffset = seriesIndex * scrollingEffectiveHeight;
-      
+
       // Generate path points
       const points = normalizedValues.map((value, i) => ({
         x: (i / (normalizedValues.length - 1)) * plotWidth,
         y: yOffset + scrollingRidgeHeight - value,
         originalValue: series.values[i],
       }));
-      
+
       return {
         ...series,
         points,
@@ -217,47 +218,59 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
         isPlaceholder,
       };
     });
-  }, [data, ridgeHeight, effectiveRidgeHeight, plotWidth, colors, variant, maxRidges, totalHeight, overlap]);
+  }, [
+    data,
+    ridgeHeight,
+    effectiveRidgeHeight,
+    plotWidth,
+    colors,
+    variant,
+    maxRidges,
+    totalHeight,
+    overlap,
+  ]);
 
   // Generate path for ridge
   const generatePath = (points: any[], yOffset: number, closed: boolean = false) => {
     if (points.length === 0) return '';
-    
+
     let path = '';
-    
+
     if (curve === 'smooth') {
       // Cubic bezier curve
-      path = points.map((point, i) => {
-        if (i === 0) return `M ${point.x} ${point.y}`;
-        
-        const prev = points[i - 1];
-        const cpx1 = prev.x + (point.x - prev.x) / 3;
-        const cpy1 = prev.y;
-        const cpx2 = prev.x + 2 * (point.x - prev.x) / 3;
-        const cpy2 = point.y;
-        
-        return `C ${cpx1} ${cpy1}, ${cpx2} ${cpy2}, ${point.x} ${point.y}`;
-      }).join(' ');
+      path = points
+        .map((point, i) => {
+          if (i === 0) return `M ${point.x} ${point.y}`;
+
+          const prev = points[i - 1];
+          const cpx1 = prev.x + (point.x - prev.x) / 3;
+          const cpy1 = prev.y;
+          const cpx2 = prev.x + (2 * (point.x - prev.x)) / 3;
+          const cpy2 = point.y;
+
+          return `C ${cpx1} ${cpy1}, ${cpx2} ${cpy2}, ${point.x} ${point.y}`;
+        })
+        .join(' ');
     } else if (curve === 'step') {
-      path = points.map((point, i) => {
-        if (i === 0) return `M ${point.x} ${point.y}`;
-        const prev = points[i - 1];
-        return `L ${point.x} ${prev.y} L ${point.x} ${point.y}`;
-      }).join(' ');
+      path = points
+        .map((point, i) => {
+          if (i === 0) return `M ${point.x} ${point.y}`;
+          const prev = points[i - 1];
+          return `L ${point.x} ${prev.y} L ${point.x} ${point.y}`;
+        })
+        .join(' ');
     } else {
       // Linear
-      path = points.map((point, i) => 
-        `${i === 0 ? 'M' : 'L'} ${point.x} ${point.y}`
-      ).join(' ');
+      path = points.map((point, i) => `${i === 0 ? 'M' : 'L'} ${point.x} ${point.y}`).join(' ');
     }
-    
+
     if (closed && fill) {
       const lastPoint = points[points.length - 1];
       const firstPoint = points[0];
       const baseY = yOffset + ridgeHeight;
       path += ` L ${lastPoint.x} ${baseY} L ${firstPoint.x} ${baseY} Z`;
     }
-    
+
     return path;
   };
 
@@ -317,12 +330,10 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
     <div className={classes}>
       <div className="snake-ridgeline-graph__corner snake-ridgeline-graph__corner--top-left" />
       <div className="snake-ridgeline-graph__corner snake-ridgeline-graph__corner--top-right" />
-      
+
       <div className="snake-ridgeline-graph__container">
-        {title && (
-          <div className="snake-ridgeline-graph__title">{title}</div>
-        )}
-        
+        {title && <div className="snake-ridgeline-graph__title">{title}</div>}
+
         <svg
           width={width}
           height={height}
@@ -333,13 +344,20 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
           <defs>
             {/* Gradient definitions for fill */}
             {processedData.map((series, i) => (
-              <linearGradient key={`gradient-${i}`} id={`ridge-gradient-${i}`} x1="0%" y1="0%" x2="0%" y2="100%">
+              <linearGradient
+                key={`gradient-${i}`}
+                id={`ridge-gradient-${i}`}
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+              >
                 <stop offset="0%" stopColor={series.color} stopOpacity={fillOpacity} />
                 <stop offset="100%" stopColor={series.color} stopOpacity={fillOpacity * 0.3} />
               </linearGradient>
             ))}
           </defs>
-          
+
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {/* Grid */}
             {finalShowGrid && (
@@ -369,9 +387,9 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
                 const isActive = activeRidge === series.label;
                 const isHovered = hoveredRidge === series.label;
                 const isDimmed = isInteractive && activeRidge && !isActive;
-                
+
                 return (
-                  <g 
+                  <g
                     key={`ridge-${i}`}
                     className={`snake-ridgeline-graph__ridge ${isActive ? 'snake-ridgeline-graph__ridge--active' : ''} ${series.isPlaceholder ? 'snake-ridgeline-graph__ridge--placeholder' : ''}`}
                     style={{
@@ -400,16 +418,24 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
                         onMouseLeave={() => isInteractive && setHoveredRidge(null)}
                       />
                     )}
-                    
+
                     {/* Stroke line or placeholder line */}
                     <path
-                      d={series.isPlaceholder 
-                        ? `M 0 ${series.yOffset + (variant === 'scrolling' ? totalHeight / maxRidges / 2 : ridgeHeight / 2)} L ${plotWidth} ${series.yOffset + (variant === 'scrolling' ? totalHeight / maxRidges / 2 : ridgeHeight / 2)}`
-                        : generatePath(series.points, series.yOffset, false)}
+                      d={
+                        series.isPlaceholder
+                          ? `M 0 ${series.yOffset + (variant === 'scrolling' ? totalHeight / maxRidges / 2 : ridgeHeight / 2)} L ${plotWidth} ${series.yOffset + (variant === 'scrolling' ? totalHeight / maxRidges / 2 : ridgeHeight / 2)}`
+                          : generatePath(series.points, series.yOffset, false)
+                      }
                       fill="none"
                       stroke={series.isPlaceholder ? '#2a2a2a' : series.color}
-                      strokeWidth={series.isPlaceholder ? 1 : (isActive || isHovered ? finalStrokeWidth + 1 : finalStrokeWidth)}
-                      strokeOpacity={series.isPlaceholder ? 0.5 : (isDimmed ? 0.5 : 1)}
+                      strokeWidth={
+                        series.isPlaceholder
+                          ? 1
+                          : isActive || isHovered
+                            ? finalStrokeWidth + 1
+                            : finalStrokeWidth
+                      }
+                      strokeOpacity={series.isPlaceholder ? 0.5 : isDimmed ? 0.5 : 1}
                       strokeDasharray={series.isPlaceholder ? '4 4' : undefined}
                       className="snake-ridgeline-graph__ridge-line"
                       style={{
@@ -441,12 +467,15 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
                         }
                       }}
                     />
-                    
+
                     {/* Labels - don't show for placeholders */}
                     {finalShowLabels && !series.isPlaceholder && (
                       <text
                         x={-15}
-                        y={series.yOffset + (variant === 'scrolling' ? totalHeight / maxRidges / 2 : ridgeHeight / 2)}
+                        y={
+                          series.yOffset +
+                          (variant === 'scrolling' ? totalHeight / maxRidges / 2 : ridgeHeight / 2)
+                        }
                         textAnchor="end"
                         dominantBaseline="middle"
                         fill="#bdbdbd"
@@ -499,37 +528,39 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
                   stroke="#5a5a5a"
                   strokeWidth="2"
                 />
-                {xLabels ? xLabels.map((label, i) => {
-                  const x = (i / (xLabels.length - 1)) * plotWidth;
-                  return (
-                    <text
-                      key={`xlabel-${i}`}
-                      x={x}
-                      y={totalHeight + 25}
-                      textAnchor="middle"
-                      fill="#8a8a8a"
-                      fontSize="10"
-                      fontFamily="var(--font-family-mono)"
-                    >
-                      {label}
-                    </text>
-                  );
-                }) : xTicks.map((tick, i) => {
-                  const x = (tick / (data[0].values.length - 1)) * plotWidth;
-                  return (
-                    <text
-                      key={`xtick-${i}`}
-                      x={x}
-                      y={totalHeight + 25}
-                      textAnchor="middle"
-                      fill="#8a8a8a"
-                      fontSize="10"
-                      fontFamily="var(--font-family-mono)"
-                    >
-                      {tick}
-                    </text>
-                  );
-                })}
+                {xLabels
+                  ? xLabels.map((label, i) => {
+                      const x = (i / (xLabels.length - 1)) * plotWidth;
+                      return (
+                        <text
+                          key={`xlabel-${i}`}
+                          x={x}
+                          y={totalHeight + 25}
+                          textAnchor="middle"
+                          fill="#8a8a8a"
+                          fontSize="10"
+                          fontFamily="var(--font-family-mono)"
+                        >
+                          {label}
+                        </text>
+                      );
+                    })
+                  : xTicks.map((tick, i) => {
+                      const x = (tick / (data[0].values.length - 1)) * plotWidth;
+                      return (
+                        <text
+                          key={`xtick-${i}`}
+                          x={x}
+                          y={totalHeight + 25}
+                          textAnchor="middle"
+                          fill="#8a8a8a"
+                          fontSize="10"
+                          fontFamily="var(--font-family-mono)"
+                        >
+                          {tick}
+                        </text>
+                      );
+                    })}
               </g>
             )}
 

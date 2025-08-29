@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import './streamgraph.css';
 
 interface DataPoint {
@@ -69,24 +69,24 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
   // Fixed SVG dimensions for consistent viewBox
   const svgWidth = 600;
   const svgHeight = 400;
-  
+
   // State for interactive variant
   const [activeLayer, setActiveLayer] = useState<string | null>(null);
   const [hoveredLayer, setHoveredLayer] = useState<string | null>(null);
   // Calculate stacked data
   const stackedData = useMemo(() => {
     const layers: any[] = [];
-    
+
     if (!keys || keys.length === 0 || !data || data.length === 0) {
       return layers;
     }
-    
+
     keys.forEach((key, keyIndex) => {
       const layer = data.map((d, i) => {
         const value = typeof d[key] === 'number' ? d[key] : 0;
         const prevLayers = layers.slice(0, keyIndex);
         const y0 = prevLayers.reduce((sum, l) => sum + (l[i]?.value || 0), 0);
-        
+
         return {
           x: i,
           y0,
@@ -106,8 +106,8 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
         const layerMax = Math.max(...layer.map((d: any) => d.y1));
         return Math.max(max, layerMax);
       }, 0);
-      
-      layers.forEach(layer => {
+
+      layers.forEach((layer) => {
         layer.forEach((d: any) => {
           const shift = (maxHeight - d.y1) / 2;
           d.y0 += shift;
@@ -116,12 +116,10 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
       });
     } else if (offset === 'wiggle') {
       // Minimize wiggle
-      const totals = data.map((_, i) => 
-        layers.reduce((sum, layer) => sum + layer[i].value, 0)
-      );
+      const totals = data.map((_, i) => layers.reduce((sum, layer) => sum + layer[i].value, 0));
       const maxTotal = Math.max(...totals);
-      
-      layers.forEach(layer => {
+
+      layers.forEach((layer) => {
         layer.forEach((d: any, i: number) => {
           const shift = (maxTotal - totals[i]) / 2;
           d.y0 += shift;
@@ -134,7 +132,7 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
         const total = layers.reduce((sum, layer) => sum + layer[i].value, 0);
         if (total > 0) {
           let cumulative = 0;
-          layers.forEach(layer => {
+          layers.forEach((layer) => {
             const normalized = (layer[i].value / total) * 100;
             layer[i].y0 = cumulative;
             layer[i].y1 = cumulative + normalized;
@@ -156,18 +154,18 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
   // Generate path for each layer
   const generatePath = (layer: any[]) => {
     if (layer.length === 0) return '';
-    
+
     const xScale = (i: number) => (i / (data.length - 1)) * svgWidth;
     const yScale = (v: number) => svgHeight - (v / maxValue) * svgHeight;
-    
+
     let pathTop = '';
     let pathBottom = '';
-    
+
     layer.forEach((point, i) => {
       const x = xScale(i);
       const y0 = yScale(point.y0);
       const y1 = yScale(point.y1);
-      
+
       if (i === 0) {
         pathTop = `M ${x} ${y1}`;
         pathBottom = `L ${x} ${y0}`;
@@ -178,7 +176,7 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
           const midX = (prevX + x) / 2;
           const prevY1 = yScale(layer[i - 1].y1);
           pathTop += ` C ${midX} ${prevY1}, ${midX} ${y1}, ${x} ${y1}`;
-          
+
           const prevY0 = yScale(layer[i - 1].y0);
           pathBottom = ` C ${midX} ${y0}, ${midX} ${prevY0}, ${prevX} ${prevY0}` + pathBottom;
         } else if (curve === 'step') {
@@ -191,7 +189,7 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
         }
       }
     });
-    
+
     return pathTop + pathBottom + ' Z';
   };
 
@@ -227,25 +225,25 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
 
   // Generate grid positions
   const gridPositions = useMemo(() => {
-    return Array.from({ length: finalGridLines + 1 }, (_, i) => 
-      (i / finalGridLines) * svgHeight
-    );
+    return Array.from({ length: finalGridLines + 1 }, (_, i) => (i / finalGridLines) * svgHeight);
   }, [finalGridLines, svgHeight]);
 
   // Generate x-axis labels
   const xLabels = useMemo(() => {
     const step = Math.ceil(data.length / 8); // Show max 8 labels
-    return data.filter((_, i) => i % step === 0).map((d, i) => ({
-      value: d.x,
-      position: (i * step) / (data.length - 1) * svgWidth,
-    }));
+    return data
+      .filter((_, i) => i % step === 0)
+      .map((d, i) => ({
+        value: d.x,
+        position: ((i * step) / (data.length - 1)) * svgWidth,
+      }));
   }, [data, svgWidth]);
 
   return (
     <div className={classes}>
       <div className="snake-stream-graph__corner snake-stream-graph__corner--top-left" />
       <div className="snake-stream-graph__corner snake-stream-graph__corner--top-right" />
-      
+
       <div className="snake-stream-graph__container">
         <svg
           width={typeof width === 'number' ? width : width}
@@ -280,26 +278,16 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
               const isHovered = hoveredLayer === keys[i];
               const isInteractive = variant === 'interactive';
               const isDimmed = isInteractive && activeLayer && !isActive;
-              
+
               return (
                 <path
                   key={`stream-${i}`}
                   d={generatePath(layer)}
                   fill={colors[i % colors.length]}
-                  fillOpacity={
-                    isDimmed ? '0.1' : 
-                    isActive ? '0.7' : 
-                    isHovered ? '0.6' : 
-                    '0.4'
-                  }
+                  fillOpacity={isDimmed ? '0.1' : isActive ? '0.7' : isHovered ? '0.6' : '0.4'}
                   stroke={colors[i % colors.length]}
                   strokeWidth={isActive || isHovered ? '2' : '1'}
-                  strokeOpacity={
-                    isDimmed ? '0.2' : 
-                    isActive ? '1' : 
-                    isHovered ? '0.8' : 
-                    '0.6'
-                  }
+                  strokeOpacity={isDimmed ? '0.2' : isActive ? '1' : isHovered ? '0.8' : '0.6'}
                   className={`snake-stream-graph__stream ${isActive ? 'snake-stream-graph__stream--active' : ''}`}
                   style={{
                     animationDelay: animate ? `${i * 100}ms` : '0',
@@ -319,7 +307,6 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
               );
             })}
           </g>
-
         </svg>
 
         {/* X-axis labels */}
@@ -339,15 +326,17 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
 
         {/* Legend */}
         {finalShowLegend && (
-          <div className={`snake-stream-graph__legend ${animateLegend ? 'snake-stream-graph__legend--animated' : ''}`}>
+          <div
+            className={`snake-stream-graph__legend ${animateLegend ? 'snake-stream-graph__legend--animated' : ''}`}
+          >
             {keys.map((key, i) => {
               const isActive = activeLayer === key;
               const isInteractive = variant === 'interactive';
               const isDimmed = isInteractive && activeLayer && !isActive;
-              
+
               return (
-                <div 
-                  key={`legend-${i}`} 
+                <div
+                  key={`legend-${i}`}
                   className={`snake-stream-graph__legend-item ${isActive ? 'snake-stream-graph__legend-item--active' : ''}`}
                   style={{
                     opacity: isDimmed ? 0.3 : 1,
@@ -363,9 +352,9 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
                   onMouseEnter={() => isInteractive && setHoveredLayer(key)}
                   onMouseLeave={() => isInteractive && setHoveredLayer(null)}
                 >
-                  <span 
+                  <span
                     className="snake-stream-graph__legend-color"
-                    style={{ 
+                    style={{
                       backgroundColor: colors[i % colors.length],
                       borderWidth: isActive ? '2px' : '1px',
                       borderColor: isActive ? '#bdbdbd' : '#3a3a3a',

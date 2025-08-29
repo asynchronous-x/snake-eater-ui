@@ -601,15 +601,15 @@
   .snake-mobile__stats {
     grid-template-columns: 1fr;
   }
-  
+
   .snake-mobile__header {
     padding: 8px 12px;
   }
-  
+
   .snake-mobile__content {
     padding: 12px;
   }
-  
+
   .snake-mobile__nav-tab {
     font-size: 20px;
     padding: 6px;
@@ -621,11 +621,11 @@
   .snake-mobile__content {
     padding-bottom: 60px;
   }
-  
+
   .snake-mobile__nav {
     padding: 4px 0;
   }
-  
+
   .snake-mobile__nav-tab {
     font-size: 18px;
     padding: 4px;

@@ -87,7 +87,9 @@
 }
 
 .snake-ridgeline-graph__ridge-line {
-  transition: stroke-width var(--transition-base), stroke-opacity var(--transition-base);
+  transition:
+    stroke-width var(--transition-base),
+    stroke-opacity var(--transition-base);
 }
 
 .snake-ridgeline-graph__ridge:hover .snake-ridgeline-graph__ridge-fill {
@@ -192,23 +194,30 @@
 }
 
 /* Scrolling variant */
-.snake-ridgeline-graph--scrolling .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) {
+.snake-ridgeline-graph--scrolling
+  .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) {
   animation: snake-ridgeline-graph-scroll-in 0.3s ease-out;
 }
 
-.snake-ridgeline-graph--scrolling .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) .snake-ridgeline-graph__ridge-line {
+.snake-ridgeline-graph--scrolling
+  .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder)
+  .snake-ridgeline-graph__ridge-line {
   stroke-dasharray: 3000;
   stroke-dashoffset: 3000;
   animation: snake-ridgeline-graph-draw 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.snake-ridgeline-graph--scrolling .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) .snake-ridgeline-graph__ridge-fill {
+.snake-ridgeline-graph--scrolling
+  .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder)
+  .snake-ridgeline-graph__ridge-fill {
   opacity: 0;
   animation: snake-ridgeline-graph-fill-fade 0.8s ease-out forwards;
   animation-delay: 0.6s;
 }
 
-.snake-ridgeline-graph--scrolling .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder) .snake-ridgeline-graph__label {
+.snake-ridgeline-graph--scrolling
+  .snake-ridgeline-graph__ridge:first-child:not(.snake-ridgeline-graph__ridge--placeholder)
+  .snake-ridgeline-graph__label {
   opacity: 0;
   animation: snake-ridgeline-graph-label-fade 0.5s ease-out forwards;
   animation-delay: 1s;
@@ -319,7 +328,8 @@
 }
 
 @keyframes snake-ridgeline-graph-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
   }
   50% {

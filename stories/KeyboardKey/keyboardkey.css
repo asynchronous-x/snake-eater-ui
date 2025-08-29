@@ -99,25 +99,31 @@ kbd.snake-keyboard-key {
 .snake-keyboard-key--pressed.snake-keyboard-key--action,
 .snake-keyboard-key--clickable.snake-keyboard-key--action:active {
   background: linear-gradient(180deg, #1a2a1a 0%, #0a1a0a 100%);
-  box-shadow: 
+  box-shadow:
     inset 0 1px 3px rgba(0, 0, 0, 0.5),
     0 0 10px rgba(80, 250, 123, 0.2);
 }
 
 /* Hover state for clickable keys */
-.snake-keyboard-key--clickable:hover:not(.snake-keyboard-key--disabled):not(.snake-keyboard-key--pressed) {
+.snake-keyboard-key--clickable:hover:not(.snake-keyboard-key--disabled):not(
+    .snake-keyboard-key--pressed
+  ) {
   background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
   border-color: #5a5a5a;
   border-bottom-color: #4a4a4a;
   transform: translateY(-1px);
 }
 
-.snake-keyboard-key--clickable.snake-keyboard-key--action:hover:not(.snake-keyboard-key--disabled):not(.snake-keyboard-key--pressed) {
+.snake-keyboard-key--clickable.snake-keyboard-key--action:hover:not(
+    .snake-keyboard-key--disabled
+  ):not(.snake-keyboard-key--pressed) {
   background: linear-gradient(180deg, #3a4a3a 0%, #2a3a2a 100%);
   box-shadow: 0 0 15px rgba(80, 250, 123, 0.15);
 }
 
-.snake-keyboard-key--clickable.snake-keyboard-key--danger:hover:not(.snake-keyboard-key--disabled):not(.snake-keyboard-key--pressed) {
+.snake-keyboard-key--clickable.snake-keyboard-key--danger:hover:not(
+    .snake-keyboard-key--disabled
+  ):not(.snake-keyboard-key--pressed) {
   background: linear-gradient(180deg, #4a3a3a 0%, #3a2a2a 100%);
   box-shadow: 0 0 15px rgba(255, 85, 85, 0.15);
 }
@@ -191,9 +197,10 @@ kbd.snake-keyboard-key {
   transform: translateX(-50%);
   width: 30%;
   height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(255, 255, 255, 0.1) 50%, 
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
     transparent 100%
   );
   pointer-events: none;

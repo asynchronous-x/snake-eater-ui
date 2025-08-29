@@ -125,8 +125,21 @@ export const PageAnalytics: React.FC = () => {
         <Divider variant="dashed" />
 
         {/* Graph Section */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px', marginBottom: '20px' }}>
-          <Card header={<Heading as="h3" size="md">Request Volume</Heading>}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '2fr 1fr',
+            gap: '20px',
+            marginBottom: '20px',
+          }}
+        >
+          <Card
+            header={
+              <Heading as="h3" size="md">
+                Request Volume
+              </Heading>
+            }
+          >
             <LineGraph
               data={requestTrend}
               height={250}
@@ -138,8 +151,14 @@ export const PageAnalytics: React.FC = () => {
               formatY={(v) => `${(v / 1000).toFixed(0)}k`}
             />
           </Card>
-          
-          <Card header={<Heading as="h3" size="md">Response Codes</Heading>}>
+
+          <Card
+            header={
+              <Heading as="h3" size="md">
+                Response Codes
+              </Heading>
+            }
+          >
             <DonutGraph
               data={errorRates}
               height={250}
@@ -152,7 +171,14 @@ export const PageAnalytics: React.FC = () => {
         </div>
 
         {/* Bar Chart Section */}
-        <Card header={<Heading as="h3" size="md">Weekly Metrics</Heading>} style={{ marginBottom: '20px' }}>
+        <Card
+          header={
+            <Heading as="h3" size="md">
+              Weekly Metrics
+            </Heading>
+          }
+          style={{ marginBottom: '20px' }}
+        >
           <BarGraph
             data={dailyMetrics}
             height={200}

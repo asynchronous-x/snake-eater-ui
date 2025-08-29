@@ -47,8 +47,6 @@ export const Tabs: React.FC<TabsProps> = ({
     }
   };
 
-  const activeTabContent = tabs.find((tab) => tab.id === activeTab)?.content;
-
   const tabsClasses = [
     'snake-tabs',
     `snake-tabs--${variant}`,

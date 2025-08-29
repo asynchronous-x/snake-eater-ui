@@ -1,0 +1,5 @@
+@import '../theme.css';
+
+.snake-spacer {
+  flex-shrink: 0;
+}

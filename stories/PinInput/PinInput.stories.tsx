@@ -76,7 +76,9 @@ export const Sizes: Story = {
         <PinInput size="small" />
       </div>
       <div>
-        <p style={{ color: '#bdbdbd', marginBottom: '12px', textAlign: 'center' }}>Medium (default)</p>
+        <p style={{ color: '#bdbdbd', marginBottom: '12px', textAlign: 'center' }}>
+          Medium (default)
+        </p>
         <PinInput size="medium" />
       </div>
       <div>
@@ -95,7 +97,9 @@ export const DifferentLengths: Story = {
         <PinInput length={2} />
       </div>
       <div>
-        <p style={{ color: '#bdbdbd', marginBottom: '12px', textAlign: 'center' }}>4 Digits (default)</p>
+        <p style={{ color: '#bdbdbd', marginBottom: '12px', textAlign: 'center' }}>
+          4 Digits (default)
+        </p>
         <PinInput length={4} />
       </div>
       <div>
@@ -132,12 +136,12 @@ export const Masked: Story = {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
         <div>
-          <p style={{ color: '#bdbdbd', marginBottom: '12px', textAlign: 'center' }}>Password Input</p>
+          <p style={{ color: '#bdbdbd', marginBottom: '12px', textAlign: 'center' }}>
+            Password Input
+          </p>
           <PinInput masked onChange={setValue} autoFocus />
         </div>
-        <div style={{ color: '#8a8a8a', fontSize: '14px' }}>
-          Actual value: {value || '(empty)'}
-        </div>
+        <div style={{ color: '#8a8a8a', fontSize: '14px' }}>Actual value: {value || '(empty)'}</div>
       </div>
     );
   },
@@ -196,21 +200,23 @@ export const OTPVerification: Story = {
     };
 
     return (
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        gap: '24px', 
-        alignItems: 'center',
-        padding: '40px',
-        background: '#1f1d20',
-        border: '1px solid #3a3a3a',
-        minWidth: '400px'
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
+          alignItems: 'center',
+          padding: '40px',
+          background: '#1f1d20',
+          border: '1px solid #3a3a3a',
+          minWidth: '400px',
+        }}
+      >
         <h2 style={{ color: '#bdbdbd', margin: 0 }}>Enter Verification Code</h2>
         <p style={{ color: '#8a8a8a', margin: 0, textAlign: 'center' }}>
           We sent a 4-digit code to your email
         </p>
-        
+
         <PinInput
           length={4}
           type="numeric"
@@ -222,9 +228,7 @@ export const OTPVerification: Story = {
           autoFocus
         />
 
-        {status === 'verifying' && (
-          <p style={{ color: '#f1fa8c', margin: 0 }}>Verifying...</p>
-        )}
+        {status === 'verifying' && <p style={{ color: '#f1fa8c', margin: 0 }}>Verifying...</p>}
         {status === 'error' && (
           <p style={{ color: '#ff5555', margin: 0 }}>Invalid code. Try 1234</p>
         )}
@@ -246,15 +250,17 @@ export const ControlledInput: Story = {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
-        <PinInput
-          length={6}
-          value={value}
-          onChange={setValue}
-        />
+        <PinInput length={6} value={value} onChange={setValue} />
         <div style={{ display: 'flex', gap: '8px' }}>
-          <Button size="small" onClick={() => setValue('')}>Clear</Button>
-          <Button size="small" onClick={() => setValue('123456')}>Fill All</Button>
-          <Button size="small" onClick={() => setValue('999')}>Set "999"</Button>
+          <Button size="small" onClick={() => setValue('')}>
+            Clear
+          </Button>
+          <Button size="small" onClick={() => setValue('123456')}>
+            Fill All
+          </Button>
+          <Button size="small" onClick={() => setValue('999')}>
+            Set "999"
+          </Button>
         </div>
         <div style={{ color: '#8a8a8a', fontSize: '14px' }}>
           Current value: {value || '(empty)'}
@@ -282,15 +288,17 @@ export const GameCode: Story = {
 
     if (joined) {
       return (
-        <div style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          gap: '24px', 
-          alignItems: 'center',
-          padding: '40px',
-          background: '#1f1d20',
-          border: '1px solid #3a3a3a',
-        }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '24px',
+            alignItems: 'center',
+            padding: '40px',
+            background: '#1f1d20',
+            border: '1px solid #3a3a3a',
+          }}
+        >
           <h2 style={{ color: '#50fa7b', margin: 0 }}>✓ Joined Game!</h2>
           <p style={{ color: '#8a8a8a', margin: 0 }}>Room Code: {code}</p>
           <Button onClick={handleReset}>Leave Game</Button>
@@ -299,18 +307,20 @@ export const GameCode: Story = {
     }
 
     return (
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        gap: '24px', 
-        alignItems: 'center',
-        padding: '40px',
-        background: '#1f1d20',
-        border: '1px solid #3a3a3a',
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
+          alignItems: 'center',
+          padding: '40px',
+          background: '#1f1d20',
+          border: '1px solid #3a3a3a',
+        }}
+      >
         <h2 style={{ color: '#bdbdbd', margin: 0 }}>Join Game</h2>
         <p style={{ color: '#8a8a8a', margin: 0 }}>Enter 6-character room code</p>
-        
+
         <PinInput
           length={6}
           type="alphanumeric"
@@ -320,11 +330,7 @@ export const GameCode: Story = {
           placeholder="•"
         />
 
-        <Button 
-          variant="primary" 
-          onClick={handleJoin}
-          disabled={code.length !== 6}
-        >
+        <Button variant="primary" onClick={handleJoin} disabled={code.length !== 6}>
           Join Room
         </Button>
       </div>

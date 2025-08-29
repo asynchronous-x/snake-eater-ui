@@ -186,7 +186,9 @@ export const TransitionExpand: Story = {
     children: (
       <>
         <h3>Horizontal Expanding Card</h3>
-        <p>This card expands horizontally from the center, like the sides are stretching outward.</p>
+        <p>
+          This card expands horizontally from the center, like the sides are stretching outward.
+        </p>
         <p>The corner decorations slide in from the sides with a subtle glow effect.</p>
       </>
     ),
@@ -210,13 +212,13 @@ export const TransitionFade: Story = {
 export const TransitionSlides: Story = {
   render: () => {
     const [key, setKey] = React.useState(0);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-          <Button onClick={() => setKey(k => k + 1)}>Replay Animations</Button>
+          <Button onClick={() => setKey((k) => k + 1)}>Replay Animations</Button>
         </div>
-        
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
           <Card
             key={`slide-up-${key}`}
@@ -228,7 +230,7 @@ export const TransitionSlides: Story = {
             <h4>Slide Up</h4>
             <p>Slides up from below</p>
           </Card>
-          
+
           <Card
             key={`slide-down-${key}`}
             transitionIn
@@ -239,7 +241,7 @@ export const TransitionSlides: Story = {
             <h4>Slide Down</h4>
             <p>Slides down from above</p>
           </Card>
-          
+
           <Card
             key={`slide-left-${key}`}
             transitionIn
@@ -250,7 +252,7 @@ export const TransitionSlides: Story = {
             <h4>Slide Left</h4>
             <p>Slides in from the right</p>
           </Card>
-          
+
           <Card
             key={`slide-right-${key}`}
             transitionIn
@@ -270,20 +272,22 @@ export const TransitionSlides: Story = {
 export const StaggeredCards: Story = {
   render: () => {
     const [show, setShow] = React.useState(false);
-    
+
     React.useEffect(() => {
       setShow(true);
     }, []);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <Button onClick={() => {
-          setShow(false);
-          setTimeout(() => setShow(true), 100);
-        }}>
+        <Button
+          onClick={() => {
+            setShow(false);
+            setTimeout(() => setShow(true), 100);
+          }}
+        >
           Replay Animation
         </Button>
-        
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
           {[0, 1, 2, 3, 4, 5].map((index) => (
             <Card
@@ -308,13 +312,11 @@ export const CustomSpeed: Story = {
   render: () => {
     const [speed, setSpeed] = React.useState(300);
     const [key, setKey] = React.useState(0);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <label style={{ color: '#bdbdbd' }}>
-            Animation Speed: {speed}ms
-          </label>
+          <label style={{ color: '#bdbdbd' }}>Animation Speed: {speed}ms</label>
           <input
             type="range"
             min="100"
@@ -323,11 +325,11 @@ export const CustomSpeed: Story = {
             onChange={(e) => setSpeed(Number(e.target.value))}
             style={{ width: '200px' }}
           />
-          <Button size="small" onClick={() => setKey(k => k + 1)}>
+          <Button size="small" onClick={() => setKey((k) => k + 1)}>
             Replay
           </Button>
         </div>
-        
+
         <Card
           key={key}
           transitionIn
@@ -349,19 +351,21 @@ export const TransitionCallback: Story = {
   render: () => {
     const [status, setStatus] = React.useState('Waiting...');
     const [key, setKey] = React.useState(0);
-    
+
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <Button onClick={() => {
-            setStatus('Animating...');
-            setKey(k => k + 1);
-          }}>
+          <Button
+            onClick={() => {
+              setStatus('Animating...');
+              setKey((k) => k + 1);
+            }}
+          >
             Trigger Animation
           </Button>
           <span style={{ color: '#8a8a8a' }}>Status: {status}</span>
         </div>
-        
+
         <Card
           key={key}
           transitionIn
