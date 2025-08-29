@@ -53,6 +53,8 @@ function App() {
 
 ## Components
 
+(See also [./llms.txt] for LLM friendly description.)
+
 ### Data Visualization
 
 - **BarGraph** - Bar chart with interactive features
