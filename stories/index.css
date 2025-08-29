@@ -1,7 +1,6 @@
 /* Main entry point for all CSS - ensures proper import order */
 
-/* Font definitions must come first */
-@import './fonts.css';
+/* Font definitions must come first - using inline fonts to avoid path issues */
 @import './fonts-inline.css';
 
 /* Theme variables */
