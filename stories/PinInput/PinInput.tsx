@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './pininput.css';
 
 export interface PinInputProps {
@@ -31,7 +32,7 @@ export interface PinInputProps {
 }
 
 /** Pin Input component for OTP, verification codes, etc. */
-export const PinInput: React.FC<PinInputProps> = ({
+const PinInputComponent: React.FC<PinInputProps> = ({
   length = 4,
   onComplete,
   onChange,
@@ -197,5 +198,14 @@ export const PinInput: React.FC<PinInputProps> = ({
           />
         ))}
     </div>
+  );
+};
+
+/** PinInput with error boundary */
+export const PinInput: React.FC<PinInputProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="PinInput" resetOnPropsChange>
+      <PinInputComponent {...props} />
+    </ErrorBoundary>
   );
 };

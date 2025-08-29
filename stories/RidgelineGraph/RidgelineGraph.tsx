@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './ridgelinegraph.css';
 
 interface DataSeries {
@@ -63,7 +64,7 @@ export interface RidgelineGraphProps {
 }
 
 /** RidgelineGraph component for overlapping distribution visualization */
-export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
+const RidgelineGraphComponent: React.FC<RidgelineGraphProps> = ({
   data: initialData,
   width = '100%',
   height = '100%',
@@ -611,5 +612,14 @@ export const RidgelineGraph: React.FC<RidgelineGraphProps> = ({
       <div className="snake-ridgeline-graph__corner snake-ridgeline-graph__corner--bottom-left" />
       <div className="snake-ridgeline-graph__corner snake-ridgeline-graph__corner--bottom-right" />
     </div>
+  );
+};
+
+/** RidgelineGraph with error boundary */
+export const RidgelineGraph: React.FC<RidgelineGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="RidgelineGraph" resetOnPropsChange>
+      <RidgelineGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

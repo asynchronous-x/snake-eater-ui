@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './toast.css';
 
 // Icon components from pixel-icon-library
@@ -67,7 +68,7 @@ export interface ToastProps {
 }
 
 /** Toast component for notifications */
-export const Toast: React.FC<ToastProps> = ({
+const ToastComponent: React.FC<ToastProps> = ({
   message,
   variant = 'default',
   position = 'bottom-right',
@@ -210,5 +211,14 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
         />
       ))}
     </div>
+  );
+};
+
+/** Toast with error boundary */
+export const Toast: React.FC<ToastProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Toast" resetOnPropsChange>
+      <ToastComponent {...props} />
+    </ErrorBoundary>
   );
 };

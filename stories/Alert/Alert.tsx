@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './alert.css';
 
 // Icon components from pixel-icon-library
@@ -60,7 +61,7 @@ export interface AlertProps {
 }
 
 /** Alert component for displaying important messages */
-export const Alert: React.FC<AlertProps> = ({
+const AlertComponent: React.FC<AlertProps> = ({
   title,
   description,
   variant = 'default',
@@ -124,5 +125,14 @@ export const Alert: React.FC<AlertProps> = ({
       <div className="snake-alert__corner snake-alert__corner--bottom-left" />
       <div className="snake-alert__corner snake-alert__corner--bottom-right" />
     </div>
+  );
+};
+
+/** Alert with error boundary */
+export const Alert: React.FC<AlertProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Alert" resetOnPropsChange>
+      <AlertComponent {...props} />
+    </ErrorBoundary>
   );
 };

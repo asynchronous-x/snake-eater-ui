@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './drawer.css';
 
 export interface DrawerProps {
@@ -27,7 +28,7 @@ export interface DrawerProps {
 }
 
 /** Drawer component for slide-in panels */
-export const Drawer: React.FC<DrawerProps> = ({
+const DrawerComponent: React.FC<DrawerProps> = ({
   open,
   onClose,
   position = 'right',
@@ -140,5 +141,14 @@ export const Drawer: React.FC<DrawerProps> = ({
         {footer && <div className="snake-drawer__footer">{footer}</div>}
       </div>
     </>
+  );
+};
+
+/** Drawer with error boundary */
+export const Drawer: React.FC<DrawerProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Drawer" resetOnPropsChange>
+      <DrawerComponent {...props} />
+    </ErrorBoundary>
   );
 };

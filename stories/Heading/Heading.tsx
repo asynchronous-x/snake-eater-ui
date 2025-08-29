@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './heading.css';
 
 export interface HeadingProps {
@@ -27,7 +28,7 @@ export interface HeadingProps {
 }
 
 /** Heading component for titles and headers */
-export const Heading: React.FC<HeadingProps> = ({
+const HeadingComponent: React.FC<HeadingProps> = ({
   as = 'h2',
   size,
   align = 'left',
@@ -73,5 +74,14 @@ export const Heading: React.FC<HeadingProps> = ({
         </>
       )}
     </Component>
+  );
+};
+
+/** Heading with error boundary */
+export const Heading: React.FC<HeadingProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Heading" resetOnPropsChange>
+      <HeadingComponent {...props} />
+    </ErrorBoundary>
   );
 };

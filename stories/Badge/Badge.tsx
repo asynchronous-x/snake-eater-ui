@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './badge.css';
 
 export interface BadgeProps {
@@ -19,7 +20,7 @@ export interface BadgeProps {
 }
 
 /** Badge component for status indicators and labels */
-export const Badge: React.FC<BadgeProps> = ({
+const BadgeComponent: React.FC<BadgeProps> = ({
   children,
   variant = 'default',
   size = 'medium',
@@ -47,5 +48,14 @@ export const Badge: React.FC<BadgeProps> = ({
       {icon && <span className="snake-badge__icon">{icon}</span>}
       <span className="snake-badge__text">{children}</span>
     </Component>
+  );
+};
+
+/** Badge with error boundary */
+export const Badge: React.FC<BadgeProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Badge" resetOnPropsChange>
+      <BadgeComponent {...props} />
+    </ErrorBoundary>
   );
 };

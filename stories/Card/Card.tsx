@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './card.css';
 
 export interface CardProps {
@@ -31,7 +32,7 @@ export interface CardProps {
 }
 
 /** Card component with decorative corner elbows */
-export const Card: React.FC<CardProps> = ({
+const CardComponent: React.FC<CardProps> = ({
   children,
   header,
   footer,
@@ -109,5 +110,14 @@ export const Card: React.FC<CardProps> = ({
 
       {footer && <div className="snake-card-component__footer">{footer}</div>}
     </Component>
+  );
+};
+
+/** Card with error boundary */
+export const Card: React.FC<CardProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Card" resetOnPropsChange>
+      <CardComponent {...props} />
+    </ErrorBoundary>
   );
 };

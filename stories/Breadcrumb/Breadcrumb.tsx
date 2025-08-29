@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './breadcrumb.css';
 
 interface BreadcrumbItem {
@@ -25,7 +26,7 @@ export interface BreadcrumbProps {
 }
 
 /** Breadcrumb component for navigation hierarchy */
-export const Breadcrumb: React.FC<BreadcrumbProps> = ({
+const BreadcrumbComponent: React.FC<BreadcrumbProps> = ({
   items,
   separator = '/',
   size = 'medium',
@@ -108,5 +109,14 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
         })}
       </ol>
     </nav>
+  );
+};
+
+/** Breadcrumb with error boundary */
+export const Breadcrumb: React.FC<BreadcrumbProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Breadcrumb" resetOnPropsChange>
+      <BreadcrumbComponent {...props} />
+    </ErrorBoundary>
   );
 };

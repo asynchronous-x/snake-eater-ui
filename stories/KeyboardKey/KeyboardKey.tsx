@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './keyboardkey.css';
 
 export interface KeyboardKeyProps {
@@ -25,7 +26,7 @@ export interface KeyboardKeyProps {
 }
 
 /** Keyboard Key component for displaying keyboard shortcuts or virtual keyboards */
-export const KeyboardKey: React.FC<KeyboardKeyProps> = ({
+const KeyboardKeyComponent: React.FC<KeyboardKeyProps> = ({
   children,
   size = 'medium',
   variant = 'default',
@@ -65,5 +66,14 @@ export const KeyboardKey: React.FC<KeyboardKeyProps> = ({
       {icon && <span className="snake-keyboard-key__icon">{icon}</span>}
       <span className="snake-keyboard-key__label">{children}</span>
     </Component>
+  );
+};
+
+/** KeyboardKey with error boundary */
+export const KeyboardKey: React.FC<KeyboardKeyProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="KeyboardKey" resetOnPropsChange>
+      <KeyboardKeyComponent {...props} />
+    </ErrorBoundary>
   );
 };

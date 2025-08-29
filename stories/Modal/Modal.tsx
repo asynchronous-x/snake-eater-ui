@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './modal.css';
 
 // Icon component for Times from pixel-icon-library
@@ -30,7 +31,7 @@ export interface ModalProps {
 }
 
 /** Modal/Dialog component with dark theme styling */
-export const Modal: React.FC<ModalProps> = ({
+const ModalComponent: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   title,
@@ -100,5 +101,14 @@ export const Modal: React.FC<ModalProps> = ({
         <div className="snake-modal__corner snake-modal__corner--bottom-right" />
       </div>
     </div>
+  );
+};
+
+/** Modal with error boundary */
+export const Modal: React.FC<ModalProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Modal" resetOnPropsChange>
+      <ModalComponent {...props} />
+    </ErrorBoundary>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './streamgraph.css';
 
 interface DataPoint {
@@ -46,7 +47,7 @@ export interface StreamGraphProps {
 }
 
 /** StreamGraph component for visualizing time-series data */
-export const StreamGraph: React.FC<StreamGraphProps> = ({
+const StreamGraphComponent: React.FC<StreamGraphProps> = ({
   data,
   keys,
   colors = ['#8b2c2c', '#4a4a4a', '#d4d4d4', '#6b3030', '#7a7a7a'],
@@ -371,5 +372,14 @@ export const StreamGraph: React.FC<StreamGraphProps> = ({
       <div className="snake-stream-graph__corner snake-stream-graph__corner--bottom-left" />
       <div className="snake-stream-graph__corner snake-stream-graph__corner--bottom-right" />
     </div>
+  );
+};
+
+/** StreamGraph with error boundary */
+export const StreamGraph: React.FC<StreamGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="StreamGraph" resetOnPropsChange>
+      <StreamGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

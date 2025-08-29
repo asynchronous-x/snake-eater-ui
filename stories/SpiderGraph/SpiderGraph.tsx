@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './spidergraph.css';
 
 interface DataPoint {
@@ -45,7 +46,7 @@ export interface SpiderGraphProps {
 }
 
 /** SpiderGraph component for multi-dimensional data visualization */
-export const SpiderGraph: React.FC<SpiderGraphProps> = ({
+const SpiderGraphComponent: React.FC<SpiderGraphProps> = ({
   data,
   width = '100%',
   height = '100%',
@@ -295,5 +296,14 @@ export const SpiderGraph: React.FC<SpiderGraphProps> = ({
         </g>
       </svg>
     </div>
+  );
+};
+
+/** SpiderGraph with error boundary */
+export const SpiderGraph: React.FC<SpiderGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="SpiderGraph" resetOnPropsChange>
+      <SpiderGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

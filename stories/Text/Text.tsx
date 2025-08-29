@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './text.css';
 
 export interface TextProps {
@@ -58,7 +59,7 @@ export interface TextProps {
 }
 
 /** Text component for body text and inline elements */
-export const Text: React.FC<TextProps> = ({
+const TextComponent: React.FC<TextProps> = ({
   as = 'p',
   size = 'md',
   variant = 'default',
@@ -109,5 +110,14 @@ export const Text: React.FC<TextProps> = ({
     <Component className={textClasses} style={style}>
       {children}
     </Component>
+  );
+};
+
+/** Text with error boundary */
+export const Text: React.FC<TextProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Text" resetOnPropsChange>
+      <TextComponent {...props} />
+    </ErrorBoundary>
   );
 };

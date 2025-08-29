@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './colorpicker.css';
 
 // Icon component for ChevronDown from pixel-icon-library
@@ -30,7 +31,7 @@ export interface ColorPickerProps {
 }
 
 /** ColorPicker component for color selection */
-export const ColorPicker: React.FC<ColorPickerProps> = ({
+const ColorPickerComponent: React.FC<ColorPickerProps> = ({
   value = '#50fa7b',
   onChange,
   showAlpha = false,
@@ -343,5 +344,14 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({
         </div>
       )}
     </div>
+  );
+};
+
+/** ColorPicker with error boundary */
+export const ColorPicker: React.FC<ColorPickerProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="ColorPicker" resetOnPropsChange>
+      <ColorPickerComponent {...props} />
+    </ErrorBoundary>
   );
 };

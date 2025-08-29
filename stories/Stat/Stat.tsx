@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './stat.css';
 
 // Icon components from pixel-icon-library
@@ -47,7 +48,7 @@ export interface StatProps {
 }
 
 /** Stat component for displaying statistics and metrics */
-export const Stat: React.FC<StatProps> = ({
+const StatComponent: React.FC<StatProps> = ({
   label,
   value,
   info,
@@ -120,5 +121,14 @@ export const Stat: React.FC<StatProps> = ({
       <div className="snake-stat__corner snake-stat__corner--bottom-left" />
       <div className="snake-stat__corner snake-stat__corner--bottom-right" />
     </div>
+  );
+};
+
+/** Stat with error boundary */
+export const Stat: React.FC<StatProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Stat" resetOnPropsChange>
+      <StatComponent {...props} />
+    </ErrorBoundary>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './donutgraph.css';
 
 interface DataSegment {
@@ -47,7 +48,7 @@ export interface DonutGraphProps {
 }
 
 /** DonutGraph component for circular data visualization */
-export const DonutGraph: React.FC<DonutGraphProps> = ({
+const DonutGraphComponent: React.FC<DonutGraphProps> = ({
   data,
   size = '100%',
   innerRadius = 40,
@@ -423,5 +424,14 @@ export const DonutGraph: React.FC<DonutGraphProps> = ({
       <div className="snake-donut-graph__corner snake-donut-graph__corner--bottom-left" />
       <div className="snake-donut-graph__corner snake-donut-graph__corner--bottom-right" />
     </div>
+  );
+};
+
+/** DonutGraph with error boundary */
+export const DonutGraph: React.FC<DonutGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="DonutGraph" resetOnPropsChange>
+      <DonutGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

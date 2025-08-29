@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './bargraph.css';
 
 interface DataPoint {
@@ -52,7 +53,7 @@ export interface BarGraphProps {
 }
 
 /** BarGraph component for data visualization */
-export const BarGraph: React.FC<BarGraphProps> = ({
+const BarGraphComponent: React.FC<BarGraphProps> = ({
   data,
   maxValue,
   height = '100%',
@@ -431,5 +432,14 @@ export const BarGraph: React.FC<BarGraphProps> = ({
         </div>
       )}
     </div>
+  );
+};
+
+/** BarGraph with error boundary */
+export const BarGraph: React.FC<BarGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="BarGraph" resetOnPropsChange>
+      <BarGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

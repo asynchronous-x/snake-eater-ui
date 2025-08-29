@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './accordion.css';
 
 // Icon component for ChevronDown from pixel-icon-library
@@ -38,7 +39,7 @@ export interface AccordionProps {
 }
 
 /** Accordion component for collapsible content */
-export const Accordion: React.FC<AccordionProps> = ({
+const AccordionComponent: React.FC<AccordionProps> = ({
   items,
   multiple = false,
   defaultOpen = [],
@@ -124,5 +125,14 @@ export const Accordion: React.FC<AccordionProps> = ({
         );
       })}
     </div>
+  );
+};
+
+/** Accordion with error boundary */
+export const Accordion: React.FC<AccordionProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Accordion" resetOnPropsChange>
+      <AccordionComponent {...props} />
+    </ErrorBoundary>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './select.css';
 
 // Icon component for ChevronDown from pixel-icon-library
@@ -42,7 +43,7 @@ export interface SelectProps {
 }
 
 /** Select component with custom dropdown */
-export const Select: React.FC<SelectProps> = ({
+const SelectComponent: React.FC<SelectProps> = ({
   options,
   value,
   onChange,
@@ -141,5 +142,14 @@ export const Select: React.FC<SelectProps> = ({
         </span>
       )}
     </div>
+  );
+};
+
+/** Select with error boundary */
+export const Select: React.FC<SelectProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Select" resetOnPropsChange>
+      <SelectComponent {...props} />
+    </ErrorBoundary>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './flex.css';
 
 export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -28,7 +29,7 @@ export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const Flex: React.FC<FlexProps> = ({
+const FlexComponent: React.FC<FlexProps> = ({
   direction = 'row',
   justify = 'start',
   align = 'stretch',
@@ -73,5 +74,14 @@ export const Flex: React.FC<FlexProps> = ({
     <div className={classes} style={flexStyle} {...props}>
       {children}
     </div>
+  );
+};
+
+/** Flex with error boundary */
+export const Flex: React.FC<FlexProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Flex" resetOnPropsChange>
+      <FlexComponent {...props} />
+    </ErrorBoundary>
   );
 };

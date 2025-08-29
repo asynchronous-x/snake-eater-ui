@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './spacer.css';
 
 export interface SpacerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -6,7 +7,7 @@ export interface SpacerProps extends React.HTMLAttributes<HTMLDivElement> {
   grow?: number;
 }
 
-export const Spacer: React.FC<SpacerProps> = ({ grow = 1, className = '', style, ...props }) => {
+const SpacerComponent: React.FC<SpacerProps> = ({ grow = 1, className = '', style, ...props }) => {
   const spacerStyle: React.CSSProperties = {
     ...style,
     flexGrow: grow,
@@ -19,5 +20,14 @@ export const Spacer: React.FC<SpacerProps> = ({ grow = 1, className = '', style,
       {...props}
       aria-hidden="true"
     />
+  );
+};
+
+/** Spacer with error boundary */
+export const Spacer: React.FC<SpacerProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Spacer" resetOnPropsChange>
+      <SpacerComponent {...props} />
+    </ErrorBoundary>
   );
 };

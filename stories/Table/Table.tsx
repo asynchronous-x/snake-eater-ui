@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './table.css';
 
 // Icon component for ChevronDown from pixel-icon-library
@@ -51,7 +52,7 @@ export interface TableProps<T> {
 }
 
 /** Table component for displaying tabular data */
-export function Table<T extends Record<string, any>>({
+export function TableComponent<T extends Record<string, any>>({
   data,
   columns,
   size = 'medium',
@@ -242,3 +243,12 @@ export function Table<T extends Record<string, any>>({
     </div>
   );
 }
+
+/** Table with error boundary */
+export const Table: React.FC<TableProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Table" resetOnPropsChange>
+      <TableComponent {...props} />
+    </ErrorBoundary>
+  );
+};

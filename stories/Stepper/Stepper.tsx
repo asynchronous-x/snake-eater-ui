@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './stepper.css';
 
 interface StepperStep {
@@ -32,7 +33,7 @@ export interface StepperProps {
 }
 
 /** Stepper component for multi-step processes */
-export const Stepper: React.FC<StepperProps> = ({
+const StepperComponent: React.FC<StepperProps> = ({
   steps,
   activeStep,
   orientation = 'horizontal',
@@ -170,5 +171,14 @@ export const Stepper: React.FC<StepperProps> = ({
         );
       })}
     </div>
+  );
+};
+
+/** Stepper with error boundary */
+export const Stepper: React.FC<StepperProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Stepper" resetOnPropsChange>
+      <StepperComponent {...props} />
+    </ErrorBoundary>
   );
 };

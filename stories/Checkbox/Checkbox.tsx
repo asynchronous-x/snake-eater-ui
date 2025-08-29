@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './checkbox.css';
 
 export interface CheckboxProps
@@ -20,7 +21,7 @@ export interface CheckboxProps
 }
 
 /** Checkbox component for boolean selections */
-export const Checkbox: React.FC<CheckboxProps> = ({
+const CheckboxComponent: React.FC<CheckboxProps> = ({
   label,
   size = 'medium',
   variant = 'default',
@@ -73,5 +74,14 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       </label>
       {helperText && <div className="snake-checkbox__helper">{helperText}</div>}
     </div>
+  );
+};
+
+/** Checkbox with error boundary */
+export const Checkbox: React.FC<CheckboxProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Checkbox" resetOnPropsChange>
+      <CheckboxComponent {...props} />
+    </ErrorBoundary>
   );
 };

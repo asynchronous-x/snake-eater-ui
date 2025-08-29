@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './linegraph.css';
 
 interface DataPoint {
@@ -71,7 +72,7 @@ export interface LineGraphProps {
 }
 
 /** LineGraph component for time series and continuous data visualization */
-export const LineGraph: React.FC<LineGraphProps> = ({
+const LineGraphComponent: React.FC<LineGraphProps> = ({
   data,
   width = '100%',
   height = '100%',
@@ -563,5 +564,14 @@ export const LineGraph: React.FC<LineGraphProps> = ({
       <div className="snake-line-graph__corner snake-line-graph__corner--bottom-left" />
       <div className="snake-line-graph__corner snake-line-graph__corner--bottom-right" />
     </div>
+  );
+};
+
+/** LineGraph with error boundary */
+export const LineGraph: React.FC<LineGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="LineGraph" resetOnPropsChange>
+      <LineGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

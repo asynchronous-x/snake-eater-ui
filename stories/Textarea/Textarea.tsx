@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './textarea.css';
 
 export interface TextareaProps
@@ -30,7 +31,7 @@ export interface TextareaProps
 }
 
 /** Textarea component for multi-line text input */
-export const Textarea: React.FC<TextareaProps> = ({
+const TextareaComponent: React.FC<TextareaProps> = ({
   label,
   helperText,
   error,
@@ -136,5 +137,14 @@ export const Textarea: React.FC<TextareaProps> = ({
         )}
       </div>
     </div>
+  );
+};
+
+/** Textarea with error boundary */
+export const Textarea: React.FC<TextareaProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Textarea" resetOnPropsChange>
+      <TextareaComponent {...props} />
+    </ErrorBoundary>
   );
 };

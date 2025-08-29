@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './link.css';
 
 export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -21,7 +22,7 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
 }
 
 /** Link component for navigation */
-export const Link: React.FC<LinkProps> = ({
+const LinkComponent: React.FC<LinkProps> = ({
   variant = 'default',
   size = 'medium',
   external = false,
@@ -72,5 +73,14 @@ export const Link: React.FC<LinkProps> = ({
       {endIcon && <span className="snake-link__icon snake-link__icon--end">{endIcon}</span>}
       {external && !endIcon && <span className="snake-link__external">↗</span>}
     </a>
+  );
+};
+
+/** Link with error boundary */
+export const Link: React.FC<LinkProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Link" resetOnPropsChange>
+      <LinkComponent {...props} />
+    </ErrorBoundary>
   );
 };

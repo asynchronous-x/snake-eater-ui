@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './hexagonalbinninggraph.css';
 
 interface DataPoint {
@@ -62,7 +63,7 @@ export interface HexagonalBinningGraphProps {
 }
 
 /** HexagonalBinningGraph component for 2D density visualization */
-export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
+const HexagonalBinningGraphComponent: React.FC<HexagonalBinningGraphProps> = ({
   data,
   width = '100%',
   height = '100%',
@@ -478,5 +479,14 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
       <div className="snake-hexagonal-binning-graph__corner snake-hexagonal-binning-graph__corner--bottom-left" />
       <div className="snake-hexagonal-binning-graph__corner snake-hexagonal-binning-graph__corner--bottom-right" />
     </div>
+  );
+};
+
+/** HexagonalBinningGraph with error boundary */
+export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="HexagonalBinningGraph" resetOnPropsChange>
+      <HexagonalBinningGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

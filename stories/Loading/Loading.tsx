@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './loading.css';
 
 export interface LoadingProps {
@@ -19,7 +20,7 @@ export interface LoadingProps {
 }
 
 /** Loading component for indicating loading states */
-export const Loading: React.FC<LoadingProps> = ({
+const LoadingComponent: React.FC<LoadingProps> = ({
   type = 'grid',
   size = 'medium',
   variant = 'default',
@@ -99,4 +100,13 @@ export const Loading: React.FC<LoadingProps> = ({
   }
 
   return content;
+};
+
+/** Loading with error boundary */
+export const Loading: React.FC<LoadingProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Loading" resetOnPropsChange>
+      <LoadingComponent {...props} />
+    </ErrorBoundary>
+  );
 };

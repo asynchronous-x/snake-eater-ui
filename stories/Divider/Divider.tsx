@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './divider.css';
 
 export interface DividerProps {
@@ -21,7 +22,7 @@ export interface DividerProps {
 }
 
 /** Divider component for visual separation */
-export const Divider: React.FC<DividerProps> = ({
+const DividerComponent: React.FC<DividerProps> = ({
   orientation = 'horizontal',
   variant = 'solid',
   thickness = 'thin',
@@ -55,5 +56,14 @@ export const Divider: React.FC<DividerProps> = ({
       )}
       {!children && <div className="snake-divider__line" />}
     </div>
+  );
+};
+
+/** Divider with error boundary */
+export const Divider: React.FC<DividerProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Divider" resetOnPropsChange>
+      <DividerComponent {...props} />
+    </ErrorBoundary>
   );
 };
