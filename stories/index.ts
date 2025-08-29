@@ -136,3 +136,18 @@ export type { ToastProps } from './Toast/Toast';
 
 export { Toggle } from './Toggle/Toggle';
 export type { ToggleProps } from './Toggle/Toggle';
+
+// Export helper types for better autocomplete
+export type {
+  SnakeUIVariant,
+  SnakeUISize,
+  SnakeUIPosition,
+  SnakeUIColor,
+  SnakeUICommonProps,
+  SnakeUIIconName,
+} from './helpers/propHelpers';
+
+export {
+  createButtonProps,
+  icon,
+} from './helpers/propHelpers';
