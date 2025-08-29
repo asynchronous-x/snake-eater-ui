@@ -1,6 +1,3 @@
-@import './theme.css';
-@import './global.css';
-
 .snake-page {
   min-height: 100vh;
   background-color: var(--color-bg-base);

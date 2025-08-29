@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-textarea-wrapper {
   display: inline-flex;
   flex-direction: column;

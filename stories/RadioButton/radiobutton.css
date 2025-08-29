@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-radio-group {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-input-wrapper {
   display: inline-flex;
   flex-direction: column;

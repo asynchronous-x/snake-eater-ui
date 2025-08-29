@@ -1,6 +1,3 @@
-@import '../graph-common.css';
-@import '../theme.css';
-
 .snake-bar-graph {
   position: relative;
   display: block;

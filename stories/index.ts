@@ -1,8 +1,5 @@
-// Core styles - import first
-import './theme.css';
-import './global.css';
-import './fonts.css';
-import './graph-common.css';
+// Core styles - single entry point for all CSS
+import './index.css';
 
 // Components
 export { Accordion } from './Accordion/Accordion';

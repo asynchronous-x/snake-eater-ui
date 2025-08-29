@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-toggle-wrapper {
   display: inline-flex;
   align-items: flex-start;

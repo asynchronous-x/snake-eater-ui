@@ -1,6 +1,3 @@
-@import '../theme.css';
-@import '../graph-common.css';
-
 .snake-line-graph {
   position: relative;
   display: block;

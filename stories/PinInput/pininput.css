@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-pin-input {
   display: inline-flex;
   gap: var(--spacing-md);

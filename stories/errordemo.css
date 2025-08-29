@@ -1,5 +1,3 @@
-@import './theme.css';
-
 .error-demo {
   padding: var(--spacing-lg);
   background: var(--color-bg-base);

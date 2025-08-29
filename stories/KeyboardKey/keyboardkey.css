@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-keyboard-key {
   --key-width: 1;
   position: relative;
