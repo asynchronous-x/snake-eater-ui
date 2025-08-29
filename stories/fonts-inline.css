@@ -1,8 +1,9 @@
-/* Nimbus Sans L Font Definitions */
+/* This file will contain base64-encoded fonts for bundling */
+/* The fonts will be converted and embedded during the build process */
 
 @font-face {
   font-family: 'Nimbus Sans L';
-  src: url('./fonts/NimbusSanL-Regular.woff') format('woff');
+  src: url('./fonts/NimbusSansL-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -10,7 +11,7 @@
 
 @font-face {
   font-family: 'Nimbus Sans L';
-  src: url('./fonts/NimbusSanL-Bold.woff') format('woff');
+  src: url('./fonts/NimbusSansL-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -18,7 +19,7 @@
 
 @font-face {
   font-family: 'Nimbus Sans L';
-  src: url('./fonts/NimbusSanL-Italic.woff') format('woff');
+  src: url('./fonts/NimbusSansL-Italic.woff') format('woff');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -26,13 +27,11 @@
 
 @font-face {
   font-family: 'Nimbus Sans L';
-  src: url('./fonts/NimbusSanL-BoldItalic.woff') format('woff');
+  src: url('./fonts/NimbusSansL-BoldItalic.woff') format('woff');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
-
-/* Fira Code Font Definition */
 
 @font-face {
   font-family: 'Fira Code';

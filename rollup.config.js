@@ -3,6 +3,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import postcssImport from 'postcss-import';
+import url from 'postcss-url';
 import terser from '@rollup/plugin-terser';
 import { readFileSync } from 'fs';
 
@@ -47,6 +49,14 @@ export default [
         extract: 'snake-eater-ui.css',
         minimize: true,
         modules: false,
+        plugins: [
+          postcssImport(), // Process @import statements first
+          url({
+            url: 'inline',
+            maxSize: 200, // KB - inline fonts up to 200KB
+            fallback: 'copy',
+          }),
+        ],
       }),
       terser({
         compress: {
