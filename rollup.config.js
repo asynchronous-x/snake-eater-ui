@@ -6,7 +6,6 @@ import postcss from 'rollup-plugin-postcss';
 import postcssImport from 'postcss-import';
 import url from 'postcss-url';
 import terser from '@rollup/plugin-terser';
-import copy from 'rollup-plugin-copy';
 import { readFileSync } from 'fs';
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'));
@@ -64,13 +63,6 @@ export default [
             },
           }),
         ],
-      }),
-      copy({
-        targets: [
-          { src: 'stories/fonts/*.woff', dest: 'dist/fonts' },
-          { src: 'stories/fonts/*.woff2', dest: 'dist/fonts' }
-        ],
-        hook: 'writeBundle' // Copy after bundle is written
       }),
       terser({
         compress: {

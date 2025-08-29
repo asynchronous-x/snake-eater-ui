@@ -1,6 +1,6 @@
 {
   "name": "snake-eater-ui",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Snake Eater UI Component Library",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -39,8 +39,7 @@
     "lint:check": "eslint .",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "build:lib": "rollup -c && npm run copy:fonts",
-    "copy:fonts": "mkdir -p dist/fonts && cp stories/fonts/* dist/fonts/ 2>/dev/null || true",
+    "build:lib": "rollup -c && node scripts/copy-fonts.mjs",
     "prepublishOnly": "npm run build:lib"
   },
   "author": "asynchronousx",
