@@ -6,6 +6,7 @@ import postcss from 'rollup-plugin-postcss';
 import postcssImport from 'postcss-import';
 import url from 'postcss-url';
 import terser from '@rollup/plugin-terser';
+import copy from 'rollup-plugin-copy';
 import { readFileSync } from 'fs';
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'));
@@ -50,13 +51,26 @@ export default [
         minimize: true,
         modules: false,
         plugins: [
-          postcssImport(), // Process @import statements first
+          postcssImport({
+            path: ['stories']
+          }), // Process @import statements first
           url({
-            url: 'inline',
-            maxSize: 200, // KB - inline fonts up to 200KB
-            fallback: 'copy',
+            url: (asset) => {
+              // Keep font references as relative paths
+              if (asset.url.includes('fonts/')) {
+                return `./fonts/${asset.url.split('/').pop()}`;
+              }
+              return asset.url;
+            },
           }),
         ],
+      }),
+      copy({
+        targets: [
+          { src: 'stories/fonts/*.woff', dest: 'dist/fonts' },
+          { src: 'stories/fonts/*.woff2', dest: 'dist/fonts' }
+        ],
+        hook: 'writeBundle' // Copy after bundle is written
       }),
       terser({
         compress: {
