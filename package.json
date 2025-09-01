@@ -53,13 +53,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/asynchronous-x/snake-eater-ui"
+    "url": "https://github.com/asynchronous-x/snake-eater-ui.git"
   },
   "bugs": {
     "url": "https://github.com/asynchronous-x/snake-eater-ui/issues"
   },
   "homepage": "https://asynchronous-x.github.io/snake-eater-ui/",
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
   "peerDependencies": {

@@ -70,6 +70,8 @@ const sampleTabs = [
 export const Default: Story = {
   args: {
     tabs: sampleTabs,
+    keyboardNavigation: true,
+    showArrows: true,
   },
 };
 

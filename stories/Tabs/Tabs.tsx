@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './tabs.css';
 
 interface Tab {
@@ -22,6 +22,10 @@ export interface TabsProps {
   size?: 'small' | 'medium' | 'large';
   /** Full width tabs */
   fullWidth?: boolean;
+  /** Show arrow navigation buttons */
+  showArrows?: boolean;
+  /** Enable keyboard arrow navigation */
+  keyboardNavigation?: boolean;
   /** Additional CSS classes */
   className?: string;
 }
@@ -34,10 +38,13 @@ export const Tabs: React.FC<TabsProps> = ({
   variant = 'default',
   size = 'medium',
   fullWidth = false,
+  showArrows = false,
+  keyboardNavigation = false,
   className = '',
 }) => {
   const [internalActiveTab, setInternalActiveTab] = useState(tabs[0]?.id || '');
   const activeTab = controlledActiveTab !== undefined ? controlledActiveTab : internalActiveTab;
+  const tabListRef = useRef<HTMLDivElement>(null);
 
   const handleTabClick = (tabId: string) => {
     if (onChange) {
@@ -46,6 +53,42 @@ export const Tabs: React.FC<TabsProps> = ({
       setInternalActiveTab(tabId);
     }
   };
+
+  const navigateToTab = (direction: 'prev' | 'next') => {
+    const enabledTabs = tabs.filter(tab => !tab.disabled);
+    const currentIndex = enabledTabs.findIndex(tab => tab.id === activeTab);
+    
+    let newIndex;
+    if (direction === 'prev') {
+      newIndex = currentIndex > 0 ? currentIndex - 1 : enabledTabs.length - 1;
+    } else {
+      newIndex = currentIndex < enabledTabs.length - 1 ? currentIndex + 1 : 0;
+    }
+    
+    if (enabledTabs[newIndex]) {
+      handleTabClick(enabledTabs[newIndex].id);
+    }
+  };
+
+  useEffect(() => {
+    if (!keyboardNavigation) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigateToTab('prev');
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigateToTab('next');
+      }
+    };
+
+    const tabList = tabListRef.current;
+    if (tabList) {
+      tabList.addEventListener('keydown', handleKeyDown);
+      return () => tabList.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [activeTab, keyboardNavigation, tabs]);
 
   const activeTabContent = tabs.find((tab) => tab.id === activeTab)?.content;
 
@@ -62,7 +105,17 @@ export const Tabs: React.FC<TabsProps> = ({
   return (
     <div className={tabsClasses}>
       <div className="snake-tabs__header">
-        <div className="snake-tabs__list" role="tablist">
+        {showArrows && (
+          <button
+            type="button"
+            className="snake-tabs__arrow snake-tabs__arrow--left"
+            onClick={() => navigateToTab('prev')}
+            aria-label="Previous tab"
+          >
+            ‹
+          </button>
+        )}
+        <div className="snake-tabs__list" role="tablist" ref={tabListRef} tabIndex={keyboardNavigation ? 0 : -1}>
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -85,6 +138,16 @@ export const Tabs: React.FC<TabsProps> = ({
             </button>
           ))}
         </div>
+        {showArrows && (
+          <button
+            type="button"
+            className="snake-tabs__arrow snake-tabs__arrow--right"
+            onClick={() => navigateToTab('next')}
+            aria-label="Next tab"
+          >
+            ›
+          </button>
+        )}
         <div className="snake-tabs__indicator" />
       </div>
 

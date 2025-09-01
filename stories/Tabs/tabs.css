@@ -9,6 +9,9 @@
 .snake-tabs__header {
   position: relative;
   border-bottom: 1px solid #3a3a3a;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .snake-tabs__list {
@@ -18,8 +21,18 @@
   position: relative;
 }
 
+.snake-tabs--default .snake-tabs__list {
+  gap: 6px;
+  padding-top: 3px;
+}
+
+.snake-tabs--default.snake-tabs--full-width .snake-tabs__list {
+  gap: 0;
+}
+
 .snake-tabs--full-width .snake-tabs__list {
   width: 100%;
+  flex-grow: 1;
 }
 
 .snake-tabs__tab {
@@ -32,7 +45,7 @@
   font-family: var(--font-family);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-base), text-shadow var(--transition-base), background-color var(--transition-fast);
   position: relative;
   white-space: nowrap;
 }
@@ -63,7 +76,8 @@
 
 /* Active state */
 .snake-tabs__tab--active {
-  color: var(--color-text-primary);
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 /* Hover state */
@@ -87,14 +101,39 @@
 }
 
 /* Default variant */
-.snake-tabs--default .snake-tabs__tab--active::after {
+.snake-tabs--default .snake-tabs__tab {
+  min-width: 120px;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.snake-tabs--default .snake-tabs__tab::before {
   content: '';
   position: absolute;
-  bottom: -1px;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 120px;
+  height: 4px;
+  background-color: #3a3a3a;
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.snake-tabs--default.snake-tabs--full-width .snake-tabs__tab {
+  min-width: unset;
+}
+
+.snake-tabs--default.snake-tabs--full-width .snake-tabs__tab::before {
+  max-width: 100%;
+  width: 100%;
   left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--color-text-primary);
+  transform: none;
+}
+
+.snake-tabs--default .snake-tabs__tab--active::before {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 /* Boxed variant */
@@ -177,7 +216,74 @@
 /* Focus state */
 .snake-tabs__tab:focus {
   outline: none;
-  box-shadow: inset 0 0 0 2px rgba(189, 189, 189, 0.3);
+}
+
+/* Arrow buttons */
+.snake-tabs__arrow {
+  background-color: transparent;
+  border: none;
+  color: #8e8e90;
+  font-size: 28px;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+/* Arrow button sizes */
+.snake-tabs--small .snake-tabs__arrow {
+  width: 36px;
+  height: 36px;
+  font-size: 24px;
+}
+
+.snake-tabs--medium .snake-tabs__arrow {
+  width: 40px;
+  height: 40px;
+  font-size: 28px;
+}
+
+.snake-tabs--large .snake-tabs__arrow {
+  width: 44px;
+  height: 44px;
+  font-size: 32px;
+}
+
+.snake-tabs__arrow:hover {
+  color: var(--color-text-primary);
+  background-color: rgba(31, 29, 32, 0.4);
+}
+
+.snake-tabs__arrow:active {
+  transform: scale(0.95);
+}
+
+.snake-tabs__arrow:focus {
+  outline: none;
+}
+
+.snake-tabs__arrow--left {
+  margin-right: var(--spacing-xs);
+}
+
+.snake-tabs__arrow--right {
+  margin-left: var(--spacing-xs);
+}
+
+/* Align arrows with tabs for default variant */
+.snake-tabs--default .snake-tabs__arrow {
+  margin-bottom: 6px;
+}
+
+/* Remove flex-grow so tabs don't stretch */
+.snake-tabs__list {
+  flex-grow: 0;
 }
 
 /* Corner decorations for boxed variant */
