@@ -15,13 +15,13 @@ A dark-themed React component library built with TypeScript and Storybook, featu
 
 ## Features
 
-- 🌑 **Dark Theme** - Optimized for dark mode applications
-- 📦 **45+ Components** - Comprehensive UI component collection organized by category
-- 🎨 **Edgy Design** - Sharp corners and thin borders for a distinctive look
-- 🚀 **Zero Runtime Dependencies** - Lightweight and performant
-- 📝 **TypeScript Support** - Full type definitions included
-- 📚 **Storybook Documentation** - Interactive component playground
-- 🎯 **Organized Structure** - Components grouped into logical categories
+- **Dark Theme** - Optimized for dark mode applications
+- **45+ Components** - Comprehensive UI component collection organized by category
+- **Edgy Design** - Sharp corners and thin borders for a distinctive look
+- **Zero Runtime Dependencies** - Lightweight and performant
+- **TypeScript Support** - Full type definitions included
+- **Storybook Documentation** - Interactive component playground
+- **Organized Structure** - Components grouped into logical categories
 
 ## Installation
 
@@ -52,6 +52,8 @@ function App() {
 ```
 
 ## Components
+
+(See also [./llms.txt] for LLM friendly description.)
 
 ### Data Visualization
 
@@ -146,6 +148,7 @@ function App() {
 ### Package Contents
 
 The published package includes:
+
 - Bundled JavaScript (ESM, CJS, and UMD formats)
 - TypeScript declarations
 - Bundled CSS styles

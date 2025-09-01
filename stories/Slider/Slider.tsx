@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './slider.css';
 
 export interface SliderProps {
@@ -39,7 +40,7 @@ export interface SliderProps {
 }
 
 /** Slider component for selecting numeric values */
-export const Slider: React.FC<SliderProps> = ({
+const SliderComponent: React.FC<SliderProps> = ({
   value = 0,
   onChange,
   min = 0,
@@ -249,5 +250,14 @@ export const Slider: React.FC<SliderProps> = ({
         )}
       </div>
     </div>
+  );
+};
+
+/** Slider with error boundary */
+export const Slider: React.FC<SliderProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Slider" resetOnPropsChange>
+      <SliderComponent {...props} />
+    </ErrorBoundary>
   );
 };

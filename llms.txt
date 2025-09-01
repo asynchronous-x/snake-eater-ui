@@ -1,0 +1,72 @@
+# Snake Eater UI Components
+
+## Buttons
+- Button: children (required), variant?, size?, loading?, fullWidth?
+- IconButton: icon (required), variant?, size?, disabled?
+
+## Data Display
+- Badge: children (required), variant?, size?
+- Stat: label (required), value (required), trend?, description?
+- Table: data (required), columns (required), striped?, hoverable?
+
+## Feedback
+- Alert: children (required), variant?, dismissible?, onDismiss?
+- Loading: size?, variant?, text?
+- Modal: isOpen (required), onClose (required), children (required), title?, size?
+- Progress: value (required), max?, variant?, showLabel?
+- Skeleton: variant?, width?, height?, count?
+- Toast: message (required), variant?, duration?, onClose?
+
+## Forms
+- Checkbox: checked (required), onChange (required), label?, disabled?
+- ColorPicker: value (required), onChange (required), label?
+- Input: value (required), onChange (required), type?, placeholder?, label?, error?
+- PinInput: length (required), value (required), onChange (required), disabled?
+- RadioButton: name (required), value (required), checked (required), onChange (required), label?
+- Select: options (required), value (required), onChange (required), placeholder?, label?
+- Slider: value (required), onChange (required), min?, max?, step?, label?
+- Textarea: value (required), onChange (required), placeholder?, rows?, label?, error?
+- Toggle: checked (required), onChange (required), label?, disabled?
+
+## Layout
+- Accordion: items (required), allowMultiple?, defaultOpen?
+- Card: children (required), variant?, padding?, fullWidth?
+- Divider: orientation?, spacing?, variant?
+- Drawer: isOpen (required), onClose (required), children (required), position?, size?
+- Filter: filters (required), onFilterChange (required), activeFilters?
+- Flex: children (required), direction?, gap?, align?, justify?, wrap?
+- Grid: children (required), columns?, gap?, responsive?
+- Spacer: size?, direction?
+- SubCard: children (required), title?, padding?
+
+## Navigation
+- Breadcrumb: items (required), separator?
+- Link: href (required), children (required), external?, variant?
+- Menu: items (required), onSelect?, defaultOpen?
+- Stepper: steps (required), currentStep (required), onStepChange?, orientation?
+- Tabs: tabs (required), activeTab (required), onTabChange?
+
+## Typography
+- Heading: children (required), level?, size?, weight?
+- KeyboardKey: children (required), size?
+- List: items (required), ordered?, variant?
+- Text: children (required), size?, weight?, variant?, truncate?
+
+## Graphs
+- BarGraph: data (required), xKey (required), yKey (required), width?, height?
+- DonutGraph: data (required), valueKey (required), labelKey (required), size?
+- HexagonalBinningGraph: data (required), xKey (required), yKey (required), size?
+- LineGraph: data (required), lines (required), xKey (required), width?, height?
+- RidgelineGraph: data (required), series (required), width?, height?
+- SpiderGraph: data (required), dimensions (required), series (required), size?
+- StreamGraph: data (required), keys (required), width?, height?
+
+## Common Optional Props (available on most components)
+- className?: Additional CSS classes
+- style?: Inline styles
+- data-testid?: Test identifier
+
+## Variant Options
+- Buttons/Alerts: primary, secondary, ghost, danger, cyber, clipped
+- Sizes: small, medium, large
+- Positions: top, right, bottom, left

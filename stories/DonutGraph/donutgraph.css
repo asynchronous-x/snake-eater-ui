@@ -1,6 +1,3 @@
-@import '../graph-common.css';
-@import '../theme.css';
-
 .snake-donut-graph {
   position: relative;
   display: inline-block;
@@ -54,7 +51,6 @@
   align-items: flex-start;
   gap: 30px;
 }
-
 
 /* SVG */
 .snake-donut-graph__svg {

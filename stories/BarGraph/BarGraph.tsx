@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './bargraph.css';
 
 interface DataPoint {
@@ -52,7 +53,7 @@ export interface BarGraphProps {
 }
 
 /** BarGraph component for data visualization */
-export const BarGraph: React.FC<BarGraphProps> = ({
+const BarGraphComponent: React.FC<BarGraphProps> = ({
   data,
   maxValue,
   height = '100%',
@@ -195,9 +196,13 @@ export const BarGraph: React.FC<BarGraphProps> = ({
             <div
               key={`bar-${index}`}
               className={`snake-bar-graph__bar-container ${
-                variant === 'interactive' && hoveredBar === index ? 'snake-bar-graph__bar-container--hovered' : ''
+                variant === 'interactive' && hoveredBar === index
+                  ? 'snake-bar-graph__bar-container--hovered'
+                  : ''
               } ${
-                variant === 'interactive' && selectedBar === index ? 'snake-bar-graph__bar-container--selected' : ''
+                variant === 'interactive' && selectedBar === index
+                  ? 'snake-bar-graph__bar-container--selected'
+                  : ''
               }`}
               onMouseEnter={(e) => {
                 if (variant === 'interactive') {
@@ -205,7 +210,7 @@ export const BarGraph: React.FC<BarGraphProps> = ({
                   const rect = e.currentTarget.getBoundingClientRect();
                   setTooltipPosition({
                     x: rect.left + rect.width / 2,
-                    y: rect.top - 10
+                    y: rect.top - 10,
                   });
                   onBarHover?.(point, index);
                 }
@@ -231,9 +236,13 @@ export const BarGraph: React.FC<BarGraphProps> = ({
             >
               <div
                 className={`snake-bar-graph__bar ${
-                  variant === 'interactive' && hoveredBar === index ? 'snake-bar-graph__bar--hovered' : ''
+                  variant === 'interactive' && hoveredBar === index
+                    ? 'snake-bar-graph__bar--hovered'
+                    : ''
                 } ${
-                  variant === 'interactive' && selectedBar === index ? 'snake-bar-graph__bar--selected' : ''
+                  variant === 'interactive' && selectedBar === index
+                    ? 'snake-bar-graph__bar--selected'
+                    : ''
                 }`}
                 style={{
                   height: `${barHeight}%`,
@@ -307,9 +316,13 @@ export const BarGraph: React.FC<BarGraphProps> = ({
             <div
               key={`bar-${index}`}
               className={`snake-bar-graph__bar-container ${
-                variant === 'interactive' && hoveredBar === index ? 'snake-bar-graph__bar-container--hovered' : ''
+                variant === 'interactive' && hoveredBar === index
+                  ? 'snake-bar-graph__bar-container--hovered'
+                  : ''
               } ${
-                variant === 'interactive' && selectedBar === index ? 'snake-bar-graph__bar-container--selected' : ''
+                variant === 'interactive' && selectedBar === index
+                  ? 'snake-bar-graph__bar-container--selected'
+                  : ''
               }`}
               onMouseEnter={(e) => {
                 if (variant === 'interactive') {
@@ -317,7 +330,7 @@ export const BarGraph: React.FC<BarGraphProps> = ({
                   const rect = e.currentTarget.getBoundingClientRect();
                   setTooltipPosition({
                     x: rect.left + rect.width / 2,
-                    y: rect.top - 10
+                    y: rect.top - 10,
                   });
                   onBarHover?.(point, index);
                 }
@@ -351,9 +364,13 @@ export const BarGraph: React.FC<BarGraphProps> = ({
               )}
               <div
                 className={`snake-bar-graph__bar ${
-                  variant === 'interactive' && hoveredBar === index ? 'snake-bar-graph__bar--hovered' : ''
+                  variant === 'interactive' && hoveredBar === index
+                    ? 'snake-bar-graph__bar--hovered'
+                    : ''
                 } ${
-                  variant === 'interactive' && selectedBar === index ? 'snake-bar-graph__bar--selected' : ''
+                  variant === 'interactive' && selectedBar === index
+                    ? 'snake-bar-graph__bar--selected'
+                    : ''
                 }`}
                 style={{
                   width: `${barWidthPercent}%`,
@@ -377,7 +394,7 @@ export const BarGraph: React.FC<BarGraphProps> = ({
     <div className={classes}>
       <div className="snake-bar-graph__corner snake-bar-graph__corner--top-left" />
       <div className="snake-bar-graph__corner snake-bar-graph__corner--top-right" />
-      
+
       <div
         className="snake-bar-graph__content"
         style={{
@@ -391,10 +408,10 @@ export const BarGraph: React.FC<BarGraphProps> = ({
 
       <div className="snake-bar-graph__corner snake-bar-graph__corner--bottom-left" />
       <div className="snake-bar-graph__corner snake-bar-graph__corner--bottom-right" />
-      
+
       {/* Tooltip for interactive variant */}
       {variant === 'interactive' && hoveredBar !== null && tooltipPosition && (
-        <div 
+        <div
           className="snake-bar-graph__tooltip"
           style={{
             position: 'fixed',
@@ -405,7 +422,9 @@ export const BarGraph: React.FC<BarGraphProps> = ({
         >
           <div className="snake-bar-graph__tooltip-content">
             <div className="snake-bar-graph__tooltip-label">{data[hoveredBar].label}</div>
-            <div className="snake-bar-graph__tooltip-value">{formatValue(data[hoveredBar].value)}</div>
+            <div className="snake-bar-graph__tooltip-value">
+              {formatValue(data[hoveredBar].value)}
+            </div>
             {data[hoveredBar].subLabel && (
               <div className="snake-bar-graph__tooltip-sublabel">{data[hoveredBar].subLabel}</div>
             )}
@@ -413,5 +432,14 @@ export const BarGraph: React.FC<BarGraphProps> = ({
         </div>
       )}
     </div>
+  );
+};
+
+/** BarGraph with error boundary */
+export const BarGraph: React.FC<BarGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="BarGraph" resetOnPropsChange>
+      <BarGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

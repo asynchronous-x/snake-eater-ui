@@ -103,7 +103,6 @@ export const Default: Story = {
   },
 };
 
-
 export const Interactive: Story = {
   args: {
     data: categoryData,
@@ -115,12 +114,11 @@ export const Interactive: Story = {
     centerLabel: 'Total',
     showLegend: true,
     animate: true,
-    onSegmentClick: (segment, index) => {
+    onSegmentClick: (segment) => {
       console.log(`Clicked: ${segment.label} (value: ${segment.value})`);
     },
   },
 };
-
 
 export const Minimal: Story = {
   args: {
@@ -302,4 +300,3 @@ export const ManySegments: Story = {
     animate: true,
   },
 };
-

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './filter.css';
 
 export interface FilterProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,7 +18,7 @@ export interface FilterProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 /** Filter component with bracket styling */
-export const Filter: React.FC<FilterProps> = ({
+const FilterComponent: React.FC<FilterProps> = ({
   children,
   variant = 'default',
   active = false,
@@ -51,5 +52,14 @@ export const Filter: React.FC<FilterProps> = ({
 
       <span className="snake-filter__bracket snake-filter__bracket--right" />
     </button>
+  );
+};
+
+/** Filter with error boundary */
+export const Filter: React.FC<FilterProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Filter" resetOnPropsChange>
+      <FilterComponent {...props} />
+    </ErrorBoundary>
   );
 };

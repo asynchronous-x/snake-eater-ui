@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './card.css';
 
 export interface CardProps {
@@ -31,7 +32,7 @@ export interface CardProps {
 }
 
 /** Card component with decorative corner elbows */
-export const Card: React.FC<CardProps> = ({
+const CardComponent: React.FC<CardProps> = ({
   children,
   header,
   footer,
@@ -54,7 +55,7 @@ export const Card: React.FC<CardProps> = ({
       const delayTimer = setTimeout(() => {
         setIsVisible(true);
         setIsAnimating(true);
-        
+
         const completeTimer = setTimeout(() => {
           setIsAnimating(false);
           onTransitionComplete?.();
@@ -83,9 +84,11 @@ export const Card: React.FC<CardProps> = ({
 
   const Component = interactive ? 'button' : 'div';
 
-  const transitionStyle = transitionIn ? {
-    '--transition-speed': `${transitionSpeed}ms`,
-  } as React.CSSProperties : undefined;
+  const transitionStyle = transitionIn
+    ? ({
+        '--transition-speed': `${transitionSpeed}ms`,
+      } as React.CSSProperties)
+    : undefined;
 
   return (
     <Component
@@ -107,5 +110,14 @@ export const Card: React.FC<CardProps> = ({
 
       {footer && <div className="snake-card-component__footer">{footer}</div>}
     </Component>
+  );
+};
+
+/** Card with error boundary */
+export const Card: React.FC<CardProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Card" resetOnPropsChange>
+      <CardComponent {...props} />
+    </ErrorBoundary>
   );
 };

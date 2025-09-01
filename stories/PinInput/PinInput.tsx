@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './pininput.css';
 
 export interface PinInputProps {
@@ -31,7 +32,7 @@ export interface PinInputProps {
 }
 
 /** Pin Input component for OTP, verification codes, etc. */
-export const PinInput: React.FC<PinInputProps> = ({
+const PinInputComponent: React.FC<PinInputProps> = ({
   length = 4,
   onComplete,
   onChange,
@@ -48,23 +49,29 @@ export const PinInput: React.FC<PinInputProps> = ({
 }) => {
   const [values, setValues] = useState<string[]>(() => {
     const initial = value.split('').slice(0, length);
-    return Array(length).fill('').map((_, i) => initial[i] || '');
+    return Array(length)
+      .fill('')
+      .map((_, i) => initial[i] || '');
   });
-  
+
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     if (value !== undefined) {
       const newValues = value.split('').slice(0, length);
-      setValues(Array(length).fill('').map((_, i) => newValues[i] || ''));
+      setValues(
+        Array(length)
+          .fill('')
+          .map((_, i) => newValues[i] || ''),
+      );
     }
   }, [value, length]);
 
   useEffect(() => {
     const combined = values.join('');
     onChange?.(combined);
-    
-    if (combined.length === length && values.every(v => v !== '')) {
+
+    if (combined.length === length && values.every((v) => v !== '')) {
       onComplete?.(combined);
     }
   }, [values, length, onChange, onComplete]);
@@ -76,7 +83,7 @@ export const PinInput: React.FC<PinInputProps> = ({
     if (value.length > 1) {
       const pastedValues = value.split('').slice(0, length);
       const newValues = [...values];
-      
+
       pastedValues.forEach((char, i) => {
         if (index + i < length) {
           if (type === 'numeric' && !/^\d$/.test(char)) return;
@@ -84,11 +91,11 @@ export const PinInput: React.FC<PinInputProps> = ({
           newValues[index + i] = char;
         }
       });
-      
+
       setValues(newValues);
-      
+
       // Focus last filled input or next empty one
-      const lastFilledIndex = newValues.findLastIndex(v => v !== '');
+      const lastFilledIndex = newValues.findLastIndex((v) => v !== '');
       const nextIndex = Math.min(lastFilledIndex + 1, length - 1);
       inputRefs.current[nextIndex]?.focus();
       return;
@@ -149,7 +156,7 @@ export const PinInput: React.FC<PinInputProps> = ({
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData('text');
-    const firstEmptyIndex = values.findIndex(v => v === '');
+    const firstEmptyIndex = values.findIndex((v) => v === '');
     const startIndex = firstEmptyIndex === -1 ? 0 : firstEmptyIndex;
     handleChange(startIndex, pastedData);
   };
@@ -175,10 +182,7 @@ export const PinInput: React.FC<PinInputProps> = ({
             ref={(el) => (inputRefs.current[index] = el)}
             type={masked ? 'password' : 'text'}
             inputMode={type === 'numeric' ? 'numeric' : 'text'}
-            className={[
-              'snake-pin-input__field',
-              values[index] && 'snake-pin-input__field--filled',
-            ]
+            className={['snake-pin-input__field', values[index] && 'snake-pin-input__field--filled']
               .filter(Boolean)
               .join(' ')}
             value={masked && values[index] ? '●' : values[index]}
@@ -194,5 +198,14 @@ export const PinInput: React.FC<PinInputProps> = ({
           />
         ))}
     </div>
+  );
+};
+
+/** PinInput with error boundary */
+export const PinInput: React.FC<PinInputProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="PinInput" resetOnPropsChange>
+      <PinInputComponent {...props} />
+    </ErrorBoundary>
   );
 };

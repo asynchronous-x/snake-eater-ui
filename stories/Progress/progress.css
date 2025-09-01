@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-progress {
   display: flex;
   flex-direction: column;

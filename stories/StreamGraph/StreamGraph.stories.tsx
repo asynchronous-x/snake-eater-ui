@@ -334,7 +334,7 @@ export const InteractiveExpanded: Story = {
     curve: 'smooth',
     showGrid: true,
     gridLines: 5,
-    onLayerClick: (key, index) => {
+    onLayerClick: (key) => {
       console.log(`Selected: ${key}`);
     },
   },
@@ -352,7 +352,7 @@ export const InteractiveProducts: Story = {
     showGrid: true,
     showLabels: true,
     showLegend: true,
-    onLayerClick: (key, index) => {
+    onLayerClick: (key) => {
       alert(`Product selected: ${key}`);
     },
   },

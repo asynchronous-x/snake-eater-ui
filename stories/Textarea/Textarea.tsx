@@ -1,7 +1,9 @@
 import React, { useRef, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './textarea.css';
 
-export interface TextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
+export interface TextareaProps
+  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
   /** Label for the textarea */
   label?: string;
   /** Helper text */
@@ -29,7 +31,7 @@ export interface TextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
 }
 
 /** Textarea component for multi-line text input */
-export const Textarea: React.FC<TextareaProps> = ({
+const TextareaComponent: React.FC<TextareaProps> = ({
   label,
   helperText,
   error,
@@ -135,5 +137,14 @@ export const Textarea: React.FC<TextareaProps> = ({
         )}
       </div>
     </div>
+  );
+};
+
+/** Textarea with error boundary */
+export const Textarea: React.FC<TextareaProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Textarea" resetOnPropsChange>
+      <TextareaComponent {...props} />
+    </ErrorBoundary>
   );
 };

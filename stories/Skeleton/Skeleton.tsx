@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './skeleton.css';
 
 export interface SkeletonProps {
@@ -23,7 +24,7 @@ export interface SkeletonProps {
 }
 
 /** Skeleton component for loading states */
-export const Skeleton: React.FC<SkeletonProps> = ({
+const SkeletonComponent: React.FC<SkeletonProps> = ({
   variant = 'rectangular',
   width,
   height,
@@ -87,5 +88,14 @@ export const Skeleton: React.FC<SkeletonProps> = ({
         </>
       )}
     </div>
+  );
+};
+
+/** Skeleton with error boundary */
+export const Skeleton: React.FC<SkeletonProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Skeleton" resetOnPropsChange>
+      <SkeletonComponent {...props} />
+    </ErrorBoundary>
   );
 };

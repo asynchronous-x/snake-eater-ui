@@ -14,8 +14,7 @@ import { Loading } from './Loading/Loading';
 import './page.css';
 
 export const PageRealtime: React.FC = () => {
-  const [liveData, setLiveData] = useState<any[]>([]);
-  const [isConnected, setIsConnected] = useState(true);
+  const [isConnected] = useState(true);
   const [cpuUsage, setCpuUsage] = useState(45);
   const [memoryUsage, setMemoryUsage] = useState(62);
   const [diskUsage, setDiskUsage] = useState(78);
@@ -26,11 +25,11 @@ export const PageRealtime: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       // Update metrics
-      setCpuUsage(prev => Math.max(10, Math.min(95, prev + (Math.random() - 0.5) * 10)));
-      setMemoryUsage(prev => Math.max(30, Math.min(90, prev + (Math.random() - 0.5) * 5)));
-      setDiskUsage(prev => Math.max(60, Math.min(85, prev + (Math.random() - 0.5) * 2)));
-      setNetworkIn(prev => Math.max(50, Math.min(200, prev + (Math.random() - 0.5) * 20)));
-      setNetworkOut(prev => Math.max(40, Math.min(150, prev + (Math.random() - 0.5) * 15)));
+      setCpuUsage((prev) => Math.max(10, Math.min(95, prev + (Math.random() - 0.5) * 10)));
+      setMemoryUsage((prev) => Math.max(30, Math.min(90, prev + (Math.random() - 0.5) * 5)));
+      setDiskUsage((prev) => Math.max(60, Math.min(85, prev + (Math.random() - 0.5) * 2)));
+      setNetworkIn((prev) => Math.max(50, Math.min(200, prev + (Math.random() - 0.5) * 20)));
+      setNetworkOut((prev) => Math.max(40, Math.min(150, prev + (Math.random() - 0.5) * 15)));
     }, 2000);
 
     return () => clearInterval(interval);
@@ -84,15 +83,21 @@ export const PageRealtime: React.FC = () => {
         {/* Header */}
         <div className="snake-page__header">
           <div>
-            <Heading as="h1" size="xl">Real-time Monitoring</Heading>
+            <Heading as="h1" size="xl">
+              Real-time Monitoring
+            </Heading>
             <Text variant="muted">System performance and health metrics</Text>
           </div>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
             <Badge variant={isConnected ? 'success' : 'danger'} style="dot">
               {isConnected ? 'Connected' : 'Disconnected'}
             </Badge>
-            <Button variant="ghost" size="small">Pause</Button>
-            <Button variant="primary" size="small">Configure Alerts</Button>
+            <Button variant="ghost" size="small">
+              Pause
+            </Button>
+            <Button variant="primary" size="small">
+              Configure Alerts
+            </Button>
           </div>
         </div>
 
@@ -108,7 +113,14 @@ export const PageRealtime: React.FC = () => {
         )}
 
         {/* Primary Metrics */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '20px', marginTop: '20px' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(5, 1fr)',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
           <Card>
             <Stat
               label="CPU Usage"
@@ -137,31 +149,36 @@ export const PageRealtime: React.FC = () => {
             <Progress value={diskUsage} max={100} size="small" style={{ marginTop: '10px' }} />
           </Card>
           <Card>
-            <Stat
-              label="Network In"
-              value={`${networkIn.toFixed(0)} Mb/s`}
-              variant="stacked"
-            />
+            <Stat label="Network In" value={`${networkIn.toFixed(0)} Mb/s`} variant="stacked" />
             <Progress value={networkIn} max={200} size="small" style={{ marginTop: '10px' }} />
           </Card>
           <Card>
-            <Stat
-              label="Network Out"
-              value={`${networkOut.toFixed(0)} Mb/s`}
-              variant="stacked"
-            />
+            <Stat label="Network Out" value={`${networkOut.toFixed(0)} Mb/s`} variant="stacked" />
             <Progress value={networkOut} max={200} size="small" style={{ marginTop: '10px' }} />
           </Card>
         </div>
 
         {/* Real-time Graphs */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '20px' }}>
-          <Card header={
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Heading as="h3" size="md">CPU Trend</Heading>
-              <Loading size="small" variant="spinner" />
-            </div>
-          }>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '20px',
+            marginTop: '20px',
+          }}
+        >
+          <Card
+            header={
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
+                <Heading as="h3" size="md">
+                  CPU Trend
+                </Heading>
+                <Loading size="small" variant="spinner" />
+              </div>
+            }
+          >
             <LineGraph
               data={cpuTrend}
               width={450}
@@ -175,12 +192,18 @@ export const PageRealtime: React.FC = () => {
             />
           </Card>
 
-          <Card header={
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Heading as="h3" size="md">Memory Trend</Heading>
-              <Loading size="small" variant="spinner" />
-            </div>
-          }>
+          <Card
+            header={
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+              >
+                <Heading as="h3" size="md">
+                  Memory Trend
+                </Heading>
+                <Loading size="small" variant="spinner" />
+              </div>
+            }
+          >
             <LineGraph
               data={memoryTrend}
               width={450}
@@ -196,12 +219,19 @@ export const PageRealtime: React.FC = () => {
         </div>
 
         {/* Scrolling Ridgeline for Live Data */}
-        <Card header={
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Heading as="h3" size="md">Live Data Stream</Heading>
-            <Badge variant="success" style="dot">Streaming</Badge>
-          </div>
-        } style={{ marginTop: '20px' }}>
+        <Card
+          header={
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Heading as="h3" size="md">
+                Live Data Stream
+              </Heading>
+              <Badge variant="success" style="dot">
+                Streaming
+              </Badge>
+            </div>
+          }
+          style={{ marginTop: '20px' }}
+        >
           <RidgelineGraph
             data={[
               { label: 'Stream 1', values: Array.from({ length: 40 }, () => Math.random() * 100) },
@@ -223,7 +253,14 @@ export const PageRealtime: React.FC = () => {
         </Card>
 
         {/* Server Status Grid */}
-        <Card header={<Heading as="h3" size="md">Server Status</Heading>} style={{ marginTop: '20px' }}>
+        <Card
+          header={
+            <Heading as="h3" size="md">
+              Server Status
+            </Heading>
+          }
+          style={{ marginTop: '20px' }}
+        >
           <BarGraph
             data={serverStatus}
             width={920}
@@ -235,12 +272,19 @@ export const PageRealtime: React.FC = () => {
         </Card>
 
         {/* Process Table */}
-        <Card header={
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Heading as="h3" size="md">Active Processes</Heading>
-            <Text variant="muted" size="small">Last updated: just now</Text>
-          </div>
-        } style={{ marginTop: '20px' }}>
+        <Card
+          header={
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Heading as="h3" size="md">
+                Active Processes
+              </Heading>
+              <Text variant="muted" size="small">
+                Last updated: just now
+              </Text>
+            </div>
+          }
+          style={{ marginTop: '20px' }}
+        >
           <table className="data-table">
             <thead>
               <tr>
@@ -270,21 +314,38 @@ export const PageRealtime: React.FC = () => {
         </Card>
 
         {/* Footer Stats */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px', padding: '20px', background: '#1f1d20', border: '1px solid #3a3a3a' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '20px',
+            padding: '20px',
+            background: '#1f1d20',
+            border: '1px solid #3a3a3a',
+          }}
+        >
           <div>
-            <Text variant="muted" size="small">Uptime</Text>
+            <Text variant="muted" size="small">
+              Uptime
+            </Text>
             <Text size="large">42 days, 16:24:38</Text>
           </div>
           <div>
-            <Text variant="muted" size="small">Load Average</Text>
+            <Text variant="muted" size="small">
+              Load Average
+            </Text>
             <Text size="large">2.34, 2.18, 2.05</Text>
           </div>
           <div>
-            <Text variant="muted" size="small">Total Processes</Text>
+            <Text variant="muted" size="small">
+              Total Processes
+            </Text>
             <Text size="large">247</Text>
           </div>
           <div>
-            <Text variant="muted" size="small">Active Connections</Text>
+            <Text variant="muted" size="small">
+              Active Connections
+            </Text>
             <Text size="large">1,284</Text>
           </div>
         </div>

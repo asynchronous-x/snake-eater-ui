@@ -1,5 +1,3 @@
-@import '../global.css';
-
 .snake-grid {
   display: grid;
   grid-template-columns: var(--grid-columns);

@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './spidergraph.css';
 
 interface DataPoint {
@@ -45,7 +46,7 @@ export interface SpiderGraphProps {
 }
 
 /** SpiderGraph component for multi-dimensional data visualization */
-export const SpiderGraph: React.FC<SpiderGraphProps> = ({
+const SpiderGraphComponent: React.FC<SpiderGraphProps> = ({
   data,
   width = '100%',
   height = '100%',
@@ -146,9 +147,9 @@ export const SpiderGraph: React.FC<SpiderGraphProps> = ({
 
   return (
     <div className={classes}>
-      <svg 
-        width={typeof width === 'number' ? width : width} 
-        height={typeof height === 'number' ? height : height} 
+      <svg
+        width={typeof width === 'number' ? width : width}
+        height={typeof height === 'number' ? height : height}
         viewBox={`0 0 ${svgWidth} ${svgHeight}`}
         className="snake-spider-graph__svg"
         preserveAspectRatio="xMidYMid meet"
@@ -270,12 +271,7 @@ export const SpiderGraph: React.FC<SpiderGraphProps> = ({
         {/* Corner accents */}
         <g className="snake-spider-graph__corners">
           {/* Top left */}
-          <path
-            d="M 0 10 L 0 0 L 10 0"
-            fill="none"
-            stroke="#8e8e90"
-            strokeWidth="2"
-          />
+          <path d="M 0 10 L 0 0 L 10 0" fill="none" stroke="#8e8e90" strokeWidth="2" />
           {/* Top right */}
           <path
             d={`M ${svgWidth - 10} 0 L ${svgWidth} 0 L ${svgWidth} 10`}
@@ -300,5 +296,14 @@ export const SpiderGraph: React.FC<SpiderGraphProps> = ({
         </g>
       </svg>
     </div>
+  );
+};
+
+/** SpiderGraph with error boundary */
+export const SpiderGraph: React.FC<SpiderGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="SpiderGraph" resetOnPropsChange>
+      <SpiderGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

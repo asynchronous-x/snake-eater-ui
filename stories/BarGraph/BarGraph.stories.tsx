@@ -156,7 +156,9 @@ export const CustomColors: Story = {
 export const LargeDataset: Story = {
   args: {
     data: Array.from({ length: 12 }, (_, i) => ({
-      label: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][i],
+      label: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][
+        i
+      ],
       value: Math.floor(Math.random() * 80 + 20),
     })),
     height: 300,
@@ -267,7 +269,8 @@ export const Interactive: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Interactive variant with hover effects, tooltips, and click selection. Click on bars to select them and hover to see detailed information.',
+        story:
+          'Interactive variant with hover effects, tooltips, and click selection. Click on bars to select them and hover to see detailed information.',
       },
     },
   },
@@ -313,9 +316,9 @@ export const InteractiveWithColors: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Interactive variant with custom colors for each bar representing issue severity levels.',
+        story:
+          'Interactive variant with custom colors for each bar representing issue severity levels.',
       },
     },
   },
 };
-

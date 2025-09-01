@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './hexagonalbinninggraph.css';
 
 interface DataPoint {
@@ -62,7 +63,7 @@ export interface HexagonalBinningGraphProps {
 }
 
 /** HexagonalBinningGraph component for 2D density visualization */
-export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
+const HexagonalBinningGraphComponent: React.FC<HexagonalBinningGraphProps> = ({
   data,
   width = '100%',
   height = '100%',
@@ -92,8 +93,8 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
 
   // Calculate domains
   const { xMin, xMax, yMin, yMax } = useMemo(() => {
-    const xValues = data.map(d => d.x);
-    const yValues = data.map(d => d.y);
+    const xValues = data.map((d) => d.x);
+    const yValues = data.map((d) => d.y);
     return {
       xMin: xDomain ? xDomain[0] : Math.min(...xValues),
       xMax: xDomain ? xDomain[1] : Math.max(...xValues),
@@ -111,7 +112,7 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
   // SVG dimensions - use a default viewBox size
   const svgWidth = 600;
   const svgHeight = 400;
-  
+
   // Margins for axes and labels
   const margin = { top: 40, right: 40, bottom: 60, left: 60 };
   const plotWidth = svgWidth - margin.left - margin.right;
@@ -120,37 +121,39 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
   // Create hexagonal bins
   const hexBins = useMemo(() => {
     const bins: Map<string, HexBin> = new Map();
-    
+
     // Add padding equal to hexagon radius to keep hexagons within bounds
     const padding = hexRadius;
-    const effectiveWidth = plotWidth - (2 * padding);
-    const effectiveHeight = plotHeight - (2 * padding);
-    
-    const cols = Math.ceil(effectiveWidth / horizDist);
-    const rows = Math.ceil(effectiveHeight / vertDist);
+    const effectiveWidth = plotWidth - 2 * padding;
+    const effectiveHeight = plotHeight - 2 * padding;
 
     // Scale functions with padding offset
     const xScale = (x: number) => padding + ((x - xMin) / (xMax - xMin)) * effectiveWidth;
-    const yScale = (y: number) => padding + (effectiveHeight - ((y - yMin) / (yMax - yMin)) * effectiveHeight);
+    const yScale = (y: number) =>
+      padding + (effectiveHeight - ((y - yMin) / (yMax - yMin)) * effectiveHeight);
 
     // Bin the data points
-    data.forEach(point => {
+    data.forEach((point) => {
       const scaledX = xScale(point.x);
       const scaledY = yScale(point.y);
 
       // Find nearest hexagon center within padded area
       const col = Math.round((scaledX - padding) / horizDist);
       const row = Math.round((scaledY - padding) / vertDist);
-      
+
       // Calculate hexagon center position with padding
       const hexX = padding + col * horizDist;
       const hexY = padding + row * vertDist + (col % 2) * (vertDist / 2);
-      
+
       // Only create bins that are fully within the plot area
-      if (hexX >= padding && hexX <= plotWidth - padding && 
-          hexY >= padding && hexY <= plotHeight - padding) {
+      if (
+        hexX >= padding &&
+        hexX <= plotWidth - padding &&
+        hexY >= padding &&
+        hexY <= plotHeight - padding
+      ) {
         const key = `${col},${row}`;
-        
+
         if (!bins.has(key)) {
           bins.set(key, {
             x: hexX,
@@ -159,7 +162,7 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
             points: [],
           });
         }
-        
+
         const bin = bins.get(key)!;
         bin.count++;
         bin.points.push(point);
@@ -171,20 +174,20 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
 
   // Calculate max count for color scaling
   const maxCount = useMemo(() => {
-    return Math.max(...hexBins.map(bin => bin.count));
+    return Math.max(...hexBins.map((bin) => bin.count));
   }, [hexBins]);
 
   // Generate hexagon path
   const generateHexPath = (centerX: number, centerY: number, radius: number) => {
     const angles = [0, 60, 120, 180, 240, 300];
-    const points = angles.map(angle => {
+    const points = angles.map((angle) => {
       const radian = (angle * Math.PI) / 180;
       return {
         x: centerX + radius * Math.cos(radian),
         y: centerY + radius * Math.sin(radian),
       };
     });
-    
+
     return points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z';
   };
 
@@ -246,12 +249,10 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
     <div className={classes}>
       <div className="snake-hexagonal-binning-graph__corner snake-hexagonal-binning-graph__corner--top-left" />
       <div className="snake-hexagonal-binning-graph__corner snake-hexagonal-binning-graph__corner--top-right" />
-      
+
       <div className="snake-hexagonal-binning-graph__container">
-        {title && (
-          <div className="snake-hexagonal-binning-graph__title">{title}</div>
-        )}
-        
+        {title && <div className="snake-hexagonal-binning-graph__title">{title}</div>}
+
         <svg
           width={typeof width === 'number' ? width : '100%'}
           height={typeof height === 'number' ? height : '100%'}
@@ -306,26 +307,16 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
                 const isHovered = hoveredHex === hexKey;
                 const isDimmed = isInteractive && activeHex && !isActive;
                 const color = getColor(bin.count);
-                
+
                 return (
                   <g key={`hex-${i}`}>
                     <path
                       d={generateHexPath(bin.x, bin.y, hexRadius - 1)}
                       fill={color}
-                      fillOpacity={
-                        isDimmed ? 0.2 : 
-                        isActive ? 1 : 
-                        isHovered ? 0.9 : 
-                        0.8
-                      }
+                      fillOpacity={isDimmed ? 0.2 : isActive ? 1 : isHovered ? 0.9 : 0.8}
                       stroke={color}
                       strokeWidth={isActive || isHovered ? 2 : 1}
-                      strokeOpacity={
-                        isDimmed ? 0.3 : 
-                        isActive ? 1 : 
-                        isHovered ? 1 : 
-                        0.9
-                      }
+                      strokeOpacity={isDimmed ? 0.3 : isActive ? 1 : isHovered ? 1 : 0.9}
                       className={`snake-hexagonal-binning-graph__hexagon ${isActive ? 'snake-hexagonal-binning-graph__hexagon--active' : ''}`}
                       style={{
                         cursor: isInteractive ? 'pointer' : 'default',
@@ -400,28 +391,14 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
                     </g>
                   );
                 })}
-                
+
                 {/* Y-axis */}
-                <line
-                  x1={0}
-                  y1={0}
-                  x2={0}
-                  y2={plotHeight}
-                  stroke={axisColor}
-                  strokeWidth="2"
-                />
+                <line x1={0} y1={0} x2={0} y2={plotHeight} stroke={axisColor} strokeWidth="2" />
                 {yTicks.map((tick, i) => {
                   const y = plotHeight - ((tick - yMin) / (yMax - yMin)) * plotHeight;
                   return (
                     <g key={`y-tick-${i}`}>
-                      <line
-                        x1={0}
-                        y1={y}
-                        x2={-5}
-                        y2={y}
-                        stroke={axisColor}
-                        strokeWidth="1"
-                      />
+                      <line x1={0} y1={y} x2={-5} y2={y} stroke={axisColor} strokeWidth="1" />
                       <text
                         x={-10}
                         y={y}
@@ -476,7 +453,9 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
 
         {/* Legend */}
         {finalShowLegend && (
-          <div className={`snake-hexagonal-binning-graph__legend ${animateLegend ? 'snake-hexagonal-binning-graph__legend--animated' : ''}`}>
+          <div
+            className={`snake-hexagonal-binning-graph__legend ${animateLegend ? 'snake-hexagonal-binning-graph__legend--animated' : ''}`}
+          >
             <div className="snake-hexagonal-binning-graph__legend-title">Density</div>
             <div className="snake-hexagonal-binning-graph__legend-scale">
               <div className="snake-hexagonal-binning-graph__legend-gradient">
@@ -500,5 +479,14 @@ export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = ({
       <div className="snake-hexagonal-binning-graph__corner snake-hexagonal-binning-graph__corner--bottom-left" />
       <div className="snake-hexagonal-binning-graph__corner snake-hexagonal-binning-graph__corner--bottom-right" />
     </div>
+  );
+};
+
+/** HexagonalBinningGraph with error boundary */
+export const HexagonalBinningGraph: React.FC<HexagonalBinningGraphProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="HexagonalBinningGraph" resetOnPropsChange>
+      <HexagonalBinningGraphComponent {...props} />
+    </ErrorBoundary>
   );
 };

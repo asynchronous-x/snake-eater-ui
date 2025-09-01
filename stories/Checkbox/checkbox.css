@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-checkbox-wrapper {
   display: flex;
   flex-direction: column;

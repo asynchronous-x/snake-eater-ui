@@ -1,8 +1,5 @@
-// Core styles - import first
-import './theme.css';
-import './global.css';
-import './fonts.css';
-import './graph-common.css';
+// Core styles - single entry point for all CSS
+import './index.css';
 
 // Components
 export { Accordion } from './Accordion/Accordion';
@@ -43,6 +40,9 @@ export type { DrawerProps } from './Drawer/Drawer';
 
 export { Filter } from './Filter/Filter';
 export type { FilterProps } from './Filter/Filter';
+
+export { Flex } from './Flex/Flex';
+export type { FlexProps } from './Flex/Flex';
 
 export { Grid } from './Grid/Grid';
 export type { GridProps } from './Grid/Grid';
@@ -101,6 +101,9 @@ export type { SkeletonProps } from './Skeleton/Skeleton';
 export { Slider } from './Slider/Slider';
 export type { SliderProps } from './Slider/Slider';
 
+export { Spacer } from './Spacer/Spacer';
+export type { SpacerProps } from './Spacer/Spacer';
+
 export { SpiderGraph } from './SpiderGraph/SpiderGraph';
 export type { SpiderGraphProps } from './SpiderGraph/SpiderGraph';
 
@@ -133,3 +136,18 @@ export type { ToastProps } from './Toast/Toast';
 
 export { Toggle } from './Toggle/Toggle';
 export type { ToggleProps } from './Toggle/Toggle';
+
+// Export helper types for better autocomplete
+export type {
+  SnakeUIVariant,
+  SnakeUISize,
+  SnakeUIPosition,
+  SnakeUIColor,
+  SnakeUICommonProps,
+  SnakeUIIconName,
+} from './helpers/propHelpers';
+
+export {
+  createButtonProps,
+  icon,
+} from './helpers/propHelpers';

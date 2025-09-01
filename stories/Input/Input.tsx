@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './input.css';
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -21,7 +22,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
 }
 
 /** Input component with dark theme styling */
-export const Input: React.FC<InputProps> = ({
+const InputComponent: React.FC<InputProps> = ({
   label,
   helperText,
   error,
@@ -73,5 +74,14 @@ export const Input: React.FC<InputProps> = ({
         </span>
       )}
     </div>
+  );
+};
+
+/** Input with error boundary */
+export const Input: React.FC<InputProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Input" resetOnPropsChange>
+      <InputComponent {...props} />
+    </ErrorBoundary>
   );
 };

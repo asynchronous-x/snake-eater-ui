@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './progress.css';
 
 export interface ProgressProps {
@@ -31,7 +32,7 @@ export interface ProgressProps {
 }
 
 /** Progress component for displaying progress indicators */
-export const Progress: React.FC<ProgressProps> = ({
+const ProgressComponent: React.FC<ProgressProps> = ({
   value = 0,
   max = 100,
   size = 'medium',
@@ -130,5 +131,14 @@ export const Progress: React.FC<ProgressProps> = ({
         </div>
       )}
     </div>
+  );
+};
+
+/** Progress with error boundary */
+export const Progress: React.FC<ProgressProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Progress" resetOnPropsChange>
+      <ProgressComponent {...props} />
+    </ErrorBoundary>
   );
 };

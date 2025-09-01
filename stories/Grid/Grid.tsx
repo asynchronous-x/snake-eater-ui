@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './grid.css';
 
 export interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -69,7 +70,7 @@ interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const Grid: React.FC<GridProps> = ({
+const GridComponent: React.FC<GridProps> = ({
   columns = 12,
   rows,
   gap = 'md',
@@ -163,5 +164,14 @@ export const GridItem: React.FC<GridItemProps> = ({
     <div className={classes} style={itemStyle} {...props}>
       {children}
     </div>
+  );
+};
+
+/** Grid with error boundary */
+export const Grid: React.FC<GridProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Grid" resetOnPropsChange>
+      <GridComponent {...props} />
+    </ErrorBoundary>
   );
 };

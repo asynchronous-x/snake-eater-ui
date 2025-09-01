@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './menu.css';
 
 interface MenuItem {
@@ -40,7 +41,7 @@ export interface MenuProps {
 }
 
 /** Menu component for dropdown navigation */
-export const Menu: React.FC<MenuProps> = ({
+const MenuComponent: React.FC<MenuProps> = ({
   items,
   trigger,
   isOpen: controlledIsOpen,
@@ -181,5 +182,14 @@ export const Menu: React.FC<MenuProps> = ({
         </div>
       )}
     </div>
+  );
+};
+
+/** Menu with error boundary */
+export const Menu: React.FC<MenuProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Menu" resetOnPropsChange>
+      <MenuComponent {...props} />
+    </ErrorBoundary>
   );
 };

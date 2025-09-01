@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './toggle.css';
 
 export interface ToggleProps {
@@ -23,7 +24,7 @@ export interface ToggleProps {
 }
 
 /** Toggle/Switch component with dark theme styling */
-export const Toggle: React.FC<ToggleProps> = ({
+const ToggleComponent: React.FC<ToggleProps> = ({
   checked = false,
   onChange,
   label,
@@ -81,5 +82,14 @@ export const Toggle: React.FC<ToggleProps> = ({
         </div>
       )}
     </div>
+  );
+};
+
+/** Toggle with error boundary */
+export const Toggle: React.FC<ToggleProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Toggle" resetOnPropsChange>
+      <ToggleComponent {...props} />
+    </ErrorBoundary>
   );
 };

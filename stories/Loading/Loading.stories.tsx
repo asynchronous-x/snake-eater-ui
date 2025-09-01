@@ -160,9 +160,6 @@ export const Fullscreen: Story = {
           const root = document.createElement('div');
           container.appendChild(root);
 
-          // Simulate loading
-          const loadingElement = <Loading type="grid" text="Loading application..." fullscreen />;
-
           // This would normally use ReactDOM.render or createRoot
           console.log('Fullscreen loading would be shown here');
 

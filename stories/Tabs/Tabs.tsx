@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './tabs.css';
 
 interface Tab {
@@ -31,7 +32,7 @@ export interface TabsProps {
 }
 
 /** Tabs component for organizing content */
-export const Tabs: React.FC<TabsProps> = ({
+const TabsComponent: React.FC<TabsProps> = ({
   tabs,
   activeTab: controlledActiveTab,
   onChange,
@@ -167,5 +168,14 @@ export const Tabs: React.FC<TabsProps> = ({
         ))}
       </div>
     </div>
+  );
+};
+
+/** Tabs with error boundary */
+export const Tabs: React.FC<TabsProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Tabs" resetOnPropsChange>
+      <TabsComponent {...props} />
+    </ErrorBoundary>
   );
 };

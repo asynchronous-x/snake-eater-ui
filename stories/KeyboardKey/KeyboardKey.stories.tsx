@@ -61,7 +61,9 @@ export const Variants: Story = {
       <KeyboardKey variant="modifier">Ctrl</KeyboardKey>
       <KeyboardKey variant="action">Enter</KeyboardKey>
       <KeyboardKey variant="danger">Delete</KeyboardKey>
-      <KeyboardKey variant="space" width={4}>Space</KeyboardKey>
+      <KeyboardKey variant="space" width={4}>
+        Space
+      </KeyboardKey>
     </div>
   ),
 };
@@ -109,14 +111,22 @@ export const SpecialKeys: Story = {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div style={{ display: 'flex', gap: '8px' }}>
         <KeyboardKey variant="modifier">Tab</KeyboardKey>
-        <KeyboardKey variant="modifier" width={1.5}>Shift</KeyboardKey>
+        <KeyboardKey variant="modifier" width={1.5}>
+          Shift
+        </KeyboardKey>
         <KeyboardKey variant="modifier">Ctrl</KeyboardKey>
         <KeyboardKey variant="modifier">Alt</KeyboardKey>
-        <KeyboardKey variant="modifier" width={1.5}>Cmd</KeyboardKey>
+        <KeyboardKey variant="modifier" width={1.5}>
+          Cmd
+        </KeyboardKey>
       </div>
       <div style={{ display: 'flex', gap: '8px' }}>
-        <KeyboardKey variant="action" width={2}>Enter</KeyboardKey>
-        <KeyboardKey variant="danger" width={1.5}>Delete</KeyboardKey>
+        <KeyboardKey variant="action" width={2}>
+          Enter
+        </KeyboardKey>
+        <KeyboardKey variant="danger" width={1.5}>
+          Delete
+        </KeyboardKey>
         <KeyboardKey variant="danger">Esc</KeyboardKey>
       </div>
       <div style={{ display: 'flex', gap: '8px' }}>
@@ -144,11 +154,7 @@ export const VirtualKeyboard: Story = {
         {/* First row - numbers */}
         <div style={{ display: 'flex', gap: '8px' }}>
           {['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='].map((key) => (
-            <KeyboardKey
-              key={key}
-              onClick={() => handleKeyPress(key)}
-              pressed={pressed === key}
-            >
+            <KeyboardKey key={key} onClick={() => handleKeyPress(key)} pressed={pressed === key}>
               {key}
             </KeyboardKey>
           ))}
@@ -173,11 +179,7 @@ export const VirtualKeyboard: Story = {
             Tab
           </KeyboardKey>
           {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\'].map((key) => (
-            <KeyboardKey
-              key={key}
-              onClick={() => handleKeyPress(key)}
-              pressed={pressed === key}
-            >
+            <KeyboardKey key={key} onClick={() => handleKeyPress(key)} pressed={pressed === key}>
               {key}
             </KeyboardKey>
           ))}
@@ -194,11 +196,7 @@ export const VirtualKeyboard: Story = {
             Caps
           </KeyboardKey>
           {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'"].map((key) => (
-            <KeyboardKey
-              key={key}
-              onClick={() => handleKeyPress(key)}
-              pressed={pressed === key}
-            >
+            <KeyboardKey key={key} onClick={() => handleKeyPress(key)} pressed={pressed === key}>
               {key}
             </KeyboardKey>
           ))}
@@ -223,11 +221,7 @@ export const VirtualKeyboard: Story = {
             Shift
           </KeyboardKey>
           {['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/'].map((key) => (
-            <KeyboardKey
-              key={key}
-              onClick={() => handleKeyPress(key)}
-              pressed={pressed === key}
-            >
+            <KeyboardKey key={key} onClick={() => handleKeyPress(key)} pressed={pressed === key}>
               {key}
             </KeyboardKey>
           ))}
@@ -272,9 +266,7 @@ export const VirtualKeyboard: Story = {
             width={6.25}
             onClick={() => handleKeyPress('Space')}
             pressed={pressed === 'Space'}
-          >
-            
-          </KeyboardKey>
+          ></KeyboardKey>
           <KeyboardKey
             variant="modifier"
             width={1.25}

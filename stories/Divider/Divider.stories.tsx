@@ -129,7 +129,6 @@ export const WithContent: Story = {
   ),
 };
 
-
 export const Spacing: Story = {
   render: () => (
     <div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './drawer.css';
 
 export interface DrawerProps {
@@ -27,7 +28,7 @@ export interface DrawerProps {
 }
 
 /** Drawer component for slide-in panels */
-export const Drawer: React.FC<DrawerProps> = ({
+const DrawerComponent: React.FC<DrawerProps> = ({
   open,
   onClose,
   position = 'right',
@@ -73,7 +74,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   useEffect(() => {
     if (open && drawerRef.current) {
       const focusableElements = drawerRef.current.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
       const firstElement = focusableElements[0] as HTMLElement;
       const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
@@ -129,11 +130,7 @@ export const Drawer: React.FC<DrawerProps> = ({
         aria-modal="true"
         aria-hidden={!open}
       >
-        <button
-          className="snake-drawer__close"
-          onClick={onClose}
-          aria-label="Close drawer"
-        >
+        <button className="snake-drawer__close" onClick={onClose} aria-label="Close drawer">
           ×
         </button>
 
@@ -144,5 +141,14 @@ export const Drawer: React.FC<DrawerProps> = ({
         {footer && <div className="snake-drawer__footer">{footer}</div>}
       </div>
     </>
+  );
+};
+
+/** Drawer with error boundary */
+export const Drawer: React.FC<DrawerProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="Drawer" resetOnPropsChange>
+      <DrawerComponent {...props} />
+    </ErrorBoundary>
   );
 };

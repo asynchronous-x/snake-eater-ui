@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-tabs {
   display: flex;
   flex-direction: column;

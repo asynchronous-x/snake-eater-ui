@@ -1,0 +1,124 @@
+.snake-error-boundary {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
+  font-family: var(--font-family-base);
+  color: var(--color-text-primary);
+  position: relative;
+}
+
+.snake-error-boundary__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.snake-error-boundary__icon {
+  font-size: 24px;
+  color: var(--color-danger);
+}
+
+.snake-error-boundary__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-danger);
+}
+
+.snake-error-boundary__content {
+  font-size: 14px;
+}
+
+.snake-error-boundary__component {
+  margin: var(--spacing-sm) 0;
+  color: var(--color-text-secondary);
+}
+
+.snake-error-boundary__component code {
+  background: var(--color-bg-elevated);
+  padding: 2px 6px;
+  border: 1px solid var(--color-border);
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  color: var(--color-warning);
+}
+
+.snake-error-boundary__message {
+  margin: var(--spacing-md) 0;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.snake-error-boundary__details {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-sm);
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border);
+}
+
+.snake-error-boundary__details summary {
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+.snake-error-boundary__details summary:hover {
+  color: var(--color-text-primary);
+}
+
+.snake-error-boundary__stack,
+.snake-error-boundary__component-stack {
+  margin: var(--spacing-sm) 0;
+  padding: var(--spacing-sm);
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-family-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.snake-error-boundary__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.snake-error-boundary__reset {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-base);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.snake-error-boundary__reset:hover:not(:disabled) {
+  background: var(--color-bg-card);
+  border-color: var(--color-text-secondary);
+}
+
+.snake-error-boundary__reset:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: var(--color-text-muted);
+}
+
+.snake-error-boundary__count {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}

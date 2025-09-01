@@ -1,5 +1,3 @@
-@import '../theme.css';
-
 .snake-text {
   font-family: var(--font-family);
   color: var(--color-text-primary);

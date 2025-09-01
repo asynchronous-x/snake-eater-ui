@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './list.css';
 
 interface ListItem {
@@ -36,7 +37,7 @@ export interface ListProps {
 }
 
 /** List component with customizable numbering and styling */
-export const List: React.FC<ListProps> = ({
+const ListComponent: React.FC<ListProps> = ({
   items,
   startNumber = 1,
   numberPadding = 3,
@@ -75,11 +76,11 @@ export const List: React.FC<ListProps> = ({
           onKeyDown={
             isInteractive
               ? (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  item.onClick?.();
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.onClick?.();
+                  }
                 }
-              }
               : undefined
           }
         >
@@ -151,4 +152,13 @@ export const List: React.FC<ListProps> = ({
     .join(' ');
 
   return <ul className={listClasses}>{items.map((item, index) => renderListItem(item, index))}</ul>;
+};
+
+/** List with error boundary */
+export const List: React.FC<ListProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="List" resetOnPropsChange>
+      <ListComponent {...props} />
+    </ErrorBoundary>
+  );
 };

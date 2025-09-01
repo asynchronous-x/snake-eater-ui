@@ -3,6 +3,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import postcssImport from 'postcss-import';
+import url from 'postcss-url';
 import terser from '@rollup/plugin-terser';
 import { readFileSync } from 'fs';
 
@@ -40,13 +42,27 @@ export default [
         exclude: ['**/*.stories.tsx', '**/*.stories.ts', '**/Page*.tsx'],
         outputToFilesystem: true,
         compilerOptions: {
-          declarationMap: false
-        }
+          declarationMap: false,
+        },
       }),
       postcss({
         extract: 'snake-eater-ui.css',
         minimize: true,
         modules: false,
+        plugins: [
+          postcssImport({
+            path: ['stories']
+          }), // Process @import statements first
+          url({
+            url: (asset) => {
+              // Keep font references as relative paths
+              if (asset.url.includes('fonts/')) {
+                return `./fonts/${asset.url.split('/').pop()}`;
+              }
+              return asset.url;
+            },
+          }),
+        ],
       }),
       terser({
         compress: {

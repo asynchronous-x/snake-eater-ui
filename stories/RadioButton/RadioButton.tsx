@@ -1,4 +1,5 @@
 import React from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './radiobutton.css';
 
 interface RadioOption {
@@ -32,7 +33,7 @@ export interface RadioButtonProps {
 }
 
 /** RadioButton component with dark theme styling */
-export const RadioButton: React.FC<RadioButtonProps> = ({
+const RadioButtonComponent: React.FC<RadioButtonProps> = ({
   options,
   value,
   onChange,
@@ -109,5 +110,14 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 
       {error && <span className="snake-radio-group__error">{error}</span>}
     </div>
+  );
+};
+
+/** RadioButton with error boundary */
+export const RadioButton: React.FC<RadioButtonProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="RadioButton" resetOnPropsChange>
+      <RadioButtonComponent {...props} />
+    </ErrorBoundary>
   );
 };

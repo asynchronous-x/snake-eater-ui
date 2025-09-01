@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ErrorBoundary } from '../utils/ErrorBoundary';
 import './subcard.css';
 
 export interface SubCardProps {
@@ -33,7 +34,7 @@ export interface SubCardProps {
 }
 
 /** SubCard component with plus symbols in corners */
-export const SubCard: React.FC<SubCardProps> = ({
+const SubCardComponent: React.FC<SubCardProps> = ({
   children,
   header,
   footer,
@@ -57,7 +58,7 @@ export const SubCard: React.FC<SubCardProps> = ({
       const delayTimer = setTimeout(() => {
         setIsVisible(true);
         setIsAnimating(true);
-        
+
         const completeTimer = setTimeout(() => {
           setIsAnimating(false);
           onTransitionComplete?.();
@@ -86,9 +87,11 @@ export const SubCard: React.FC<SubCardProps> = ({
 
   const Component = interactive ? 'button' : 'div';
 
-  const transitionStyle = transitionIn ? {
-    '--transition-speed': `${transitionSpeed}ms`,
-  } as React.CSSProperties : undefined;
+  const transitionStyle = transitionIn
+    ? ({
+        '--transition-speed': `${transitionSpeed}ms`,
+      } as React.CSSProperties)
+    : undefined;
 
   return (
     <Component
@@ -128,5 +131,14 @@ export const SubCard: React.FC<SubCardProps> = ({
 
       {footer && <div className="snake-subcard__footer">{footer}</div>}
     </Component>
+  );
+};
+
+/** SubCard with error boundary */
+export const SubCard: React.FC<SubCardProps> = (props) => {
+  return (
+    <ErrorBoundary componentName="SubCard" resetOnPropsChange>
+      <SubCardComponent {...props} />
+    </ErrorBoundary>
   );
 };
